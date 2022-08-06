@@ -5,7 +5,7 @@ import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-de
 function BurgerConstructor() {
   return (
     <section className={burgerConstructorStyles.section}>
-      <div className={burgerConstructorStyles.window}>
+      <div>
         <ConstructorElement
           className={burgerConstructorStyles.item}
           type="top"
@@ -14,6 +14,9 @@ function BurgerConstructor() {
           price={200}
           thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
         />
+        <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
+
+        </div>
         <ConstructorElement
           className={burgerConstructorStyles.item}
           type="bottom"
@@ -28,7 +31,7 @@ function BurgerConstructor() {
           Оформить заказ
         </Button>
         <div className={`${burgerConstructorStyles.sum} mr-10`}>
-          <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>666</p>
+          <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>0</p>
           <CurrencyIcon type="primary" />
         </div>
       </div>

@@ -1,5 +1,5 @@
 .window {
-  height: calc(100vh - 320px);
+  height: calc(100vh - 512px);
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #8585AD #2F2F37;
