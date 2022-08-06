@@ -16,6 +16,54 @@ function BurgerConstructor() {
         />
         <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
+          <ConstructorElement
+            className={burgerConstructorStyles.item}
+            type="bottom"
+            isLocked={false}
+            text="Краторная булка N-200i (низ)"
+            price={200}
+            thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+          />
+          <ConstructorElement
+          className={burgerConstructorStyles.item}
+          type="bottom"
+          isLocked={false}
+          text="Краторная булка N-200i (низ)"
+          price={200}
+          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+          />
+          <ConstructorElement
+          className={burgerConstructorStyles.item}
+          type="bottom"
+          isLocked={false}
+          text="Краторная булка N-200i (низ)"
+          price={200}
+          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+          />
+          <ConstructorElement
+          className={burgerConstructorStyles.item}
+          type="bottom"
+          isLocked={false}
+          text="Краторная булка N-200i (низ)"
+          price={200}
+          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+          />
+          <ConstructorElement
+          className={burgerConstructorStyles.item}
+          type="bottom"
+          isLocked={false}
+          text="Краторная булка N-200i (низ)"
+          price={200}
+          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+          />
+          <ConstructorElement
+          className={burgerConstructorStyles.item}
+          type="bottom"
+          isLocked={false}
+          text="Краторная булка N-200i (низ)"
+          price={200}
+          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+          />
         </div>
         <ConstructorElement
           className={burgerConstructorStyles.item}
