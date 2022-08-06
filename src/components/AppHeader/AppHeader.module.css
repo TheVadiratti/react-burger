@@ -36,3 +36,6 @@
   margin-left: 288.85px;
 }
 
+.profile:hover {
+  cursor: pointer;
+}
