@@ -1,6 +1,7 @@
 import React from 'react';
 import burgerIngredientsStyles from './BurgerIngredients.module.css';
 import { Tab, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
 
 function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one')
@@ -55,3 +56,7 @@ function BurgerIngredients(props) {
 }
 
 export default BurgerIngredients;
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.array
+}; 
