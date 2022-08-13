@@ -4,7 +4,12 @@ import { Tab, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger
 import PropTypes from 'prop-types';
 
 function BurgerIngredients(props) {
-  const [current, setCurrent] = React.useState('one')
+  let [current, setCurrent] = React.useState('one');
+
+  function scrollToIngredientType(e) {
+    setCurrent(current = e);
+    document.querySelector(`#${e}`).scrollIntoView(true);
+  }
 
   function getInredientsListOfType(type) {
     return props.data.map(item => {
@@ -27,24 +32,24 @@ function BurgerIngredients(props) {
   return (
     <section className={burgerIngredientsStyles.section}>
       <div className={burgerIngredientsStyles.menu}>
-        <Tab value="булки" active={current === 'one'} onClick={setCurrent}>Булки</Tab>
-        <Tab value="соусы" active={current === 'two'} onClick={setCurrent}>Соусы</Tab>
-        <Tab value="начинки" active={current === 'three'} onClick={setCurrent}>Начинки</Tab>
+        <Tab value="one" active={current === 'one'} onClick={scrollToIngredientType}>Булки</Tab>
+        <Tab value="two" active={current === 'two'} onClick={scrollToIngredientType}>Соусы</Tab>
+        <Tab value="three" active={current === 'three'} onClick={scrollToIngredientType}>Начинки</Tab>
       </div>
       <div className={`${burgerIngredientsStyles.window} mt-10`}>
-        <div>
+        <div id='one'>
           <h2 className={`text text_type_main-medium ${burgerIngredientsStyles.subheading}`}>Булки</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('bun')}
           </div>
         </div>
-        <div>
+        <div id='two'>
           <h2 className={`text text_type_main-medium ${burgerIngredientsStyles.subheading}`}>Cоусы</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('sauce')}
           </div>
         </div>
-        <div>
+        <div id='three'>
           <h2 className={`text text_type_main-medium ${burgerIngredientsStyles.subheading}`}>Начинки</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('main')}
@@ -58,5 +63,5 @@ function BurgerIngredients(props) {
 export default BurgerIngredients;
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.array
+  optionalArrayOf: PropTypes.arrayOf(PropTypes.object)
 }; 
