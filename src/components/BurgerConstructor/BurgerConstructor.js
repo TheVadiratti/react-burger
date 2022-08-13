@@ -1,5 +1,4 @@
 import burgerConstructorStyles from './BurgerConstructor.module.css';
-import data from '../utils/data';
 import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function BurgerConstructor() {
