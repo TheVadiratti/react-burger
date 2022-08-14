@@ -1,6 +1,7 @@
 import React from 'react';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
+import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import appStyles from './App.module.css';
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
   return (
   <div className={appStyles.app}>
     <AppHeader />
-    <Main setConstructorList={setConstructorList} data={data}/>
+    <Main setConstructorList={setConstructorList} data={data} />
+    <ModalOverlay></ModalOverlay>
   </div>
   )
 }

@@ -38,19 +38,19 @@ function BurgerIngredients(props) {
       </div>
       <div className={`${burgerIngredientsStyles.window} mt-10`}>
         <div id='one'>
-          <h2 className={`text text_type_main-medium ${burgerIngredientsStyles.subheading}`}>Булки</h2>
+          <h2 className='text text_type_main-medium mb-6'>Булки</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('bun')}
           </div>
         </div>
         <div id='two'>
-          <h2 className={`text text_type_main-medium ${burgerIngredientsStyles.subheading}`}>Cоусы</h2>
+          <h2 className='text text_type_main-medium mt-10 mb-6'>Cоусы</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('sauce')}
           </div>
         </div>
         <div id='three'>
-          <h2 className={`text text_type_main-medium ${burgerIngredientsStyles.subheading}`}>Начинки</h2>
+          <h2 className='text text_type_main-medium mt-10 mb-6'>Начинки</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('main')}
           </div>
