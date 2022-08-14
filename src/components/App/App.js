@@ -5,6 +5,7 @@ import appStyles from './App.module.css';
 
 function App() {
   let [data, setData] = React.useState([]);
+  let [constructorList, setConstructorList] = React.useState([]);
   const baseUrl = 'https://norma.nomoreparties.space/api/ingredients/';
 
   React.useEffect(() => {
@@ -26,7 +27,7 @@ function App() {
   return (
   <div className={appStyles.app}>
     <AppHeader />
-    <Main data={data}/>
+    <Main setConstructorList={setConstructorList} data={data}/>
   </div>
   )
 }
