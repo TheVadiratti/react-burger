@@ -1,77 +1,60 @@
 import burgerConstructorStyles from './BurgerConstructor.module.css';
-import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function BurgerConstructor() {
   return (
     <section className={burgerConstructorStyles.section}>
-      <div>
-        <ConstructorElement
-          className={burgerConstructorStyles.item}
-          type="top"
-          isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={200}
-          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-        />
-        <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
-
+      <div className={burgerConstructorStyles.ingredients}>
+        <div className={burgerConstructorStyles.itemBlock}>
           <ConstructorElement
-            className={burgerConstructorStyles.item}
+            type="top"
+            isLocked={true}
+            text="Краторная булка N-200i (верх)"
+            price={200}
+            thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+          />
+        </div>
+        <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
+          <div className={burgerConstructorStyles.item}>
+            <DragIcon type='primary' />
+            <ConstructorElement
+                type="bottom"
+                isLocked={false}
+                text="Краторная булка N-200i (низ)"
+                price={200}
+                thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+              />
+          </div>
+          <div className={burgerConstructorStyles.item}>
+            <DragIcon type='primary' />
+            <ConstructorElement
+                type="bottom"
+                isLocked={false}
+                text="Краторная булка N-200i (низ)"
+                price={200}
+                thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+              />
+          </div>
+          <div className={burgerConstructorStyles.item}>
+            <DragIcon type='primary' />
+            <ConstructorElement
+                type="bottom"
+                isLocked={false}
+                text="Краторная булка N-200i (низ)"
+                price={200}
+                thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+              />
+          </div>
+        </div>
+        <div className={burgerConstructorStyles.itemBlock}>
+          <ConstructorElement
             type="bottom"
-            isLocked={false}
+            isLocked={true}
             text="Краторная булка N-200i (низ)"
             price={200}
             thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
           />
-          <ConstructorElement
-          className={burgerConstructorStyles.item}
-          type="bottom"
-          isLocked={false}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-          />
-          <ConstructorElement
-          className={burgerConstructorStyles.item}
-          type="bottom"
-          isLocked={false}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-          />
-          <ConstructorElement
-          className={burgerConstructorStyles.item}
-          type="bottom"
-          isLocked={false}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-          />
-          <ConstructorElement
-          className={burgerConstructorStyles.item}
-          type="bottom"
-          isLocked={false}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-          />
-          <ConstructorElement
-          className={burgerConstructorStyles.item}
-          type="bottom"
-          isLocked={false}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-          />
         </div>
-        <ConstructorElement
-          className={burgerConstructorStyles.item}
-          type="bottom"
-          isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-        />
       </div>
       <div className={`${burgerConstructorStyles.total} mt-10`}>
         <Button type="primary" size="large">
