@@ -39,7 +39,7 @@ function App() {
       setSelectedIngredient={setSelectedIngredient}
     />
     {onPopup.open && (
-      <ModalOverlay>
+      <ModalOverlay onHeading={onPopup.type === 'IngredientDetails'} setOnPopup={setOnPopup}>
         {onPopup.type === 'IngredientDetails' && (
           <IngredientDetails data={selectedIngredient} />
         )}

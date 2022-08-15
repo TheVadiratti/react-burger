@@ -1,7 +1,14 @@
 import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function BurgerConstructor() {
+function BurgerConstructor(props) {
+  function openOrderDetailsPopup() {
+    props.setOnPopup({
+      open: true,
+      type: 'OrderDetails'
+    })
+  }
+
   return (
     <section className={burgerConstructorStyles.section}>
       <div className={burgerConstructorStyles.ingredients}>
@@ -57,7 +64,7 @@ function BurgerConstructor() {
         </div>
       </div>
       <div className={`${burgerConstructorStyles.total} mt-10`}>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={openOrderDetailsPopup}>
           Оформить заказ
         </Button>
         <div className={`${burgerConstructorStyles.sum} mr-10`}>
