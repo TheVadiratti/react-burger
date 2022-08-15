@@ -10,7 +10,7 @@ function ModalOverlay(props) {
       <div className={modalOverlayStyle.overlay}>
         <div className={modalOverlayStyle.window}>
           <div className={`mt-10 ${modalOverlayStyle.cnt}`}>
-            <p2 className="text text_type_main-large">Детали ингредиента</p2>
+            <h2 className="text text_type_main-large">Детали ингредиента</h2>
             <div className={modalOverlayStyle.closeIcon}><CloseIcon type='primary' /></div>
           </div>
           {props.children}

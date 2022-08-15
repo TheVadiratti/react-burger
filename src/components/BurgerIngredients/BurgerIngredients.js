@@ -11,11 +11,23 @@ function BurgerIngredients(props) {
     document.querySelector(`#${e}`).scrollIntoView(true);
   }
 
+  function openIngredientDetailsPopup(e) {
+    const id = e.currentTarget.getAttribute('id');
+    const selectedIngredientData = props.data.find(item => {
+      return item._id === id; 
+    });
+    props.setOnPopup({
+      open: true,
+      type: 'IngredientDetails'
+    });
+    props.setSelectedIngredient(selectedIngredientData);
+  }
+
   function getInredientsListOfType(type) {
     return props.data.map(item => {
       if(item.type === `${type}`) {
         return (
-          <li className={burgerIngredientsStyles.option} key={item._id}>
+          <li onClick={openIngredientDetailsPopup} className={burgerIngredientsStyles.option} key={item._id} id={item._id}>
             <img className="mb-2" src={item.image} alt={item.name}></img>
             <div className={`${burgerIngredientsStyles.priceCnt} mb-2`}>
               <span className="text text_type_digits-default mr-2">{item.price}</span>
