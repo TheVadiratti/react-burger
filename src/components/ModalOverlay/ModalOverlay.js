@@ -8,12 +8,11 @@ function ModalOverlay(props) {
   return ReactDOM.createPortal(
     (
       <div className={modalOverlayStyle.overlay}>
-        <div className={`pt-10 ${modalOverlayStyle.window}`}>
-          <div className={modalOverlayStyle.cnt}>
+        <div className={modalOverlayStyle.window}>
+          <div className={`mt-10 ${modalOverlayStyle.cnt}`}>
             <p2 className="text text_type_main-large">Детали ингредиента</p2>
             <div className={modalOverlayStyle.closeIcon}><CloseIcon type='primary' /></div>
           </div>
-          
           {props.children}
         </div>
       </div>
