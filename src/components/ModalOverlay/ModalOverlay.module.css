@@ -28,18 +28,10 @@
   height: 64px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .closeIcon {
   display: inline-block;
   cursor: pointer;
-}
-
-.doneIcon {
-  width: 120px;
-  height: 120px;
-  background-image: url(../../images/doneIcon.svg);
-  background-repeat: no-repeat;
-  background-position: center;
 }
