@@ -1,0 +1,29 @@
+.window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 720px;
+  background-color: #1C1C21;
+  border-radius: 40px;
+  position: relative;
+  top: 0;
+  left: 0;
+  box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+}
+
+.cnt {
+  width: 640px;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeIcon {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.closeIcon:hover {
+  opacity: .5;
+}
