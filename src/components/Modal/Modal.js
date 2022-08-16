@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import modalStyles from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
 
 const modalRoot = document.querySelector('#react-modals');
 
@@ -51,3 +52,8 @@ function Modal(props) {
 }
 
 export default Modal;
+
+Modal.propTypes = {
+  setOnPopup: PropTypes.func,
+  setSelectedIngredient: PropTypes.func
+}; 

@@ -1,5 +1,6 @@
 import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
 
 function BurgerConstructor(props) {
   function openOrderDetailsPopup() {
@@ -77,3 +78,7 @@ function BurgerConstructor(props) {
 }
 
 export default BurgerConstructor;
+
+BurgerConstructor.propTypes = {
+  setOnPopup: PropTypes.func
+}; 
