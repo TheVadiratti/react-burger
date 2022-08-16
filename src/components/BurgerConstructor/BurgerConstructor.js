@@ -12,7 +12,7 @@ function BurgerConstructor(props) {
   return (
     <section className={burgerConstructorStyles.section}>
       <div className={burgerConstructorStyles.ingredients}>
-        <div className={burgerConstructorStyles.itemBlock}>
+        <div className={burgerConstructorStyles.itemLocked}>
           <ConstructorElement
             type="top"
             isLocked={true}
@@ -53,7 +53,7 @@ function BurgerConstructor(props) {
               />
           </div>
         </div>
-        <div className={burgerConstructorStyles.itemBlock}>
+        <div className={burgerConstructorStyles.itemLocked}>
           <ConstructorElement
             type="bottom"
             isLocked={true}
@@ -63,7 +63,7 @@ function BurgerConstructor(props) {
           />
         </div>
       </div>
-      <div className={`${burgerConstructorStyles.total} mt-10`}>
+      <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>
         <Button type="primary" size="large" onClick={openOrderDetailsPopup}>
           Оформить заказ
         </Button>

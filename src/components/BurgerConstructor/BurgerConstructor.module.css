@@ -6,7 +6,7 @@
   scrollbar-color: #8585AD #2F2F37;
   display: flex;
   flex-direction: column;
-  gap: 10px; 
+  gap: 16px; 
 }
 
 /* для Chrome/Edge/Safari */
@@ -24,10 +24,15 @@
 .item {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  gap: 8px;
 }
 
-.itemBlock {
-  padding-left: 25px;
+.itemLocked {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 16px;
 }
 
 .total {
