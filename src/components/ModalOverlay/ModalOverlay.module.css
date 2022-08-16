@@ -35,3 +35,7 @@
   display: inline-block;
   cursor: pointer;
 }
+
+.closeIcon:hover {
+  opacity: .5;
+}

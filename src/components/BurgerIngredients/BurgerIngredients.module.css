@@ -43,6 +43,7 @@
 
 .option:hover {
   cursor: pointer;
+  opacity: .7;
 }
 
 .priceCnt {
