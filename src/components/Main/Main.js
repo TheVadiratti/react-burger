@@ -17,8 +17,8 @@ function Main(props) {
 
 export default Main;
 
-BurgerIngredients.propTypes = {
-  data: ingredientType,
-  setOnPopup: PropTypes.func,
-  setSelectedIngredient: PropTypes.func
+Main.propTypes = {
+  data: PropTypes.arrayOf(ingredientType).isRequired,
+  setOnPopup: PropTypes.func.isRequired,
+  setSelectedIngredient: PropTypes.func.isRequired
 }; 

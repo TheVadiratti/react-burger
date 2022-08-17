@@ -1,5 +1,4 @@
 import ingredientDetails from './IngredientDetails.module.css';
-import PropTypes from 'prop-types';
 import { ingredientType } from '../utils/types';
 
 function IngredientDetails(props) {
@@ -32,5 +31,5 @@ function IngredientDetails(props) {
 export default IngredientDetails;
 
 IngredientDetails.propTypes = {
-  data: ingredientType
+  data: ingredientType.isRequired
 }; 

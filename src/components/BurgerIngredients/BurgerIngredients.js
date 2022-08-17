@@ -76,7 +76,7 @@ function BurgerIngredients(props) {
 export default BurgerIngredients;
 
 BurgerIngredients.propTypes = {
-  data: ingredientType,
-  setOnPopup: PropTypes.func,
-  setSelectedIngredient: PropTypes.func
+  data: PropTypes.arrayOf(ingredientType).isRequired,
+  setOnPopup: PropTypes.func.isRequired,
+  setSelectedIngredient: PropTypes.func.isRequired
 }; 

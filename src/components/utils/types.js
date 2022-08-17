@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const ingredientType = PropTypes.arrayOf(PropTypes.shape({
+const ingredientType = PropTypes.shape({
   _id: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,
@@ -13,6 +13,6 @@ const ingredientType = PropTypes.arrayOf(PropTypes.shape({
   image_mobile: PropTypes.string,
   image_large: PropTypes.string,
   __v: PropTypes.number
-}));
+});
 
 export { ingredientType };

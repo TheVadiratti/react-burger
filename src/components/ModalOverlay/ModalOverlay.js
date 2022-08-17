@@ -21,5 +21,5 @@ function ModalOverlay(props) {
 export default ModalOverlay;
 
 ModalOverlay.propTypes = {
-  setOnPopup: PropTypes.func
+  setOnPopup: PropTypes.func.isRequired
 }; 

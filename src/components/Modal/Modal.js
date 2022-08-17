@@ -46,6 +46,6 @@ function Modal(props) {
 export default Modal;
 
 Modal.propTypes = {
-  setOnPopup: PropTypes.func,
+  setOnPopup: PropTypes.func.isRequired,
   setSelectedIngredient: PropTypes.func
 }; 
