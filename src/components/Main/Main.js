@@ -1,6 +1,8 @@
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import mainStyles from './Main.module.css';
+import PropTypes from 'prop-types';
+import { ingredientType } from '../utils/types';
 
 
 function Main(props) {
@@ -14,3 +16,9 @@ function Main(props) {
 }
 
 export default Main;
+
+BurgerIngredients.propTypes = {
+  data: ingredientType,
+  setOnPopup: PropTypes.func,
+  setSelectedIngredient: PropTypes.func
+}; 
