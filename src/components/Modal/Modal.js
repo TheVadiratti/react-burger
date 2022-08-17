@@ -32,7 +32,7 @@ function Modal(props) {
       <ModalOverlay setOnPopup={props.setOnPopup}>
         <div className={modalStyles.window}>
           <div className={`mt-10 ${modalStyles.cnt}`}>
-            <h2 className="text text_type_main-large">{props.onHeading && ('Детали ингредиента')}</h2>
+            <h2 className="text text_type_main-large">{props.heading}</h2>
             <div onClick={closePopup} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>
           </div>
           {props.children}
@@ -47,5 +47,5 @@ export default Modal;
 
 Modal.propTypes = {
   setOnPopup: PropTypes.func.isRequired,
-  setSelectedIngredient: PropTypes.func
+  heading: PropTypes.string
 }; 
