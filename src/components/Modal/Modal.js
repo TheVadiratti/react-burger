@@ -15,12 +15,6 @@ function Modal(props) {
     })
   }
 
-  function closePopupOverlay(e) {
-    if(e.target.getAttribute('id') === 'overlay') {
-      closePopup();
-    }
-  }
-
   React.useEffect(() => {
     function closePopupEsc(e) {
       if(e.code === 'Escape') {
@@ -35,15 +29,13 @@ function Modal(props) {
 
   return ReactDOM.createPortal(
     (
-      <ModalOverlay>
-        <div id='overlay' className={modalStyles.overlay} onClick={closePopupOverlay}>
-          <div className={modalStyles.window}>
-            <div className={`mt-10 ${modalStyles.cnt}`}>
-              <h2 className="text text_type_main-large">{props.onHeading && ('Детали ингредиента')}</h2>
-              <div onClick={closePopup} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>
-            </div>
-            {props.children}
+      <ModalOverlay setOnPopup={props.setOnPopup}>
+        <div className={modalStyles.window}>
+          <div className={`mt-10 ${modalStyles.cnt}`}>
+            <h2 className="text text_type_main-large">{props.onHeading && ('Детали ингредиента')}</h2>
+            <div onClick={closePopup} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>
           </div>
+          {props.children}
         </div>
       </ModalOverlay>
     ), 
