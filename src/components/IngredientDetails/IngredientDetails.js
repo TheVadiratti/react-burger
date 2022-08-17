@@ -4,7 +4,7 @@ import { ingredientType } from '../utils/types';
 function IngredientDetails(props) {
   return (
     <>
-      <img className={ingredientDetails.image} src={props.data.image} alt='[uq'></img>
+      <img className={ingredientDetails.image} src={props.data.image} alt={props.data.name}></img>
       <span className="mt-4 text text_type_main-medium">{props.data.name}</span>
       <div className={`mt-8 pb-15 ${ingredientDetails.infoCnt}`}>
         <div className={ingredientDetails.infoItem}>
