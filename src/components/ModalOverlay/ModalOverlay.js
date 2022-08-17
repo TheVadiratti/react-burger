@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function ModalOverlay(props) {
   function closePopupOverlay(e) {
-    if(e.target.getAttribute('id') === 'overlay') {
+    if (e.target.getAttribute('id') === 'overlay') {
       props.setOnPopup({
         open: false,
         type: ''

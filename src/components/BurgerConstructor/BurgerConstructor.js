@@ -26,38 +26,38 @@ function BurgerConstructor(props) {
           <div className={burgerConstructorStyles.item}>
             <DragIcon type='primary' />
             <ConstructorElement
-                isLocked={false}
-                text="Сыр с астероидной плесенью"
-                price={4142}
-                thumbnail={'https://code.s3.yandex.net/react/code/cheese.png'}
-              />
+              isLocked={false}
+              text="Сыр с астероидной плесенью"
+              price={4142}
+              thumbnail={'https://code.s3.yandex.net/react/code/cheese.png'}
+            />
           </div>
           <div className={burgerConstructorStyles.item}>
             <DragIcon type='primary' />
             <ConstructorElement
-                isLocked={false}
-                text="Мини-салат Экзо-Плантаго"
-                price={4400}
-                thumbnail={'https://code.s3.yandex.net/react/code/salad.png'}
-              />
+              isLocked={false}
+              text="Мини-салат Экзо-Плантаго"
+              price={4400}
+              thumbnail={'https://code.s3.yandex.net/react/code/salad.png'}
+            />
           </div>
           <div className={burgerConstructorStyles.item}>
             <DragIcon type='primary' />
             <ConstructorElement
-                isLocked={false}
-                text="Соус фирменный Space Sauce"
-                price={80}
-                thumbnail={'https://code.s3.yandex.net/react/code/sauce-04.png'}
-              />
+              isLocked={false}
+              text="Соус фирменный Space Sauce"
+              price={80}
+              thumbnail={'https://code.s3.yandex.net/react/code/sauce-04.png'}
+            />
           </div>
           <div className={burgerConstructorStyles.item}>
             <DragIcon type='primary' />
             <ConstructorElement
-                isLocked={false}
-                text="Филе Люминесцентного тетраодонтимформа"
-                price={988}
-                thumbnail={'https://code.s3.yandex.net/react/code/meat-03.png'}
-              />
+              isLocked={false}
+              text="Филе Люминесцентного тетраодонтимформа"
+              price={988}
+              thumbnail={'https://code.s3.yandex.net/react/code/meat-03.png'}
+            />
           </div>
         </div>
         <div className={burgerConstructorStyles.itemLocked}>

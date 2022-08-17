@@ -17,7 +17,7 @@ function Modal(props) {
 
   React.useEffect(() => {
     function closePopupEsc(e) {
-      if(e.code === 'Escape') {
+      if (e.code === 'Escape') {
         closePopup();
       }
     }
@@ -38,7 +38,7 @@ function Modal(props) {
           {props.children}
         </div>
       </ModalOverlay>
-    ), 
+    ),
     modalRoot
   );
 }

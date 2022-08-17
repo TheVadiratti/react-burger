@@ -8,14 +8,14 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 
 function App() {
   const [data, setData] = React.useState([]);
-  const [onPopup, setOnPopup] = React.useState({open: false, type: ''});
+  const [onPopup, setOnPopup] = React.useState({ open: false, type: '' });
   const [selectedIngredient, setSelectedIngredient] = React.useState({});
   const baseUrl = 'https://norma.nomoreparties.space/api/ingredients/';
 
   React.useEffect(() => {
     fetch(baseUrl)
       .then(res => {
-        if(res.ok) {
+        if (res.ok) {
           return res.json();
         }
         return Promise.reject(`Ошибка: ${res.status}`);
@@ -29,24 +29,24 @@ function App() {
   }, []);
 
   return (
-  <div className={appStyles.app}>
-    <AppHeader />
-    <Main
-      data={data}
-      setOnPopup={setOnPopup}
-      setSelectedIngredient={setSelectedIngredient}
-    />
-    {onPopup.open && (
-      <Modal  onHeading={onPopup.type === 'IngredientDetails'} setOnPopup={setOnPopup}>
-        {onPopup.type === 'IngredientDetails' && (
-          <IngredientDetails data={selectedIngredient} />
-        )}
-        {onPopup.type === 'OrderDetails' && (
-          <OrderDetails />
-        )}
-      </Modal>
-    )}
-  </div>
+    <div className={appStyles.app}>
+      <AppHeader />
+      <Main
+        data={data}
+        setOnPopup={setOnPopup}
+        setSelectedIngredient={setSelectedIngredient}
+      />
+      {onPopup.open && (
+        <Modal onHeading={onPopup.type === 'IngredientDetails'} setOnPopup={setOnPopup}>
+          {onPopup.type === 'IngredientDetails' && (
+            <IngredientDetails data={selectedIngredient} />
+          )}
+          {onPopup.type === 'OrderDetails' && (
+            <OrderDetails />
+          )}
+        </Modal>
+      )}
+    </div>
   )
 }
 

@@ -14,7 +14,7 @@ function BurgerIngredients(props) {
   function openIngredientDetailsPopup(e) {
     const id = e.currentTarget.getAttribute('id');
     const selectedIngredientData = props.data.find(item => {
-      return item._id === id; 
+      return item._id === id;
     });
     props.setOnPopup({
       open: true,
@@ -25,7 +25,7 @@ function BurgerIngredients(props) {
 
   function getInredientsListOfType(type) {
     return props.data.map(item => {
-      if(item.type === `${type}`) {
+      if (item.type === `${type}`) {
         return (
           <li onClick={openIngredientDetailsPopup} className={burgerIngredientsStyles.option} key={item._id} id={item._id}>
             <img className="mb-2" src={item.image} alt={item.name}></img>
