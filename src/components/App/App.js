@@ -1,15 +1,15 @@
 import React from 'react';
+import appStyles from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import appStyles from './App.module.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
 
 function App() {
-  let [data, setData] = React.useState([]);
-  let [onPopup, setOnPopup] = React.useState({open: false, type: ''});
-  let [selectedIngredient, setSelectedIngredient] = React.useState({});
+  const [data, setData] = React.useState([]);
+  const [onPopup, setOnPopup] = React.useState({open: false, type: ''});
+  const [selectedIngredient, setSelectedIngredient] = React.useState({});
   const baseUrl = 'https://norma.nomoreparties.space/api/ingredients/';
 
   React.useEffect(() => {
@@ -21,7 +21,7 @@ function App() {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
       .then(res => {
-        setData(data = res.data);
+        setData(res.data)
       })
       .catch(error => {
         console.log(error);

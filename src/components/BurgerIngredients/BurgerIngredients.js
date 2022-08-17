@@ -4,7 +4,7 @@ import { Tab, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger
 import PropTypes from 'prop-types';
 
 function BurgerIngredients(props) {
-  let [current, setCurrent] = React.useState('one');
+  const [current, setCurrent] = React.useState('one');
 
   function scrollToIngredientType(e) {
     setCurrent(current = e);
