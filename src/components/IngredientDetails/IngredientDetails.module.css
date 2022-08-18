@@ -1,0 +1,17 @@
+.image {
+  width: 480px;
+  height: 240px;
+}
+
+.infoCnt {
+  width: 516px;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

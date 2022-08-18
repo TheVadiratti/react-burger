@@ -1,0 +1,43 @@
+.header {
+  width: 100%;
+  background: #1C1C21;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 100;
+}
+
+.container {
+  width: 1280px;
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  margin: 0;
+  margin-right: 112px;
+  padding: 0;
+}
+
+.item {
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.profile {
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  margin-left: 288.85px;
+}
+
+.profile:hover {
+  cursor: pointer;
+}
