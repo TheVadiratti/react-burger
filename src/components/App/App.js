@@ -37,7 +37,7 @@ function App() {
         setSelectedIngredient={setSelectedIngredient}
       />
       {onPopup.open && (
-        <Modal heading={onPopup.type === 'IngredientDetails' && 'Детали ингредиента'} setOnPopup={setOnPopup}>
+        <Modal heading={onPopup.type === 'IngredientDetails' ? 'Детали ингредиента' : ''} setOnPopup={setOnPopup}>
           {onPopup.type === 'IngredientDetails' && (
             <IngredientDetails data={selectedIngredient} />
           )}
