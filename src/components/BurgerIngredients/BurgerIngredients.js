@@ -8,7 +8,7 @@ function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one');
 
   function scrollToIngredientType(e) {
-    setCurrent(current = e);
+    setCurrent(e);
     document.querySelector(`#${e}`).scrollIntoView(true);
   }
 
