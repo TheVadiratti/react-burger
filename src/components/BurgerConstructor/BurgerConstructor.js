@@ -62,7 +62,7 @@ function BurgerConstructor(props) {
           Оформить заказ
         </Button>
         <div className={`${burgerConstructorStyles.sum} mr-10`}>
-          <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>{sum()}</p>
+          <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>{`${sum()}`}</p>
           <CurrencyIcon type="primary" />
         </div>
       </div>
