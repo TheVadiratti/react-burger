@@ -29,6 +29,17 @@ function BurgerConstructor(props) {
     )
   }
 
+  function sum() {
+    const bunSum = ingredientData.bun.price * 2;
+    const mainPriceArray = ingredientData.main.map(item => {
+      return item.price;
+    });
+    const mainSum = mainPriceArray.reduce((prev, current) => {
+      return prev + current;
+    }, mainPriceArray[0]); 
+    return mainSum + bunSum;
+  }
+
   return (
     <section className={burgerConstructorStyles.section}>
       <div className={burgerConstructorStyles.ingredients}>
@@ -51,7 +62,7 @@ function BurgerConstructor(props) {
           Оформить заказ
         </Button>
         <div className={`${burgerConstructorStyles.sum} mr-10`}>
-          <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>0</p>
+          <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>{sum()}</p>
           <CurrencyIcon type="primary" />
         </div>
       </div>
