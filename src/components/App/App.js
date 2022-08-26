@@ -6,12 +6,14 @@ import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import { ConstructorContext } from '../../services/ConstructorContext';
+import { ModalContext } from '../../services/ModalContext';
 
 function App() {
   const [data, setData] = React.useState([]);
   const [onPopup, setOnPopup] = React.useState({ open: false, type: '' });
   const [selectedIngredient, setSelectedIngredient] = React.useState({});
   const [constructorData, setConstructorData] = React.useState({bun: {}, main: []});
+  const [orderData, setOrderData] = React.useState({});
   const baseUrl = 'https://norma.nomoreparties.space/api/ingredients/';
 
   React.useEffect(() => {
@@ -45,23 +47,26 @@ function App() {
   return (
     <div className={appStyles.app}>
       <AppHeader />
-      <ConstructorContext.Provider value={constructorData}>
-        <Main
-          data={data}
-          setOnPopup={setOnPopup}
-          setSelectedIngredient={setSelectedIngredient}
-        />
-      </ConstructorContext.Provider>
-      {onPopup.open && (
-        <Modal heading={onPopup.type === 'IngredientDetails' ? 'Детали ингредиента' : ''} setOnPopup={setOnPopup}>
-          {onPopup.type === 'IngredientDetails' && (
-            <IngredientDetails data={selectedIngredient} />
-          )}
-          {onPopup.type === 'OrderDetails' && (
-            <OrderDetails />
-          )}
-        </Modal>
-      )}
+      <ModalContext.Provider value={orderData}>
+        <ConstructorContext.Provider value={constructorData}>
+          <Main
+            data={data}
+            setOnPopup={setOnPopup}
+            setSelectedIngredient={setSelectedIngredient}
+            setOrderData={setOrderData}
+          />
+        </ConstructorContext.Provider>
+        {onPopup.open && (
+          <Modal heading={onPopup.type === 'IngredientDetails' ? 'Детали ингредиента' : ''} setOnPopup={setOnPopup}>
+            {onPopup.type === 'IngredientDetails' && (
+              <IngredientDetails data={selectedIngredient} />
+            )}
+            {onPopup.type === 'OrderDetails' && (
+              <OrderDetails />
+            )}
+          </Modal>
+        )}
+      </ModalContext.Provider>
     </div>
   )
 }

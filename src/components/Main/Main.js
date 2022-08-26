@@ -10,7 +10,7 @@ function Main(props) {
     <main className={mainStyles.main}>
       <h1 className={`text text_type_main-large mb-4 mt-10 ${mainStyles.heading}`}>Соберите бургер</h1>
       <BurgerIngredients setSelectedIngredient={props.setSelectedIngredient} setOnPopup={props.setOnPopup} setConstructorList={props.setConstructorList} data={props.data} />
-      <BurgerConstructor setOnPopup={props.setOnPopup} />
+      <BurgerConstructor setOnPopup={props.setOnPopup} setOrderData={props.setOrderData} />
     </main>
   )
 }

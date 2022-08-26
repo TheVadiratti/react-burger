@@ -5,14 +5,8 @@ import PropTypes from 'prop-types';
 import { ConstructorContext } from '../../services/ConstructorContext';
 
 function BurgerConstructor(props) {
+  const submitURL = 'https://norma.nomoreparties.space/api/orders';
   const ingredientData = React.useContext(ConstructorContext);
-
-  function openOrderDetailsPopup() {
-    props.setOnPopup({
-      open: true,
-      type: 'OrderDetails'
-    })
-  }
 
   function createIngredient(ingredient, type, isLocked, isMain, text, key) {
     return (
@@ -40,6 +34,34 @@ function BurgerConstructor(props) {
     return mainSum + bunSum;
   }
 
+  function sendOrder() {
+    const orderList = Object.assign([], ingredientData.main);
+    orderList.unshift(ingredientData.bun);
+    orderList.push(ingredientData.bun);
+    fetch(submitURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "ingredients": orderList
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then(res => {
+      props.setOrderData(res);
+      props.setOnPopup({
+        open: true,
+        type: 'OrderDetails'
+      })
+    }) 
+  }
+
   return (
     <section className={burgerConstructorStyles.section}>
       <div className={burgerConstructorStyles.ingredients}>
@@ -49,7 +71,7 @@ function BurgerConstructor(props) {
         <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
           {ingredientData.main.map(item => {
-            return createIngredient(item, false, false, true, '', item._id);
+            return createIngredient(item, null, false, true, '', item._id);
           })}
 
         </div>
@@ -58,7 +80,7 @@ function BurgerConstructor(props) {
 
       </div>
       <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>
-        <Button type="primary" size="large" onClick={openOrderDetailsPopup}>
+        <Button type="primary" size="large" onClick={sendOrder}>
           Оформить заказ
         </Button>
         <div className={`${burgerConstructorStyles.sum} mr-10`}>
