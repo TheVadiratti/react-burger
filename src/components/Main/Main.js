@@ -20,5 +20,6 @@ export default Main;
 Main.propTypes = {
   data: PropTypes.arrayOf(ingredientType).isRequired,
   setOnPopup: PropTypes.func.isRequired,
-  setSelectedIngredient: PropTypes.func.isRequired
+  setSelectedIngredient: PropTypes.func.isRequired,
+  setOrderData: PropTypes.func.isRequired
 }; 

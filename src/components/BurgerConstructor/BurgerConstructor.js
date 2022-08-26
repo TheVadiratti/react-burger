@@ -95,5 +95,6 @@ function BurgerConstructor(props) {
 export default BurgerConstructor;
 
 BurgerConstructor.propTypes = {
-  setOnPopup: PropTypes.func.isRequired
+  setOnPopup: PropTypes.func.isRequired,
+  setOrderData: PropTypes.func.isRequired
 }; 
