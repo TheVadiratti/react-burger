@@ -8,6 +8,7 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import { ConstructorContext } from '../../services/ConstructorContext';
 import { ModalContext } from '../../services/ModalContext';
 import { baseUrl } from '../../utils/constants';
+import { checkResponse } from '../../utils/utils';
 
 function App() {
   const [data, setData] = React.useState([]);
@@ -18,12 +19,7 @@ function App() {
 
   React.useEffect(() => {
     fetch(`${baseUrl}/api/ingredients/`)
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(checkResponse)
       .then(res => {
         setData(res.data);
 

@@ -4,9 +4,9 @@ import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktiku
 import PropTypes from 'prop-types';
 import { ConstructorContext } from '../../services/ConstructorContext';
 import { baseUrl } from '../../utils/constants';
+import { checkResponse } from '../../utils/utils';
 
 function BurgerConstructor(props) {
-  const submitURL = 'https://norma.nomoreparties.space/api/orders';
   const ingredientData = React.useContext(ConstructorContext);
 
   function createIngredient(ingredient, type, isLocked, isMain, text, key) {
@@ -48,12 +48,7 @@ function BurgerConstructor(props) {
         "ingredients": orderList
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(checkResponse)
     .then(res => {
       props.setOrderData(res);
       props.setOnPopup({
