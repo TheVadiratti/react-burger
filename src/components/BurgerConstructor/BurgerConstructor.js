@@ -60,7 +60,10 @@ function BurgerConstructor(props) {
         open: true,
         type: 'OrderDetails'
       })
-    }) 
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }
 
   return (
