@@ -7,6 +7,7 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import { ConstructorContext } from '../../services/ConstructorContext';
 import { ModalContext } from '../../services/ModalContext';
+import { baseUrl } from '../../utils/constants';
 
 function App() {
   const [data, setData] = React.useState([]);
@@ -14,10 +15,9 @@ function App() {
   const [selectedIngredient, setSelectedIngredient] = React.useState({});
   const [constructorData, setConstructorData] = React.useState({bun: {}, main: []});
   const [orderData, setOrderData] = React.useState({});
-  const baseUrl = 'https://norma.nomoreparties.space/api/ingredients/';
 
   React.useEffect(() => {
-    fetch(baseUrl)
+    fetch(`${baseUrl}/api/ingredients/`)
       .then(res => {
         if (res.ok) {
           return res.json();

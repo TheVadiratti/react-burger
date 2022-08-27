@@ -3,6 +3,7 @@ import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { ConstructorContext } from '../../services/ConstructorContext';
+import { baseUrl } from '../../utils/constants';
 
 function BurgerConstructor(props) {
   const submitURL = 'https://norma.nomoreparties.space/api/orders';
@@ -38,7 +39,7 @@ function BurgerConstructor(props) {
     const orderList = Object.assign([], ingredientData.main);
     orderList.unshift(ingredientData.bun);
     orderList.push(ingredientData.bun);
-    fetch(submitURL, {
+    fetch(`${baseUrl}/api/orders/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
