@@ -7,10 +7,31 @@ import { BurgerContext } from '../../services/BurgerContext';
 function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one');
   const ingredientsData = React.useContext(BurgerContext);
+  
+  const bunSection = React.useRef(null);
+  const sauceSection = React.useRef(null);
+  const mainSection = React.useRef(null);
 
-  function scrollToIngredientType(e) {
-    setCurrent(e);
-    document.querySelector(`#${e}`).scrollIntoView(true);
+  function scrollOnTarget(section) {
+    section.current.scrollIntoView({behavior: "smooth"});
+  }
+
+  React.useEffect(() => {
+    switch(current) {
+      case 'one':
+        scrollOnTarget(bunSection);
+        break;
+      case 'two':
+        scrollOnTarget(sauceSection);
+        break;
+      case 'three':
+        scrollOnTarget(mainSection);
+        break;
+    }
+  }, [current])
+
+  function setCurrentTab(e) {
+    setCurrent(e)
   }
 
   function openIngredientDetailsPopup(e) {
@@ -46,24 +67,24 @@ function BurgerIngredients(props) {
   return (
     <section className={burgerIngredientsStyles.section}>
       <div className={burgerIngredientsStyles.menu}>
-        <Tab value="one" active={current === 'one'} onClick={scrollToIngredientType}>Булки</Tab>
-        <Tab value="two" active={current === 'two'} onClick={scrollToIngredientType}>Соусы</Tab>
-        <Tab value="three" active={current === 'three'} onClick={scrollToIngredientType}>Начинки</Tab>
+        <Tab value="one" active={current === 'one'} onClick={setCurrentTab}>Булки</Tab>
+        <Tab value="two" active={current === 'two'} onClick={setCurrentTab}>Соусы</Tab>
+        <Tab value="three" active={current === 'three'} onClick={setCurrentTab}>Начинки</Tab>
       </div>
       <div className={`${burgerIngredientsStyles.window} mt-10`}>
-        <div id='one'>
+        <div id='one' ref={bunSection}>
           <h2 className='text text_type_main-medium mb-6'>Булки</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('bun')}
           </div>
         </div>
-        <div id='two'>
+        <div id='two' ref={sauceSection}>
           <h2 className='text text_type_main-medium mt-10 mb-6'>Cоусы</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('sauce')}
           </div>
         </div>
-        <div id='three'>
+        <div id='three' ref={mainSection}>
           <h2 className='text text_type_main-medium mt-10 mb-6'>Начинки</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('main')}
