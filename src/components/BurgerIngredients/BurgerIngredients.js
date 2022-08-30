@@ -2,19 +2,41 @@ import React from 'react';
 import burgerIngredientsStyles from './BurgerIngredients.module.css';
 import { Tab, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { ingredientType } from '../utils/types';
+import { BurgerContext } from '../../services/BurgerContext';
 
 function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one');
+  const ingredientsData = React.useContext(BurgerContext);
+  
+  const bunSection = React.useRef(null);
+  const sauceSection = React.useRef(null);
+  const mainSection = React.useRef(null);
 
-  function scrollToIngredientType(e) {
-    setCurrent(e);
-    document.querySelector(`#${e}`).scrollIntoView(true);
+  function scrollOnTarget(section) {
+    section.current.scrollIntoView({behavior: "smooth"});
+  }
+
+  React.useEffect(() => {
+    switch(current) {
+      case 'one':
+        scrollOnTarget(bunSection);
+        break;
+      case 'two':
+        scrollOnTarget(sauceSection);
+        break;
+      case 'three':
+        scrollOnTarget(mainSection);
+        break;
+    }
+  }, [current])
+
+  function setCurrentTab(e) {
+    setCurrent(e)
   }
 
   function openIngredientDetailsPopup(e) {
     const id = e.currentTarget.getAttribute('id');
-    const selectedIngredientData = props.data.find(item => {
+    const selectedIngredientData = ingredientsData.find(item => {
       return item._id === id;
     });
     props.setOnPopup({
@@ -25,7 +47,7 @@ function BurgerIngredients(props) {
   }
 
   function getInredientsListOfType(type) {
-    return props.data.map(item => {
+    return ingredientsData.map(item => {
       if (item.type === `${type}`) {
         return (
           <li onClick={openIngredientDetailsPopup} className={burgerIngredientsStyles.option} key={item._id} id={item._id}>
@@ -45,24 +67,24 @@ function BurgerIngredients(props) {
   return (
     <section className={burgerIngredientsStyles.section}>
       <div className={burgerIngredientsStyles.menu}>
-        <Tab value="one" active={current === 'one'} onClick={scrollToIngredientType}>Булки</Tab>
-        <Tab value="two" active={current === 'two'} onClick={scrollToIngredientType}>Соусы</Tab>
-        <Tab value="three" active={current === 'three'} onClick={scrollToIngredientType}>Начинки</Tab>
+        <Tab value="one" active={current === 'one'} onClick={setCurrentTab}>Булки</Tab>
+        <Tab value="two" active={current === 'two'} onClick={setCurrentTab}>Соусы</Tab>
+        <Tab value="three" active={current === 'three'} onClick={setCurrentTab}>Начинки</Tab>
       </div>
       <div className={`${burgerIngredientsStyles.window} mt-10`}>
-        <div id='one'>
+        <div id='one' ref={bunSection}>
           <h2 className='text text_type_main-medium mb-6'>Булки</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('bun')}
           </div>
         </div>
-        <div id='two'>
+        <div id='two' ref={sauceSection}>
           <h2 className='text text_type_main-medium mt-10 mb-6'>Cоусы</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('sauce')}
           </div>
         </div>
-        <div id='three'>
+        <div id='three' ref={mainSection}>
           <h2 className='text text_type_main-medium mt-10 mb-6'>Начинки</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('main')}
@@ -76,7 +98,6 @@ function BurgerIngredients(props) {
 export default BurgerIngredients;
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientType).isRequired,
   setOnPopup: PropTypes.func.isRequired,
   setSelectedIngredient: PropTypes.func.isRequired
 }; 

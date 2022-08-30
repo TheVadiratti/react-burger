@@ -5,23 +5,23 @@ import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
+import { ModalContext } from '../../services/ModalContext';
+import { baseUrl } from '../../utils/constants';
+import { checkResponse } from '../../utils/utils';
+
+import { BurgerContext } from '../../services/BurgerContext';
 
 function App() {
   const [data, setData] = React.useState([]);
   const [onPopup, setOnPopup] = React.useState({ open: false, type: '' });
   const [selectedIngredient, setSelectedIngredient] = React.useState({});
-  const baseUrl = 'https://norma.nomoreparties.space/api/ingredients/';
+  const [orderData, setOrderData] = React.useState({});
 
   React.useEffect(() => {
-    fetch(baseUrl)
+    fetch(`${baseUrl}/api/ingredients/`)
+      .then(checkResponse)
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .then(res => {
-        setData(res.data)
+        setData(res.data);
       })
       .catch(error => {
         console.log(error);
@@ -30,22 +30,26 @@ function App() {
 
   return (
     <div className={appStyles.app}>
-      <AppHeader />
-      <Main
-        data={data}
-        setOnPopup={setOnPopup}
-        setSelectedIngredient={setSelectedIngredient}
-      />
-      {onPopup.open && (
-        <Modal heading={onPopup.type === 'IngredientDetails' ? 'Детали ингредиента' : ''} setOnPopup={setOnPopup}>
-          {onPopup.type === 'IngredientDetails' && (
-            <IngredientDetails data={selectedIngredient} />
+      <BurgerContext.Provider value={data}>
+        <AppHeader />
+        <ModalContext.Provider value={orderData}>
+            <Main
+              setOnPopup={setOnPopup}
+              setSelectedIngredient={setSelectedIngredient}
+              setOrderData={setOrderData}
+            />
+          {onPopup.open && (
+            <Modal heading={onPopup.type === 'IngredientDetails' ? 'Детали ингредиента' : ''} setOnPopup={setOnPopup}>
+              {onPopup.type === 'IngredientDetails' && (
+                <IngredientDetails data={selectedIngredient} />
+              )}
+              {onPopup.type === 'OrderDetails' && (
+                <OrderDetails />
+              )}
+            </Modal>
           )}
-          {onPopup.type === 'OrderDetails' && (
-            <OrderDetails />
-          )}
-        </Modal>
-      )}
+        </ModalContext.Provider>
+      </BurgerContext.Provider>
     </div>
   )
 }
