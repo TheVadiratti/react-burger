@@ -1,4 +1,4 @@
-import { GET_INGREDIENTS } from "../actions/actions";
+import { GET_INGREDIENTS } from "../../utils/constants";
 
 const initialState = {};
 

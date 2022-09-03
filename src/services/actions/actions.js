@@ -1,5 +1,4 @@
-import { baseUrl } from '../../utils/constants'; 
-const GET_INGREDIENTS = 'GET_INGREDIENTS';
+import { GET_INGREDIENTS, baseUrl } from '../../utils/constants';
 
 const getData = (data) => {
   return {
@@ -8,7 +7,7 @@ const getData = (data) => {
   }
 }
 
-const setIngredientsList = () => {
+function setIngredientsList() {
   return function(dispatch) {
     fetch(`${baseUrl}/api/ingredients/`)
       .then(res => {
