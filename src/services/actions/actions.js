@@ -1,4 +1,5 @@
 import { GET_INGREDIENTS, baseUrl } from '../../utils/constants';
+import { checkResponse } from '../../utils/utils';
 
 const getData = (data) => {
   return {
@@ -10,12 +11,7 @@ const getData = (data) => {
 function setIngredientsList() {
   return function(dispatch) {
     fetch(`${baseUrl}/api/ingredients/`)
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(checkResponse)
       .then(res => {
         dispatch(getData(res.data))
       })
