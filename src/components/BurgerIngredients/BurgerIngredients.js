@@ -2,11 +2,12 @@ import React from 'react';
 import burgerIngredientsStyles from './BurgerIngredients.module.css';
 import { Tab, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { BurgerContext } from '../../services/BurgerContext';
+import { useSelector } from 'react-redux';
 
 function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one');
-  const ingredientsData = React.useContext(BurgerContext);
+  const [state, setState] = React.useState([]);
+  const ingredientsData = useSelector((state) => state.ingredients);
   
   const bunSection = React.useRef(null);
   const sauceSection = React.useRef(null);
@@ -17,6 +18,16 @@ function BurgerIngredients(props) {
   }
 
   React.useEffect(() => {
+    const loadData = new Promise(function(resolve) {
+      if(ingredientsData) {
+        resolve();
+      }
+    });
+
+    loadData.then(() => {
+      setState(ingredientsData);
+    })
+
     switch(current) {
       case 'one':
         scrollOnTarget(bunSection);
@@ -28,7 +39,7 @@ function BurgerIngredients(props) {
         scrollOnTarget(mainSection);
         break;
     }
-  }, [current])
+  }, [current, ingredientsData])
 
   function setCurrentTab(e) {
     setCurrent(e)
@@ -36,7 +47,7 @@ function BurgerIngredients(props) {
 
   function openIngredientDetailsPopup(e) {
     const id = e.currentTarget.getAttribute('id');
-    const selectedIngredientData = ingredientsData.find(item => {
+    const selectedIngredientData = state.find(item => {
       return item._id === id;
     });
     props.setOnPopup({
@@ -47,7 +58,7 @@ function BurgerIngredients(props) {
   }
 
   function getInredientsListOfType(type) {
-    return ingredientsData.map(item => {
+    return state.map(item => {
       if (item.type === `${type}`) {
         return (
           <li onClick={openIngredientDetailsPopup} className={burgerIngredientsStyles.option} key={item._id} id={item._id}>
@@ -75,7 +86,7 @@ function BurgerIngredients(props) {
         <div id='one' ref={bunSection}>
           <h2 className='text text_type_main-medium mb-6'>Булки</h2>
           <div className={burgerIngredientsStyles.options}>
-            {getInredientsListOfType('bun')}
+            {getInredientsListOfType('sauce')}
           </div>
         </div>
         <div id='two' ref={sauceSection}>
@@ -87,7 +98,7 @@ function BurgerIngredients(props) {
         <div id='three' ref={mainSection}>
           <h2 className='text text_type_main-medium mt-10 mb-6'>Начинки</h2>
           <div className={burgerIngredientsStyles.options}>
-            {getInredientsListOfType('main')}
+            {getInredientsListOfType('sauce')}
           </div>
         </div>
       </div>

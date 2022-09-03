@@ -1,18 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
-import { BurgerContext } from '../../services/BurgerContext';
 
 function BurgerConstructor(props) {
-  const ingredientsData = React.useContext(BurgerContext);
+  const ingredientsData = useSelector((state) => state.ingredients);
   const [state, setState] = React.useState(null);
 
   React.useEffect(() => {
     const loadData = new Promise(function(resolve) {
-      if(ingredientsData.length !== 0) {
+      if(ingredientsData) {
         resolve();
       }
     });
