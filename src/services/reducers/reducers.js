@@ -1,4 +1,3 @@
-import { combineReducers } from "redux";
 import { GET_INGREDIENTS } from "../actions/actions";
 
 const initialState = {};
@@ -12,7 +11,6 @@ export const rootReducer = (state = initialState, action) => {
       };
 
     default: 
-      console.log('error', state);
       return state;
   }
 }

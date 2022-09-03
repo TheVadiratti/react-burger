@@ -17,7 +17,7 @@ function App() {
 
   React.useEffect(() => {
     dispatch(setIngredientsList())
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className={appStyles.app}>

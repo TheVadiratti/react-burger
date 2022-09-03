@@ -9,9 +9,7 @@ const getData = (data) => {
 }
 
 const setIngredientsList = () => {
-  // Воспользуемся первым аргументом из усилителя redux-thunk — dispatch
   return function(dispatch) {
-    // Запрашиваем данные у сервера
     fetch(`${baseUrl}/api/ingredients/`)
       .then(res => {
         if (res.ok) {
