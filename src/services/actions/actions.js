@@ -1,9 +1,16 @@
-import { GET_INGREDIENTS, baseUrl } from '../../utils/constants';
+import { GET_INGREDIENTS, OPEN_INGREDIENT_DETAILS, baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
 
-const getData = (data) => {
+function getData(data) {
   return {
     type: GET_INGREDIENTS,
+    data: data
+  }
+}
+
+function handleIngredientDetails(type, data) {
+  return {
+    type: type,
     data: data
   }
 }
@@ -21,5 +28,4 @@ function setIngredientsList() {
     }
 }
 
-
-export { GET_INGREDIENTS, setIngredientsList };
+export { setIngredientsList, handleIngredientDetails };

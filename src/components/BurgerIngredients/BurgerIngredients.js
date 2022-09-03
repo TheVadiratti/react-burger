@@ -2,24 +2,27 @@ import React from 'react';
 import burgerIngredientsStyles from './BurgerIngredients.module.css';
 import { Tab, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { handleIngredientDetails } from '../../services/actions/actions';
+import { OPEN_INGREDIENT_DETAILS } from '../../utils/constants';
 
 function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one');
   const [state, setState] = React.useState([]);
   const ingredientsData = useSelector((state) => state.ingredients);
-  
+  const dispatch = useDispatch();
+
   const bunSection = React.useRef(null);
   const sauceSection = React.useRef(null);
   const mainSection = React.useRef(null);
 
   function scrollOnTarget(section) {
-    section.current.scrollIntoView({behavior: "smooth"});
+    section.current.scrollIntoView({ behavior: "smooth" });
   }
 
   React.useEffect(() => {
-    const loadData = new Promise(function(resolve) {
-      if(ingredientsData) {
+    const loadData = new Promise(function (resolve) {
+      if (ingredientsData) {
         resolve();
       }
     });
@@ -28,7 +31,7 @@ function BurgerIngredients(props) {
       setState(ingredientsData);
     })
 
-    switch(current) {
+    switch (current) {
       case 'one':
         scrollOnTarget(bunSection);
         break;
@@ -54,7 +57,7 @@ function BurgerIngredients(props) {
       open: true,
       type: 'IngredientDetails'
     });
-    props.setSelectedIngredient(selectedIngredientData);
+    dispatch(handleIngredientDetails(OPEN_INGREDIENT_DETAILS, selectedIngredientData));
   }
 
   function getInredientsListOfType(type) {
