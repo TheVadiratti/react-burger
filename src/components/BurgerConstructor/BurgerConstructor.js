@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import { baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
 import { openOrderDetailsAction } from '../../services/actions/actions';
@@ -111,7 +110,3 @@ function BurgerConstructor(props) {
 }
 
 export default BurgerConstructor;
-
-BurgerConstructor.propTypes = {
-  setOrderData: PropTypes.func.isRequired
-}; 

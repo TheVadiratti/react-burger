@@ -5,12 +5,10 @@ import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import { ModalContext } from '../../services/ModalContext';
 import { setIngredientsListAction } from '../../services/actions/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
-  const [orderData, setOrderData] = React.useState({});
   const modalEnabled = useSelector((state) => state.modal.open);
   const modalType = useSelector((state) => state.modal.type);
   const dispatch = useDispatch();
@@ -22,21 +20,17 @@ function App() {
   return (
     <div className={appStyles.app}>
       <AppHeader />
-      <ModalContext.Provider value={orderData}>
-        <Main
-          setOrderData={setOrderData}
-        />
-        {modalEnabled && (
-          <Modal heading={modalType === 'IngredientDetails' ? 'Детали ингредиента' : ''}>
-            {modalType === 'IngredientDetails' && (
-              <IngredientDetails />
-            )}
-            {modalType === 'OrderDetails' && (
-              <OrderDetails />
-            )}
-          </Modal>
-        )}
-      </ModalContext.Provider>
+      <Main />
+      {modalEnabled && (
+        <Modal heading={modalType === 'IngredientDetails' ? 'Детали ингредиента' : ''}>
+          {modalType === 'IngredientDetails' && (
+            <IngredientDetails />
+          )}
+          {modalType === 'OrderDetails' && (
+            <OrderDetails />
+          )}
+        </Modal>
+      )}
     </div>
   )
 }
