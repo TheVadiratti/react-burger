@@ -1,12 +1,10 @@
 import React from 'react';
 import burgerIngredientsStyles from './BurgerIngredients.module.css';
 import { Tab, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { handleIngredientDetails } from '../../services/actions/actions';
-import { OPEN_INGREDIENT_DETAILS } from '../../utils/constants';
+import { openIngredientDetailsAction } from '../../services/actions/actions';
 
-function BurgerIngredients(props) {
+function BurgerIngredients() {
   const [current, setCurrent] = React.useState('one');
   const [state, setState] = React.useState([]);
   const ingredientsData = useSelector((state) => state.ingredients);
@@ -53,11 +51,7 @@ function BurgerIngredients(props) {
     const selectedIngredientData = state.find(item => {
       return item._id === id;
     });
-    props.setOnPopup({
-      open: true,
-      type: 'IngredientDetails'
-    });
-    dispatch(handleIngredientDetails(OPEN_INGREDIENT_DETAILS, selectedIngredientData));
+    dispatch(openIngredientDetailsAction(selectedIngredientData));
   }
 
   function getInredientsListOfType(type) {
@@ -110,8 +104,3 @@ function BurgerIngredients(props) {
 }
 
 export default BurgerIngredients;
-
-BurgerIngredients.propTypes = {
-  setOnPopup: PropTypes.func.isRequired,
-  setSelectedIngredient: PropTypes.func.isRequired
-}; 

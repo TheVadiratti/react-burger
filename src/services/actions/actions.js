@@ -1,26 +1,19 @@
-import { GET_INGREDIENTS, OPEN_INGREDIENT_DETAILS, baseUrl } from '../../utils/constants';
+import { GET_INGREDIENTS, OPEN_INGREDIENT_DETAILS, CLOSE_MODAL, baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
 
-function getData(data) {
+function getDataAction(data) {
   return {
     type: GET_INGREDIENTS,
     data: data
   }
 }
 
-function handleIngredientDetails(type, data) {
-  return {
-    type: type,
-    data: data
-  }
-}
-
-function setIngredientsList() {
+function setIngredientsListAction() {
   return function(dispatch) {
     fetch(`${baseUrl}/api/ingredients/`)
       .then(checkResponse)
       .then(res => {
-        dispatch(getData(res.data))
+        dispatch(getDataAction(res.data))
       })
       .catch(error => {
         console.log(error);
@@ -28,4 +21,17 @@ function setIngredientsList() {
     }
 }
 
-export { setIngredientsList, handleIngredientDetails };
+function openIngredientDetailsAction(data) {
+  return {
+    type: OPEN_INGREDIENT_DETAILS,
+    dataIngredientDetails: data
+  }
+}
+
+function closeModalAction() {
+  return {
+    type: CLOSE_MODAL,
+  }
+}
+
+export { setIngredientsListAction, openIngredientDetailsAction, closeModalAction };

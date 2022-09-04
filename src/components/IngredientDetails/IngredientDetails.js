@@ -1,9 +1,8 @@
-import React from 'react';
 import ingredientDetails from './IngredientDetails.module.css';
 import { useSelector } from 'react-redux';
 
 function IngredientDetails() {
-  const currentIngredient = useSelector((state) => state.ingredintDetails.data);
+  const currentIngredient = useSelector((state) => state.modal.dataIngredientDetails);
 
   return (
     <>

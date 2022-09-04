@@ -12,7 +12,7 @@ function BurgerConstructor(props) {
 
   React.useEffect(() => {
     const loadData = new Promise(function(resolve) {
-      if(ingredientsData) {
+      if(ingredientsData.length !== 0) {
         resolve();
       }
     });
@@ -115,6 +115,5 @@ function BurgerConstructor(props) {
 export default BurgerConstructor;
 
 BurgerConstructor.propTypes = {
-  setOnPopup: PropTypes.func.isRequired,
   setOrderData: PropTypes.func.isRequired
 }; 
