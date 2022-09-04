@@ -23,9 +23,9 @@ function App() {
     <div className={appStyles.app}>
       <AppHeader />
       <ModalContext.Provider value={orderData}>
-          <Main
-            setOrderData={setOrderData}
-          />
+        <Main
+          setOrderData={setOrderData}
+        />
         {modalEnabled && (
           <Modal heading={modalType === 'IngredientDetails' ? 'Детали ингредиента' : ''}>
             {modalType === 'IngredientDetails' && (

@@ -9,7 +9,7 @@ function getDataAction(data) {
 }
 
 function setIngredientsListAction() {
-  return function(dispatch) {
+  return function (dispatch) {
     fetch(`${baseUrl}/api/ingredients/`)
       .then(checkResponse)
       .then(res => {
@@ -18,7 +18,7 @@ function setIngredientsListAction() {
       .catch(error => {
         console.log(error);
       })
-    }
+  }
 }
 
 function openIngredientDetailsAction(data) {

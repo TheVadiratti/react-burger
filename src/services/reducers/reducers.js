@@ -11,7 +11,7 @@ const initialState = {
 };
 
 export const rootReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_INGREDIENTS:
       return {
         ...state,
@@ -29,13 +29,13 @@ export const rootReducer = (state = initialState, action) => {
         }
       }
 
-      case CLOSE_MODAL:
-        return {
-          ...state,
-          modal: initialState.modal
-        }
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        modal: initialState.modal
+      }
 
-    default: 
+    default:
       return state;
   }
 }

@@ -13,7 +13,7 @@ function Modal(props) {
   const dispatch = useDispatch();
 
   function closeModal() {
-    dispatch(closeModalAction());  
+    dispatch(closeModalAction());
   }
 
   React.useEffect(() => {

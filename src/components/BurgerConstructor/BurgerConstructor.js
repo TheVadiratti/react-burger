@@ -11,8 +11,8 @@ function BurgerConstructor(props) {
   const [state, setState] = React.useState(null);
 
   React.useEffect(() => {
-    const loadData = new Promise(function(resolve) {
-      if(ingredientsData.length !== 0) {
+    const loadData = new Promise(function (resolve) {
+      if (ingredientsData.length !== 0) {
         resolve();
       }
     });
@@ -26,7 +26,7 @@ function BurgerConstructor(props) {
       const main = ingredientsData.filter(item => {
         return item.type !== 'bun';
       })
-      setState({bun: bun, main: main});
+      setState({ bun: bun, main: main });
     })
   }, [ingredientsData])
 
