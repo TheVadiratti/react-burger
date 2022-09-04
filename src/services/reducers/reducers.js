@@ -1,4 +1,4 @@
-import { CLOSE_MODAL, GET_INGREDIENTS, OPEN_INGREDIENT_DETAILS } from "../../utils/constants";
+import { CLOSE_MODAL, GET_INGREDIENTS, OPEN_INGREDIENT_DETAILS, OPEN_ORDER_DETAILS } from "../../utils/constants";
 
 const initialState = {
   ingredients: [],
@@ -25,7 +25,18 @@ export const rootReducer = (state = initialState, action) => {
           ...state.modal,
           open: true,
           type: 'IngredientDetails',
-          dataIngredientDetails: action.dataIngredientDetails
+          dataIngredientDetails: action.data
+        }
+      }
+
+    case OPEN_ORDER_DETAILS:
+      return {
+        ...state,
+        modal: {
+          ...state.modal,
+          open: true,
+          type: 'OrderDetails',
+          dataOrderDetails: action.data
         }
       }
 

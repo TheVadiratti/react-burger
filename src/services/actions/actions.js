@@ -1,4 +1,4 @@
-import { GET_INGREDIENTS, OPEN_INGREDIENT_DETAILS, CLOSE_MODAL, baseUrl } from '../../utils/constants';
+import { GET_INGREDIENTS, OPEN_INGREDIENT_DETAILS, OPEN_ORDER_DETAILS, CLOSE_MODAL, baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
 
 function getDataAction(data) {
@@ -24,7 +24,14 @@ function setIngredientsListAction() {
 function openIngredientDetailsAction(data) {
   return {
     type: OPEN_INGREDIENT_DETAILS,
-    dataIngredientDetails: data
+    data: data
+  }
+}
+
+function openOrderDetailsAction(data) {
+  return {
+    type: OPEN_ORDER_DETAILS,
+    data: data
   }
 }
 
@@ -34,4 +41,4 @@ function closeModalAction() {
   }
 }
 
-export { setIngredientsListAction, openIngredientDetailsAction, closeModalAction };
+export { setIngredientsListAction, openIngredientDetailsAction, closeModalAction, openOrderDetailsAction };

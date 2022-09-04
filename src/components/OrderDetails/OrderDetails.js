@@ -1,13 +1,12 @@
-import React from 'react';
 import orderDetailsStyles from './OrderDetails.module.css';
-import { ModalContext } from '../../services/ModalContext';
+import { useSelector } from 'react-redux';
 
 function OrderDetails() {
-  const modalData = React.useContext(ModalContext);
+  const orderData = useSelector((state) => state.modal.dataOrderDetails);
 
   return (
     <>
-      <span className='mt-4 text text_type_digits-large'>{modalData.order.number}</span>
+      <span className='mt-4 text text_type_digits-large'>{orderData.order.number}</span>
       <span className='text text_type_main-medium mt-9'>идентификатор заказа</span>
       <div className={`mt-15 ${orderDetailsStyles.doneIcon}`}></div>
       <span className='text text_type_main-default mt-15'>Ваш заказ начали готовить</span>

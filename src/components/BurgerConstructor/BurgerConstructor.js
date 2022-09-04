@@ -1,14 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
+import { openOrderDetailsAction } from '../../services/actions/actions';
 
 function BurgerConstructor(props) {
   const ingredientsData = useSelector((state) => state.ingredients);
   const [state, setState] = React.useState(null);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     const loadData = new Promise(function (resolve) {
@@ -71,11 +73,7 @@ function BurgerConstructor(props) {
     })
       .then(checkResponse)
       .then(res => {
-        props.setOrderData(res);
-        props.setOnPopup({
-          open: true,
-          type: 'OrderDetails'
-        })
+        dispatch(openOrderDetailsAction(res));
       })
       .catch(error => {
         console.log(error);
