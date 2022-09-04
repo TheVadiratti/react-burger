@@ -23,7 +23,6 @@
 
 .options {
   width: 100%;
-  min-height: calc(100vh - 360px); /* для того чтобы при нажатии на табы заголовок секции был у верхней границы окна */
   display: grid;
   grid-template-columns: 272px 272px;
   grid-template-rows: 208px;
