@@ -10,9 +10,39 @@ function BurgerIngredients() {
   const ingredientsData = useSelector((state) => state.ingredients);
   const dispatch = useDispatch();
 
-  const bunSection = React.useRef(null);
-  const sauceSection = React.useRef(null);
-  const mainSection = React.useRef(null);
+  const windowCntRef = React.useRef(null);
+  const bunSectionRef = React.useRef(null);
+  const sauceSectionRef = React.useRef(null);
+  const mainSectionRef = React.useRef(null);
+
+  function autoToggleByScroll() {
+    const bunSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - bunSectionRef.current.getBoundingClientRect().top);
+    const sauceSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - sauceSectionRef.current.getBoundingClientRect().top);
+    const mainSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - mainSectionRef.current.getBoundingClientRect().top);
+
+    const bottomWindow = windowCntRef.current.getBoundingClientRect().bottom;
+    const bottomLastEl = mainSectionRef.current.getBoundingClientRect().bottom;
+
+    const minDist = Math.min(bunSectionDist, sauceSectionDist, mainSectionDist);
+
+    switch (minDist) {
+      case bunSectionDist:
+        setCurrent('one');
+        break;
+      case sauceSectionDist:
+        setCurrent('two');
+        break;
+      case mainSectionDist:
+        setCurrent('three');
+        break;
+    }
+
+    // если прокручивают до дна, переключится на последний таб
+    //(для корректного отображения навигации при малом кол-ве ингредиентов)
+    if(bottomWindow === bottomLastEl) {
+      setCurrent('three');
+    }
+  }
 
   function scrollOnTarget(section) {
     section.current.scrollIntoView({ behavior: "smooth" });
@@ -28,22 +58,21 @@ function BurgerIngredients() {
     loadData.then(() => {
       setState(ingredientsData);
     })
-
-    switch (current) {
-      case 'one':
-        scrollOnTarget(bunSection);
-        break;
-      case 'two':
-        scrollOnTarget(sauceSection);
-        break;
-      case 'three':
-        scrollOnTarget(mainSection);
-        break;
-    }
-  }, [current, ingredientsData])
+  }, [ingredientsData])
 
   function setCurrentTab(e) {
     setCurrent(e)
+    switch (e) {
+      case 'one':
+        scrollOnTarget(bunSectionRef);
+        break;
+      case 'two':
+        scrollOnTarget(sauceSectionRef);
+        break;
+      case 'three':
+        scrollOnTarget(mainSectionRef);
+        break;
+    }
   }
 
   function openIngredientDetailsPopup(e) {
@@ -79,20 +108,20 @@ function BurgerIngredients() {
         <Tab value="two" active={current === 'two'} onClick={setCurrentTab}>Соусы</Tab>
         <Tab value="three" active={current === 'three'} onClick={setCurrentTab}>Начинки</Tab>
       </div>
-      <div className={`${burgerIngredientsStyles.window} mt-10`}>
-        <div id='one' ref={bunSection}>
+      <div ref={windowCntRef} onScroll={autoToggleByScroll} className={`${burgerIngredientsStyles.window} mt-10`}>
+        <div id='one' ref={bunSectionRef}>
           <h2 className='text text_type_main-medium mb-6'>Булки</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('sauce')}
           </div>
         </div>
-        <div id='two' ref={sauceSection}>
+        <div id='two' ref={sauceSectionRef}>
           <h2 className='text text_type_main-medium mt-10 mb-6'>Cоусы</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('sauce')}
           </div>
         </div>
-        <div id='three' ref={mainSection}>
+        <div id='three' ref={mainSectionRef}>
           <h2 className='text text_type_main-medium mt-10 mb-6'>Начинки</h2>
           <div className={burgerIngredientsStyles.options}>
             {getInredientsListOfType('sauce')}
