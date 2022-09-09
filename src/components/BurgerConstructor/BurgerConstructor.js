@@ -89,11 +89,11 @@ function BurgerConstructor() {
 
   return (
     state && (<section className={burgerConstructorStyles.section}>
-      <div className={burgerConstructorStyles.ingredients}>
+      <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
 
         {createIngredient(state.bun, 'top', true, false, '(верх)', 1)}
 
-        <div ref={dropTarget} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
+        <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
           {state.main.map(item => {
             return createIngredient(item, null, false, true, '', item._id);
