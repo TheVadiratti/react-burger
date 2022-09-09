@@ -1,8 +1,9 @@
 import React from 'react';
 import burgerIngredientsStyles from './BurgerIngredients.module.css';
-import { Tab, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { openIngredientDetailsAction } from '../../services/actions/actions';
+import Ingredient from '../Ingredient/Ingredient';
 
 function BurgerIngredients() {
   const [current, setCurrent] = React.useState('one');
@@ -39,7 +40,7 @@ function BurgerIngredients() {
 
     // для корректного отображения навигации при малом кол-ве ингредиентов
     // переключится на последний таб, если прокрутят до дна
-    if(bottomWindow === bottomLastEl) {
+    if (bottomWindow === bottomLastEl) {
       setCurrent('three');
     }
   }
@@ -87,14 +88,8 @@ function BurgerIngredients() {
     return state.map(item => {
       if (item.type === `${type}`) {
         return (
-          <li onClick={openIngredientDetailsPopup} className={burgerIngredientsStyles.option} key={item._id} id={item._id}>
-            <img className="mb-2" src={item.image} alt={item.name}></img>
-            <div className={`${burgerIngredientsStyles.priceCnt} mb-2`}>
-              <span className="text text_type_digits-default mr-2">{item.price}</span>
-              <CurrencyIcon type="primary" />
-            </div>
-            <h3 className="text text_type_main-default">{item.name}</h3>
-            <Counter count={1} size="default" />
+          <li className={burgerIngredientsStyles.option} onClick={openIngredientDetailsPopup} key={item._id} id={item._id}>
+            <Ingredient {...item} />
           </li>
         )
       }
@@ -112,7 +107,7 @@ function BurgerIngredients() {
         <div id='one' ref={bunSectionRef}>
           <h2 className='text text_type_main-medium mb-6'>Булки</h2>
           <div className={burgerIngredientsStyles.options}>
-            {getInredientsListOfType('sauce')}
+            {getInredientsListOfType('bun')}
           </div>
         </div>
         <div id='two' ref={sauceSectionRef}>
@@ -124,7 +119,7 @@ function BurgerIngredients() {
         <div id='three' ref={mainSectionRef}>
           <h2 className='text text_type_main-medium mt-10 mb-6'>Начинки</h2>
           <div className={burgerIngredientsStyles.options}>
-            {getInredientsListOfType('sauce')}
+            {getInredientsListOfType('main')}
           </div>
         </div>
       </div>

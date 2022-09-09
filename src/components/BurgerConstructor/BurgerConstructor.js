@@ -5,11 +5,19 @@ import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktiku
 import { baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
 import { openOrderDetailsAction } from '../../services/actions/actions';
+import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 
-function BurgerConstructor(props) {
+function BurgerConstructor() {
   const ingredientsData = useSelector((state) => state.ingredients);
   const [state, setState] = React.useState(null);
   const dispatch = useDispatch();
+
+  const [, dropTarget] = useDrop({
+    accept: "ingredient",
+    drop() {
+      console.log('score!');
+    }
+  });
 
   React.useEffect(() => {
     const loadData = new Promise(function (resolve) {
@@ -29,7 +37,7 @@ function BurgerConstructor(props) {
       })
       setState({ bun: bun, main: main });
     })
-  }, [ingredientsData])
+  }, [ingredientsData]);
 
   function createIngredient(ingredient, type, isLocked, isMain, text, key) {
     return (
@@ -85,7 +93,7 @@ function BurgerConstructor(props) {
 
         {createIngredient(state.bun, 'top', true, false, '(верх)', 1)}
 
-        <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
+        <div ref={dropTarget} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
           {state.main.map(item => {
             return createIngredient(item, null, false, true, '', item._id);
