@@ -9,13 +9,20 @@ import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 
 function BurgerConstructor() {
   const ingredientsData = useSelector((state) => state.ingredients);
+  const constructorStructure = useSelector((state) => state.constructor);
   const [state, setState] = React.useState(null);
   const dispatch = useDispatch();
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop() {
-      console.log('score!');
+    drop(item) {
+      const currentIngredient = ingredientsData.find(ingredient => {
+        return ingredient._id === item.id
+      })
+      dispatch({
+        type: 'ADD_INGREDIENT',
+        ingredient: currentIngredient
+      });
     }
   });
 
@@ -37,7 +44,8 @@ function BurgerConstructor() {
       })
       setState({ bun: bun, main: main });
     })
-  }, [ingredientsData]);
+    console.log(constructorStructure);
+  }, [ingredientsData, constructorStructure]);
 
   function createIngredient(ingredient, type, isLocked, isMain, text, key) {
     return (
@@ -55,8 +63,8 @@ function BurgerConstructor() {
   }
 
   function sum() {
-    const bunSum = state.bun.price * 2;
-    const mainPriceArray = state.main.map(item => {
+    const bunSum = constructorStructure.buns.price * 2;
+    const mainPriceArray = constructorStructure.main.map(item => {
       return item.price;
     });
     const mainSum = mainPriceArray.reduce((prev, current) => {
@@ -88,32 +96,38 @@ function BurgerConstructor() {
   }
 
   return (
-    state && (<section className={burgerConstructorStyles.section}>
-      <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
+    state && (
+      <section className={burgerConstructorStyles.section}>
+        <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
 
-        {createIngredient(state.bun, 'top', true, false, '(верх)', 1)}
+          {constructorStructure.buns.name ? createIngredient(constructorStructure.buns, 'top', true, false, '(верх)', 1) : <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте булки</p>}
 
-        <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
+          <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
-          {state.main.map(item => {
-            return createIngredient(item, null, false, true, '', item._id);
-          })}
+            {constructorStructure.main.length !== 0 ?
+              constructorStructure.main.map(item => {
+                return createIngredient(item, null, false, true, '', item._id);
+              })
+              :
+              <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте ингредиенты</p>
+              }
+
+          </div>
+
+          {constructorStructure.buns.name && createIngredient(constructorStructure.buns, 'bottom', true, false, '(низ)', 2)}
 
         </div>
-
-        {createIngredient(state.bun, 'bottom', true, false, '(низ)', 2)}
-
-      </div>
-      <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>
-        <Button type="primary" size="large" onClick={sendOrder}>
-          Оформить заказ
-        </Button>
-        <div className={`${burgerConstructorStyles.sum} mr-10`}>
-          <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>{`${sum()}`}</p>
-          <CurrencyIcon type="primary" />
+        <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>
+          <Button type="primary" size="large" onClick={sendOrder}>
+            Оформить заказ
+          </Button>
+          <div className={`${burgerConstructorStyles.sum} mr-10`}>
+            <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>{`${sum()}`}</p>
+            <CurrencyIcon type="primary" />
+          </div>
         </div>
-      </div>
-    </section>)
+      </section>
+    )
   )
 }
 
