@@ -81,8 +81,8 @@ function BurgerConstructor() {
         <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
           {constructorStructure.main.length !== 0 ?
-            constructorStructure.main.map(item => {
-              return createIngredient(item, null, false, true, '', item._id);
+            constructorStructure.main.map((item, i) => {
+              return createIngredient(item, null, false, true, '', i + 1);
             })
             :
             <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте ингредиенты</p>
