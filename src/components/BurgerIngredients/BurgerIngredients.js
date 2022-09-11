@@ -84,7 +84,7 @@ function BurgerIngredients() {
     dispatch(openIngredientDetailsAction(selectedIngredientData));
   }
 
-  function getInredientsListOfType(type) {
+  function renderInredientsListOfType(type) {
     return state.map(item => {
       if (item.type === `${type}`) {
         return (
@@ -107,19 +107,19 @@ function BurgerIngredients() {
         <div id='one' ref={bunSectionRef}>
           <h2 className='text text_type_main-medium mb-6'>Булки</h2>
           <div className={burgerIngredientsStyles.options}>
-            {getInredientsListOfType('bun')}
+            {renderInredientsListOfType('bun')}
           </div>
         </div>
         <div id='two' ref={sauceSectionRef}>
           <h2 className='text text_type_main-medium mt-10 mb-6'>Cоусы</h2>
           <div className={burgerIngredientsStyles.options}>
-            {getInredientsListOfType('sauce')}
+            {renderInredientsListOfType('sauce')}
           </div>
         </div>
         <div id='three' ref={mainSectionRef}>
           <h2 className='text text_type_main-medium mt-10 mb-6'>Начинки</h2>
           <div className={burgerIngredientsStyles.options}>
-            {getInredientsListOfType('main')}
+            {renderInredientsListOfType('main')}
           </div>
         </div>
       </div>
