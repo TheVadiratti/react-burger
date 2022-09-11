@@ -10,7 +10,8 @@ const initialState = {
   },
   constructor: {
     buns: {},
-    main: []
+    main: [],
+    counter: {}
   }
 };
 
@@ -54,8 +55,23 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         constructor: {
+          ...state.constructor,
           buns: action.ingredient.type === 'bun' ? action.ingredient : state.constructor.buns,
           main: action.ingredient.type !== 'bun' ? [...state.constructor.main, action.ingredient] : state.constructor.main
+        }
+      }
+
+    case 'UPDATE_COUNTER':
+      return {
+        ...state,
+        constructor: {
+          ...state.constructor,
+          counter: {
+            ...state.constructor.counter,
+            [action.id]: state.constructor.main.filter(item => {
+              return item._id === action.id
+            }).length
+          }
         }
       }
 

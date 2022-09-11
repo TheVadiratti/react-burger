@@ -11,6 +11,8 @@ function BurgerConstructor() {
   const constructorStructure = useSelector((state) => state.constructor);
   const dispatch = useDispatch();
 
+  console.log(constructorStructure.counter);
+
   const [, dropTarget] = useDrop({
     accept: "ingredient",
     drop(item) {
@@ -21,6 +23,13 @@ function BurgerConstructor() {
         type: 'ADD_INGREDIENT',
         ingredient: currentIngredient
       });
+      if (currentIngredient.type !== 'bun') {
+        dispatch({
+          type: 'UPDATE_COUNTER',
+          id: item.id,
+        });
+      }
+
     }
   });
 
@@ -40,13 +49,13 @@ function BurgerConstructor() {
   }
 
   function sum() {
-    const bunSum = constructorStructure.buns.price * 2;
+    const bunSum = constructorStructure.buns.price * 2 || 0;
     const mainPriceArray = constructorStructure.main.map(item => {
       return item.price;
     });
     const mainSum = mainPriceArray.reduce((prev, current) => {
       return prev + current;
-    }, mainPriceArray[0]);
+    }, mainPriceArray[0]) || 0;
     return mainSum + bunSum;
   }
 
