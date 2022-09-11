@@ -11,7 +11,7 @@ function BurgerConstructor() {
   const constructorStructure = useSelector((state) => state.constructor);
   const dispatch = useDispatch();
 
-  console.log(constructorStructure.counter);
+  console.log(constructorStructure.main);
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
@@ -55,7 +55,7 @@ function BurgerConstructor() {
     });
     const mainSum = mainPriceArray.reduce((prev, current) => {
       return prev + current;
-    }, mainPriceArray[0]) || 0;
+    }, 0) || 0;
     return mainSum + bunSum;
   }
 
