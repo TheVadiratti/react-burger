@@ -14,7 +14,7 @@ function Ingredient({ image, name, price, _id, type }) {
     if(constructorStructure.buns._id === _id) {
       return (<Counter count={2} size="default" />)
     }
-    else if(type !== 'bun' && constructorStructure.counter[_id]) {
+    else if(constructorStructure.counter[_id]) {
       return (<Counter count={constructorStructure.counter[_id]} size="default" />)
     }
     else {
