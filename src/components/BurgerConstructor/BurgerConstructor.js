@@ -3,7 +3,7 @@ import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
-import { openOrderDetailsAction } from '../../services/actions/actions';
+import { openOrderDetailsAction, addIngregient, deleteIngredientAction, updateCounter } from '../../services/actions/actions';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 
 function BurgerConstructor() {
@@ -14,18 +14,13 @@ function BurgerConstructor() {
   const [, dropTarget] = useDrop({
     accept: "ingredient",
     drop(item) {
+      // поиск ингредиента в сторе
       const currentIngredient = ingredientsData.find(ingredient => {
         return ingredient._id === item.id
-      })
-      dispatch({
-        type: 'ADD_INGREDIENT',
-        ingredient: currentIngredient
       });
+      dispatch(addIngregient(currentIngredient));
       if (currentIngredient.type !== 'bun') {
-        dispatch({
-          type: 'UPDATE_COUNTER',
-          id: item.id,
-        });
+        dispatch(updateCounter(item.id));
       }
     }
   });
@@ -36,16 +31,8 @@ function BurgerConstructor() {
     const currentIngredientIndex = parseInt(e.currentTarget.parentElement.parentElement.parentElement.parentElement.getAttribute('id'));
     // поиск id УИ по индексу в сторе
     const currentIngredientId = constructorStructure.main[currentIngredientIndex]._id;
-    dispatch({
-      type: 'DELETE_INGREDIENT',
-      id: currentIngredientId,
-      index: currentIngredientIndex
-    })
-    dispatch({
-      type: 'UPDATE_COUNTER',
-      id: currentIngredientId
-    });
-
+    dispatch(deleteIngredientAction(currentIngredientId, currentIngredientIndex));
+    dispatch(updateCounter(currentIngredientId));
   }
 
   function createIngredient(ingredient, type, isLocked, isMain, text, key) {

@@ -1,4 +1,4 @@
-import { GET_INGREDIENTS, OPEN_INGREDIENT_DETAILS, OPEN_ORDER_DETAILS, CLOSE_MODAL, baseUrl } from '../../utils/constants';
+import { GET_INGREDIENTS, OPEN_INGREDIENT_DETAILS, OPEN_ORDER_DETAILS, CLOSE_MODAL, ADD_INGREDIENT, DELETE_INGREDIENT, UPDATE_COUNTER, baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
 
 function getDataAction(data) {
@@ -41,4 +41,34 @@ function closeModalAction() {
   }
 }
 
-export { setIngredientsListAction, openIngredientDetailsAction, closeModalAction, openOrderDetailsAction };
+function addIngregient(ingredient) {
+  return {
+    type: ADD_INGREDIENT,
+    ingredient:ingredient
+  }
+}
+
+function deleteIngredientAction(id, index) {
+  return {
+    type: DELETE_INGREDIENT,
+    id: id,
+    index: index
+  }
+}
+
+function updateCounter(id) {
+  return {
+    type: UPDATE_COUNTER,
+    id: id
+  }
+}
+
+export {
+  setIngredientsListAction,
+  openIngredientDetailsAction,
+  closeModalAction,
+  openOrderDetailsAction,
+  addIngregient,
+  deleteIngredientAction,
+  updateCounter
+};

@@ -16,6 +16,18 @@ function BurgerIngredients() {
   const sauceSectionRef = React.useRef(null);
   const mainSectionRef = React.useRef(null);
 
+  React.useEffect(() => {
+    const loadData = new Promise(function (resolve) {
+      if (ingredientsData) {
+        resolve();
+      }
+    });
+
+    loadData.then(() => {
+      setState(ingredientsData);
+    })
+  }, [ingredientsData])
+
   function autoToggleByScroll() {
     const bunSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - bunSectionRef.current.getBoundingClientRect().top);
     const sauceSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - sauceSectionRef.current.getBoundingClientRect().top);
@@ -25,6 +37,7 @@ function BurgerIngredients() {
     const bottomLastEl = mainSectionRef.current.getBoundingClientRect().bottom;
 
     const minDist = Math.min(bunSectionDist, sauceSectionDist, mainSectionDist);
+    
 
     switch (minDist) {
       case bunSectionDist:
@@ -48,18 +61,6 @@ function BurgerIngredients() {
   function scrollOnTarget(section) {
     section.current.scrollIntoView({ behavior: "smooth" });
   }
-
-  React.useEffect(() => {
-    const loadData = new Promise(function (resolve) {
-      if (ingredientsData) {
-        resolve();
-      }
-    });
-
-    loadData.then(() => {
-      setState(ingredientsData);
-    })
-  }, [ingredientsData])
 
   function setCurrentTab(e) {
     setCurrent(e)
