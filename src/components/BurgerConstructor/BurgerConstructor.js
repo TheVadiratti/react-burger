@@ -1,15 +1,27 @@
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
-import { openOrderDetailsAction, addIngregient, deleteIngredientAction, updateCounter } from '../../services/actions/actions';
+import { openOrderDetailsAction, addIngredient, deleteIngredientAction, updateCounter } from '../../services/actions/actions';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 
 function BurgerConstructor() {
   const ingredientsData = useSelector((state) => state.ingredients);
   const constructorStructure = useSelector((state) => state.constructor);
   const dispatch = useDispatch();
+
+  const windowCntRef = React.useRef(null);
+
+  React.useEffect(() => {
+    // плавная прокрутка к последнему добавленному ингредиенту
+    windowCntRef.current.scrollBy({
+      top: windowCntRef.current.scrollHeight,
+      left: 0,
+      behavior: "smooth"
+    });
+  }, [constructorStructure])
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
@@ -18,7 +30,7 @@ function BurgerConstructor() {
       const currentIngredient = ingredientsData.find(ingredient => {
         return ingredient._id === item.id
       });
-      dispatch(addIngregient(currentIngredient));
+      dispatch(addIngredient(currentIngredient));
       if (currentIngredient.type !== 'bun') {
         dispatch(updateCounter(item.id));
       }
@@ -90,7 +102,7 @@ function BurgerConstructor() {
 
         {constructorStructure.buns.name ? createIngredient(constructorStructure.buns, 'top', true, false, '(верх)', 0) : <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте булки</p>}
 
-        <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
+        <div ref={windowCntRef} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
           {constructorStructure.main.length !== 0 ?
             constructorStructure.main.map((item, i) => {

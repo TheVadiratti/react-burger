@@ -41,7 +41,7 @@ function closeModalAction() {
   }
 }
 
-function addIngregient(ingredient) {
+function addIngredient(ingredient) {
   return {
     type: ADD_INGREDIENT,
     ingredient:ingredient
@@ -68,7 +68,7 @@ export {
   openIngredientDetailsAction,
   closeModalAction,
   openOrderDetailsAction,
-  addIngregient,
+  addIngredient,
   deleteIngredientAction,
   updateCounter
 };
