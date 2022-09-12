@@ -11,8 +11,6 @@ function BurgerConstructor() {
   const constructorStructure = useSelector((state) => state.constructor);
   const dispatch = useDispatch();
 
-  console.log(constructorStructure.main);
-
   const [, dropTarget] = useDrop({
     accept: "ingredient",
     drop(item) {
@@ -29,13 +27,30 @@ function BurgerConstructor() {
           id: item.id,
         });
       }
-
     }
   });
 
+  function deleteIngredient(e) {
+    // !! УИ - удаляемый ингредиент !!
+    // получение индекса УИ из атрибута элемента, преобразование к числу
+    const currentIngredientIndex = parseInt(e.currentTarget.parentElement.parentElement.parentElement.parentElement.getAttribute('id'));
+    // поиск id УИ по индексу в сторе
+    const currentIngredientId = constructorStructure.main[currentIngredientIndex]._id;
+    dispatch({
+      type: 'DELETE_INGREDIENT',
+      id: currentIngredientId,
+      index: currentIngredientIndex
+    })
+    dispatch({
+      type: 'UPDATE_COUNTER',
+      id: currentIngredientId
+    });
+
+  }
+
   function createIngredient(ingredient, type, isLocked, isMain, text, key) {
     return (
-      <div className={isMain ? burgerConstructorStyles.item : burgerConstructorStyles.itemLocked} key={key}>
+      <div className={isMain ? burgerConstructorStyles.item : burgerConstructorStyles.itemLocked} key={key} id={key}>
         {isMain && <DragIcon type='primary' />}
         <ConstructorElement
           type={isMain ? '' : type}
@@ -43,6 +58,7 @@ function BurgerConstructor() {
           text={`${ingredient.name} ${text}`}
           price={ingredient.price}
           thumbnail={ingredient.image}
+          handleClose={deleteIngredient}
         />
       </div>
     )
@@ -85,13 +101,13 @@ function BurgerConstructor() {
     <section className={burgerConstructorStyles.section}>
       <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
 
-        {constructorStructure.buns.name ? createIngredient(constructorStructure.buns, 'top', true, false, '(верх)', 1) : <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте булки</p>}
+        {constructorStructure.buns.name ? createIngredient(constructorStructure.buns, 'top', true, false, '(верх)', 0) : <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте булки</p>}
 
         <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
           {constructorStructure.main.length !== 0 ?
             constructorStructure.main.map((item, i) => {
-              return createIngredient(item, null, false, true, '', i + 1);
+              return createIngredient(item, null, false, true, '', i);
             })
             :
             <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте ингредиенты</p>
@@ -99,7 +115,7 @@ function BurgerConstructor() {
 
         </div>
 
-        {constructorStructure.buns.name && createIngredient(constructorStructure.buns, 'bottom', true, false, '(низ)', 2)}
+        {constructorStructure.buns.name && createIngredient(constructorStructure.buns, 'bottom', true, false, '(низ)', 1)}
 
       </div>
       <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>

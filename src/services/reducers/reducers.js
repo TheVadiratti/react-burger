@@ -75,6 +75,17 @@ export const rootReducer = (state = initialState, action) => {
         }
       }
 
+    case 'DELETE_INGREDIENT':
+      return {
+        ...state,
+        constructor: {
+          ...state.constructor,
+          main: state.constructor.main.filter((item, i) => {
+            return item._id !== action.id || i !== action.index;
+          })
+        }
+      }
+
     default:
       return state;
   }
