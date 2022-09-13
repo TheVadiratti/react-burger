@@ -20,20 +20,6 @@
   border: 4px solid #8585AD;
 }
 
-.item {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 8px;
-  gap: 8px;
-}
-
-.itemLocked {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 16px;
-}
-
 .total {
   display: flex;
   flex-direction: row-reverse;
