@@ -1,0 +1,13 @@
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  gap: 8px;
+}
+
+.itemLocked {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 16px;
+}

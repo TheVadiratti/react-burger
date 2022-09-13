@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import burgerConstructorStyles from './BurgerConstructor.module.css';
-import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import BurgerItem from '../BurgerItem/BurgerItem';
 import { baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
-import { openOrderDetailsAction, addIngredient, deleteIngredientAction, updateCounter } from '../../services/actions/actions';
+import { openOrderDetailsAction, addIngredient, updateCounter } from '../../services/actions/actions';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 
 function BurgerConstructor() {
@@ -36,32 +37,6 @@ function BurgerConstructor() {
       }
     }
   });
-
-  function deleteIngredient(e) {
-    // !! УИ - удаляемый ингредиент !!
-    // получение индекса УИ из атрибута элемента, преобразование к числу
-    const currentIngredientIndex = parseInt(e.currentTarget.parentElement.parentElement.parentElement.parentElement.getAttribute('id'));
-    // поиск id УИ по индексу в сторе
-    const currentIngredientId = constructorStructure.main[currentIngredientIndex]._id;
-    dispatch(deleteIngredientAction(currentIngredientId, currentIngredientIndex));
-    dispatch(updateCounter(currentIngredientId));
-  }
-
-  function createIngredient(ingredient, type, isLocked, isMain, text, key) {
-    return (
-      <div className={isMain ? burgerConstructorStyles.item : burgerConstructorStyles.itemLocked} key={key} id={key}>
-        {isMain && <DragIcon type='primary' />}
-        <ConstructorElement
-          type={isMain ? '' : type}
-          isLocked={isLocked}
-          text={`${ingredient.name} ${text}`}
-          price={ingredient.price}
-          thumbnail={ingredient.image}
-          handleClose={deleteIngredient}
-        />
-      </div>
-    )
-  }
 
   function sum() {
     const bunSum = constructorStructure.buns.price * 2 || 0;
@@ -100,13 +75,16 @@ function BurgerConstructor() {
     <section className={burgerConstructorStyles.section}>
       <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
 
-        {constructorStructure.buns.name ? createIngredient(constructorStructure.buns, 'top', true, false, '(верх)', 0) : <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте булки</p>}
+        {constructorStructure.buns.name ?
+        <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} keyValue={0} />
+        :
+        <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте булки</p>}
 
         <div ref={windowCntRef} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
           {constructorStructure.main.length !== 0 ?
             constructorStructure.main.map((item, i) => {
-              return createIngredient(item, null, false, true, '', i);
+              return (<BurgerItem ingredient={item} type={null} isLocked={false} isMain={true} text={''} id={i} key={i} />)
             })
             :
             <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте ингредиенты</p>
@@ -114,7 +92,9 @@ function BurgerConstructor() {
 
         </div>
 
-        {constructorStructure.buns.name && createIngredient(constructorStructure.buns, 'bottom', true, false, '(низ)', 1)}
+        {constructorStructure.buns.name &&
+        <BurgerItem ingredient={constructorStructure.buns} type={'bottom'} isLocked={true} isMain={false} text={'(низ)'} keyValue={1} />
+        }
 
       </div>
       <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>
