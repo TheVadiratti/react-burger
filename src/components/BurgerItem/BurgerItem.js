@@ -2,7 +2,7 @@ import React from 'react';
 import burgerItem from './BurgerItem.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteIngredientAction, updateCounter } from '../../services/actions/actions';
+import { deleteIngredientAction, updateCounterAction, sortIngredientsAction } from '../../services/actions/actions';
 import { useDrag, useDrop } from "react-dnd";
 
 function BurgerItem({ ingredient, type, isLocked, isMain, text, id }) {
@@ -13,40 +13,29 @@ function BurgerItem({ ingredient, type, isLocked, isMain, text, id }) {
 
   const [, dragRef] = useDrag({
     type: "burgerItem",
-    item: { id: id },
-    collect: monitor => ({
-      canDrag: monitor.canDrag(),
-      isDrag: monitor.isDragging()
-    })
+    // id из пропсов компонента
+    item: { id: id }
   });
 
   const [, dropTarget] = useDrop({
     accept: "burgerItem",
     drop(item) {
-      dispatch({
-        type: 'SORT_INGREDIENTS',
-        from: item.id,
-        to: id
-      })
+      dispatch(sortIngredientsAction(item.id, id))
     },
     hover: (item, monitor) => {
-      const dragIndex = item.id
-      const hoverIndex = id
-      const hoverBoundingRect = commonRef.current?.getBoundingClientRect()
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-      const hoverActualY = monitor.getClientOffset().y - hoverBoundingRect.top
+      const dragIndex = item.id;
+      const hoverIndex = id;
+      const hoverBoundingRect = commonRef.current?.getBoundingClientRect();
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverActualY = monitor.getClientOffset().y - hoverBoundingRect.top;
 
       // if dragging down, continue only when hover is smaller than middle Y
       if (dragIndex < hoverIndex && hoverActualY < hoverMiddleY) return
       // if dragging up, continue only when hover is bigger than middle Y
       if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return
-      dispatch({
-        type: 'SORT_INGREDIENTS',
-        from: item.id,
-        to: id
-      })
-      item.id = hoverIndex
-    },
+      dispatch(sortIngredientsAction(item.id, id));
+      item.id = hoverIndex;
+    }
   })
 
   const dragDropRef = dragRef(dropTarget(commonRef))
@@ -58,7 +47,7 @@ function BurgerItem({ ingredient, type, isLocked, isMain, text, id }) {
     // поиск id УИ по индексу в сторе
     const currentIngredientId = constructorStructure.main[currentIngredientIndex]._id;
     dispatch(deleteIngredientAction(currentIngredientId, currentIngredientIndex));
-    dispatch(updateCounter(currentIngredientId));
+    dispatch(updateCounterAction(currentIngredientId));
   }
 
   return (

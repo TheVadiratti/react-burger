@@ -5,7 +5,7 @@ import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-co
 import BurgerItem from '../BurgerItem/BurgerItem';
 import { baseUrl } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
-import { openOrderDetailsAction, addIngredient, updateCounter } from '../../services/actions/actions';
+import { openOrderDetailsAction, addIngredientAction, updateCounterAction } from '../../services/actions/actions';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 
 function BurgerConstructor() {
@@ -31,13 +31,10 @@ function BurgerConstructor() {
       const currentIngredient = ingredientsData.find(ingredient => {
         return ingredient._id === item.id
       });
-      dispatch(addIngredient(currentIngredient));
+      dispatch(addIngredientAction(currentIngredient));
       if (currentIngredient.type !== 'bun') {
-        dispatch(updateCounter(item.id));
+        dispatch(updateCounterAction(item.id));
       }
-      dispatch({
-        type: 'DRAG_OFF'
-      });
     }
   });
 

@@ -1,4 +1,13 @@
-import { CLOSE_MODAL, GET_INGREDIENTS, OPEN_INGREDIENT_DETAILS, OPEN_ORDER_DETAILS, ADD_INGREDIENT } from "../../utils/constants";
+import {
+  CLOSE_MODAL,
+  GET_INGREDIENTS,
+  OPEN_INGREDIENT_DETAILS,
+  OPEN_ORDER_DETAILS,
+  ADD_INGREDIENT,
+  DELETE_INGREDIENT,
+  UPDATE_COUNTER,
+  SORT_INGREDIENTS
+} from "../../utils/constants";
 
 const initialState = {
   ingredients: [],
@@ -62,7 +71,7 @@ export const rootReducer = (state = initialState, action) => {
         }
       }
 
-    case 'UPDATE_COUNTER':
+    case UPDATE_COUNTER:
       return {
         ...state,
         constructor: {
@@ -76,7 +85,7 @@ export const rootReducer = (state = initialState, action) => {
         }
       }
 
-    case 'DELETE_INGREDIENT':
+    case DELETE_INGREDIENT:
       return {
         ...state,
         constructor: {
@@ -87,25 +96,7 @@ export const rootReducer = (state = initialState, action) => {
         }
       }
 
-    case 'DRAG_ON':
-      return {
-        ...state,
-        constructor: {
-          ...state.constructor,
-          isActiveDrag: true
-        }
-      }
-
-    case 'DRAG_OFF':
-      return {
-        ...state,
-        constructor: {
-          ...state.constructor,
-          isActiveDrag: false
-        }
-      }
-
-    case 'SORT_INGREDIENTS':
+    case SORT_INGREDIENTS:
       const burgerItems = state.constructor.main;
       burgerItems.splice(action.to, 0, burgerItems.splice(action.from, 1)[0]);
       return {
