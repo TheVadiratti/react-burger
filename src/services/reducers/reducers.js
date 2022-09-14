@@ -20,8 +20,7 @@ const initialState = {
   constructor: {
     buns: {},
     main: [],
-    counter: {},
-    isActiveDrag: false
+    counter: {}
   }
 };
 
