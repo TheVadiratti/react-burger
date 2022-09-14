@@ -2,10 +2,31 @@ import burgerItem from './BurgerItem.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteIngredientAction, updateCounter } from '../../services/actions/actions';
+import { useDrag, useDrop } from "react-dnd";
 
 function BurgerItem({ingredient, type, isLocked, isMain, text, id}) {
   const constructorStructure = useSelector((state) => state.constructor);
   const dispatch = useDispatch();
+
+  const [{canDrag, isDrag}, dragRef] = useDrag({
+    type: "burgerItem",
+    item: {id: id},
+    collect: monitor => ({
+      canDrag: monitor.canDrag(),
+      isDrag: monitor.isDragging()
+  })
+  });
+
+  const [, dropTarget] = useDrop({
+    accept: "burgerItem",
+    drop(item) {
+      dispatch({
+        type: 'SORT_INGREDIENTS',
+        from: item.id,
+        to: id
+      })
+    }
+  })
 
   function deleteIngredient(e) {
     // !! УИ - удаляемый ингредиент !!
@@ -18,7 +39,7 @@ function BurgerItem({ingredient, type, isLocked, isMain, text, id}) {
   }
 
   return (
-    <div className={isMain ? burgerItem.item : burgerItem.itemLocked} id={id}>
+    <div style={{opacity: (isDrag) ? 0 : 1}} ref={!canDrag ? dropTarget : dragRef} className={isMain ? burgerItem.item : burgerItem.itemLocked} id={id}>
       {isMain && <DragIcon type='primary' />}
       <ConstructorElement
         type={isMain ? '' : type}

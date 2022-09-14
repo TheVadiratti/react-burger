@@ -12,6 +12,7 @@ function BurgerConstructor() {
   const ingredientsData = useSelector((state) => state.ingredients);
   const constructorStructure = useSelector((state) => state.constructor);
   const dispatch = useDispatch();
+  console.log(constructorStructure.main);
 
   const windowCntRef = React.useRef(null);
 
@@ -22,7 +23,7 @@ function BurgerConstructor() {
       left: 0,
       behavior: "smooth"
     });
-  }, [constructorStructure])
+  }, [constructorStructure.main.length])
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
@@ -35,6 +36,9 @@ function BurgerConstructor() {
       if (currentIngredient.type !== 'bun') {
         dispatch(updateCounter(item.id));
       }
+      dispatch({
+        type: 'DRAG_OFF'
+      });
     }
   });
 

@@ -11,7 +11,8 @@ const initialState = {
   constructor: {
     buns: {},
     main: [],
-    counter: {}
+    counter: {},
+    isActiveDrag: false
   }
 };
 
@@ -83,6 +84,35 @@ export const rootReducer = (state = initialState, action) => {
           main: state.constructor.main.filter((item, i) => {
             return item._id !== action.id || i !== action.index;
           })
+        }
+      }
+
+    case 'DRAG_ON':
+      return {
+        ...state,
+        constructor: {
+          ...state.constructor,
+          isActiveDrag: true
+        }
+      }
+
+    case 'DRAG_OFF':
+      return {
+        ...state,
+        constructor: {
+          ...state.constructor,
+          isActiveDrag: false
+        }
+      }
+
+    case 'SORT_INGREDIENTS':
+      const burgerItems = state.constructor.main;
+      burgerItems.splice(action.to, 0, burgerItems.splice(action.from, 1)[0]);
+      return {
+        ...state,
+        constructor: {
+          ...state.constructor,
+          main: burgerItems
         }
       }
 
