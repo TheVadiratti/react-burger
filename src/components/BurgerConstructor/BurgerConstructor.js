@@ -12,7 +12,6 @@ function BurgerConstructor() {
   const ingredientsData = useSelector((state) => state.ingredients);
   const constructorStructure = useSelector((state) => state.constructor);
   const dispatch = useDispatch();
-  console.log(constructorStructure.main);
 
   const windowCntRef = React.useRef(null);
 

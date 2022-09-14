@@ -8,7 +8,8 @@ import { useDrag, useDrop } from "react-dnd";
 function BurgerItem({ ingredient, type, isLocked, isMain, text, id }) {
   const constructorStructure = useSelector((state) => state.constructor);
   const dispatch = useDispatch();
-  const commonRef = React.useRef(null)
+  const commonRef = React.useRef(null);
+  const nullRef = React.useRef(null);
 
   const [, dragRef] = useDrag({
     type: "burgerItem",
@@ -61,7 +62,7 @@ function BurgerItem({ ingredient, type, isLocked, isMain, text, id }) {
   }
 
   return (
-    <div ref={dragDropRef} className={isMain ? burgerItem.item : burgerItem.itemLocked} id={id}>
+    <div ref={isMain ? dragDropRef : nullRef} className={isMain ? burgerItem.item : burgerItem.itemLocked} id={id}>
       {isMain && <DragIcon type='primary' />}
       <ConstructorElement
         type={isMain ? '' : type}
