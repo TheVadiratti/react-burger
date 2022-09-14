@@ -1,20 +1,22 @@
+import React from 'react';
 import burgerItem from './BurgerItem.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteIngredientAction, updateCounter } from '../../services/actions/actions';
 import { useDrag, useDrop } from "react-dnd";
 
-function BurgerItem({ingredient, type, isLocked, isMain, text, id}) {
+function BurgerItem({ ingredient, type, isLocked, isMain, text, id }) {
   const constructorStructure = useSelector((state) => state.constructor);
   const dispatch = useDispatch();
+  const commonRef = React.useRef(null)
 
-  const [{canDrag, isDrag}, dragRef] = useDrag({
+  const [, dragRef] = useDrag({
     type: "burgerItem",
-    item: {id: id},
+    item: { id: id },
     collect: monitor => ({
       canDrag: monitor.canDrag(),
       isDrag: monitor.isDragging()
-  })
+    })
   });
 
   const [, dropTarget] = useDrop({
@@ -25,8 +27,28 @@ function BurgerItem({ingredient, type, isLocked, isMain, text, id}) {
         from: item.id,
         to: id
       })
-    }
+    },
+    hover: (item, monitor) => {
+      const dragIndex = item.id
+      const hoverIndex = id
+      const hoverBoundingRect = commonRef.current?.getBoundingClientRect()
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+      const hoverActualY = monitor.getClientOffset().y - hoverBoundingRect.top
+
+      // if dragging down, continue only when hover is smaller than middle Y
+      if (dragIndex < hoverIndex && hoverActualY < hoverMiddleY) return
+      // if dragging up, continue only when hover is bigger than middle Y
+      if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return
+      dispatch({
+        type: 'SORT_INGREDIENTS',
+        from: item.id,
+        to: id
+      })
+      item.id = hoverIndex
+    },
   })
+
+  const dragDropRef = dragRef(dropTarget(commonRef))
 
   function deleteIngredient(e) {
     // !! УИ - удаляемый ингредиент !!
@@ -39,7 +61,7 @@ function BurgerItem({ingredient, type, isLocked, isMain, text, id}) {
   }
 
   return (
-    <div style={{opacity: (isDrag) ? 0 : 1}} ref={!canDrag ? dropTarget : dragRef} className={isMain ? burgerItem.item : burgerItem.itemLocked} id={id}>
+    <div ref={dragDropRef} className={isMain ? burgerItem.item : burgerItem.itemLocked} id={id}>
       {isMain && <DragIcon type='primary' />}
       <ConstructorElement
         type={isMain ? '' : type}
