@@ -1,6 +1,6 @@
 import {
   CLOSE_MODAL,
-  GET_INGREDIENTS,
+  GET_INGREDIENTS_SUCCESS,
   OPEN_INGREDIENT_DETAILS,
   OPEN_ORDER_DETAILS,
   ADD_INGREDIENT,
@@ -26,7 +26,7 @@ const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_INGREDIENTS:
+    case GET_INGREDIENTS_SUCCESS:
       return {
         ...state,
         ingredients: action.data

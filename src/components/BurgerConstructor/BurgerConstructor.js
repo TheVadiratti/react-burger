@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerItem from '../BurgerItem/BurgerItem';
-import { baseUrl } from '../../utils/constants';
-import { checkResponse } from '../../utils/utils';
-import { openOrderDetailsAction, addIngredientAction, updateCounterAction } from '../../services/actions/actions';
+import { sendOrderAction, addIngredientAction, updateCounterAction } from '../../services/actions/actions';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 
 function BurgerConstructor() {
@@ -53,22 +51,7 @@ function BurgerConstructor() {
     const orderList = Object.assign([], constructorStructure.main);
     orderList.unshift(constructorStructure.buns);
     orderList.push(constructorStructure.buns);
-    fetch(`${baseUrl}/api/orders/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "ingredients": orderList
-      })
-    })
-      .then(checkResponse)
-      .then(res => {
-        dispatch(openOrderDetailsAction(res));
-      })
-      .catch(error => {
-        console.log(error);
-      })
+    dispatch(sendOrderAction(orderList));
   }
 
   return (
@@ -76,9 +59,9 @@ function BurgerConstructor() {
       <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
 
         {constructorStructure.buns.name ?
-        <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} keyValue={0} />
-        :
-        <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте булки</p>}
+          <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} keyValue={0} />
+          :
+          <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте булки</p>}
 
         <div ref={windowCntRef} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
@@ -93,7 +76,7 @@ function BurgerConstructor() {
         </div>
 
         {constructorStructure.buns.name &&
-        <BurgerItem ingredient={constructorStructure.buns} type={'bottom'} isLocked={true} isMain={false} text={'(низ)'} keyValue={1} />
+          <BurgerItem ingredient={constructorStructure.buns} type={'bottom'} isLocked={true} isMain={false} text={'(низ)'} keyValue={1} />
         }
 
       </div>

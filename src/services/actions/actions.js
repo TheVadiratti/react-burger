@@ -1,5 +1,5 @@
 import {
-  GET_INGREDIENTS,
+  GET_INGREDIENTS_SUCCESS,
   OPEN_INGREDIENT_DETAILS,
   OPEN_ORDER_DETAILS,
   CLOSE_MODAL,
@@ -13,7 +13,7 @@ import { checkResponse } from '../../utils/utils';
 
 function getDataAction(data) {
   return {
-    type: GET_INGREDIENTS,
+    type: GET_INGREDIENTS_SUCCESS,
     data: data
   }
 }
@@ -45,9 +45,31 @@ function openOrderDetailsAction(data) {
   }
 }
 
+
+function sendOrderAction(list) {
+  return function (dispatch) {
+    fetch(`${baseUrl}/api/orders/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "ingredients": list
+      })
+    })
+      .then(checkResponse)
+      .then(res => {
+        dispatch(openOrderDetailsAction(res));
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+}
+
 function closeModalAction() {
   return {
-    type: CLOSE_MODAL,
+    type: CLOSE_MODAL
   }
 }
 
@@ -85,7 +107,7 @@ export {
   setIngredientsListAction,
   openIngredientDetailsAction,
   closeModalAction,
-  openOrderDetailsAction,
+  sendOrderAction,
   addIngredientAction,
   deleteIngredientAction,
   updateCounterAction,
