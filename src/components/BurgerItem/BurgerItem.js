@@ -4,6 +4,7 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteIngredientAction, updateCounterAction, sortIngredientsAction } from '../../services/actions/actions';
 import { useDrag, useDrop } from "react-dnd";
+import PropTypes from 'prop-types';
 
 function BurgerItem({ ingredient, type, isLocked, isMain, text, id }) {
   const constructorStructure = useSelector((state) => state.constructor);
@@ -68,3 +69,30 @@ function BurgerItem({ ingredient, type, isLocked, isMain, text, id }) {
 }
 
 export default BurgerItem;
+
+BurgerItem.propTypes = {
+  ingredient: PropTypes.shape({
+    calories: PropTypes.number,
+    carbohydrates: PropTypes.number,
+    fat: PropTypes.number,
+    proteins: PropTypes.number,
+    image: PropTypes.string,
+    image_large: PropTypes.string,
+    image_mobile: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    type: PropTypes.string,
+    __v: PropTypes.number,
+    _id: PropTypes.string
+  }),
+
+  type: PropTypes.string,
+
+  isLocked: PropTypes.bool,
+
+  isMain: PropTypes.bool,
+
+  text: PropTypes.string,
+
+  id: PropTypes.number
+}; 

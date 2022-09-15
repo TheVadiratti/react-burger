@@ -3,6 +3,7 @@ import ingredientStyles from './Ingredient.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
+import PropTypes from 'prop-types';
 
 function Ingredient({ image, name, price, _id }) {
   const constructorStructure = useSelector((state) => state.constructor);
@@ -42,3 +43,13 @@ function Ingredient({ image, name, price, _id }) {
 }
 
 export default Ingredient;
+
+Ingredient.propTypes = {
+  image: PropTypes.string,
+
+  name: PropTypes.string,
+
+  price: PropTypes.number,
+
+  _id: PropTypes.string
+}; 
