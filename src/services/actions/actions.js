@@ -1,5 +1,7 @@
 import {
+  GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
+  GET_INGREDIENTS_ERROR,
   OPEN_INGREDIENT_DETAILS,
   OPEN_ORDER_DETAILS,
   CLOSE_MODAL,
@@ -20,12 +22,18 @@ function getDataAction(data) {
 
 function setIngredientsListAction() {
   return function (dispatch) {
+    dispatch({
+      type: GET_INGREDIENTS_REQUEST
+    })
     fetch(`${baseUrl}/api/ingredients/`)
       .then(checkResponse)
       .then(res => {
         dispatch(getDataAction(res.data))
       })
       .catch(error => {
+        dispatch({
+          type: GET_INGREDIENTS_ERROR
+        })
         console.log(error);
       })
   }

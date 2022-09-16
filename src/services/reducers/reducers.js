@@ -3,14 +3,21 @@ import {
   CLOSE_MODAL,
   GET_INGREDIENTS_SUCCESS,
   OPEN_INGREDIENT_DETAILS,
+  GET_INGREDIENTS_ERROR,
   OPEN_ORDER_DETAILS,
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   UPDATE_COUNTER,
-  SORT_INGREDIENTS
+  SORT_INGREDIENTS,
+  GET_INGREDIENTS_REQUEST
 } from "../../utils/constants";
 
-const ingredientsState = [];
+const ingredientsState = {
+  data: [],
+  isLoaded: false,
+  isSuccess: false,
+  isError: false
+};
 
 const modalState = {
   open: false,
@@ -27,8 +34,30 @@ const constructorState = {
 
 const ingredients = (state = ingredientsState, action) => {
   switch (action.type) {
+    case GET_INGREDIENTS_REQUEST:
+      return {
+        ...state,
+        isLoaded: true,
+        isSuccess: false,
+        isError: false
+      }
     case GET_INGREDIENTS_SUCCESS:
-      return action.data
+      return {
+        ...state,
+        isLoaded: false,
+        isSuccess: true,
+        isError: false,
+        data: action.data
+      }
+
+    case GET_INGREDIENTS_ERROR:
+      return {
+        ...state,
+        isLoaded: false,
+        isSuccess: false,
+        isError: true
+      }
+
     default:
       return state;
   }

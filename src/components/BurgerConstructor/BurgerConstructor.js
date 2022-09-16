@@ -7,7 +7,7 @@ import { sendOrderAction, addIngredientAction, updateCounterAction } from '../..
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 
 function BurgerConstructor() {
-  const ingredientsData = useSelector((state) => state.ingredients);
+  const ingredientsData = useSelector((state) => state.ingredients.data);
   const constructorStructure = useSelector((state) => state.burgerConstructor);
   const dispatch = useDispatch();
 

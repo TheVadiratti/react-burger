@@ -7,26 +7,13 @@ import Ingredient from '../Ingredient/Ingredient';
 
 function BurgerIngredients() {
   const [current, setCurrent] = React.useState('one');
-  const [state, setState] = React.useState([]);
-  const ingredientsData = useSelector((state) => state.ingredients);
+  const {data, isSuccess} = useSelector((state) => state.ingredients);
   const dispatch = useDispatch();
 
   const windowCntRef = React.useRef(null);
   const bunSectionRef = React.useRef(null);
   const sauceSectionRef = React.useRef(null);
   const mainSectionRef = React.useRef(null);
-
-  React.useEffect(() => {
-    const loadData = new Promise(function (resolve) {
-      if (ingredientsData) {
-        resolve();
-      }
-    });
-
-    loadData.then(() => {
-      setState(ingredientsData);
-    })
-  }, [ingredientsData])
 
   function autoToggleByScroll() {
     const bunSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - bunSectionRef.current.getBoundingClientRect().top);
@@ -79,14 +66,14 @@ function BurgerIngredients() {
 
   function openIngredientDetailsPopup(e) {
     const id = e.currentTarget.getAttribute('id');
-    const selectedIngredientData = state.find(item => {
+    const selectedIngredientData = data.find(item => {
       return item._id === id;
     });
     dispatch(openIngredientDetailsAction(selectedIngredientData));
   }
 
   function renderInredientsListOfType(type) {
-    return state.map(item => {
+    return data.map(item => {
       if (item.type === `${type}`) {
         return (
           <li className={burgerIngredientsStyles.option} onClick={openIngredientDetailsPopup} key={item._id} id={item._id}>
@@ -104,6 +91,8 @@ function BurgerIngredients() {
         <Tab value="two" active={current === 'two'} onClick={setCurrentTab}>Соусы</Tab>
         <Tab value="three" active={current === 'three'} onClick={setCurrentTab}>Начинки</Tab>
       </div>
+
+      {isSuccess &&
       <div ref={windowCntRef} onScroll={autoToggleByScroll} className={`${burgerIngredientsStyles.window} mt-10`}>
         <div id='one' ref={bunSectionRef}>
           <h2 className='text text_type_main-medium mb-6'>Булки</h2>
@@ -124,6 +113,8 @@ function BurgerIngredients() {
           </div>
         </div>
       </div>
+      }
+      
     </section>
   )
 }
