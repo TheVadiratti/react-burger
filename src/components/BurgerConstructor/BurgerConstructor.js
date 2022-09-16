@@ -8,7 +8,7 @@ import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 
 function BurgerConstructor() {
   const ingredientsData = useSelector((state) => state.ingredients);
-  const constructorStructure = useSelector((state) => state.constructor);
+  const constructorStructure = useSelector((state) => state.burgerConstructor);
   const dispatch = useDispatch();
 
   const windowCntRef = React.useRef(null);

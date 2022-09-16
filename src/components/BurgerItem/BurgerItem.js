@@ -7,7 +7,7 @@ import { useDrag, useDrop } from "react-dnd";
 import PropTypes from 'prop-types';
 
 function BurgerItem({ ingredient, type, isLocked, isMain, text, id }) {
-  const constructorStructure = useSelector((state) => state.constructor);
+  const constructorStructure = useSelector((state) => state.burgerConstructor);
   const dispatch = useDispatch();
   const commonRef = React.useRef(null);
   const nullRef = React.useRef(null);

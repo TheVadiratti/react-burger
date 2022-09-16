@@ -1,3 +1,4 @@
+import { combineReducers } from "redux";
 import {
   CLOSE_MODAL,
   GET_INGREDIENTS_SUCCESS,
@@ -9,104 +10,99 @@ import {
   SORT_INGREDIENTS
 } from "../../utils/constants";
 
-const initialState = {
-  ingredients: [],
-  modal: {
-    open: false,
-    type: '',
-    dataIngredientDetails: {},
-    dataOrderDetails: {}
-  },
-  constructor: {
-    buns: {},
-    main: [],
-    counter: {}
-  }
-};
+const ingredientsState = [];
 
-export const rootReducer = (state = initialState, action) => {
+const modalState = {
+  open: false,
+  type: '',
+  dataIngredientDetails: {},
+  dataOrderDetails: {}
+}
+
+const constructorState = {
+  buns: {},
+  main: [],
+  counter: {}
+}
+
+const ingredients = (state = ingredientsState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS_SUCCESS:
-      return {
-        ...state,
-        ingredients: action.data
-      };
+      return action.data
+    default:
+      return state;
+  }
+}
 
+const modal = (state = modalState, action) => {
+  switch (action.type) {
     case OPEN_INGREDIENT_DETAILS:
       return {
         ...state,
-        modal: {
-          ...state.modal,
-          open: true,
-          type: 'IngredientDetails',
-          dataIngredientDetails: action.data
-        }
+        open: true,
+        type: 'IngredientDetails',
+        dataIngredientDetails: action.data
       }
 
     case OPEN_ORDER_DETAILS:
       return {
         ...state,
-        modal: {
-          ...state.modal,
-          open: true,
-          type: 'OrderDetails',
-          dataOrderDetails: action.data
-        }
+        open: true,
+        type: 'OrderDetails',
+        dataOrderDetails: action.data
       }
 
     case CLOSE_MODAL:
-      return {
-        ...state,
-        modal: initialState.modal
-      }
+      return modalState
 
+    default:
+      return state;
+  }
+}
+
+const burgerConstructor = (state = constructorState, action) => {
+  switch (action.type) {
     case ADD_INGREDIENT:
       return {
         ...state,
-        constructor: {
-          ...state.constructor,
-          buns: action.ingredient.type === 'bun' ? action.ingredient : state.constructor.buns,
-          main: action.ingredient.type !== 'bun' ? [...state.constructor.main, action.ingredient] : state.constructor.main
-        }
+        buns: action.ingredient.type === 'bun' ? action.ingredient : state.buns,
+        main: action.ingredient.type !== 'bun' ? [...state.main, action.ingredient] : state.main
       }
 
     case UPDATE_COUNTER:
       return {
         ...state,
-        constructor: {
-          ...state.constructor,
-          counter: {
-            ...state.constructor.counter,
-            [action.id]: state.constructor.main.filter(item => {
-              return item._id === action.id
-            }).length
-          }
+        counter: {
+          ...state.counter,
+          [action.id]: state.main.filter(item => {
+            return item._id === action.id
+          }).length
         }
       }
 
     case DELETE_INGREDIENT:
       return {
         ...state,
-        constructor: {
-          ...state.constructor,
-          main: state.constructor.main.filter((item, i) => {
-            return item._id !== action.id || i !== action.index;
-          })
-        }
+        main: state.main.filter((item, i) => {
+          return item._id !== action.id || i !== action.index;
+        })
       }
 
     case SORT_INGREDIENTS:
-      const burgerItems = state.constructor.main;
+      const burgerItems = state.main;
       burgerItems.splice(action.to, 0, burgerItems.splice(action.from, 1)[0]);
       return {
         ...state,
-        constructor: {
-          ...state.constructor,
-          main: burgerItems
-        }
+        main: burgerItems
       }
 
     default:
       return state;
   }
 }
+
+export const rootReducer = combineReducers({
+  ingredients,
+  modal,
+  burgerConstructor
+})

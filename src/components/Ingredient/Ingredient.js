@@ -6,7 +6,7 @@ import { useDrag } from "react-dnd";
 import PropTypes from 'prop-types';
 
 function Ingredient({ image, name, price, _id }) {
-  const constructorStructure = useSelector((state) => state.constructor);
+  const constructorStructure = useSelector((state) => state.burgerConstructor);
   const [counter, setCounter] = React.useState(null);
   const [, dragRef] = useDrag({
     type: "ingredient",
