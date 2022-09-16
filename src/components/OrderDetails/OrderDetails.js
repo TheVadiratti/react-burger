@@ -2,11 +2,11 @@ import orderDetailsStyles from './OrderDetails.module.css';
 import { useSelector } from 'react-redux';
 
 function OrderDetails() {
-  const orderData = useSelector((state) => state.modal.dataOrderDetails);
+  const {number, isSuccess} = useSelector((state) => state.order);
 
-  return (
+  return (isSuccess &&
     <>
-      <span className='mt-4 text text_type_digits-large'>{orderData.order.number}</span>
+      <span className='mt-4 text text_type_digits-large'>{number}</span>
       <span className='text text_type_main-medium mt-9'>идентификатор заказа</span>
       <div className={`mt-15 ${orderDetailsStyles.doneIcon}`}></div>
       <span className='text text_type_main-default mt-15'>Ваш заказ начали готовить</span>

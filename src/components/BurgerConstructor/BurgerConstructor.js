@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerItem from '../BurgerItem/BurgerItem';
-import { sendOrderAction, addIngredientAction, updateCounterAction } from '../../services/actions/actions';
+import { sendOrderAction, addIngredientAction, updateCounterAction, openOrderDetailsAction } from '../../services/actions/actions';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 
 function BurgerConstructor() {
@@ -52,6 +52,7 @@ function BurgerConstructor() {
     orderList.unshift(constructorStructure.buns);
     orderList.push(constructorStructure.buns);
     dispatch(sendOrderAction(orderList));
+    dispatch(openOrderDetailsAction());
   }
 
   return (

@@ -4,6 +4,9 @@ import {
   GET_INGREDIENTS_SUCCESS,
   OPEN_INGREDIENT_DETAILS,
   GET_INGREDIENTS_ERROR,
+  SEND_ORDER_REQUEST,
+  SEND_ORDER_SUCCESS,
+  SEND_ORDER_ERROR,
   OPEN_ORDER_DETAILS,
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
@@ -22,8 +25,14 @@ const ingredientsState = {
 const modalState = {
   open: false,
   type: '',
-  dataIngredientDetails: {},
-  dataOrderDetails: {}
+  dataIngredientDetails: {}
+}
+
+const orderState = {
+  number: null,
+  isLoaded: false,
+  isSuccess: false,
+  isError: false
 }
 
 const constructorState = {
@@ -77,12 +86,48 @@ const modal = (state = modalState, action) => {
       return {
         ...state,
         open: true,
-        type: 'OrderDetails',
-        dataOrderDetails: action.data
+        type: 'OrderDetails'
       }
 
     case CLOSE_MODAL:
       return modalState
+
+    default:
+      return state;
+  }
+}
+
+const order = (state = orderState, action) => {
+  switch (action.type) {
+    case SEND_ORDER_REQUEST:
+      return {
+        ...state,
+        isLoaded: true,
+        isSuccess: false,
+        isError: false
+      }
+    case SEND_ORDER_SUCCESS:
+      return {
+        ...state,
+        isLoaded: false,
+        isSuccess: true,
+        isError: false,
+        number: action.data
+      }
+
+    case SEND_ORDER_ERROR:
+      return {
+        ...state,
+        isLoaded: false,
+        isSuccess: false,
+        isError: true
+      }
+
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        number: null
+      }
 
     default:
       return state;
@@ -133,5 +178,6 @@ const burgerConstructor = (state = constructorState, action) => {
 export const rootReducer = combineReducers({
   ingredients,
   modal,
+  order,
   burgerConstructor
 })

@@ -2,6 +2,9 @@ import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_ERROR,
+  SEND_ORDER_REQUEST,
+  SEND_ORDER_SUCCESS,
+  SEND_ORDER_ERROR,
   OPEN_INGREDIENT_DETAILS,
   OPEN_ORDER_DETAILS,
   CLOSE_MODAL,
@@ -46,16 +49,17 @@ function openIngredientDetailsAction(data) {
   }
 }
 
-function openOrderDetailsAction(data) {
+function openOrderDetailsAction() {
   return {
-    type: OPEN_ORDER_DETAILS,
-    data: data
+    type: OPEN_ORDER_DETAILS
   }
 }
 
-
 function sendOrderAction(list) {
   return function (dispatch) {
+    dispatch({
+      type: SEND_ORDER_REQUEST
+    })
     fetch(`${baseUrl}/api/orders/`, {
       method: 'POST',
       headers: {
@@ -67,10 +71,16 @@ function sendOrderAction(list) {
     })
       .then(checkResponse)
       .then(res => {
-        dispatch(openOrderDetailsAction(res));
+        dispatch({
+          type: SEND_ORDER_SUCCESS,
+          data: res.order.number
+        })
       })
       .catch(error => {
         console.log(error);
+        dispatch({
+          type: SEND_ORDER_ERROR
+        })
       })
   }
 }
@@ -114,6 +124,7 @@ function sortIngredientsAction(fromIndex, toIndex) {
 export {
   setIngredientsListAction,
   openIngredientDetailsAction,
+  openOrderDetailsAction,
   closeModalAction,
   sendOrderAction,
   addIngredientAction,
