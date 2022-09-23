@@ -1,6 +1,5 @@
 .window {
-  height: fit-content;
-  max-height: calc(100vh - 512px);
+  height: calc(100vh - 512px);
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #8585AD #2F2F37;
@@ -21,20 +20,6 @@
   border: 4px solid #8585AD;
 }
 
-.item {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 8px;
-  gap: 8px;
-}
-
-.itemLocked {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 16px;
-}
-
 .total {
   display: flex;
   flex-direction: row-reverse;
@@ -44,4 +29,8 @@
 .sum {
   display: flex;
   align-items: center;
+}
+
+.instruction {
+  align-self: center;
 }

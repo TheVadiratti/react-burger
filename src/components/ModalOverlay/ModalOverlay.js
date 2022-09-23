@@ -1,13 +1,13 @@
 import modalOverlayStyle from './ModalOverlay.module.css';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { closeModalAction } from '../../services/actions/actions';
 
 function ModalOverlay(props) {
+  const dispatch = useDispatch();
+
   function closePopupOverlay(e) {
     if (e.target.getAttribute('id') === 'overlay') {
-      props.setOnPopup({
-        open: false,
-        type: ''
-      })
+      dispatch(closeModalAction());
     }
   }
 
@@ -19,7 +19,3 @@ function ModalOverlay(props) {
 }
 
 export default ModalOverlay;
-
-ModalOverlay.propTypes = {
-  setOnPopup: PropTypes.func.isRequired
-}; 

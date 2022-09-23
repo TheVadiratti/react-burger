@@ -1,102 +1,84 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import burgerConstructorStyles from './BurgerConstructor.module.css';
-import { ConstructorElement, Button, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
-import { baseUrl } from '../../utils/constants';
-import { checkResponse } from '../../utils/utils';
-import { BurgerContext } from '../../services/BurgerContext';
+import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import BurgerItem from '../BurgerItem/BurgerItem';
+import { sendOrderAction, addIngredientAction, updateCounterAction, openOrderDetailsAction } from '../../services/actions/actions';
+import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 
-function BurgerConstructor(props) {
-  const ingredientsData = React.useContext(BurgerContext);
-  const [state, setState] = React.useState(null);
+function BurgerConstructor() {
+  const ingredientsData = useSelector((state) => state.ingredients.data);
+  const constructorStructure = useSelector((state) => state.burgerConstructor);
+  const dispatch = useDispatch();
+
+  const windowCntRef = React.useRef(null);
 
   React.useEffect(() => {
-    const loadData = new Promise(function(resolve) {
-      if(ingredientsData.length !== 0) {
-        resolve();
-      }
+    // плавная прокрутка к последнему добавленному ингредиенту
+    windowCntRef.current.scrollBy({
+      top: windowCntRef.current.scrollHeight,
+      left: 0,
+      behavior: "smooth"
     });
+  }, [constructorStructure.main.length])
 
-    loadData.then(() => {
-      const bun = ingredientsData.find(item => {
-        if (item.type === 'bun') {
-          return item;
-        }
-      })
-      const main = ingredientsData.filter(item => {
-        return item.type !== 'bun';
-      })
-      setState({bun: bun, main: main});
-    })
-  }, [ingredientsData])
-
-  function createIngredient(ingredient, type, isLocked, isMain, text, key) {
-    return (
-      <div className={isMain ? burgerConstructorStyles.item : burgerConstructorStyles.itemLocked} key={key}>
-        {isMain && <DragIcon type='primary' />}
-        <ConstructorElement
-          type={isMain ? '' : type}
-          isLocked={isLocked}
-          text={`${ingredient.name} ${text}`}
-          price={ingredient.price}
-          thumbnail={ingredient.image}
-        />
-      </div>
-    )
-  }
+  const [, dropTarget] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      // поиск ингредиента в сторе
+      const currentIngredient = ingredientsData.find(ingredient => {
+        return ingredient._id === item.id
+      });
+      dispatch(addIngredientAction(currentIngredient));
+      if (currentIngredient.type !== 'bun') {
+        dispatch(updateCounterAction(item.id));
+      }
+    }
+  });
 
   function sum() {
-    const bunSum = state.bun.price * 2;
-    const mainPriceArray = state.main.map(item => {
+    const bunSum = constructorStructure.buns.price * 2 || 0;
+    const mainPriceArray = constructorStructure.main.map(item => {
       return item.price;
     });
     const mainSum = mainPriceArray.reduce((prev, current) => {
       return prev + current;
-    }, mainPriceArray[0]);
+    }, 0) || 0;
     return mainSum + bunSum;
   }
 
   function sendOrder() {
-    const orderList = Object.assign([], state.main);
-    orderList.unshift(state.bun);
-    orderList.push(state.bun);
-    fetch(`${baseUrl}/api/orders/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "ingredients": orderList
-      })
-    })
-      .then(checkResponse)
-      .then(res => {
-        props.setOrderData(res);
-        props.setOnPopup({
-          open: true,
-          type: 'OrderDetails'
-        })
-      })
-      .catch(error => {
-        console.log(error);
-      })
+    const orderList = Object.assign([], constructorStructure.main);
+    orderList.unshift(constructorStructure.buns);
+    orderList.push(constructorStructure.buns);
+    dispatch(sendOrderAction(orderList));
+    dispatch(openOrderDetailsAction());
   }
 
   return (
-    state && (<section className={burgerConstructorStyles.section}>
-      <div className={burgerConstructorStyles.ingredients}>
+    <section className={burgerConstructorStyles.section}>
+      <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
 
-        {createIngredient(state.bun, 'top', true, false, '(верх)', 1)}
+        {constructorStructure.buns.name ?
+          <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} keyValue={0} />
+          :
+          <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте булки</p>}
 
-        <div className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
+        <div ref={windowCntRef} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
-          {state.main.map(item => {
-            return createIngredient(item, null, false, true, '', item._id);
-          })}
+          {constructorStructure.main.length !== 0 ?
+            constructorStructure.main.map((item, i) => {
+              return (<BurgerItem ingredient={item} type={null} isLocked={false} isMain={true} text={''} id={i} key={i} />)
+            })
+            :
+            <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте ингредиенты</p>
+          }
 
         </div>
 
-        {createIngredient(state.bun, 'bottom', true, false, '(низ)', 2)}
+        {constructorStructure.buns.name &&
+          <BurgerItem ingredient={constructorStructure.buns} type={'bottom'} isLocked={true} isMain={false} text={'(низ)'} keyValue={1} />
+        }
 
       </div>
       <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>
@@ -108,13 +90,8 @@ function BurgerConstructor(props) {
           <CurrencyIcon type="primary" />
         </div>
       </div>
-    </section>)
+    </section>
   )
 }
 
 export default BurgerConstructor;
-
-BurgerConstructor.propTypes = {
-  setOnPopup: PropTypes.func.isRequired,
-  setOrderData: PropTypes.func.isRequired
-}; 
