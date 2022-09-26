@@ -1,0 +1,61 @@
+.main {
+  height: calc(100vh - 93px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formCnt {
+  width: 480px;
+}
+
+.heading {
+  margin-top: 0;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  width: 95%;
+  height: 64px;
+  border-radius: 40px;
+  background-color: #2F2F37;
+  border: none;
+}
+input::-webkit-input-placeholder {
+  color: #8585AD;
+  opacity: 0.5;
+}
+input-moz-placeholder {
+  color: #8585AD;
+  opacity: 0.5;
+}/* Firefox 19+ */
+input:-moz-placeholder {
+  color: #8585AD;
+  opacity: 0.5;
+}/* Firefox 18- */
+input:-ms-input-placeholder {
+  color: #8585AD;
+  opacity: .5;
+}
+input:focus {
+  outline: none;
+}
+
+.text {
+  text-align: center;
+}
+
+.link {
+  color: #4C4CFF;
+  text-decoration: none;
+}
+
+.link:hover {
+  opacity: .8;
+}
