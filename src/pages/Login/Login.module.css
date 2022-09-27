@@ -20,6 +20,11 @@
   align-items: center;
 }
 
+.inputCnt {
+  width: 100%;
+  position: relative;
+}
+
 .input {
   width: 95%;
   height: 64px;
@@ -45,6 +50,17 @@ input:-ms-input-placeholder {
 }
 input:focus {
   outline: none;
+}
+
+.icon {
+  position: absolute;
+  top: 25%;
+  right: 26px;
+  cursor: pointer;
+}
+
+.icon:hover {
+  opacity: .8;
 }
 
 .text {
