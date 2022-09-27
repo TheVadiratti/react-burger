@@ -7,12 +7,12 @@ function PageWithForm({heading, buttonText, hints, children}) {
     return hints.map((hint, i) => {
       if(hints.length - 1 === i) {
         return (
-          <p className={`text text_type_main-default text_color_inactive ${styles.text}`}>{hint.text}<Link to={hint.route} className={styles.link}>{hint.link}</Link></p>
+          <p key={i} className={`text text_type_main-default text_color_inactive ${styles.text}`}>{hint.text}<Link to={hint.route} className={styles.link}>{hint.link}</Link></p>
         )
       }
       else {
         return (
-          <p className={`text text_type_main-default text_color_inactive ${styles.text}`}>{hint.text}<Link to={hint.route} className={styles.link}>{hint.link}</Link></p>
+          <p key={i} className={`text text_type_main-default text_color_inactive mb-4 ${styles.text}`}>{hint.text}<Link to={hint.route} className={styles.link}>{hint.link}</Link></p>
         )
       }
     })

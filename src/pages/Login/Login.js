@@ -18,7 +18,7 @@ function Login() {
 
   return (
     <PageWithForm heading='Вход' buttonText='Войти' hints={loginHints}>
-      <BaseInput type='email' placeholder='E-mail' />
+      <BaseInput type='email' placeholder='E-mail' margin={'mb-6'} />
       <PasswordInput />
     </PageWithForm>
   )
