@@ -12,14 +12,14 @@ function Login() {
     {
       text: 'Забыли пароль? ',
       link: 'Восстановить пароль',
-      route: '/forgot-password'
+      route: '/forgot-password/confirm'
     }
   ]
 
   return (
     <PageWithForm heading='Вход' buttonText='Войти' hints={loginHints}>
       <BaseInput type='email' placeholder='E-mail' margin={'mb-6'} />
-      <PasswordInput />
+      <PasswordInput placeholder={'Пароль'} />
     </PageWithForm>
   )
 }

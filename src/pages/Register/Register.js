@@ -15,7 +15,7 @@ function Register() {
     <PageWithForm heading='Регистрация' buttonText='Зарегистрироваться' hints={registerHints}>
       <BaseInput type='text' placeholder='Имя' margin={'mb-6'} />
       <BaseInput type='email' placeholder='E-mail' margin={'mb-6'} />
-      <PasswordInput />
+      <PasswordInput placeholder={'Пароль'} />
     </PageWithForm>
   )
 }
