@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MainPage from '../../pages/MainPage/MainPage';
 import Login from '../../pages/Login/Login';
 import Register from '../../pages/Register/Register';
+import ResetPassword from '../../pages/ResetPassword/ResetPassword';
 import ForgotPassword from '../../pages/ForgotPassword/ForgotPassword';
-import ForgotPasswordConfirm from '../../pages/ForgotPasswordConfirm/ForgotPasswordConfirm';
 
 function Main() {
   return (
@@ -18,11 +18,11 @@ function Main() {
         <Route path="/register" exact={true}>
           <Register />
         </Route>
-        <Route path="/forgot-password/change" exact={true}>
+        <Route path="/forgot-password/" exact={true}>
           <ForgotPassword />
         </Route>
-        <Route path="/forgot-password/confirm" exact={true}>
-          <ForgotPasswordConfirm />
+        <Route path="/reset-password" exact={true}>
+          <ResetPassword />
         </Route>
       </Switch>
     </Router>

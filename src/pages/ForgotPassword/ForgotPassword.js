@@ -1,6 +1,5 @@
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import BaseInput from '../../components/AuthorizationInputs/BaseInput';
-import PasswordInput from '../../components/AuthorizationInputs/PasswordInput';
 
 function ForgotPassword() {
   const forgotPasswordHints = [
@@ -12,9 +11,8 @@ function ForgotPassword() {
   ]
 
   return (
-    <PageWithForm heading='Ввостановление пароля' buttonText='Сохранить' hints={forgotPasswordHints}>
-      <PasswordInput placeholder={'Введите новый пароль'} />
-      <BaseInput type='text' placeholder='Введите код из письма' margin={'mb-6'} />
+    <PageWithForm heading='Восстановление пароля' buttonText='Восстановить' hints={forgotPasswordHints}>
+      <BaseInput type='email' placeholder='Укажите e-mail' margin={'mb-6'} />
     </PageWithForm>
   )
 }

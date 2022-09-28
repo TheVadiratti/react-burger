@@ -12,7 +12,7 @@ function Login() {
     {
       text: 'Забыли пароль? ',
       link: 'Восстановить пароль',
-      route: '/forgot-password/confirm'
+      route: '/forgot-password/'
     }
   ]
 
