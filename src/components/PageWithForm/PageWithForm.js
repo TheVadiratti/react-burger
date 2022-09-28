@@ -2,10 +2,10 @@ import styles from './PageWithForm.module.css';
 import { Link } from 'react-router-dom';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function PageWithForm({heading, buttonText, hints, children}) {
+function PageWithForm({ heading, buttonText, hints, children }) {
   function renderHints() {
     return hints.map((hint, i) => {
-      if(hints.length - 1 === i) {
+      if (hints.length - 1 === i) {
         return (
           <p key={i} className={`text text_type_main-default text_color_inactive ${styles.text}`}>{hint.text}<Link to={hint.route} className={styles.link}>{hint.link}</Link></p>
         )

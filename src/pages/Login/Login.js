@@ -1,8 +1,12 @@
+import { useState, useRef } from 'react';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
-import BaseInput from '../../components/AuthorizationInputs/BaseInput';
-import PasswordInput from '../../components/AuthorizationInputs/PasswordInput';
+import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function Login() {
+  const [valueEmail, setValueEmail] = useState('');
+  const [valuePassword, setValuePassword] = useState('');
+  const inputRef = useRef(null);
+
   const loginHints = [
     {
       text: 'Вы — новый пользователь? ',
@@ -16,10 +20,24 @@ function Login() {
     }
   ]
 
+  const onChange = e => {
+    setValuePassword(e.target.value)
+  }
+
   return (
     <PageWithForm heading='Вход' buttonText='Войти' hints={loginHints}>
-      <BaseInput type='email' placeholder='E-mail' margin={'mb-6'} />
-      <PasswordInput placeholder={'Пароль'} />
+      <Input
+        type={'email'}
+        placeholder={'E-mail'}
+        onChange={e => setValueEmail(e.target.value)}
+        value={valueEmail}
+        name={'login-email'}
+        error={false}
+        ref={inputRef}
+        errorText={'Ошибка'}
+        size={'default'}
+      />
+      <PasswordInput onChange={onChange} value={valuePassword} name={'login-password'} />
     </PageWithForm>
   )
 }
