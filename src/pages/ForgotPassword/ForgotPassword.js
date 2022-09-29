@@ -1,10 +1,13 @@
 import React from 'react';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { changePasswordFetchAction } from '../../services/actions/actions';
+import { useDispatch } from 'react-redux';
 
 function ForgotPassword() {
   const [value, setValue] = React.useState('');
   const inputRef = React.useRef(null);
+  const dispatch = useDispatch();
   
   const forgotPasswordHints = [
     {
@@ -14,8 +17,13 @@ function ForgotPassword() {
     }
   ];
 
+  function submitForm(e) {
+    e.preventDefault();
+    dispatch(changePasswordFetchAction(value));
+  }
+
   return (
-    <PageWithForm heading='Восстановление пароля' buttonText='Восстановить' hints={forgotPasswordHints}>
+    <PageWithForm heading='Восстановление пароля' buttonText='Восстановить' hints={forgotPasswordHints} submitFunc={submitForm}>
       <Input
         type={'email'}
         placeholder={'Укажите e-mail'}

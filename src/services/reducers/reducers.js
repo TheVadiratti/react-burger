@@ -2,8 +2,9 @@ import { combineReducers } from "redux";
 import {
   CLOSE_MODAL,
   GET_INGREDIENTS_SUCCESS,
-  OPEN_INGREDIENT_DETAILS,
+  GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_ERROR,
+  OPEN_INGREDIENT_DETAILS,
   SEND_ORDER_REQUEST,
   SEND_ORDER_SUCCESS,
   SEND_ORDER_ERROR,
@@ -12,7 +13,9 @@ import {
   DELETE_INGREDIENT,
   UPDATE_COUNTER,
   SORT_INGREDIENTS,
-  GET_INGREDIENTS_REQUEST
+  CHANGE_PASSWORD_REQUEST,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_ERROR
 } from "../../utils/constants";
 
 const ingredientsState = {
@@ -39,6 +42,13 @@ const constructorState = {
   buns: {},
   main: [],
   counter: {}
+}
+
+const changePasswordState = {
+  isLoaded: false,
+  isSuccess: false,
+  isError: false,
+  message: null
 }
 
 const ingredients = (state = ingredientsState, action) => {
@@ -175,9 +185,51 @@ const burgerConstructor = (state = constructorState, action) => {
   }
 }
 
+const changePassword = (state = changePasswordState, action) => {
+  switch(action.type) {
+    case CHANGE_PASSWORD_REQUEST:
+      return {
+        ...state,
+        isLoaded: true,
+        isSuccess: false,
+        isError: false
+      }
+    
+    case CHANGE_PASSWORD_SUCCESS:
+      if(action.result) {
+        return {
+          isLoaded: false,
+          isSuccess: true,
+          isError: false,
+          message: action.message
+        }
+      }
+      else {
+        return {
+          isLoaded: false,
+          isSuccess: false,
+          isError: false,
+          message: action.message
+        }
+      }
+
+    case CHANGE_PASSWORD_ERROR:
+      return {
+        ...state,
+        isLoaded: false,
+        isSuccess: false,
+        isError: true
+      }
+      
+    default:
+      return state;
+  }
+}
+
 export const rootReducer = combineReducers({
   ingredients,
   modal,
   order,
-  burgerConstructor
+  burgerConstructor,
+  changePassword
 })

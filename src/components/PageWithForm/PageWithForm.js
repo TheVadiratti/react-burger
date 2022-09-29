@@ -2,7 +2,7 @@ import styles from './PageWithForm.module.css';
 import { Link } from 'react-router-dom';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function PageWithForm({ heading, buttonText, hints, children }) {
+function PageWithForm({ heading, buttonText, hints, children, submitFunc }) {
   function renderHints() {
     return hints.map((hint, i) => {
       if (hints.length - 1 === i) {
@@ -22,7 +22,7 @@ function PageWithForm({ heading, buttonText, hints, children }) {
     <main className={styles.main}>
       <div className={styles.formCnt}>
         <h2 className={`text text_type_main-medium mb-6 ${styles.heading}`}>{heading}</h2>
-        <form className={`mb-20 ${styles.form}`}>
+        <form className={`mb-20 ${styles.form}`} onSubmit={submitFunc}>
           {children}
           <Button type="primary" size="medium">{buttonText}</Button>
         </form>
