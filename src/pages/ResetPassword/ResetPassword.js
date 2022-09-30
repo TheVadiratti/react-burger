@@ -1,13 +1,16 @@
 import { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { showPassword, hidePassword } from '../../utils/utils';
+import { resetPasswordFetchAction } from '../../services/actions/actions';
 
 function ResetPassword() {
   const [valuePassword, setValuePassword] = useState('');
   const [valueCode, setValueCode] = useState('');
   const [showPasswordState, setShowPassword] = useState({enable: false, icon: 'ShowIcon'});
   const inputPasswordRef = useRef(null);
+  const dispatch = useDispatch();
   const forgotPasswordHints = [
     {
       text: 'Вспомнили пароль? ',
@@ -27,8 +30,13 @@ function ResetPassword() {
     }
   }
 
+  function submitForm(e) {
+    e.preventDefault();
+    dispatch(resetPasswordFetchAction(valuePassword, valueCode));
+  }
+
   return (
-    <PageWithForm heading='Ввостановление пароля' buttonText='Сохранить' hints={forgotPasswordHints}>
+    <PageWithForm heading='Ввостановление пароля' buttonText='Сохранить' hints={forgotPasswordHints} submitFunc={submitForm}>
       <Input
         type={'password'}
         placeholder={'Введите новый пароль'}
