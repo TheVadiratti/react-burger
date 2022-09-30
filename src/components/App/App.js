@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import appStyles from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
@@ -19,18 +20,20 @@ function App() {
 
   return (
     <div className={appStyles.app}>
-      <AppHeader />
-      <Main />
-      {modalEnabled && (
-        <Modal heading={modalType === 'IngredientDetails' ? 'Детали ингредиента' : ''}>
-          {modalType === 'IngredientDetails' && (
-            <IngredientDetails />
-          )}
-          {modalType === 'OrderDetails' && (
-            <OrderDetails />
-          )}
-        </Modal>
-      )}
+      <Router>
+        <AppHeader />
+        <Main />
+        {modalEnabled && (
+          <Modal heading={modalType === 'IngredientDetails' ? 'Детали ингредиента' : ''}>
+            {modalType === 'IngredientDetails' && (
+              <IngredientDetails />
+            )}
+            {modalType === 'OrderDetails' && (
+              <OrderDetails />
+            )}
+          </Modal>
+        )}
+      </Router>
     </div>
   )
 }

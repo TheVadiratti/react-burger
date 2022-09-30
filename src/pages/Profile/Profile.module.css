@@ -1,0 +1,32 @@
+.main {
+  margin-top: 120px;
+  display: grid;
+  grid-template-columns: 320px auto;
+  column-gap: 60px;
+}
+
+.links {
+  padding: 0;
+}
+
+.item {
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  list-style-type: none;
+  color: #8585AD;
+}
+
+.link_active {
+  color: #F2F2F3;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
