@@ -1,12 +1,15 @@
 import { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { registationFetchAction } from '../../services/actions/authorization';
 
 function Register() {
   const [valueName, setValueName] = useState('');
   const [valueEmail, setValueEmail] = useState('');
   const [valuePassword, setValuePassword] = useState('');
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
   const registerHints = [
     {
       text: 'Уже зарегистрированы? ',
@@ -15,12 +18,17 @@ function Register() {
     }
   ]
 
-  const onChange = e => {
+  function onChange(e) {
     setValuePassword(e.target.value)
   }
 
+  function submitForm(e) {
+    e.preventDefault();
+    dispatch(registationFetchAction(valueEmail, valuePassword, valueName));
+  }
+
   return (
-    <PageWithForm heading='Регистрация' buttonText='Зарегистрироваться' hints={registerHints}>
+    <PageWithForm heading='Регистрация' buttonText='Зарегистрироваться' hints={registerHints} submitFunc={submitForm}>
       <Input
         type={'text'}
         placeholder={'Имя'}

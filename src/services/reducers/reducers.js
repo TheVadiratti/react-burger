@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import user from './user';
 import {
   CLOSE_MODAL,
   GET_INGREDIENTS_SUCCESS,
@@ -18,7 +19,10 @@ import {
   CHANGE_PASSWORD_ERROR,
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_ERROR
+  RESET_PASSWORD_ERROR,
+  REGISTRATION_REQUEST,
+  REGISTRATION_SUCCESS,
+  REGISTRATION_ERROR
 } from "../../utils/constants";
 
 const ingredientsState = {
@@ -59,6 +63,12 @@ const resetPasswordState = {
   isSuccess: false,
   isError: false,
   message: null
+}
+
+const registrationState = {
+  isLoaded: false,
+  isSuccess: false,
+  isError: false
 }
 
 const ingredients = (state = ingredientsState, action) => {
@@ -218,7 +228,7 @@ const changePassword = (state = changePasswordState, action) => {
         return {
           isLoaded: false,
           isSuccess: false,
-          isError: false,
+          isError: true,
           message: action.message
         }
       }
@@ -259,12 +269,51 @@ const resetPassword = (state = resetPasswordState, action) => {
         return {
           isLoaded: false,
           isSuccess: false,
-          isError: false,
+          isError: true,
           message: action.message
         }
       }
 
     case RESET_PASSWORD_ERROR:
+      return {
+        ...state,
+        isLoaded: false,
+        isSuccess: false,
+        isError: true
+      }
+      
+    default:
+      return state;
+  }
+}
+
+const registration = (state = registrationState, action) => {
+  switch(action.type) {
+    case REGISTRATION_REQUEST:
+      return {
+        ...state,
+        isLoaded: true,
+        isSuccess: false,
+        isError: false
+      }
+    
+    case REGISTRATION_SUCCESS:
+      if(action.result) {
+        return {
+          isLoaded: false,
+          isSuccess: true,
+          isError: false
+        }
+      }
+      else {
+        return {
+          isLoaded: false,
+          isSuccess: false,
+          isError: true
+        }
+      }
+
+    case REGISTRATION_ERROR:
       return {
         ...state,
         isLoaded: false,
@@ -283,5 +332,7 @@ export const rootReducer = combineReducers({
   order,
   burgerConstructor,
   changePassword,
-  resetPassword
+  resetPassword,
+  registration,
+  user
 })
