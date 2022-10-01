@@ -54,9 +54,6 @@ function Profile() {
               onIconClick={() => {setInputDisable({...inputDisable, password: !inputDisable.password})}}
             />
           </Route>
-          <Route path='/profile/orders' exact={true}>
-
-          </Route>
         </Switch>
       </section>
     </main>
