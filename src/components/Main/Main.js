@@ -18,7 +18,7 @@ function Main() {
       <Route path="/register" exact={true}>
         <Register />
       </Route>
-      <Route path="/forgot-password/" exact={true}>
+      <Route path="/forgot-password" exact={true}>
         <ForgotPassword />
       </Route>
       <Route path="/reset-password" exact={true}>

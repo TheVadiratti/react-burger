@@ -1,6 +1,6 @@
 import headerStyles from './AppHeader.module.css';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function AppHeader() {
   return (
@@ -8,23 +8,27 @@ function AppHeader() {
       <div className={`${headerStyles.container} mt-3 mb-4`}>
         <menu className={headerStyles.menu}>
           <li className={`${headerStyles.item} p-5`}>
-            <BurgerIcon type="primary" />
-            <span className='text text_type_main-default ml-2'>Конструктор</span>
+            <NavLink to='/' className={headerStyles.link} activeClassName={headerStyles.link_active}>
+              <BurgerIcon type="secondary" />
+              <span className='text text_type_main-default ml-2'>Конструктор</span>
+            </NavLink>
           </li>
           <li className={`${headerStyles.item} p-5 ml-2`}>
-            <ListIcon type="secondary" />
-            <span className='text text_type_main-default text_color_inactive ml-2'>Лента заказов</span>
+            <NavLink to='/orders' className={headerStyles.link} activeClassName={headerStyles.link_active}>
+              <ListIcon type="secondary" />
+              <span className='text text_type_main-default ml-2'>Лента заказов</span>
+            </NavLink>
           </li>
         </menu>
 
         <Logo />
 
-        <Link to='/profile/' className={headerStyles.link}>
+        <NavLink to='/profile' className={headerStyles.link} activeClassName={headerStyles.link_active}>
           <div className={`${headerStyles.profile} p-5`}>
             <ProfileIcon type='secondary' />
-            <span className='text text_type_main-default text_color_inactive ml-2'>Личный кабинет</span>
+            <span className='text text_type_main-default ml-2'>Личный кабинет</span>
           </div>
-        </Link>
+        </NavLink>
       </div>
     </header>
   )
