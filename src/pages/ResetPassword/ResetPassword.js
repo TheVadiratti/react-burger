@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { showPassword, hidePassword } from '../../utils/utils';
-import { resetPasswordFetchAction } from '../../services/actions/authorization';
+import { resetPasswordFetchAction } from '../../services/actions/account';
 
 function ResetPassword() {
   const [valuePassword, setValuePassword] = useState('');

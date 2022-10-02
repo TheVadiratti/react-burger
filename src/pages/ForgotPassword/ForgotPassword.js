@@ -1,7 +1,7 @@
 import React from 'react';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { changePasswordFetchAction } from '../../services/actions/authorization';
+import { changePasswordFetchAction } from '../../services/actions/account';
 import { useDispatch } from 'react-redux';
 
 function ForgotPassword() {
@@ -18,7 +18,6 @@ function ForgotPassword() {
   ];
 
   function submitForm(e) {
-    e.preventDefault();
     dispatch(changePasswordFetchAction(value));
   }
 
