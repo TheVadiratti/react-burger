@@ -17,7 +17,7 @@ function ForgotPassword() {
     }
   ];
 
-  function submitForm(e) {
+  function submitForm() {
     dispatch(changePasswordFetchAction(value));
   }
 
