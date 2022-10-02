@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom'; 
+import { useHistory } from 'react-router-dom';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { registationFetchAction } from '../../services/actions/account';
@@ -10,7 +10,7 @@ function Register() {
   const [valueEmail, setValueEmail] = useState('');
   const [valuePassword, setValuePassword] = useState('');
   const inputRef = useRef(null);
-  const history = useHistory(); 
+  const history = useHistory();
   const dispatch = useDispatch();
   const registerHints = [
     {
@@ -24,13 +24,12 @@ function Register() {
     setValuePassword(e.target.value)
   }
 
-  const submitForm = useCallback(
-    () => {
-      dispatch(registationFetchAction(valueEmail, valuePassword, valueName));
-      history.replace({pathname: '/'});
-    },
-    [history]
-  );
+  function submitForm(e) {
+    e.preventDefault();
+    dispatch(registationFetchAction(valueEmail, valuePassword, valueName));
+    history.replace({ pathname: '/' });
+  }
+
 
   return (
     <PageWithForm heading='Регистрация' buttonText='Зарегистрироваться' hints={registerHints} submitFunc={submitForm}>

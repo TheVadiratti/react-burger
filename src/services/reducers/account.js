@@ -7,7 +7,10 @@ import {
   RESET_PASSWORD_ERROR,
   REGISTRATION_REQUEST,
   REGISTRATION_SUCCESS,
-  REGISTRATION_ERROR
+  REGISTRATION_ERROR,
+  AUTHORIZATION_REQUEST,
+  AUTHORIZATION_SUCCESS,
+  AUTHORIZATION_ERROR
 } from "../../utils/constants";
 
 const changePasswordState = {
@@ -25,6 +28,12 @@ const resetPasswordState = {
 }
 
 const registrationState = {
+  isLoaded: false,
+  isSuccess: false,
+  isError: false
+}
+
+const authorizationState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
@@ -151,4 +160,43 @@ const registration = (state = registrationState, action) => {
   }
 }
 
-export { changePassword, resetPassword, registration };
+const authorization = (state = authorizationState, action) => {
+  switch(action.type) {
+    case AUTHORIZATION_REQUEST:
+      return {
+        ...state,
+        isLoaded: true,
+        isSuccess: false,
+        isError: false
+      }
+    
+    case AUTHORIZATION_SUCCESS:
+      if(action.result) {
+        return {
+          isLoaded: false,
+          isSuccess: true,
+          isError: false
+        }
+      }
+      else {
+        return {
+          isLoaded: false,
+          isSuccess: false,
+          isError: true
+        }
+      }
+
+    case AUTHORIZATION_ERROR:
+      return {
+        ...state,
+        isLoaded: false,
+        isSuccess: false,
+        isError: true
+      }
+      
+    default:
+      return state;
+  }
+}
+
+export { changePassword, resetPassword, registration, authorization };

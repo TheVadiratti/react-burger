@@ -9,6 +9,9 @@ import {
   REGISTRATION_REQUEST,
   REGISTRATION_SUCCESS,
   REGISTRATION_ERROR,
+  AUTHORIZATION_REQUEST,
+  AUTHORIZATION_SUCCESS,
+  AUTHORIZATION_ERROR,
   SET_USER_DATA
 } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
@@ -44,6 +47,13 @@ function setUserDataAction(email, name) {
   }
 }
 
+function authorizationAction(result) {
+  return {
+    type: AUTHORIZATION_SUCCESS,
+    result: result
+  }
+}
+
 // API
 
 function changePasswordFetchAction(email) {
@@ -56,7 +66,7 @@ function changePasswordFetchAction(email) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body:  JSON.stringify({
+      body: JSON.stringify({
         "email": email
       })
     })
@@ -83,7 +93,7 @@ function resetPasswordFetchAction(password, token) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body:  JSON.stringify({
+      body: JSON.stringify({
         "password": password,
         "token": token
       })
@@ -129,8 +139,35 @@ function registationFetchAction(email, password, name) {
         })
         console.log(error);
       })
-      .finally(() => {
-        console.log(email, password, name);
+  }
+}
+
+function authorizationFetchAction(email, password) {
+  return function (dispatch) {
+    dispatch({
+      type: AUTHORIZATION_REQUEST
+    })
+    fetch(`${baseUrl}/api/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "email": email,
+        "password": password
+      })
+    })
+      .then(checkResponse)
+      .then(res => {
+        dispatch(authorizationAction(res.success));
+        dispatch(setUserDataAction(res.user.email, res.user.name));
+        localStorage.setItem('refreshToken', res.refreshToken);
+      })
+      .catch(error => {
+        dispatch({
+          type: AUTHORIZATION_ERROR
+        })
+        console.log(error);
       })
   }
 }
@@ -138,5 +175,6 @@ function registationFetchAction(email, password, name) {
 export {
   changePasswordFetchAction,
   resetPasswordFetchAction,
-  registationFetchAction
+  registationFetchAction,
+  authorizationFetchAction
 };

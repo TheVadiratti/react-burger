@@ -1,11 +1,14 @@
 import { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { authorizationFetchAction } from '../../services/actions/account';
 
 function Login() {
   const [valueEmail, setValueEmail] = useState('');
   const [valuePassword, setValuePassword] = useState('');
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
 
   const loginHints = [
     {
@@ -24,8 +27,13 @@ function Login() {
     setValuePassword(e.target.value)
   }
 
+  function onSubmit(e) {
+    e.preventDefault();
+    dispatch(authorizationFetchAction(valueEmail, valuePassword));
+  }
+
   return (
-    <PageWithForm heading='Вход' buttonText='Войти' hints={loginHints}>
+    <PageWithForm heading='Вход' buttonText='Войти' hints={loginHints} submitFunc={onSubmit}>
       <Input
         type={'email'}
         placeholder={'E-mail'}
