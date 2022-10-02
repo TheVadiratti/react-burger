@@ -115,8 +115,6 @@ function registationFetchAction(email, password, name) {
       .then(res => {
         dispatch(registrationAction(res.success));
         dispatch(setUserDataAction(res.user.email, res.user.name));
-        const accessToken = res.accessToken.split('Bearer ')[1];
-        localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', res.refreshToken);
       })
       .catch(error => {
