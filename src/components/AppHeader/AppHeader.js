@@ -25,9 +25,9 @@ function AppHeader() {
 
         <Logo />
 
-        <NavLink to='/profile' className={headerStyles.link} activeClassName={headerStyles.link_active} exact={true}>
+        <NavLink to='/profile' className={headerStyles.link} activeClassName={headerStyles.link_active}>
           <div className={`${headerStyles.profile} p-5`}>
-            <ProfileIcon type={pathname === '/profile' ? 'primary' : 'secondary'} />
+            <ProfileIcon type={pathname.startsWith('/profile') ? 'primary' : 'secondary'} />
             <span className='text text_type_main-default ml-2'>Личный кабинет</span>
           </div>
         </NavLink>
