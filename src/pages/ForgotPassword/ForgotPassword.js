@@ -1,14 +1,16 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { changePasswordFetchAction } from '../../services/actions/account';
-import { useDispatch } from 'react-redux';
 
 function ForgotPassword() {
   const [value, setValue] = React.useState('');
   const inputRef = React.useRef(null);
   const dispatch = useDispatch();
-  
+  const hasToken = localStorage.getItem('refreshToken');
+
   const forgotPasswordHints = [
     {
       text: 'Вспомнили пароль? ',
@@ -21,21 +23,32 @@ function ForgotPassword() {
     dispatch(changePasswordFetchAction(value));
   }
 
-  return (
-    <PageWithForm heading='Восстановление пароля' buttonText='Восстановить' hints={forgotPasswordHints} submitFunc={submitForm}>
-      <Input
-        type={'email'}
-        placeholder={'Укажите e-mail'}
-        onChange={e => setValue(e.target.value)}
-        value={value}
-        name={'forgot-email'}
-        error={false}
-        ref={inputRef}
-        errorText={'Ошибка'}
-        size={'default'}
+  if (hasToken) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/'
+        }}
       />
-    </PageWithForm>
-  )
+    )
+  }
+  else {
+    return (
+      <PageWithForm heading='Восстановление пароля' buttonText='Восстановить' hints={forgotPasswordHints} submitFunc={submitForm}>
+        <Input
+          type={'email'}
+          placeholder={'Укажите e-mail'}
+          onChange={e => setValue(e.target.value)}
+          value={value}
+          name={'forgot-email'}
+          error={false}
+          ref={inputRef}
+          errorText={'Ошибка'}
+          size={'default'}
+        />
+      </PageWithForm>
+    )
+  }
 }
 
 export default ForgotPassword;
