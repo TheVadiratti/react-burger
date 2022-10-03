@@ -82,7 +82,7 @@ function BurgerConstructor() {
 
       </div>
       <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>
-        <Button type="primary" size="large" onClick={sendOrder}>
+        <Button type="primary" size="large" onClick={sendOrder} htmlType='submit'>
           Оформить заказ
         </Button>
         <div className={`${burgerConstructorStyles.sum} mr-10`}>
