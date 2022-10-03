@@ -1,10 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function ProfileEdit() {
-  const [inputDisable, setInputDisable] = useState({name: true, login: true, password: true});
+  const [state, setState] = useState({
+    user: {
+      name: '',
+      email: '',
+      password: '111'
+    },
+    inputState: {
+      name: true,
+      login: true,
+      password: true
+    }
+  });
   const userData = useSelector((state) => state.user);
+
+  useEffect(() => {
+
+  })
 
   return (
     <>
@@ -15,8 +30,8 @@ function ProfileEdit() {
         icon={'EditIcon'}
         name={'name'}
         size={'default'}
-        disabled={inputDisable.name}
-        onIconClick={() => { setInputDisable({ ...inputDisable, name: !inputDisable.name }) }}
+        disabled={state.inputState.name}
+        onIconClick={() => { setState({ ...state, inputState: {...state.inputState, name: !state.inputState.name} }) }}
       />
       <Input
         type={'email'}
@@ -25,8 +40,8 @@ function ProfileEdit() {
         icon={'EditIcon'}
         name={'login'}
         size={'default'}
-        disabled={inputDisable.login}
-        onIconClick={() => { setInputDisable({ ...inputDisable, login: !inputDisable.login }) }}
+        disabled={state.inputState.login}
+        onIconClick={() => { setState({ ...state, inputState: {...state.inputState, login: !state.inputState.login} }) }}
       />
       <Input
         type={'password'}
@@ -35,8 +50,8 @@ function ProfileEdit() {
         icon={'EditIcon'}
         name={'password'}
         size={'default'}
-        disabled={inputDisable.password}
-        onIconClick={() => { setInputDisable({ ...inputDisable, password: !inputDisable.password }) }}
+        disabled={state.inputState.password}
+        onIconClick={() => { setState({ ...state, inputState: {...state.inputState, password: !state.inputState.password} }) }}
       />
     </>
   )
