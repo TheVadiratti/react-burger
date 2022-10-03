@@ -24,7 +24,7 @@ function PageWithForm({ heading, buttonText, hints, children, submitFunc }) {
         <h2 className={`text text_type_main-medium mb-6 ${styles.heading}`}>{heading}</h2>
         <form className={`mb-20 ${styles.form}`} onSubmit={submitFunc}>
           {children}
-          <Button type="primary" size="medium">{buttonText}</Button>
+          <Button type="primary" size="medium" htmlType='submit'>{buttonText}</Button>
         </form>
         {renderHints()}
       </div>

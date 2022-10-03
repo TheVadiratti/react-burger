@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Route, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 function ProtectedRoute({ children, redirectPath, ...props }) {
   const userName = useSelector((state) => state.user.name);
+  const hasToken = localStorage.getItem('refreshToken');
   console.log(userName);
 
-  if (userName) {
+  if (userName || hasToken) {
     return (
       <Route {...props}>
         {children}
