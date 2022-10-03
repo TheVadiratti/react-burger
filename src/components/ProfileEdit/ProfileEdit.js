@@ -15,18 +15,25 @@ function ProfileEdit() {
       password: true
     }
   });
-  const userData = useSelector((state) => state.user);
+  const userName = useSelector((state) => state.user.name);
+  const userLogin = useSelector((state) => state.user.login);
 
   useEffect(() => {
-
-  })
+    setState({
+      ...state,
+      user: {
+        ...state.user,
+        name: userName,
+        login: userLogin
+    }})
+  }, [userName, userLogin]);
 
   return (
     <>
       <Input
         type={'text'}
         placeholder={'Имя'}
-        value={userData.name}
+        value={state.user.name}
         icon={'EditIcon'}
         name={'name'}
         size={'default'}
@@ -36,7 +43,7 @@ function ProfileEdit() {
       <Input
         type={'email'}
         placeholder={'Логин'}
-        value={userData.email}
+        value={state.user.email}
         icon={'EditIcon'}
         name={'login'}
         size={'default'}
@@ -46,7 +53,7 @@ function ProfileEdit() {
       <Input
         type={'password'}
         placeholder={'Пароль'}
-        value={'вввввв'}
+        value={state.user.password}
         icon={'EditIcon'}
         name={'password'}
         size={'default'}
