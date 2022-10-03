@@ -1,15 +1,17 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function ProfileEdit() {
   const [inputDisable, setInputDisable] = useState({name: true, login: true, password: true});
+  const userData = useSelector((state) => state.user);
 
   return (
     <>
       <Input
         type={'text'}
         placeholder={'Имя'}
-        value={'Спанч Боб'}
+        value={userData.name}
         icon={'EditIcon'}
         name={'name'}
         size={'default'}
@@ -19,7 +21,7 @@ function ProfileEdit() {
       <Input
         type={'email'}
         placeholder={'Логин'}
-        value={'test.mail@mail.ru'}
+        value={userData.email}
         icon={'EditIcon'}
         name={'login'}
         size={'default'}

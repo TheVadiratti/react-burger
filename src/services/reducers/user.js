@@ -1,8 +1,8 @@
 import { SET_USER_DATA } from "../../utils/constants";
 
 const userState = {
-  email: '',
-  name: ''
+  email: null,
+  name: null
 }
 
 const user = (state = userState, action) => {

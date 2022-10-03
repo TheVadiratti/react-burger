@@ -1,4 +1,5 @@
 import { BrowserRouter as Route, Switch } from 'react-router-dom';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import MainPage from '../../pages/MainPage/MainPage';
 import Login from '../../pages/Login/Login';
 import Register from '../../pages/Register/Register';
@@ -15,7 +16,7 @@ function Main() {
       <Route path="/login" exact={true}>
         <Login />
       </Route>
-      <Route path="/register" exact={true}>
+      <Route path="/register" exact={true} redirectPath='/profile'>
         <Register />
       </Route>
       <Route path="/forgot-password" exact={true}>
@@ -24,9 +25,9 @@ function Main() {
       <Route path="/reset-password" exact={true}>
         <ResetPassword />
       </Route>
-      <Route path="/profile" exact={true}>
+      <ProtectedRoute path="/profile" redirectPath="/login">
         <Profile />
-      </Route>
+      </ProtectedRoute>
     </Switch>
   )
 }
