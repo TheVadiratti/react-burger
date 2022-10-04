@@ -10,7 +10,10 @@ import {
   REGISTRATION_ERROR,
   AUTHORIZATION_REQUEST,
   AUTHORIZATION_SUCCESS,
-  AUTHORIZATION_ERROR
+  AUTHORIZATION_ERROR,
+  UPDATE_TOKEN_REQUEST,
+  UPDATE_TOKEN_SUCCESS,
+  UPDATE_TOKEN_ERROR
 } from "../../utils/constants";
 
 const changePasswordState = {
@@ -34,6 +37,12 @@ const registrationState = {
 }
 
 const authorizationState = {
+  isLoaded: false,
+  isSuccess: false,
+  isError: false
+}
+
+const updateTokenState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
@@ -199,4 +208,43 @@ const authorization = (state = authorizationState, action) => {
   }
 }
 
-export { changePassword, resetPassword, registration, authorization };
+const updateToken = (state = updateTokenState, action) => {
+  switch(action.type) {
+    case UPDATE_TOKEN_REQUEST:
+      return {
+        ...state,
+        isLoaded: true,
+        isSuccess: false,
+        isError: false
+      }
+    
+    case UPDATE_TOKEN_SUCCESS:
+      if(action.result) {
+        return {
+          isLoaded: false,
+          isSuccess: true,
+          isError: false
+        }
+      }
+      else {
+        return {
+          isLoaded: false,
+          isSuccess: false,
+          isError: true
+        }
+      }
+
+    case UPDATE_TOKEN_ERROR:
+      return {
+        ...state,
+        isLoaded: false,
+        isSuccess: false,
+        isError: true
+      }
+      
+    default:
+      return state;
+  }
+}
+
+export { changePassword, resetPassword, registration, authorization, updateToken };
