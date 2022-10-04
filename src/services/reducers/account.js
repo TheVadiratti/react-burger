@@ -13,7 +13,10 @@ import {
   AUTHORIZATION_ERROR,
   UPDATE_TOKEN_REQUEST,
   UPDATE_TOKEN_SUCCESS,
-  UPDATE_TOKEN_ERROR
+  UPDATE_TOKEN_ERROR,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_ERROR
 } from "../../utils/constants";
 
 const changePasswordState = {
@@ -48,8 +51,14 @@ const updateTokenState = {
   isError: false
 }
 
+const logoutState = {
+  isLoaded: false,
+  isSuccess: false,
+  isError: false
+}
+
 const changePassword = (state = changePasswordState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case CHANGE_PASSWORD_REQUEST:
       return {
         ...state,
@@ -57,9 +66,9 @@ const changePassword = (state = changePasswordState, action) => {
         isSuccess: false,
         isError: false
       }
-    
+
     case CHANGE_PASSWORD_SUCCESS:
-      if(action.result) {
+      if (action.result) {
         return {
           isLoaded: false,
           isSuccess: true,
@@ -83,14 +92,14 @@ const changePassword = (state = changePasswordState, action) => {
         isSuccess: false,
         isError: true
       }
-      
+
     default:
       return state;
   }
 }
 
 const resetPassword = (state = resetPasswordState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case RESET_PASSWORD_REQUEST:
       return {
         ...state,
@@ -98,9 +107,9 @@ const resetPassword = (state = resetPasswordState, action) => {
         isSuccess: false,
         isError: false
       }
-    
+
     case RESET_PASSWORD_SUCCESS:
-      if(action.result) {
+      if (action.result) {
         return {
           isLoaded: false,
           isSuccess: true,
@@ -124,14 +133,14 @@ const resetPassword = (state = resetPasswordState, action) => {
         isSuccess: false,
         isError: true
       }
-      
+
     default:
       return state;
   }
 }
 
 const registration = (state = registrationState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case REGISTRATION_REQUEST:
       return {
         ...state,
@@ -139,9 +148,9 @@ const registration = (state = registrationState, action) => {
         isSuccess: false,
         isError: false
       }
-    
+
     case REGISTRATION_SUCCESS:
-      if(action.result) {
+      if (action.result) {
         return {
           isLoaded: false,
           isSuccess: true,
@@ -163,14 +172,14 @@ const registration = (state = registrationState, action) => {
         isSuccess: false,
         isError: true
       }
-      
+
     default:
       return state;
   }
 }
 
 const authorization = (state = authorizationState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case AUTHORIZATION_REQUEST:
       return {
         ...state,
@@ -178,9 +187,9 @@ const authorization = (state = authorizationState, action) => {
         isSuccess: false,
         isError: false
       }
-    
+
     case AUTHORIZATION_SUCCESS:
-      if(action.result) {
+      if (action.result) {
         return {
           isLoaded: false,
           isSuccess: true,
@@ -202,14 +211,14 @@ const authorization = (state = authorizationState, action) => {
         isSuccess: false,
         isError: true
       }
-      
+
     default:
       return state;
   }
 }
 
 const updateToken = (state = updateTokenState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case UPDATE_TOKEN_REQUEST:
       return {
         ...state,
@@ -217,21 +226,12 @@ const updateToken = (state = updateTokenState, action) => {
         isSuccess: false,
         isError: false
       }
-    
+
     case UPDATE_TOKEN_SUCCESS:
-      if(action.result) {
-        return {
-          isLoaded: false,
-          isSuccess: true,
-          isError: false
-        }
-      }
-      else {
-        return {
-          isLoaded: false,
-          isSuccess: false,
-          isError: true
-        }
+      return {
+        isLoaded: false,
+        isSuccess: true,
+        isError: false
       }
 
     case UPDATE_TOKEN_ERROR:
@@ -241,10 +241,40 @@ const updateToken = (state = updateTokenState, action) => {
         isSuccess: false,
         isError: true
       }
-      
+
     default:
       return state;
   }
 }
 
-export { changePassword, resetPassword, registration, authorization, updateToken };
+const logout = (state = logoutState, action) => {
+  switch (action.type) {
+    case LOGOUT_REQUEST:
+      return {
+        ...state,
+        isLoaded: true,
+        isSuccess: false,
+        isError: false
+      }
+
+    case LOGOUT_SUCCESS:
+      return {
+        isLoaded: false,
+        isSuccess: true,
+        isError: false
+      }
+
+    case LOGOUT_ERROR:
+      return {
+        ...state,
+        isLoaded: false,
+        isSuccess: false,
+        isError: true
+      }
+
+    default:
+      return state;
+  }
+}
+
+export { changePassword, resetPassword, registration, authorization, updateToken, logout };

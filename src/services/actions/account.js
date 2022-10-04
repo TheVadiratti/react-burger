@@ -15,7 +15,10 @@ import {
   SET_USER_DATA,
   UPDATE_TOKEN_REQUEST,
   UPDATE_TOKEN_SUCCESS,
-  UPDATE_TOKEN_ERROR
+  UPDATE_TOKEN_ERROR,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_ERROR
 } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
 
@@ -217,10 +220,51 @@ function updateTokenFetchAction() {
   }
 }
 
+function logoutFetchAction() {
+  return function (dispatch) {
+    dispatch({
+      type: LOGOUT_REQUEST
+    })
+    fetch(`${baseUrl}/api/auth/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "token": localStorage.getItem('refreshToken')
+      })
+    })
+      .then(checkResponse)
+      .then(res => {
+        if (res.success) {
+          dispatch({
+            type: LOGOUT_SUCCESS
+          });
+          setUserDataAction('', '')
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+        }
+        else {
+          dispatch({
+            type: LOGOUT_ERROR
+          })
+        }
+
+      })
+      .catch(error => {
+        dispatch({
+          type: LOGOUT_ERROR
+        })
+        console.log(error);
+      })
+  }
+}
+
 export {
   changePasswordFetchAction,
   resetPasswordFetchAction,
   registationFetchAction,
   authorizationFetchAction,
-  updateTokenFetchAction
+  updateTokenFetchAction,
+  logoutFetchAction
 };
