@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { BrowserRouter as Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import commonStyles from '../CommonStyles.module.css';
 import profileStyles from './Profile.module.css';
 import ProfileEdit from '../../components/ProfileEdit/ProfileEdit';
