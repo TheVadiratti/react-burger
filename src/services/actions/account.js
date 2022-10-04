@@ -161,6 +161,8 @@ function authorizationFetchAction(email, password) {
       .then(res => {
         dispatch(authorizationAction(res.success));
         dispatch(setUserDataAction(res.user.email, res.user.name));
+        const accessToken = res.accessToken.split('Bearer ')[1];
+        localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', res.refreshToken);
       })
       .catch(error => {
