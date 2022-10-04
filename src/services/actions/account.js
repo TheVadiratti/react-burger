@@ -12,7 +12,6 @@ import {
   AUTHORIZATION_REQUEST,
   AUTHORIZATION_SUCCESS,
   AUTHORIZATION_ERROR,
-  SET_USER_DATA,
   UPDATE_TOKEN_REQUEST,
   UPDATE_TOKEN_SUCCESS,
   UPDATE_TOKEN_ERROR,
@@ -20,6 +19,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_ERROR
 } from '../../utils/constants';
+import { setUserDataAction } from './user';
 import { checkResponse } from '../../utils/utils';
 
 function changePasswordAction(result, message) {
@@ -42,14 +42,6 @@ function registrationAction(result) {
   return {
     type: REGISTRATION_SUCCESS,
     result: result
-  }
-}
-
-function setUserDataAction(email, name) {
-  return {
-    type: SET_USER_DATA,
-    email: email,
-    name: name
   }
 }
 
