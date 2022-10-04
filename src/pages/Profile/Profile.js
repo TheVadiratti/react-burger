@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
@@ -5,9 +6,14 @@ import commonStyles from '../CommonStyles.module.css';
 import profileStyles from './Profile.module.css';
 import ProfileEdit from '../../components/ProfileEdit/ProfileEdit';
 import { logoutFetchAction } from "../../services/actions/account";
+import { getUserDataFetchAction } from '../../services/actions/user';
 
 function Profile() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserDataFetchAction());
+  }, [])
 
   function logout() {
     dispatch(logoutFetchAction());

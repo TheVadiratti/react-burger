@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function ProfileEdit() {
+  const userName = useSelector((state) => state.user.name);
+  const userLogin = useSelector((state) => state.user.email);
   const [state, setState] = useState({
     user: {
       name: '',
@@ -15,8 +17,6 @@ function ProfileEdit() {
       password: true
     }
   });
-  const userName = useSelector((state) => state.user.name);
-  const userLogin = useSelector((state) => state.user.login);
 
   useEffect(() => {
     setState({
@@ -24,7 +24,7 @@ function ProfileEdit() {
       user: {
         ...state.user,
         name: userName,
-        login: userLogin
+        email: userLogin
     }})
   }, [userName, userLogin]);
 

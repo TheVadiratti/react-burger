@@ -229,12 +229,12 @@ function logoutFetchAction() {
       .then(checkResponse)
       .then(res => {
         if (res.success) {
-          dispatch({
-            type: LOGOUT_SUCCESS
-          });
           setUserDataAction('', '')
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
+          dispatch({
+            type: LOGOUT_SUCCESS
+          });
         }
         else {
           dispatch({
