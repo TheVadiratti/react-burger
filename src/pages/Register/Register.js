@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { registationFetchAction } from '../../services/actions/account';
@@ -10,8 +10,8 @@ function Register() {
   const [valueEmail, setValueEmail] = useState('');
   const [valuePassword, setValuePassword] = useState('');
   const inputRef = useRef(null);
-  const history = useHistory();
   const dispatch = useDispatch();
+  const userName = useSelector((state) => state.user.name);
   const hasToken = localStorage.getItem('refreshToken');
   const registerHints = [
     {
@@ -28,10 +28,9 @@ function Register() {
   function submitForm(e) {
     e.preventDefault();
     dispatch(registationFetchAction(valueEmail, valuePassword, valueName));
-    history.replace({ pathname: '/' });
   }
 
-  if (hasToken) {
+  if (userName || hasToken) {
     return (
       <Redirect
         to={{

@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { authorizationFetchAction } from '../../services/actions/account';
@@ -10,7 +10,7 @@ function Login() {
   const [valuePassword, setValuePassword] = useState('');
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const userName = useSelector((state) => state.user.name);
   const hasToken = localStorage.getItem('refreshToken');
 
   const loginHints = [
@@ -33,10 +33,9 @@ function Login() {
   function onSubmit(e) {
     e.preventDefault();
     dispatch(authorizationFetchAction(valueEmail, valuePassword));
-    history.replace({ pathname: '/' });
   }
 
-  if (hasToken) {
+  if (userName || hasToken) {
     return (
       <Redirect
         to={{
