@@ -1,8 +1,18 @@
-import { SET_USER_DATA } from "../../utils/constants";
+import { SET_USER_DATA,
+  GET_USER_DATA_REQUEST,
+  GET_USER_DATA_SUCCESS,
+  GET_USER_DATA_ERROR
+} from "../../utils/constants";
 
 const userState = {
   email: '',
   name: ''
+}
+
+const getUserDataState = {
+  isLoaded: false,
+  isSuccess: false,
+  isError: false
 }
 
 const user = (state = userState, action) => {
@@ -18,4 +28,37 @@ const user = (state = userState, action) => {
   }
 }
 
-export default user;
+const getUserData = (state = getUserDataState, action) => {
+  switch (action.type) {
+    case GET_USER_DATA_REQUEST:
+      return {
+        ...state,
+        isLoaded: true,
+        isSuccess: false,
+        isError: false
+      }
+
+    case GET_USER_DATA_SUCCESS:
+      return {
+        isLoaded: false,
+        isSuccess: true,
+        isError: false
+      }
+
+    case GET_USER_DATA_ERROR:
+      return {
+        ...state,
+        isLoaded: false,
+        isSuccess: false,
+        isError: true
+      }
+
+    default:
+      return state;
+  }
+}
+
+export {
+  user,
+  getUserData
+};

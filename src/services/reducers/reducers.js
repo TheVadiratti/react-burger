@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import user from './user';
+import { user, getUserData } from './user';
 import { modal } from "./modal";
 import { ingredients, order, burgerConstructor } from './ingredients';
 import { changePassword, resetPassword, registration, authorization, updateToken, logout } from './account';
@@ -15,5 +15,6 @@ export const rootReducer = combineReducers({
   authorization,
   user,
   updateToken,
-  logout
+  logout,
+  getUserData
 })
