@@ -22,6 +22,7 @@
 }
 
 .content {
+  max-width: 480px;
   display: flex;
   flex-direction: column;
   gap: 24px;

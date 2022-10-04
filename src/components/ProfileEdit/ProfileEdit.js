@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import profileEdidStyles from './ProfileEdit.module.css';
 import { useSelector } from 'react-redux';
-import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function ProfileEdit() {
   const userName = useSelector((state) => state.user.name);
@@ -25,7 +26,8 @@ function ProfileEdit() {
         ...state.user,
         name: userName,
         email: userLogin
-    }})
+      }
+    })
   }, [userName, userLogin]);
 
   return (
@@ -38,7 +40,7 @@ function ProfileEdit() {
         name={'name'}
         size={'default'}
         disabled={state.inputState.name}
-        onIconClick={() => { setState({ ...state, inputState: {...state.inputState, name: !state.inputState.name} }) }}
+        onIconClick={() => { setState({ ...state, inputState: { ...state.inputState, name: !state.inputState.name } }) }}
       />
       <Input
         type={'email'}
@@ -48,7 +50,7 @@ function ProfileEdit() {
         name={'login'}
         size={'default'}
         disabled={state.inputState.login}
-        onIconClick={() => { setState({ ...state, inputState: {...state.inputState, login: !state.inputState.login} }) }}
+        onIconClick={() => { setState({ ...state, inputState: { ...state.inputState, login: !state.inputState.login } }) }}
       />
       <Input
         type={'password'}
@@ -58,8 +60,12 @@ function ProfileEdit() {
         name={'password'}
         size={'default'}
         disabled={state.inputState.password}
-        onIconClick={() => { setState({ ...state, inputState: {...state.inputState, password: !state.inputState.password} }) }}
+        onIconClick={() => { setState({ ...state, inputState: { ...state.inputState, password: !state.inputState.password } }) }}
       />
+      <div className={profileEdidStyles.buttonsCnt}>
+        <Button type="secondary" size="medium">Отмена</Button>
+        <Button type="primary" size="medium">Сохранить</Button>
+      </div>
     </>
   )
 }
