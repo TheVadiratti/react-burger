@@ -12,7 +12,10 @@ import {
   AUTHORIZATION_REQUEST,
   AUTHORIZATION_SUCCESS,
   AUTHORIZATION_ERROR,
-  SET_USER_DATA
+  SET_USER_DATA,
+  UPDATE_TOKEN_REQUEST,
+  UPDATE_TOKEN_SUCCESS,
+  UPDATE_TOKEN_ERROR
 } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
 
@@ -174,9 +177,50 @@ function authorizationFetchAction(email, password) {
   }
 }
 
+function updateTokenFetchAction() {
+  return function (dispatch) {
+    dispatch({
+      type: UPDATE_TOKEN_REQUEST
+    })
+    fetch(`${baseUrl}/api/auth/token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "token": localStorage.getItem('refreshToken')
+      })
+    })
+      .then(checkResponse)
+      .then(res => {
+        if (res.success) {
+          dispatch({
+            type: UPDATE_TOKEN_SUCCESS
+          });
+          const accessToken = res.accessToken.split('Bearer ')[1];
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('refreshToken', res.refreshToken);
+        }
+        else {
+          dispatch({
+            type: UPDATE_TOKEN_ERROR
+          })
+        }
+
+      })
+      .catch(error => {
+        dispatch({
+          type: UPDATE_TOKEN_ERROR
+        })
+        console.log(error);
+      })
+  }
+}
+
 export {
   changePasswordFetchAction,
   resetPasswordFetchAction,
   registationFetchAction,
-  authorizationFetchAction
+  authorizationFetchAction,
+  updateTokenFetchAction
 };
