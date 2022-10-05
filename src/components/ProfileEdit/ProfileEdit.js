@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function ProfileEdit() {
-  const [state, setState] = useState({
+  const initialState = {
     user: {
       name: '',
       login: '',
@@ -15,7 +15,8 @@ function ProfileEdit() {
       login: true,
       password: true
     }
-  });
+  };
+  const [state, setState] = useState(initialState);
   const userName = useSelector((state) => state.user.name);
   const userLogin = useSelector((state) => state.user.email);
   const nameRef = useRef(null);
@@ -31,18 +32,17 @@ function ProfileEdit() {
         login: userLogin
       }
     })
+    console.log(nameRef.current.value, userName);
   }, [userName, userLogin]);
 
   function renderButtons() {
-    if (nameRef.current && loginRef.current && passwordRef.current) {
-      if (nameRef.current.value !== userName || loginRef.current.value !== userLogin || passwordRef.current.value !== 'password') {
-        return (
-          <div className={profileEdidStyles.buttonsCnt}>
-            <Button type="secondary" size="medium">Отмена</Button>
-            <Button type="primary" size="medium">Сохранить</Button>
-          </div>
-        )
-      }
+    if (state.user.name !== userName || state.user.login !== userLogin || state.user.password !== initialState.user.password) {
+      return (
+        <div className={profileEdidStyles.buttonsCnt}>
+          <Button type="secondary" size="medium">Отмена</Button>
+          <Button type="primary" size="medium">Сохранить</Button>
+        </div>
+      )
     }
   }
 
