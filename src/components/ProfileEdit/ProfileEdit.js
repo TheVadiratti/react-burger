@@ -18,9 +18,9 @@ function ProfileEdit() {
   });
   const userName = useSelector((state) => state.user.name);
   const userLogin = useSelector((state) => state.user.email);
-  const nameRef = useRef('');
-  const loginRef = useRef('');
-  const passwordRef = useRef('');
+  const nameRef = useRef(null);
+  const loginRef = useRef(null);
+  const passwordRef = useRef(null);
 
   useEffect(() => {
     setState({
@@ -34,13 +34,15 @@ function ProfileEdit() {
   }, [userName, userLogin]);
 
   function renderButtons() {
-    if (nameRef.current.value !== userName || loginRef.current.value !== userLogin || passwordRef.current.value !== 'password') {
-      return (
-        <div className={profileEdidStyles.buttonsCnt}>
-          <Button type="secondary" size="medium">Отмена</Button>
-          <Button type="primary" size="medium">Сохранить</Button>
-        </div>
-      )
+    if (nameRef.current && loginRef.current && passwordRef.current) {
+      if (nameRef.current.value !== userName || loginRef.current.value !== userLogin || passwordRef.current.value !== 'password') {
+        return (
+          <div className={profileEdidStyles.buttonsCnt}>
+            <Button type="secondary" size="medium">Отмена</Button>
+            <Button type="primary" size="medium">Сохранить</Button>
+          </div>
+        )
+      }
     }
   }
 
