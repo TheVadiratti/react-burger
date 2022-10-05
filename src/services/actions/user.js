@@ -45,11 +45,16 @@ function getUserDataFetchAction() {
 
       })
       .catch(error => {
-        dispatch(updateTokenFetchAction());
-        dispatch({
-          type: GET_USER_DATA_ERROR
-        })
-        console.log(error);
+        if(error === 'Ошибка: 403') {
+          console.log('Токен обновился');
+          dispatch(updateTokenFetchAction());
+        }
+        else {
+          dispatch({
+            type: GET_USER_DATA_ERROR
+          })
+          console.log(error);
+        }
       })
   }
 }
