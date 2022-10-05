@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import profileEdidStyles from './ProfileEdit.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { updateUserDataFetchAction } from '../../services/actions/user';
 
 function ProfileEdit() {
   const initialState = {
     user: {
       name: '',
       login: '',
-      password: 'password'
+      password: 'pas'
     },
     inputState: {
       name: true,
@@ -17,6 +18,7 @@ function ProfileEdit() {
     }
   };
   const [state, setState] = useState(initialState);
+  const dispatch = useDispatch();
   const userName = useSelector((state) => state.user.name);
   const userLogin = useSelector((state) => state.user.email);
   const nameRef = useRef(null);
@@ -39,11 +41,27 @@ function ProfileEdit() {
     if (state.user.name !== userName || state.user.login !== userLogin || state.user.password !== initialState.user.password) {
       return (
         <div className={profileEdidStyles.buttonsCnt}>
-          <Button type="secondary" size="medium">Отмена</Button>
-          <Button type="primary" size="medium">Сохранить</Button>
+          <Button type="secondary" size="medium" htmlType='reset'>Отмена</Button>
+          <Button type="primary" size="medium" htmlType='submit' onClick={submitForm}>Сохранить</Button>
         </div>
       )
     }
+  }
+
+  function submitForm() {
+    let data = {};
+    if (state.user.name !== userName) {
+      data.name = state.user.name;
+    }
+    if (state.user.login !== userLogin) {
+      data.login = state.user.login;
+    }
+    if (state.user.password !== initialState.user.password) {
+      data.password = state.user.password;
+      setState({...state, user: {...state.user, password: initialState.user.password}})
+    }
+    dispatch(updateUserDataFetchAction(data));
+    setState({ ...state, inputState: initialState.inputState });
   }
 
   return (
