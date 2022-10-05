@@ -18,9 +18,9 @@ function ProfileEdit() {
   });
   const userName = useSelector((state) => state.user.name);
   const userLogin = useSelector((state) => state.user.email);
-  const nameRef = useRef(null);
-  const loginRef = useRef(null);
-  const passwordRef = useRef(null);
+  const nameRef = useRef('');
+  const loginRef = useRef('');
+  const passwordRef = useRef('');
 
   useEffect(() => {
     setState({
