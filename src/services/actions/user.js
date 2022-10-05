@@ -46,7 +46,7 @@ function getUserDataFetchAction() {
       })
       .catch(error => {
         if(error === 'Ошибка: 403') {
-          console.log('Токен обновился');
+          console.log('Token updating');
           dispatch(updateTokenFetchAction());
         }
         else {

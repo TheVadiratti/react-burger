@@ -1,16 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import profileEdidStyles from './ProfileEdit.module.css';
 import { useSelector } from 'react-redux';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function ProfileEdit() {
-  const userName = useSelector((state) => state.user.name);
-  const userLogin = useSelector((state) => state.user.email);
   const [state, setState] = useState({
     user: {
       name: '',
-      email: '',
-      password: '111'
+      login: '',
+      password: 'password'
     },
     inputState: {
       name: true,
@@ -18,6 +16,11 @@ function ProfileEdit() {
       password: true
     }
   });
+  const userName = useSelector((state) => state.user.name);
+  const userLogin = useSelector((state) => state.user.email);
+  const nameRef = useRef(null);
+  const loginRef = useRef(null);
+  const passwordRef = useRef(null);
 
   useEffect(() => {
     setState({
@@ -25,10 +28,21 @@ function ProfileEdit() {
       user: {
         ...state.user,
         name: userName,
-        email: userLogin
+        login: userLogin
       }
     })
   }, [userName, userLogin]);
+
+  function renderButtons() {
+    if (nameRef.current.value !== userName || loginRef.current.value !== userLogin || passwordRef.current.value !== 'password') {
+      return (
+        <div className={profileEdidStyles.buttonsCnt}>
+          <Button type="secondary" size="medium">Отмена</Button>
+          <Button type="primary" size="medium">Сохранить</Button>
+        </div>
+      )
+    }
+  }
 
   return (
     <>
@@ -36,36 +50,39 @@ function ProfileEdit() {
         type={'text'}
         placeholder={'Имя'}
         value={state.user.name}
+        onChange={e => setState({ ...state, user: { ...state.user, name: e.target.value } })}
         icon={'EditIcon'}
         name={'name'}
         size={'default'}
         disabled={state.inputState.name}
         onIconClick={() => { setState({ ...state, inputState: { ...state.inputState, name: !state.inputState.name } }) }}
+        ref={nameRef}
       />
       <Input
         type={'email'}
         placeholder={'Логин'}
-        value={state.user.email}
+        value={state.user.login}
+        onChange={e => setState({ ...state, user: { ...state.user, login: e.target.value } })}
         icon={'EditIcon'}
         name={'login'}
         size={'default'}
         disabled={state.inputState.login}
         onIconClick={() => { setState({ ...state, inputState: { ...state.inputState, login: !state.inputState.login } }) }}
+        ref={loginRef}
       />
       <Input
         type={'password'}
         placeholder={'Пароль'}
         value={state.user.password}
+        onChange={e => setState({ ...state, user: { ...state.user, password: e.target.value } })}
         icon={'EditIcon'}
         name={'password'}
         size={'default'}
         disabled={state.inputState.password}
         onIconClick={() => { setState({ ...state, inputState: { ...state.inputState, password: !state.inputState.password } }) }}
+        ref={passwordRef}
       />
-      <div className={profileEdidStyles.buttonsCnt}>
-        <Button type="secondary" size="medium">Отмена</Button>
-        <Button type="primary" size="medium">Сохранить</Button>
-      </div>
+      {renderButtons()}
     </>
   )
 }
