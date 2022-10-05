@@ -19,7 +19,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_ERROR
 } from '../../utils/constants';
-import { setUserDataAction } from './user';
+import { setUserDataAction, getUserDataFetchAction } from './user';
 import { checkResponse } from '../../utils/utils';
 
 function changePasswordAction(result, message) {
@@ -179,11 +179,14 @@ function updateTokenFetchAction() {
     })
     fetch(`${baseUrl}/api/auth/token`, {
       method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "token": localStorage.getItem('refreshToken')
+        'token': localStorage.getItem('refreshToken')
       })
     })
       .then(checkResponse)
@@ -195,6 +198,7 @@ function updateTokenFetchAction() {
           const accessToken = res.accessToken.split('Bearer ')[1];
           localStorage.setItem('accessToken', accessToken);
           localStorage.setItem('refreshToken', res.refreshToken);
+          dispatch(getUserDataFetchAction());
         }
         else {
           dispatch({

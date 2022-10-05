@@ -6,6 +6,7 @@ import {
   SET_USER_DATA
 } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
+import { updateTokenFetchAction } from './account';
 
 function setUserDataAction(email, name) {
   return {
@@ -29,6 +30,7 @@ function getUserDataFetchAction() {
     })
       .then(checkResponse)
       .then(res => {
+        console.log(res);
         if (res.success) {
           dispatch({
             type: GET_USER_DATA_SUCCESS
@@ -43,6 +45,7 @@ function getUserDataFetchAction() {
 
       })
       .catch(error => {
+        dispatch(updateTokenFetchAction());
         dispatch({
           type: GET_USER_DATA_ERROR
         })
