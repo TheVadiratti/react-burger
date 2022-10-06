@@ -1,3 +1,10 @@
+.form {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .buttonsCnt {
   display: flex;
   justify-content: flex-end;

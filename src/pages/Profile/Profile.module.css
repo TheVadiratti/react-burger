@@ -20,10 +20,3 @@
   list-style-type: none;
   color: #8585AD;
 }
-
-.content {
-  max-width: 480px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}

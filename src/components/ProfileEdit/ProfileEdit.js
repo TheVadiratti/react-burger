@@ -37,7 +37,7 @@ function ProfileEdit() {
       return (
         <div className={profileEdidStyles.buttonsCnt}>
           <Button type="secondary" size="medium" htmlType='reset'>Отмена</Button>
-          <Button type="primary" size="medium" htmlType='submit' onClick={submitForm}>Сохранить</Button>
+          <Button type="primary" size="medium" htmlType='submit'>Сохранить</Button>
         </div>
       )
     }
@@ -60,7 +60,7 @@ function ProfileEdit() {
   }
 
   return (
-    <>
+    <form className={profileEdidStyles.form} onSubmit={submitForm}>
       <Input
         type={'text'}
         placeholder={'Имя'}
@@ -98,7 +98,7 @@ function ProfileEdit() {
         ref={passwordRef}
       />
       {renderButtons()}
-    </>
+    </form>
   )
 }
 
