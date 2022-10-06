@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { showPassword, hidePassword } from '../../utils/utils';
@@ -10,6 +10,7 @@ function ResetPassword() {
   const [valuePassword, setValuePassword] = useState('');
   const [valueCode, setValueCode] = useState('');
   const [showPasswordState, setShowPassword] = useState({ enable: false, icon: 'ShowIcon' });
+  const requestSuccess = useSelector((state) => state.resetPassword.isSuccess);
   const inputPasswordRef = useRef(null);
   const dispatch = useDispatch();
   const hasToken = localStorage.getItem('refreshToken');
@@ -46,6 +47,15 @@ function ResetPassword() {
       />
     )
   }
+  else if (requestSuccess) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/login'
+        }}
+      />
+    )
+  }
   else {
     return (
       <PageWithForm heading='Ввостановление пароля' buttonText='Сохранить' hints={forgotPasswordHints} submitFunc={submitForm}>
@@ -54,7 +64,7 @@ function ResetPassword() {
           placeholder={'Введите новый пароль'}
           onChange={e => setValuePassword(e.target.value)}
           value={valuePassword}
-          name={'register-name'}
+          name={'reset-password'}
           error={false}
           icon={showPasswordState.icon}
           errorText={'Ошибка'}
@@ -67,7 +77,7 @@ function ResetPassword() {
           placeholder={'Введите код из письма'}
           onChange={e => setValueCode(e.target.value)}
           value={valueCode}
-          name={'register-name'}
+          name={'reset-password-code'}
           error={false}
           errorText={'Ошибка'}
           size={'default'}

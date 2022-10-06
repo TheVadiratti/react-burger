@@ -29,10 +29,9 @@ function changePasswordAction(message) {
   }
 }
 
-function resetPasswordAction(result, message) {
+function resetPasswordAction(message) {
   return {
     type: RESET_PASSWORD_SUCCESS,
-    success: result,
     message: message
   }
 }
@@ -74,7 +73,8 @@ function changePasswordFetchAction(email) {
         }
         else {
           dispatch({
-            type: CHANGE_PASSWORD_ERROR
+            type: CHANGE_PASSWORD_ERROR,
+            message: res.message
           })
         }
       })
@@ -104,7 +104,15 @@ function resetPasswordFetchAction(password, token) {
     })
       .then(checkResponse)
       .then(res => {
-        dispatch(resetPasswordAction(res.success, res.message))
+        if(res.success) {
+          dispatch(resetPasswordAction(res.message));
+        }
+        else {
+          dispatch({
+            type: RESET_PASSWORD_ERROR,
+            message: res.message
+          })
+        }
       })
       .catch(error => {
         dispatch({
@@ -185,9 +193,6 @@ function updateTokenFetchAction() {
     })
     fetch(`${baseUrl}/api/auth/token`, {
       method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
       },

@@ -77,10 +77,10 @@ const changePassword = (state = changePasswordState, action) => {
 
     case CHANGE_PASSWORD_ERROR:
       return {
-        ...state,
         isLoaded: false,
         isSuccess: false,
-        isError: true
+        isError: true,
+        message: action.message
       }
 
     default:
@@ -99,21 +99,11 @@ const resetPassword = (state = resetPasswordState, action) => {
       }
 
     case RESET_PASSWORD_SUCCESS:
-      if (action.result) {
-        return {
-          isLoaded: false,
-          isSuccess: true,
-          isError: false,
-          message: action.message
-        }
-      }
-      else {
-        return {
-          isLoaded: false,
-          isSuccess: false,
-          isError: true,
-          message: action.message
-        }
+      return {
+        isLoaded: false,
+        isSuccess: true,
+        isError: false,
+        message: action.message
       }
 
     case RESET_PASSWORD_ERROR:
@@ -121,7 +111,8 @@ const resetPassword = (state = resetPasswordState, action) => {
         ...state,
         isLoaded: false,
         isSuccess: false,
-        isError: true
+        isError: true,
+        message: action.message
       }
 
     default:
