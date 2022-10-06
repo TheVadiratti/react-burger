@@ -5,19 +5,18 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 import { updateUserDataFetchAction } from '../../services/actions/user';
 
 function ProfileEdit() {
-  const initialState = {
-    user: {
-      name: '',
-      login: '',
-      password: 'password'
-    },
-    inputState: {
-      name: true,
-      login: true,
-      password: true
-    }
+  const initialUserState = {
+    name: '',
+    login: '',
+    password: 'password'
   };
-  const [state, setState] = useState(initialState);
+  const initialInputState = {
+    name: true,
+    login: true,
+    password: true
+  };
+  const [userState, setUserState] = useState(initialUserState);
+  const [inputState, setInputState] = useState(initialInputState);
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.user.name);
   const userLogin = useSelector((state) => state.user.email);
@@ -26,19 +25,15 @@ function ProfileEdit() {
   const passwordRef = useRef(null);
 
   useEffect(() => {
-    setState({
-      ...state,
-      user: {
-        ...state.user,
-        name: userName,
-        login: userLogin
-      }
+    setUserState({
+      ...userState,
+      name: userName,
+      login: userLogin
     })
-    console.log(nameRef.current.value, userName);
   }, [userName, userLogin]);
 
   function renderButtons() {
-    if (state.user.name !== userName || state.user.login !== userLogin || state.user.password !== initialState.user.password) {
+    if (userState.name !== userName || userState.login !== userLogin || userState.password !== initialUserState.password) {
       return (
         <div className={profileEdidStyles.buttonsCnt}>
           <Button type="secondary" size="medium" htmlType='reset'>Отмена</Button>
@@ -50,18 +45,18 @@ function ProfileEdit() {
 
   function submitForm() {
     let data = {};
-    if (state.user.name !== userName) {
-      data.name = state.user.name;
+    if (userState.name !== userName) {
+      data.name = userState.name;
     }
-    if (state.user.login !== userLogin) {
-      data.login = state.user.login;
+    if (userState.login !== userLogin) {
+      data.login = userState.login;
     }
-    if (state.user.password !== initialState.user.password) {
-      data.password = state.user.password;
-      setState({...state, user: {...state.user, password: initialState.user.password}})
+    if (userState.password !== initialUserState.password) {
+      data.password = userState.password;
+      setUserState({ ...userState, password: initialUserState.password })
     }
     dispatch(updateUserDataFetchAction(data));
-    setState({ ...state, inputState: initialState.inputState });
+    setInputState(initialInputState);
   }
 
   return (
@@ -69,37 +64,37 @@ function ProfileEdit() {
       <Input
         type={'text'}
         placeholder={'Имя'}
-        value={state.user.name}
-        onChange={e => setState({ ...state, user: { ...state.user, name: e.target.value } })}
+        value={userState.name}
+        onChange={e => setUserState({ ...userState, name: e.target.value })}
         icon={'EditIcon'}
         name={'name'}
         size={'default'}
-        disabled={state.inputState.name}
-        onIconClick={() => { setState({ ...state, inputState: { ...state.inputState, name: !state.inputState.name } }) }}
+        disabled={inputState.name}
+        onIconClick={() => { setInputState({ ...inputState, name: !inputState.name }) }}
         ref={nameRef}
       />
       <Input
         type={'email'}
         placeholder={'Логин'}
-        value={state.user.login}
-        onChange={e => setState({ ...state, user: { ...state.user, login: e.target.value } })}
+        value={userState.login}
+        onChange={e => setUserState({ ...userState, login: e.target.value })}
         icon={'EditIcon'}
         name={'login'}
         size={'default'}
-        disabled={state.inputState.login}
-        onIconClick={() => { setState({ ...state, inputState: { ...state.inputState, login: !state.inputState.login } }) }}
+        disabled={inputState.login}
+        onIconClick={() => { setInputState({ ...inputState, login: !inputState.login }) }}
         ref={loginRef}
       />
       <Input
         type={'password'}
         placeholder={'Пароль'}
-        value={state.user.password}
-        onChange={e => setState({ ...state, user: { ...state.user, password: e.target.value } })}
+        value={userState.password}
+        onChange={e => setUserState({ ...userState, password: e.target.value })}
         icon={'EditIcon'}
         name={'password'}
         size={'default'}
-        disabled={state.inputState.password}
-        onIconClick={() => { setState({ ...state, inputState: { ...state.inputState, password: !state.inputState.password } }) }}
+        disabled={inputState.password}
+        onIconClick={() => { setInputState({ ...inputState, password: !inputState.password }) }}
         ref={passwordRef}
       />
       {renderButtons()}
