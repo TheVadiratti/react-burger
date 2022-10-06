@@ -4,7 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import commonStyles from '../CommonStyles.module.css';
 import profileStyles from './Profile.module.css';
-import ProfileEdit from '../../components/ProfileEdit/ProfileEdit';
+import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import { logoutFetchAction } from "../../services/actions/account";
 import { getUserDataFetchAction } from '../../services/actions/user';
 
@@ -38,7 +38,7 @@ function Profile() {
       <section className={profileStyles.content}>
         <Switch>
           <Route path="/profile" exact>
-            <ProfileEdit />
+            <ProfileForm />
           </Route>
           <Route path="/profile/orders" exact>
             <p>Anything</p>

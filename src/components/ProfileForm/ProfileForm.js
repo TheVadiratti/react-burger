@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import profileEdidStyles from './ProfileEdit.module.css';
+import profileFormStyles from './ProfileForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { updateUserDataFetchAction } from '../../services/actions/user';
 
-function ProfileEdit() {
+function ProfileForm() {
   const initialUserState = {
     name: '',
     login: '',
@@ -35,7 +35,7 @@ function ProfileEdit() {
   function renderButtons() {
     if (userState.name !== userName || userState.login !== userLogin || userState.password !== initialUserState.password) {
       return (
-        <div className={profileEdidStyles.buttonsCnt}>
+        <div className={profileFormStyles.buttonsCnt}>
           <Button type="secondary" size="medium" htmlType='reset'>Отмена</Button>
           <Button type="primary" size="medium" htmlType='submit'>Сохранить</Button>
         </div>
@@ -60,7 +60,7 @@ function ProfileEdit() {
   }
 
   return (
-    <form className={profileEdidStyles.form} onSubmit={submitForm}>
+    <form className={profileFormStyles.form} onSubmit={submitForm}>
       <Input
         type={'text'}
         placeholder={'Имя'}
@@ -102,4 +102,4 @@ function ProfileEdit() {
   )
 }
 
-export default ProfileEdit;
+export default ProfileForm;
