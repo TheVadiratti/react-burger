@@ -9,7 +9,7 @@ function ProfileEdit() {
     user: {
       name: '',
       login: '',
-      password: 'pas'
+      password: 'password'
     },
     inputState: {
       name: true,
