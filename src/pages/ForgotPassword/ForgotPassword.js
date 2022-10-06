@@ -1,14 +1,15 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { changePasswordFetchAction } from '../../services/actions/account';
 
 function ForgotPassword() {
-  const [value, setValue] = React.useState('');
-  const inputRef = React.useRef(null);
+  const [value, setValue] = useState('');
+  const inputRef = useRef(null);
   const dispatch = useDispatch();
+  const requestSuccess = useSelector((state) => state.changePassword.isSuccess);
   const hasToken = localStorage.getItem('refreshToken');
 
   const forgotPasswordHints = [
@@ -19,7 +20,8 @@ function ForgotPassword() {
     }
   ];
 
-  function submitForm() {
+  function submitForm(e) {
+    e.preventDefault();
     dispatch(changePasswordFetchAction(value));
   }
 
@@ -28,6 +30,15 @@ function ForgotPassword() {
       <Redirect
         to={{
           pathname: '/'
+        }}
+      />
+    )
+  }
+  else if (requestSuccess) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/reset-password'
         }}
       />
     )

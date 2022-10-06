@@ -68,21 +68,11 @@ const changePassword = (state = changePasswordState, action) => {
       }
 
     case CHANGE_PASSWORD_SUCCESS:
-      if (action.result) {
-        return {
-          isLoaded: false,
-          isSuccess: true,
-          isError: false,
-          message: action.message
-        }
-      }
-      else {
-        return {
-          isLoaded: false,
-          isSuccess: false,
-          isError: true,
-          message: action.message
-        }
+      return {
+        isLoaded: false,
+        isSuccess: true,
+        isError: false,
+        message: action.message
       }
 
     case CHANGE_PASSWORD_ERROR:

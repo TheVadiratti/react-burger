@@ -22,10 +22,9 @@ import {
 import { setUserDataAction, getUserDataFetchAction } from './user';
 import { checkResponse } from '../../utils/utils';
 
-function changePasswordAction(result, message) {
+function changePasswordAction(message) {
   return {
     type: CHANGE_PASSWORD_SUCCESS,
-    success: result,
     message: message
   }
 }
@@ -70,7 +69,14 @@ function changePasswordFetchAction(email) {
     })
       .then(checkResponse)
       .then(res => {
-        dispatch(changePasswordAction(res.success, res.message))
+        if(res.success) {
+          dispatch(changePasswordAction(res.message))
+        }
+        else {
+          dispatch({
+            type: CHANGE_PASSWORD_ERROR
+          })
+        }
       })
       .catch(error => {
         dispatch({
