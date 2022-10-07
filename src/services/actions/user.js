@@ -33,7 +33,6 @@ function getUserDataFetchAction() {
     })
       .then(checkResponse)
       .then(res => {
-        console.log(res);
         if (res.success) {
           dispatch({
             type: GET_USER_DATA_SUCCESS

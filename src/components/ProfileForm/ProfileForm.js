@@ -53,7 +53,6 @@ function ProfileForm() {
     }
     if (userState.password !== initialUserState.password) {
       data.password = userState.password;
-      setUserState({ ...userState, password: initialUserState.password })
     }
     dispatch(updateUserDataFetchAction(data));
     setInputState(initialInputState);
@@ -72,6 +71,7 @@ function ProfileForm() {
         disabled={inputState.name}
         onIconClick={() => { setInputState({ ...inputState, name: !inputState.name }) }}
         ref={nameRef}
+        onFocus={true}
       />
       <Input
         type={'email'}
