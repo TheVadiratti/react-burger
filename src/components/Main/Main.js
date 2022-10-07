@@ -25,7 +25,7 @@ function Main() {
       <Route path="/reset-password" exact={true}>
         <ResetPassword />
       </Route>
-      <ProtectedRoute path="/profile" redirectPath="/login">
+      <ProtectedRoute path="/profile">
         <Profile />
       </ProtectedRoute>
     </Switch>

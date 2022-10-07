@@ -27,7 +27,7 @@ function Profile() {
           <ul className={`text text_type_main-medium ${profileStyles.links}`}>
             <li className={profileStyles.item}><NavLink to="/profile" className={profileStyles.link} activeStyle={{ color: "#F2F2F3" }} exact>Профиль</NavLink></li>
             <li className={profileStyles.item}><NavLink to="/profile/orders" className={profileStyles.link} activeStyle={{ color: "#F2F2F3" }} exact>История</NavLink></li>
-            <li onClick={logout} className={profileStyles.item}><NavLink to="/login" className={profileStyles.link} exact>Выход</NavLink></li>
+            <li onClick={logout} className={profileStyles.item}><span className={profileStyles.link} exact>Выход</span></li>
           </ul>
         </nav>
         {
