@@ -36,7 +36,7 @@ function ProfileForm() {
     if (userState.name !== userName || userState.login !== userLogin || userState.password !== initialUserState.password) {
       return (
         <div className={profileFormStyles.buttonsCnt}>
-          <Button type="secondary" size="medium" htmlType='reset'>Отмена</Button>
+          <Button type="secondary" size="medium" htmlType='reset' onClick={resetForm}>Отмена</Button>
           <Button type="primary" size="medium" htmlType='submit'>Сохранить</Button>
         </div>
       )
@@ -55,6 +55,15 @@ function ProfileForm() {
       data.password = userState.password;
     }
     dispatch(updateUserDataFetchAction(data));
+    setInputState(initialInputState);
+  }
+
+  function resetForm() {
+    setUserState({
+      name: userName,
+    login: userLogin,
+    password: 'password'
+    });
     setInputState(initialInputState);
   }
 
