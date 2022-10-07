@@ -3,12 +3,12 @@ import { Route, Redirect } from 'react-router-dom';
 
 function ProtectedRoute({ children, ...props }) {
   const userName = useSelector((state) => state.user.name);
-  console.log(userName);
+  const hasToken = localStorage.getItem('refreshToken');
 
   return (
     <Route
       {...props}
-      render={() => userName ?
+      render={() => (userName || hasToken) ?
         (children)
         :
         (<Redirect
