@@ -11,7 +11,6 @@ function Login() {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.user.name);
-  const hasToken = localStorage.getItem('refreshToken');
 
   const loginHints = [
     {
@@ -35,7 +34,7 @@ function Login() {
     dispatch(authorizationFetchAction(valueEmail, valuePassword));
   }
 
-  if (userName || hasToken) {
+  if (userName) {
     return (
       <Redirect
         to={{

@@ -244,7 +244,7 @@ function logoutFetchAction() {
       .then(checkResponse)
       .then(res => {
         if (res.success) {
-          setUserDataAction('', '')
+          dispatch(setUserDataAction('', ''));
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
           dispatch({
