@@ -5,12 +5,14 @@ import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { showPassword, hidePassword } from '../../utils/utils';
 import { resetPasswordFetchAction } from '../../services/actions/account';
+import { CHANGE_PASSWORD_RESET_STATE } from '../../utils/constants';
 
 function ResetPassword() {
   const [valuePassword, setValuePassword] = useState('');
   const [valueCode, setValueCode] = useState('');
   const [showPasswordState, setShowPassword] = useState({ enable: false, icon: 'ShowIcon' });
   const requestSuccess = useSelector((state) => state.resetPassword.isSuccess);
+  const preRequestSuccess = useSelector((state) => state.changePassword.isSuccess);
   const inputPasswordRef = useRef(null);
   const dispatch = useDispatch();
   const hasToken = localStorage.getItem('refreshToken');
@@ -36,6 +38,9 @@ function ResetPassword() {
   function submitForm(e) {
     e.preventDefault();
     dispatch(resetPasswordFetchAction(valuePassword, valueCode));
+    dispatch({
+      type: CHANGE_PASSWORD_RESET_STATE
+    })
   }
 
   if (hasToken) {
@@ -52,6 +57,15 @@ function ResetPassword() {
       <Redirect
         to={{
           pathname: '/login'
+        }}
+      />
+    )
+  }
+  else if (!preRequestSuccess) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/forgot-password'
         }}
       />
     )

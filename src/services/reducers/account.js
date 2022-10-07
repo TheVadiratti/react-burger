@@ -2,6 +2,7 @@ import {
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_ERROR,
+  CHANGE_PASSWORD_RESET_STATE,
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_ERROR,
@@ -82,6 +83,9 @@ const changePassword = (state = changePasswordState, action) => {
         isError: true,
         message: action.message
       }
+
+    case CHANGE_PASSWORD_RESET_STATE:
+      return changePasswordState
 
     default:
       return state;
