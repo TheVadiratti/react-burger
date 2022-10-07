@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerItem from '../BurgerItem/BurgerItem';
@@ -10,6 +11,8 @@ function BurgerConstructor() {
   const ingredientsData = useSelector((state) => state.ingredients.data);
   const constructorStructure = useSelector((state) => state.burgerConstructor);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const hasToken = localStorage.getItem('refreshToken');
 
   const windowCntRef = React.useRef(null);
 
@@ -48,11 +51,16 @@ function BurgerConstructor() {
   }
 
   function sendOrder() {
-    const orderList = Object.assign([], constructorStructure.main);
-    orderList.unshift(constructorStructure.buns);
-    orderList.push(constructorStructure.buns);
-    dispatch(sendOrderAction(orderList));
-    dispatch(openOrderDetailsAction());
+    if (hasToken) {
+      const orderList = Object.assign([], constructorStructure.main);
+      orderList.unshift(constructorStructure.buns);
+      orderList.push(constructorStructure.buns);
+      dispatch(sendOrderAction(orderList));
+      dispatch(openOrderDetailsAction());
+    }
+    else {
+      history.replace({pathname: '/login'});
+    }
   }
 
   return (
