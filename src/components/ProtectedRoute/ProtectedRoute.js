@@ -1,27 +1,22 @@
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-function ProtectedRoute({ children, redirectPath, ...props }) {
+function ProtectedRoute({ children, ...props }) {
   const userName = useSelector((state) => state.user.name);
-  const hasToken = localStorage.getItem('refreshToken');
   console.log(userName);
 
-  if (userName || hasToken) {
-    return (
-      <Route {...props}>
-        {children}
-      </Route>
-    )
-  }
-  else {
-    return (
-      <Redirect
-        to={{
-          pathname: redirectPath
-        }}
-      />
-    )
-  }
+  return (
+    <Route
+      {...props}
+      render={() => userName ?
+        (children)
+        :
+        (<Redirect
+            to='/login'
+          />)
+      }
+    />
+  )
 }
 
 export default ProtectedRoute;
