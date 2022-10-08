@@ -1,4 +1,5 @@
 import styles from './PageWithForm.module.css';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -33,3 +34,10 @@ function PageWithForm({ heading, buttonText, hints, children, submitFunc }) {
 }
 
 export default PageWithForm;
+
+PageWithForm.propTypes = {
+  heading: PropTypes.string,
+  buttonText: PropTypes.string,
+  hints: PropTypes.arrayOf(PropTypes.object),
+  submitFunc: PropTypes.func.isRequired
+}; 
