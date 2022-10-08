@@ -1,19 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import modalStyles from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { closeModalAction } from '../../services/actions/actions';
-import { useDispatch } from 'react-redux';
 
 const modalRoot = document.querySelector('#react-modals');
 
 function Modal(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   function closeModal() {
     dispatch(closeModalAction());
+    history.replace({pathname: '/'});
   }
 
   React.useEffect(() => {
