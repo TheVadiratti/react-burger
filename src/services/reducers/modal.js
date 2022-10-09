@@ -7,15 +7,16 @@ import {
 const modalState = {
   open: false,
   type: '',
+  byClick: false
 }
 
 const modal = (state = modalState, action) => {
   switch (action.type) {
     case OPEN_INGREDIENT_DETAILS:
       return {
-        ...state,
         open: true,
         type: 'IngredientDetails',
+        byClick: action.byClick
       }
 
     case OPEN_ORDER_DETAILS:

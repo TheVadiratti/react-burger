@@ -4,9 +4,10 @@ import {
   CLOSE_MODAL
 } from '../../utils/constants';
 
-function openIngredientDetailsAction() {
+function openIngredientDetailsAction(byClick) {
   return {
-    type: OPEN_INGREDIENT_DETAILS
+    type: OPEN_INGREDIENT_DETAILS,
+    byClick: byClick
   }
 }
 

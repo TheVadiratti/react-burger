@@ -18,9 +18,11 @@ function Main() {
   const dispatch = useDispatch();
   const location = useLocation();
   
+  const byClick = useSelector((state) => state.modal.byClick);
+  
   useEffect(() => {
     if(location.pathname.includes('ingredients/')) {
-      dispatch(openIngredientDetailsAction({}));
+      dispatch(openIngredientDetailsAction(false));
     }
   }, []);
 
@@ -43,7 +45,7 @@ function Main() {
         <ProtectedRoute path="/profile">
           <Profile />
         </ProtectedRoute>
-        <Route path="/">
+        <Route path="/" exact={!byClick}>
           <MainPage />
         </Route>
       </Switch>

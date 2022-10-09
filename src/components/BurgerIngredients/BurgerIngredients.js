@@ -68,10 +68,7 @@ function BurgerIngredients() {
 
   function openIngredientDetailsPopup(e) {
     const id = e.currentTarget.getAttribute('id');
-    const selectedIngredientData = data.find(item => {
-      return item._id === id;
-    });
-    dispatch(openIngredientDetailsAction(selectedIngredientData));
+    dispatch(openIngredientDetailsAction(true));
     history.replace({pathname: `/ingredients/${id}`});
   }
 
