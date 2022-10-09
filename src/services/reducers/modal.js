@@ -7,7 +7,6 @@ import {
 const modalState = {
   open: false,
   type: '',
-  dataIngredientDetails: {}
 }
 
 const modal = (state = modalState, action) => {
@@ -17,7 +16,6 @@ const modal = (state = modalState, action) => {
         ...state,
         open: true,
         type: 'IngredientDetails',
-        dataIngredientDetails: action.data
       }
 
     case OPEN_ORDER_DETAILS:

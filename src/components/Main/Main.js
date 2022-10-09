@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import MainPage from '../../pages/MainPage/MainPage';
 import Login from '../../pages/Login/Login';
@@ -10,10 +11,18 @@ import Profile from '../../pages/Profile/Profile';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
+import { openIngredientDetailsAction } from '../../services/actions/modal';
 
 function Main() {
-  const modalEnabled = useSelector((state) => state.modal.open);
   const modalType = useSelector((state) => state.modal.type);
+  const dispatch = useDispatch();
+  const location = useLocation();
+  
+  useEffect(() => {
+    if(location.pathname.includes('ingredients/')) {
+      dispatch(openIngredientDetailsAction({}));
+    }
+  }, []);
 
   return (
     <>
@@ -38,8 +47,7 @@ function Main() {
           <MainPage />
         </Route>
       </Switch>
-      <Route path='/ingredients/:id'>
-      {modalEnabled && (
+      <Route path='/ingredients/:id' exact>
         <Modal heading={modalType === 'IngredientDetails' ? 'Детали ингредиента' : ''}>
           {modalType === 'IngredientDetails' && (
             <IngredientDetails />
@@ -48,7 +56,6 @@ function Main() {
             <OrderDetails />
           )}
         </Modal>
-      )}
       </Route>
     </>
   )

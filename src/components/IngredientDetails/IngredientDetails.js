@@ -1,10 +1,16 @@
 import ingredientDetails from './IngredientDetails.module.css';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 function IngredientDetails() {
-  const currentIngredient = useSelector((state) => state.modal.dataIngredientDetails);
+  const ingredientsData = useSelector((state) => state.ingredients.data);
+  const params = useParams();
 
-  return (
+  const currentIngredient = ingredientsData.find(item => {
+    return item._id === params.id;
+  });
+
+  return (currentIngredient &&
     <>
       <img className={ingredientDetails.image} src={currentIngredient.image} alt={currentIngredient.name}></img>
       <span className="mt-4 text text_type_main-medium">{currentIngredient.name}</span>
