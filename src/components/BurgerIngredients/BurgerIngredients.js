@@ -2,7 +2,7 @@ import React from 'react';
 import burgerIngredientsStyles from './BurgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { openIngredientDetailsAction } from '../../services/actions/actions';
+import { openIngredientDetailsAction } from '../../services/actions/modal';
 import Ingredient from '../Ingredient/Ingredient';
 import { useHistory } from 'react-router-dom';
 

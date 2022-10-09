@@ -6,7 +6,7 @@ import modalStyles from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { closeModalAction } from '../../services/actions/actions';
+import { closeModalAction } from '../../services/actions/modal';
 
 const modalRoot = document.querySelector('#react-modals');
 

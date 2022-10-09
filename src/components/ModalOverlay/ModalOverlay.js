@@ -1,6 +1,6 @@
 import modalOverlayStyle from './ModalOverlay.module.css';
 import { useDispatch } from 'react-redux';
-import { closeModalAction } from '../../services/actions/actions';
+import { closeModalAction } from '../../services/actions/modal';
 import { useHistory } from 'react-router-dom';
 
 function ModalOverlay(props) {

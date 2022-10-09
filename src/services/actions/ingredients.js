@@ -5,9 +5,6 @@ import {
   SEND_ORDER_REQUEST,
   SEND_ORDER_SUCCESS,
   SEND_ORDER_ERROR,
-  OPEN_INGREDIENT_DETAILS,
-  OPEN_ORDER_DETAILS,
-  CLOSE_MODAL,
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   UPDATE_COUNTER,
@@ -42,19 +39,6 @@ function setIngredientsListAction() {
   }
 }
 
-function openIngredientDetailsAction(data) {
-  return {
-    type: OPEN_INGREDIENT_DETAILS,
-    data: data
-  }
-}
-
-function openOrderDetailsAction() {
-  return {
-    type: OPEN_ORDER_DETAILS
-  }
-}
-
 function sendOrderAction(list) {
   return function (dispatch) {
     dispatch({
@@ -82,12 +66,6 @@ function sendOrderAction(list) {
           type: SEND_ORDER_ERROR
         })
       })
-  }
-}
-
-function closeModalAction() {
-  return {
-    type: CLOSE_MODAL
   }
 }
 
@@ -125,9 +103,6 @@ function sortIngredientsAction(fromIndex, toIndex) {
 
 export {
   setIngredientsListAction,
-  openIngredientDetailsAction,
-  openOrderDetailsAction,
-  closeModalAction,
   sendOrderAction,
   addIngredientAction,
   deleteIngredientAction,
