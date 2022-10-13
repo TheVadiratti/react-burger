@@ -1,19 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import modalStyles from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { closeModalAction } from '../../services/actions/actions';
-import { useDispatch } from 'react-redux';
+import { closeModalAction } from '../../services/actions/modal';
 
 const modalRoot = document.querySelector('#react-modals');
 
 function Modal(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const byClick = useSelector((state) => state.modal.byClick);
 
   function closeModal() {
     dispatch(closeModalAction());
+    history.replace({pathname: '/'});
   }
 
   React.useEffect(() => {
@@ -31,10 +36,10 @@ function Modal(props) {
   return ReactDOM.createPortal(
     (
       <ModalOverlay >
-        <div className={modalStyles.window}>
+        <div className={`${modalStyles.window} ${!byClick && modalStyles.windowTypeGeneral}`}>
           <div className={`mt-10 ${modalStyles.cnt}`}>
-            <h2 className="text text_type_main-large">{props.heading}</h2>
-            <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>
+            <h2 className={`text text_type_main-large ${!byClick && modalStyles.textTypeGeneral}`}>{props.heading}</h2>
+            {byClick && <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>}
           </div>
           {props.children}
         </div>

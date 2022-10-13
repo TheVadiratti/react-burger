@@ -1,0 +1,35 @@
+.main {
+  height: calc(100vh - 93px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formCnt {
+  width: 480px;
+}
+
+.heading {
+  margin-top: 0;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.text {
+  text-align: center;
+}
+
+.link {
+  color: #4C4CFF;
+  text-decoration: none;
+}
+
+.link:hover {
+  opacity: .8;
+}

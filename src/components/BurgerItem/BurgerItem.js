@@ -2,7 +2,7 @@ import React from 'react';
 import burgerItem from './BurgerItem.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteIngredientAction, updateCounterAction, sortIngredientsAction } from '../../services/actions/actions';
+import { deleteIngredientAction, updateCounterAction, sortIngredientsAction } from '../../services/actions/ingredients';
 import { useDrag, useDrop } from "react-dnd";
 import PropTypes from 'prop-types';
 

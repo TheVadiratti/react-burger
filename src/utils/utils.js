@@ -7,4 +7,12 @@ function checkResponse(res) {
   }
 }
 
-export { checkResponse };
+function showPassword(ref) {
+  ref.current.setAttribute('type', 'password');
+}
+
+function hidePassword(ref) {
+  ref.current.setAttribute('type', 'text');
+}
+
+export { checkResponse, showPassword, hidePassword };
