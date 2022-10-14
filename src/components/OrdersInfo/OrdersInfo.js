@@ -1,6 +1,6 @@
 import orderInfoStyles from './OrdersInfo.module.css';
 
-function OrderInfo() {
+function OrdersInfo() {
   return (
     <section>
       <div className={orderInfoStyles.statuses}>
@@ -35,4 +35,4 @@ function OrderInfo() {
   )
 }
 
-export default OrderInfo;
+export default OrdersInfo;
