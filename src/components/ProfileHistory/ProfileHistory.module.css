@@ -32,6 +32,11 @@
   border-radius: 40px;
 }
 
+.idCnt {
+  display: flex;
+  justify-content: space-between;
+}
+
 .cnt {
   display: flex;
 }
