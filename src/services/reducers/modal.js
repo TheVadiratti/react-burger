@@ -21,9 +21,9 @@ const modal = (state = modalState, action) => {
 
     case OPEN_ORDER_DETAILS:
       return {
-        ...state,
         open: true,
-        type: 'OrderDetails'
+        type: 'OrderDetails',
+        byClick: action.byClick
       }
 
     case CLOSE_MODAL:

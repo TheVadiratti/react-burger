@@ -11,9 +11,10 @@ function openIngredientDetailsAction(byClick) {
   }
 }
 
-function openOrderDetailsAction() {
+function openOrderDetailsAction(byClick) {
   return {
-    type: OPEN_ORDER_DETAILS
+    type: OPEN_ORDER_DETAILS,
+    byClick: byClick
   }
 }
 

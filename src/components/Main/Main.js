@@ -16,14 +16,15 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import { openIngredientDetailsAction } from '../../services/actions/modal';
 
 function Main() {
+  const modalEnable = useSelector((state) => state.modal.open);
   const modalType = useSelector((state) => state.modal.type);
   const dispatch = useDispatch();
   const location = useLocation();
-  
+
   const byClick = useSelector((state) => state.modal.byClick);
-  
+
   useEffect(() => {
-    if(location.pathname.includes('ingredients/')) {
+    if (location.pathname.includes('ingredients/')) {
       dispatch(openIngredientDetailsAction(false));
     }
   }, []);
@@ -54,17 +55,19 @@ function Main() {
         </ProtectedRoute>
         <Route path="/" exact={!byClick}>
           <MainPage />
+          {(modalEnable && modalType === 'OrderDetails') &&
+            <Modal heading={''}>
+              <OrderDetails />
+            </Modal>
+          }
         </Route>
       </Switch>
       <Route path='/ingredients/:id' exact>
-        <Modal heading={modalType === 'IngredientDetails' ? 'Детали ингредиента' : ''}>
-          {modalType === 'IngredientDetails' && (
+        {modalEnable &&
+          <Modal heading={'Детали ингредиента'}>
             <IngredientDetails />
-          )}
-          {modalType === 'OrderDetails' && (
-            <OrderDetails />
-          )}
-        </Modal>
+          </Modal>
+        }
       </Route>
     </>
   )

@@ -57,7 +57,7 @@ function BurgerConstructor() {
       orderList.unshift(constructorStructure.buns);
       orderList.push(constructorStructure.buns);
       dispatch(sendOrderAction(orderList));
-      dispatch(openOrderDetailsAction());
+      dispatch(openOrderDetailsAction(true));
     }
     else {
       history.replace({ pathname: '/login' });
