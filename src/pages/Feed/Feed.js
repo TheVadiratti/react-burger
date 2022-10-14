@@ -1,8 +1,8 @@
-import ordersStyles from './Orders.module.css';
+import ordersStyles from './Feed.module.css';
 import OrdersList from '../../components/OrdersList/OrdersList';
 import OrdersInfo from '../../components/OrdersInfo/OrdersInfo';
 
-function Orders() {
+function Feed() {
   return (
     <main className={ordersStyles.main}>
       <h1 className={`text text_type_main-large mb-5 mt-9 ${ordersStyles.heading}`}>Лента заказов</h1>
@@ -12,4 +12,4 @@ function Orders() {
   )
 }
 
-export default Orders; 
+export default Feed; 

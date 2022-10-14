@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import MainPage from '../../pages/MainPage/MainPage';
-import Orders from '../../pages/Orders/Orders';
+import Feed from '../../pages/Feed/Feed';
 import OrderInfo from '../../pages/OrderInfo/OrderInfo';
 import Login from '../../pages/Login/Login';
 import Register from '../../pages/Register/Register';
@@ -31,10 +31,10 @@ function Main() {
   return (
     <>
       <Switch>
-        <Route path='/orders' exact={true}>
-          <Orders />
+        <Route path='/feed' exact={true}>
+          <Feed />
         </Route>
-        <Route path='/orders/id' exact={true}>
+        <Route path='/feed/id' exact={true}>
           <OrderInfo />
         </Route>
         <Route path="/login" exact={true}>

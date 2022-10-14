@@ -16,8 +16,8 @@ function AppHeader() {
             </NavLink>
           </li>
           <li className={`${headerStyles.item} p-5 ml-2`}>
-            <NavLink to='/orders' className={headerStyles.link} activeClassName={headerStyles.link_active} exact={true}>
-              <ListIcon type={pathname === '/orders' ? 'primary' : 'secondary'} />
+            <NavLink to='/feed' className={headerStyles.link} activeClassName={headerStyles.link_active} exact={true}>
+              <ListIcon type={pathname === '/feed' ? 'primary' : 'secondary'} />
               <span className='text text_type_main-default ml-2'>Лента заказов</span>
             </NavLink>
           </li>
