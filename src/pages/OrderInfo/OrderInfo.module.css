@@ -1,0 +1,75 @@
+.main {
+  height: calc(100vh - 92px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info {
+  width: 32%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.num {
+  width: 100%;
+  text-align: center;
+}
+
+.status {
+  color: #00CCCC;
+}
+
+.components {
+  max-height: 366px;
+  padding-left: 0;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: #8585AD #2F2F37;
+}
+
+/* для Chrome/Edge/Safari */
+.components::-webkit-scrollbar {
+  width: 8px;
+}
+
+.components::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.components::-webkit-scrollbar-thumb {
+  background-color: #2F2F37;
+  border: 4px solid #8585AD;
+}
+
+.component {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.img {
+  width: 64px;
+  height: 64px;
+}
+
+.componentName {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.priceCnt {
+  display: flex;
+  gap: 9px;
+}
+
+.timeCnt {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sumCnt {
+  display: flex;
+  gap: 9px;
+}

@@ -10,8 +10,8 @@ function OrdersList() {
           <span className='text text_type_main-default text_color_inactive'>Сегодня, 16:20 i-GMT+3</span>
         </div>
         <h4 className='text text_type_main-medium'>Death Star Starship Main бургер</h4>
-        <div className={ordersListStyles.ingredientsCnt}>
-          <div className={ordersListStyles.ingredients}></div>
+        <div className={ordersListStyles.componentsCnt}>
+          <div className={ordersListStyles.components}></div>
           <div className={ordersListStyles.sum}>
             <span className='text text_type_digits-default'>480</span>
             <CurrencyIcon type="primary" />

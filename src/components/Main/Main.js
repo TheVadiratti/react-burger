@@ -4,6 +4,7 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import MainPage from '../../pages/MainPage/MainPage';
 import Orders from '../../pages/Orders/Orders';
+import OrderInfo from '../../pages/OrderInfo/OrderInfo';
 import Login from '../../pages/Login/Login';
 import Register from '../../pages/Register/Register';
 import ResetPassword from '../../pages/ResetPassword/ResetPassword';
@@ -32,6 +33,9 @@ function Main() {
       <Switch>
         <Route path='/orders' exact={true}>
           <Orders />
+        </Route>
+        <Route path='/orders/id' exact={true}>
+          <OrderInfo />
         </Route>
         <Route path="/login" exact={true}>
           <Login />
