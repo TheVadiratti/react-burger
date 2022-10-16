@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -16,12 +16,7 @@ function Modal(props) {
 
   const byClick = useSelector((state) => state.modal.byClick);
 
-  function closeModal() {
-    dispatch(closeModalAction());
-    history.replace({pathname: '/'});
-  }
-
-  React.useEffect(() => {
+  useEffect(() => {
     function closePopupEsc(e) {
       if (e.code === 'Escape') {
         closeModal();
@@ -33,14 +28,16 @@ function Modal(props) {
     }
   }, []);
 
+  function closeModal() {
+    dispatch(closeModalAction());
+    history.replace({ pathname: '/' });
+  }
+
   return ReactDOM.createPortal(
     (
       <ModalOverlay >
         <div className={`${modalStyles.window} ${!byClick && modalStyles.windowTypeGeneral}`}>
-          <div className={`mt-10 ${modalStyles.cnt}`}>
-            <h2 className={`text text_type_main-large ${!byClick && modalStyles.textTypeGeneral}`}>{props.heading}</h2>
-            {byClick && <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>}
-          </div>
+          {byClick && <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>}
           {props.children}
         </div>
       </ModalOverlay>
