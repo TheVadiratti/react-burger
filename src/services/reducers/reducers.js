@@ -4,6 +4,7 @@ import { modal } from "./modal";
 import { ingredients, order, burgerConstructor } from './ingredients';
 import { changePassword, resetPassword, registration, authorization, updateToken, logout } from './account';
 import { ws } from "./web-socket";
+import { orders } from "./orders";
 
 export const rootReducer = combineReducers({
   ingredients,
@@ -19,5 +20,6 @@ export const rootReducer = combineReducers({
   logout,
   getUserData,
   updateUserData,
-  ws
+  ws,
+  orders
 })

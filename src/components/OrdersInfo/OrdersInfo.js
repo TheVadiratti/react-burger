@@ -1,35 +1,45 @@
 import orderInfoStyles from './OrdersInfo.module.css';
+import { useSelector } from 'react-redux';
 
 function OrdersInfo() {
+  const orders = useSelector((state) => state.orders);
+
+  function renderNumbers(type) {
+    return orders.list.map((order, i) => {
+      if (type === 'done') {
+        return (
+          <li className={`text text_type_digits-default ${orderInfoStyles.numberComplited}`} key={i}>{order.number}</li>
+        )
+      }
+      else {
+        <li className={`text text_type_digits-default ${orderInfoStyles.numberInProgress}`}>{order.number}</li>
+      }
+    })
+  }
+
   return (
     <section>
       <div className={orderInfoStyles.statuses}>
         <div className={orderInfoStyles.numbersCnt}>
           <h3 className='text text_type_main-medium'>Готовы:</h3>
           <ul className={`mt-6 ${orderInfoStyles.list}`}>
-            <li className={`text text_type_digits-default mt-2 ${orderInfoStyles.numberComplited}`}>034533</li>
-            <li className={`text text_type_digits-default mt-2 ${orderInfoStyles.numberComplited}`}>034533</li>
-            <li className={`text text_type_digits-default mt-2 ${orderInfoStyles.numberComplited}`}>034533</li>
-            <li className={`text text_type_digits-default mt-2 ${orderInfoStyles.numberComplited}`}>034533</li>
-            <li className={`text text_type_digits-default mt-2 ${orderInfoStyles.numberComplited}`}>034533</li>
+            {renderNumbers('done')}
           </ul>
         </div>
         <div>
           <h3 className='text text_type_main-medium'>В работе:</h3>
           <ul className={`mt-6 ${orderInfoStyles.list}`}>
-            <li className={`text text_type_digits-default mt-2 ${orderInfoStyles.numberInProgress}`}>034533</li>
-            <li className={`text text_type_digits-default mt-2 ${orderInfoStyles.numberInProgress}`}>034533</li>
-            <li className={`text text_type_digits-default mt-2 ${orderInfoStyles.numberInProgress}`}>034533</li>
+            {renderNumbers('work')}
           </ul>
         </div>
       </div>
       <div className='mt-15'>
         <h3 className='text text_type_main-medium'>Выполнено за все время:</h3>
-        <span className={`text text_type_digits-large ${orderInfoStyles.digit}`}>28 752</span>
+        <span className={`text text_type_digits-large ${orderInfoStyles.digit}`}>{orders.total}</span>
       </div>
       <div className='mt-15'>
         <h3 className='text text_type_main-medium'>Выполнено за сегодня:</h3>
-        <span className={`text text_type_digits-large ${orderInfoStyles.digit}`}>138</span>
+        <span className={`text text_type_digits-large ${orderInfoStyles.digit}`}>{orders.totalToday}</span>
       </div>
     </section>
   )

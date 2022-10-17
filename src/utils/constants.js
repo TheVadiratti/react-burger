@@ -46,4 +46,4 @@ export const WS_GET_MESSAGE = 'WS_GET_MESSAGE';
 export const WS_SEND_MESSAGE = 'WS_SEND_MESSAGE';
 
 // other
-export const baseUrl = 'https://norma.nomoreparties.space';
+export const baseUrl = '://norma.nomoreparties.space';

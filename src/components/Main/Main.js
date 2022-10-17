@@ -21,9 +21,6 @@ function Main() {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const state = useSelector((state) => state);
-  console.log(state);
-
   const byClick = useSelector((state) => state.modal.byClick);
 
   useEffect(() => {

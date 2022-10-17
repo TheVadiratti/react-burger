@@ -6,20 +6,25 @@
 
 .list {
   width: 280px;
+  height: 152px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  column-gap: 30px;
   padding: 0;
+  overflow: hidden;
 }
 
 .numberComplited {
+  height: 24px;
   list-style-type: none;
   color: #00CCCC;
 }
 
 .numberInProgress {
+  height: 24px;
   list-style-type: none;
-}
-
-.numberComplited:first-of-type {
-  margin-top: 0;
 }
 
 .digit {

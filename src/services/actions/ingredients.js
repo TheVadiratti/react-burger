@@ -25,7 +25,7 @@ function setIngredientsListAction() {
     dispatch({
       type: GET_INGREDIENTS_REQUEST
     })
-    fetch(`${baseUrl}/api/ingredients/`)
+    fetch(`http${baseUrl}/api/ingredients/`)
       .then(checkResponse)
       .then(res => {
         dispatch(getDataAction(res.data))
@@ -44,7 +44,7 @@ function sendOrderAction(list) {
     dispatch({
       type: SEND_ORDER_REQUEST
     })
-    fetch(`${baseUrl}/api/orders/`, {
+    fetch(`http${baseUrl}/api/orders/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
