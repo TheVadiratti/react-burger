@@ -5,11 +5,42 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { getTimeString } from '../../utils/utils';
 
 function OrdersList() {
-  const ingredients = useSelector((state) => state.ingredients.data);
+  const ingredientsState = useSelector((state) => state.ingredients.data);
   const orders = useSelector((state) => state.orders);
   const windowCntRef = useRef(null);
 
-  console.log(ingredients);
+  function findIngredient(id) {
+    return ingredientsState.find(ingredient => {
+      return id === ingredient._id;
+    })
+  }
+
+  function sumCost(order) {
+    let sum = 0;
+    order.ingredients.forEach(ingredientID => {
+      const currentIngredient = findIngredient(ingredientID);
+      if (currentIngredient.type === 'bun') {
+        sum += currentIngredient.price * 2;
+      }
+      else {
+        sum += currentIngredient.price;
+      }
+    })
+    return sum;
+  }
+
+  function renderOrderComponents(ingredientsArr) {
+    return ingredientsArr.map((ingredientID, i) => {
+      const currentIngredient = ingredientsState.find(item => {
+        return item._id === ingredientID;
+      })
+      return (
+        <div className={ordersListStyles.fakeBorder} style={{ zIndex: `${ingredientsArr.length - i}` }} key={i}>
+          <div className={ordersListStyles.cardImg} style={{ backgroundImage: `url(${currentIngredient.image})` }} key={i}></div>
+        </div>
+      )
+    })
+  }
 
   function renderOrderCard() {
     return orders.list.map((order, i) => {
@@ -25,23 +56,10 @@ function OrdersList() {
               {renderOrderComponents(order.ingredients)}
             </div>
             <div className={ordersListStyles.sum}>
-              <span className="text text_type_digits-default">480</span>
+              <span className="text text_type_digits-default">{sumCost(order)}</span>
               <CurrencyIcon type="primary" />
             </div>
           </div>
-        </div>
-      )
-    })
-  }
-
-  function renderOrderComponents(ingredientsArr) {
-    return ingredientsArr.map((ingredientID, i) => {
-      const currentIngredient = ingredients.find(item => {
-        return item._id === ingredientID;
-      })
-      return (
-        <div className={ordersListStyles.fakeBorder} style={{zIndex: `${ingredientsArr.length - i}`}}>
-          <div className={ordersListStyles.cardImg} style={{ backgroundImage: `url(${currentIngredient.image})` }} key={i}></div>
         </div>
       )
     })
