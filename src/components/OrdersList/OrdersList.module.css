@@ -12,9 +12,11 @@
 .window::-webkit-scrollbar {
   width: 8px;
 }
+
 .window::-webkit-scrollbar-track {
   background: #2F2F37;
 }
+
 .window::-webkit-scrollbar-thumb {
   background-color: #2F2F37;
   border: 4px solid #8585AD;
@@ -33,4 +35,43 @@
 .info {
   display: flex;
   justify-content: space-between;
+}
+
+.componentsCnt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.components {
+  display: flex;
+}
+
+.fakeBorder {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(to right, #801AB2, #4C4CFF);
+  border-radius: 100px;
+  position: relative;
+  margin-right: -20px;
+  top: 0;
+  right: 0;
+}
+
+.cardImg {
+  width: 60px;
+  height: 60px;
+  background-color: #131316;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 100px;
+}
+
+.sum {
+  display: flex;
+  gap: 9px;
 }
