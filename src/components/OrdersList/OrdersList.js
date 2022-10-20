@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import ordersListStyles from './OrdersList.module.css';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getTimeString } from '../../utils/utils';
 import useFindIngredient from '../../hooks/useFindIngredient';
@@ -8,6 +9,7 @@ import useFindIngredient from '../../hooks/useFindIngredient';
 function OrdersList() {
   const orders = useSelector((state) => state.orders);
   const windowCntRef = useRef(null);
+  const history = useHistory();
   const findIngredient = useFindIngredient();
 
   function sumCost(order) {
@@ -22,6 +24,11 @@ function OrdersList() {
       }
     })
     return sum;
+  }
+
+  function openOrder(e) {
+    const id = e.currentTarget.getAttribute('id');
+    history.replace({pathname: `/feed/${id}`});
   }
 
   function renderBurgerComponents(ingredientsArr) {
@@ -53,7 +60,7 @@ function OrdersList() {
   function renderOrderCard() {
     return orders.list.map((order, i) => {
       return (
-        <div className={`p-6 ${ordersListStyles.item}`} key={i}>
+        <div onClick={openOrder} className={`p-6 ${ordersListStyles.item}`} key={i} id={order._id}>
           <div className={ordersListStyles.info}>
             <span className="text text_type_digits-default">{'#' + order.number}</span>
             <span className="text text_type_main-default text_color_inactive">{getTimeString(order.createdAt)}</span>

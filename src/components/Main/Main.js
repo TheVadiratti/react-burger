@@ -35,7 +35,7 @@ function Main() {
         <Route path='/feed' exact={true}>
           <Feed />
         </Route>
-        <Route path='/feed/id' exact={true}>
+        <Route path='/feed/:id' exact={true}>
           <OrderInfo />
         </Route>
         <Route path="/login" exact={true}>
