@@ -29,16 +29,33 @@ function OrdersList() {
     return sum;
   }
 
-  function renderOrderComponents(ingredientsArr) {
+  function renderBurgerComponents(ingredientsArr) {
     return ingredientsArr.map((ingredientID, i) => {
-      const currentIngredient = ingredientsState.find(item => {
-        return item._id === ingredientID;
-      })
-      return (
-        <div className={ordersListStyles.fakeBorder} style={{ zIndex: `${ingredientsArr.length - i}` }} key={i}>
-          <div className={ordersListStyles.cardImg} style={{ backgroundImage: `url(${currentIngredient.image})` }} key={i}></div>
-        </div>
-      )
+      if (i < 5) {
+        const currentIngredient = ingredientsState.find(item => {
+          return item._id === ingredientID;
+        });
+        return (
+          <div className={ordersListStyles.fakeBorder} style={{ zIndex: `${ingredientsArr.length - i}` }} key={i}>
+            <div className={ordersListStyles.img} style={{ backgroundImage: `url(${currentIngredient.image})` }} key={i}></div>
+          </div>
+        )
+      }
+      else if (i === 5) {
+        const currentIngredient = ingredientsState.find(item => {
+          return item._id === ingredientID;
+        });
+        const remains = String(ingredientsArr.length - 5);
+        return (
+          <div className={ordersListStyles.fakeBorder} style={{ zIndex: `${ingredientsArr.length - i}` }} key={i}>
+            <div className={ordersListStyles.img} style={{ backgroundImage: `url(${currentIngredient.image})` }} key={i}>
+              <div className={ordersListStyles.imgOverlay}>
+                <span className='text text_type_main-default'>{'+' + remains}</span>
+              </div>
+            </div>
+          </div>
+        )
+      }
     })
   }
 
@@ -53,7 +70,7 @@ function OrdersList() {
           <h4 className="text text_type_main-medium">{order.name}</h4>
           <div className={ordersListStyles.componentsCnt}>
             <div className={ordersListStyles.components}>
-              {renderOrderComponents(order.ingredients)}
+              {renderBurgerComponents(order.ingredients)}
             </div>
             <div className={ordersListStyles.sum}>
               <span className="text text_type_digits-default">{sumCost(order)}</span>
