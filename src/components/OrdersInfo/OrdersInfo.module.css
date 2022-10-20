@@ -1,17 +1,17 @@
 .statuses {
-  height: 206px;
+  height: auto;
   display: flex;
   gap: 32px;
 }
 
 .list {
-  width: 280px;
-  height: 152px;
+  width: 272px;
+  height: 315px;
   display: flex;
+  margin-bottom: 0;
   flex-direction: column;
   flex-wrap: wrap;
   row-gap: 8px;
-  column-gap: 30px;
   padding: 0;
   overflow: hidden;
 }

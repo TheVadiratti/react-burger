@@ -6,13 +6,15 @@ function OrdersInfo() {
 
   function renderNumbers(type) {
     return orders.list.map((order, i) => {
-      if (type === 'done') {
-        return (
-          <li className={`text text_type_digits-default ${orderInfoStyles.numberComplited}`} key={i}>{order.number}</li>
-        )
-      }
-      else {
-        <li className={`text text_type_digits-default ${orderInfoStyles.numberInProgress}`}>{order.number}</li>
+      if (i < 20) {
+        if (type === 'done') {
+          return (
+            <li className={`text text_type_digits-default ${orderInfoStyles.numberComplited}`} key={i}>{order.number}</li>
+          )
+        }
+        else {
+          <li className={`text text_type_digits-default ${orderInfoStyles.numberInProgress}`}>{order.number}</li>
+        }
       }
     })
   }
