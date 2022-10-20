@@ -44,6 +44,13 @@
   justify-content: space-between;
 }
 
+.heading {
+  height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .components {
   display: flex;
 }

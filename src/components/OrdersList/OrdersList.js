@@ -58,7 +58,7 @@ function OrdersList() {
             <span className="text text_type_digits-default">{'#' + order.number}</span>
             <span className="text text_type_main-default text_color_inactive">{getTimeString(order.createdAt)}</span>
           </div>
-          <h4 className="text text_type_main-medium">{order.name}</h4>
+          <h4 className={`text text_type_main-medium ${ordersListStyles.heading}`}>{order.name}</h4>
           <div className={ordersListStyles.componentsCnt}>
             <div className={ordersListStyles.components}>
               {renderBurgerComponents(order.ingredients)}
