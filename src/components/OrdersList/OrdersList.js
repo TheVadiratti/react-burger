@@ -3,17 +3,12 @@ import ordersListStyles from './OrdersList.module.css';
 import { useSelector } from 'react-redux';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getTimeString } from '../../utils/utils';
+import useFindIngredient from '../../hooks/useFindIngredient';
 
 function OrdersList() {
-  const ingredientsState = useSelector((state) => state.ingredients.data);
   const orders = useSelector((state) => state.orders);
   const windowCntRef = useRef(null);
-
-  function findIngredient(id) {
-    return ingredientsState.find(ingredient => {
-      return id === ingredient._id;
-    })
-  }
+  const findIngredient = useFindIngredient();
 
   function sumCost(order) {
     let sum = 0;
@@ -32,9 +27,7 @@ function OrdersList() {
   function renderBurgerComponents(ingredientsArr) {
     return ingredientsArr.map((ingredientID, i) => {
       if (i < 5) {
-        const currentIngredient = ingredientsState.find(item => {
-          return item._id === ingredientID;
-        });
+        const currentIngredient = findIngredient(ingredientID);
         return (
           <div className={ordersListStyles.fakeBorder} style={{ zIndex: `${ingredientsArr.length - i}` }} key={i}>
             <div className={ordersListStyles.img} style={{ backgroundImage: `url(${currentIngredient.image})` }} key={i}></div>
@@ -42,9 +35,7 @@ function OrdersList() {
         )
       }
       else if (i === 5) {
-        const currentIngredient = ingredientsState.find(item => {
-          return item._id === ingredientID;
-        });
+        const currentIngredient = findIngredient(ingredientID);
         const remains = String(ingredientsArr.length - 5);
         return (
           <div className={ordersListStyles.fakeBorder} style={{ zIndex: `${ingredientsArr.length - i}` }} key={i}>
