@@ -6,7 +6,8 @@
 }
 
 .info {
-  width: 32%;
+  width: 32vw;
+  min-width: 640px;
   height: 600px;
   display: flex;
   flex-direction: column;
@@ -22,6 +23,9 @@
 }
 
 .components {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   max-height: 366px;
   padding-left: 0;
   overflow-y: scroll;
@@ -49,9 +53,24 @@
   gap: 16px;
 }
 
-.img {
+.fakeBorder {
   width: 64px;
   height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(to right, #801AB2, #4C4CFF);
+  border-radius: 100px;
+}
+
+.img {
+  width: 60px;
+  height: 60px;
+  background-color: #131316;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 100px;
 }
 
 .componentName {

@@ -5,26 +5,14 @@ import { useHistory } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getTimeString } from '../../utils/utils';
 import useFindIngredient from '../../hooks/useFindIngredient';
+import useSumCost from '../../hooks/useSumCost';
 
 function OrdersList() {
   const orders = useSelector((state) => state.orders);
   const windowCntRef = useRef(null);
   const history = useHistory();
   const findIngredient = useFindIngredient();
-
-  function sumCost(order) {
-    let sum = 0;
-    order.ingredients.forEach(ingredientID => {
-      const currentIngredient = findIngredient(ingredientID);
-      if (currentIngredient.type === 'bun') {
-        sum += currentIngredient.price * 2;
-      }
-      else {
-        sum += currentIngredient.price;
-      }
-    })
-    return sum;
-  }
+  const sumCost = useSumCost();
 
   function openOrder(e) {
     const id = e.currentTarget.getAttribute('id');
