@@ -47,9 +47,9 @@ function OrderInfo() {
   return (
     <main className={orderInfoStyles.main}>
       <div className={orderInfoStyles.info}>
-        <span className={`text text_type_digits-default ${orderInfoStyles.num}`}>{currentOrder.number}</span>
+        <span className={`text text_type_digits-default ${orderInfoStyles.num}`}>{'#' + currentOrder.number}</span>
         <h3 className="text text_type_main-medium mt-10">{currentOrder.name}</h3>
-        <span className={`text text_type_main-default mt-3 ${status && orderInfoStyles.status}`}>{status ? 'Выполнен' : 'В работе'}</span>
+        <span className={`text text_type_main-default mt-3 ${status && orderInfoStyles.status}`}>{status ? ' Выполнен' : ' В работе'}</span>
         <h4 className="text text_type_main-medium mt-15">Состав:</h4>
         <ul className={`mt-6 pr-8 ${orderInfoStyles.components}`}>
           {renderComponents()}
