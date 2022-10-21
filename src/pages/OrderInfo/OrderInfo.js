@@ -15,7 +15,6 @@ function OrderInfo() {
   const currentOrder = orders.find(order => {
     return order._id === params.id;
   });
-
   const status = currentOrder.status === 'done';
 
   console.log(currentOrder);
@@ -24,7 +23,7 @@ function OrderInfo() {
     return currentOrder.ingredients.map((ingredient, i) => {
       const currentIngredient = findIngredient(ingredient);
       return (
-        <li className={orderInfoStyles.component}>
+        <li className={orderInfoStyles.component} key={i}>
           <div className={orderInfoStyles.fakeBorder}>
             <div className={orderInfoStyles.img} style={{ backgroundImage: `url(${currentIngredient.image})` }}></div>
           </div>
