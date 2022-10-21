@@ -2,7 +2,7 @@ import orderInfoStyles from './OrderInfo.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getTimeString } from '../../utils/utils';
+import { getTimeString, getQuantity } from '../../utils/utils';
 import useSumCost from '../../hooks/useSumCost';
 import useFindIngredient from '../../hooks/useFindIngredient';
 
@@ -20,20 +20,27 @@ function OrderInfo() {
   console.log(currentOrder);
 
   function renderComponents() {
+    let rendered = [];
     return currentOrder.ingredients.map((ingredient, i) => {
       const currentIngredient = findIngredient(ingredient);
-      return (
-        <li className={orderInfoStyles.component} key={i}>
-          <div className={orderInfoStyles.fakeBorder}>
-            <div className={orderInfoStyles.img} style={{ backgroundImage: `url(${currentIngredient.image})` }}></div>
-          </div>
-          <h5 className={`text text_type_main-default ${orderInfoStyles.componentName}`}>{currentIngredient.name}</h5>
-          <div className={orderInfoStyles.priceCnt}>
-            <span className="text text_type_digits-default">{currentIngredient.price}</span>
-            <CurrencyIcon type="primary" />
-          </div>
-        </li>
-      )
+      const hasAlready = rendered.some(item => {
+        return item === ingredient;
+      })
+      if (!hasAlready) {
+        rendered.push(ingredient);
+        return (
+          <li className={orderInfoStyles.component} key={i}>
+            <div className={orderInfoStyles.fakeBorder}>
+              <div className={orderInfoStyles.img} style={{ backgroundImage: `url(${currentIngredient.image})` }}></div>
+            </div>
+            <h5 className={`text text_type_main-default ${orderInfoStyles.componentName}`}>{currentIngredient.name}</h5>
+            <div className={orderInfoStyles.priceCnt}>
+              <span className="text text_type_digits-default">{`${getQuantity(currentOrder.ingredients, ingredient)} x ${currentIngredient.price}`}</span>
+              <CurrencyIcon type="primary" />
+            </div>
+          </li>
+        )
+      }
     })
   }
 

@@ -90,4 +90,14 @@ function getTimeString(ISO) {
   return period + ' ' + hours + ':' + minutes + ' i-GMT' + gmt;
 }
 
-export { checkResponse, showPassword, hidePassword, getTimeString };
+function getQuantity (array, target) {
+  let quantity = 0;
+  array.forEach(item => {
+    if(item === target) {
+      quantity += 1; 
+    }
+  })
+  return quantity;
+}
+
+export { checkResponse, showPassword, hidePassword, getTimeString, getQuantity };
