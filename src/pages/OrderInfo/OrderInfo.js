@@ -1,23 +1,40 @@
+import { useEffect, useState } from 'react';
 import orderInfoStyles from './OrderInfo.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getTimeString, getQuantity } from '../../utils/utils';
 import useSumCost from '../../hooks/useSumCost';
 import useFindIngredient from '../../hooks/useFindIngredient';
+import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../../utils/constants';
+
 
 function OrderInfo() {
   const orders = useSelector((state) => state.orders.list);
+  const wsConnected = useSelector((state) => state.ws.wsConnected);
   const params = useParams();
+  const dispatch = useDispatch();
   const sumCost = useSumCost();
   const findIngredient = useFindIngredient();
+
+  useEffect(() => {
+    if (!wsConnected) {
+      dispatch({
+        type: WS_CONNECTION_START
+      });
+    }
+    return () => {
+      if (wsConnected) {
+        dispatch({
+          type: WS_CONNECTION_CLOSED
+        })
+      }
+    }
+  }, []);
 
   const currentOrder = orders.find(order => {
     return order._id === params.id;
   });
-  const status = currentOrder.status === 'done';
-
-  console.log(currentOrder);
 
   function renderComponents() {
     let rendered = [];
@@ -44,12 +61,12 @@ function OrderInfo() {
     })
   }
 
-  return (
-    <main className={orderInfoStyles.main}>
+  return (currentOrder &&
+    <>
       <div className={orderInfoStyles.info}>
         <span className={`text text_type_digits-default ${orderInfoStyles.num}`}>{'#' + currentOrder.number}</span>
         <h3 className="text text_type_main-medium mt-10">{currentOrder.name}</h3>
-        <span className={`text text_type_main-default mt-3 ${status && orderInfoStyles.status}`}>{status ? ' Выполнен' : ' В работе'}</span>
+        <span className={`text text_type_main-default mt-3 ${currentOrder.status === 'done' && orderInfoStyles.status}`}>{currentOrder.status === 'done' ? 'Выполнен' : 'В работе'}</span>
         <h4 className="text text_type_main-medium mt-15">Состав:</h4>
         <ul className={`mt-6 pr-8 ${orderInfoStyles.components}`}>
           {renderComponents()}
@@ -62,7 +79,7 @@ function OrderInfo() {
           </div>
         </div>
       </div>
-    </main>
+    </>
   )
 }
 

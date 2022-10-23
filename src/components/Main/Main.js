@@ -13,7 +13,7 @@ import Profile from '../../pages/Profile/Profile';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import { openIngredientDetailsAction } from '../../services/actions/modal';
+import { openIngredientDetailsAction, openOrderInfoAction } from '../../services/actions/modal';
 
 function Main() {
   const modalEnable = useSelector((state) => state.modal.open);
@@ -27,16 +27,16 @@ function Main() {
     if (location.pathname.includes('ingredients/')) {
       dispatch(openIngredientDetailsAction(false));
     }
+    if (location.pathname.includes('feed/')) {
+      dispatch(openOrderInfoAction(false));
+    }
   }, []);
 
   return (
     <>
       <Switch>
-        <Route path='/feed' exact={true}>
+        <Route path='/feed' exact={!byClick}>
           <Feed />
-        </Route>
-        <Route path='/feed/:id' exact={true}>
-          <OrderInfo />
         </Route>
         <Route path="/login" exact={true}>
           <Login />
@@ -66,6 +66,13 @@ function Main() {
         {modalEnable &&
           <Modal heading={'Детали ингредиента'}>
             <IngredientDetails />
+          </Modal>
+        }
+      </Route>
+      <Route path='/feed/:id' exact>
+        {modalEnable &&
+          <Modal>
+            <OrderInfo />
           </Modal>
         }
       </Route>

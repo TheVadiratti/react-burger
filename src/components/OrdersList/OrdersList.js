@@ -1,22 +1,25 @@
 import { useRef } from 'react';
 import ordersListStyles from './OrdersList.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getTimeString } from '../../utils/utils';
 import useFindIngredient from '../../hooks/useFindIngredient';
 import useSumCost from '../../hooks/useSumCost';
+import { openOrderInfoAction } from '../../services/actions/modal';
 
 function OrdersList() {
   const orders = useSelector((state) => state.orders);
   const windowCntRef = useRef(null);
   const history = useHistory();
+  const dispatch = useDispatch();
   const findIngredient = useFindIngredient();
   const sumCost = useSumCost();
 
   function openOrder(e) {
     const id = e.currentTarget.getAttribute('id');
-    history.replace({pathname: `/feed/${id}`});
+    dispatch(openOrderInfoAction(true));
+    history.replace({ pathname: `/feed/${id}` });
   }
 
   function renderBurgerComponents(ingredientsArr) {

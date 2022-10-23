@@ -1,7 +1,8 @@
 import {
   CLOSE_MODAL,
   OPEN_INGREDIENT_DETAILS,
-  OPEN_ORDER_DETAILS
+  OPEN_ORDER_DETAILS,
+  OPEN_ORDER_INFO
 } from '../../utils/constants';
 
 const modalState = {
@@ -23,6 +24,13 @@ const modal = (state = modalState, action) => {
       return {
         open: true,
         type: 'OrderDetails',
+        byClick: action.byClick
+      }
+    
+    case OPEN_ORDER_INFO:
+      return {
+        open: true,
+        type: 'OrderInfo',
         byClick: action.byClick
       }
 
