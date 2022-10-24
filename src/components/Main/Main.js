@@ -4,7 +4,7 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import MainPage from '../../pages/MainPage/MainPage';
 import Feed from '../../pages/Feed/Feed';
-import OrderInfo from '../../pages/OrderInfo/OrderInfo';
+import OrderInfo from '../OrderInfo/OrderInfo';
 import Login from '../../pages/Login/Login';
 import Register from '../../pages/Register/Register';
 import ResetPassword from '../../pages/ResetPassword/ResetPassword';
