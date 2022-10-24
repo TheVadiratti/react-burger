@@ -5,7 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import commonStyles from '../CommonStyles.module.css';
 import profileStyles from './Profile.module.css';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
-import ProfileHistory from "../../components/ProfileHistory/ProfileHistory";
+import Orders from "../Orders/Orders";
 import { logoutFetchAction } from "../../services/actions/account";
 import { getUserDataFetchAction } from '../../services/actions/user';
 
@@ -42,7 +42,7 @@ function Profile() {
             <ProfileForm />
           </Route>
           <Route path="/profile/orders" exact>
-            <ProfileHistory />
+            <Orders />
           </Route>
         </Switch>
       </section>

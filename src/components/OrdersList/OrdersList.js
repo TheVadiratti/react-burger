@@ -4,48 +4,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getTimeString } from '../../utils/utils';
-import useFindIngredient from '../../hooks/useFindIngredient';
 import useSumCost from '../../hooks/useSumCost';
 import { openOrderInfoAction } from '../../services/actions/modal';
+import OrderIngredients from '../OrderIngredients/OrderIngredients';
 
 function OrdersList() {
   const orders = useSelector((state) => state.orders);
   const windowCntRef = useRef(null);
   const history = useHistory();
   const dispatch = useDispatch();
-  const findIngredient = useFindIngredient();
   const sumCost = useSumCost();
 
   function openOrder(e) {
     const id = e.currentTarget.getAttribute('id');
     dispatch(openOrderInfoAction(true));
     history.replace({ pathname: `/feed/${id}` });
-  }
-
-  function renderBurgerComponents(ingredientsArr) {
-    return ingredientsArr.map((ingredientID, i) => {
-      if (i < 5) {
-        const currentIngredient = findIngredient(ingredientID);
-        return (
-          <div className={ordersListStyles.fakeBorder} style={{ zIndex: `${ingredientsArr.length - i}` }} key={i}>
-            <div className={ordersListStyles.img} style={{ backgroundImage: `url(${currentIngredient.image})` }} key={i}></div>
-          </div>
-        )
-      }
-      else if (i === 5) {
-        const currentIngredient = findIngredient(ingredientID);
-        const remains = String(ingredientsArr.length - 5);
-        return (
-          <div className={ordersListStyles.fakeBorder} style={{ zIndex: `${ingredientsArr.length - i}` }} key={i}>
-            <div className={ordersListStyles.img} style={{ backgroundImage: `url(${currentIngredient.image})` }} key={i}>
-              <div className={ordersListStyles.imgOverlay}>
-                <span className='text text_type_main-default'>{'+' + remains}</span>
-              </div>
-            </div>
-          </div>
-        )
-      }
-    })
   }
 
   function renderOrderCard() {
@@ -59,7 +32,7 @@ function OrdersList() {
           <h4 className={`text text_type_main-medium ${ordersListStyles.heading}`}>{order.name}</h4>
           <div className={ordersListStyles.componentsCnt}>
             <div className={ordersListStyles.components}>
-              {renderBurgerComponents(order.ingredients)}
+              <OrderIngredients ingredientsArr={order.ingredients} />
             </div>
             <div className={ordersListStyles.sum}>
               <span className="text text_type_digits-default">{sumCost(order)}</span>
