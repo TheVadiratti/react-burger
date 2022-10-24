@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import modalStyles from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -10,12 +10,10 @@ import { closeModalAction } from '../../services/actions/modal';
 
 const modalRoot = document.querySelector('#react-modals');
 
-function Modal({ children }) {
-  const [prePage, setPrePage] = useState('');
+function Modal({ children, prePage }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const byClick = useSelector((state) => state.modal.byClick);
-  const modalType = useSelector((state) => state.modal.type);
 
   useEffect(() => {
     function closePopupEsc(e) {
@@ -24,19 +22,10 @@ function Modal({ children }) {
       }
     }
     document.addEventListener('keydown', closePopupEsc);
-
-    switch(modalType) {
-      case 'IngredientDetails':
-        setPrePage('/');
-      case 'OrderInfo':
-        setPrePage('/feed');
-    }
     return () => {
       document.removeEventListener('keydown', closePopupEsc);
     }
   }, []);
-
-  console.log('modal!');
 
   function closeModal() {
     dispatch(closeModalAction());
@@ -45,7 +34,7 @@ function Modal({ children }) {
 
   return ReactDOM.createPortal(
     (
-      <ModalOverlay >
+      <ModalOverlay prePage={prePage}>
         <div className={`${modalStyles.window} ${!byClick && modalStyles.windowTypeGeneral}`}>
           {byClick && <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>}
           {children}

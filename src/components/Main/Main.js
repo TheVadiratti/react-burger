@@ -56,7 +56,7 @@ function Main() {
         <Route path="/" exact={!byClick}>
           <MainPage />
           {(modalEnable && modalType === 'OrderDetails') &&
-            <Modal heading={''}>
+            <Modal heading={''} prePage={'/'}>
               <OrderDetails />
             </Modal>
           }
@@ -64,14 +64,14 @@ function Main() {
       </Switch>
       <Route path='/ingredients/:id' exact>
         {modalEnable &&
-          <Modal heading={'Детали ингредиента'}>
+          <Modal heading={'Детали ингредиента'} prePage={'/'}>
             <IngredientDetails />
           </Modal>
         }
       </Route>
       <Route path='/feed/:id' exact>
         {modalEnable &&
-          <Modal>
+          <Modal prePage={'/feed'}>
             <OrderInfo />
           </Modal>
         }
