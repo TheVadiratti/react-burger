@@ -9,7 +9,7 @@ import { openOrderInfoAction } from '../../services/actions/modal';
 import OrderIngredients from '../OrderIngredients/OrderIngredients';
 
 function OrdersList() {
-  const orders = useSelector((state) => state.orders);
+  const orders = useSelector((state) => state.orders.all);
   const windowCntRef = useRef(null);
   const history = useHistory();
   const dispatch = useDispatch();

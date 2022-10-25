@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { getTimeString, getQuantity } from '../../utils/utils';
 import useSumCost from '../../hooks/useSumCost';
 import useFindIngredient from '../../hooks/useFindIngredient';
-import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../../utils/constants';
+import { wsAllOrdersActions } from '../../utils/constants';
 
 
 function OrderInfo() {
@@ -20,13 +20,13 @@ function OrderInfo() {
   useEffect(() => {
     if (!wsConnected) {
       dispatch({
-        type: WS_CONNECTION_START
+        type: wsAllOrdersActions.start
       });
     }
     return () => {
       if (wsConnected) {
         dispatch({
-          type: WS_CONNECTION_CLOSED
+          type: wsAllOrdersActions.closed
         })
       }
     }

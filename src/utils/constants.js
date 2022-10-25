@@ -39,12 +39,23 @@ export const GET_USER_DATA_ERROR = 'GET_USER_DATA_ERROR';
 export const UPDATE_USER_DATA_REQUEST = 'UPDATE_USER_DATA_REQUEST';
 export const UPDATE_USER_DATA_SUCCESS = 'UPDATE_USER_DATA_SUCCESS';
 export const UPDATE_USER_DATA_ERROR = 'UPDATE_USER_DATA_ERROR';
-export const WS_CONNECTION_START = 'WS_CONNECTION_START';
-export const WS_CONNECTION_SUCCESS = 'WS_CONNECTION_SUCCESS';
-export const WS_CONNECTION_ERROR = 'WS_CONNECTION_ERROR';
-export const WS_CONNECTION_CLOSED = 'WS_CONNECTION_CLOSED';
-export const WS_GET_MESSAGE = 'WS_GET_MESSAGE';
-export const WS_SEND_MESSAGE = 'WS_SEND_MESSAGE';
+
+export const wsAllOrdersActions = {
+  start: 'WS_ALL_ORDERS_START',
+  success: 'WS_ALL_ORDERS_SUCCESS',
+  error: 'WS_ALL_ORDERS_ERROR',
+  closed: 'WS_ALL_ORDERS_CLOSED',
+  getMessage: 'WS_ALL_ORDERS_GET_MESSAGE',
+  sendMessage: 'WS_ALL_ORDERS_SEND_MESSAGE'
+}
+export const wsMyOrdersActions = {
+  start: 'WS_MY_ORDERS_START',
+  success: 'WS_MY_ORDERS_SUCCESS',
+  error: 'WS_MY_ORDERS_ERROR',
+  closed: 'WS_MY_ORDERS_CLOSED',
+  getMessage: 'WS_MY_ORDERS_GET_MESSAGE',
+  sendMessage: 'WS_MY_ORDERS_SEND_MESSAGE'
+}
 
 // other
 export const baseUrl = '://norma.nomoreparties.space';

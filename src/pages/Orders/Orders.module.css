@@ -1,6 +1,6 @@
 .orders {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 24px;
   height: calc(100vh - 220px);
   padding: 0;

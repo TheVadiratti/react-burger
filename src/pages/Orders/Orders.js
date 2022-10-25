@@ -3,22 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import profileHistoryStyles from './Orders.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import useSumCost from '../../hooks/useSumCost';
-import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../../utils/constants';
+import { wsMyOrdersActions } from '../../utils/constants';
 import { getTimeString } from '../../utils/utils';
 import OrderIngredients from '../../components/OrderIngredients/OrderIngredients';
 
 function Orders() {
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders.list);
+  const orders = useSelector((state) => state.orders.my.list);
   const sumCost = useSumCost();
+
+  console.log(orders);
 
   useEffect(() => {
     dispatch({
-      type: WS_CONNECTION_START
+      type: wsMyOrdersActions.start
     });
     return () => {
       dispatch({
-        type: WS_CONNECTION_CLOSED
+        type: wsMyOrdersActions.closed
       })
     }
   }, []);

@@ -1,8 +1,4 @@
-import {
-  WS_CONNECTION_SUCCESS,
-  WS_CONNECTION_ERROR,
-  WS_CONNECTION_CLOSED,
-} from '../../utils/constants';
+import { wsAllOrdersActions, wsMyOrdersActions } from '../../utils/constants';
 
 const socketState = {
   wsConnected: false,
@@ -11,20 +7,19 @@ const socketState = {
 
 export const ws = (state = socketState, action) => {
   switch (action.type) {
-    
-    case WS_CONNECTION_SUCCESS:
+    case wsAllOrdersActions.success || wsMyOrdersActions.success:
       return {
         wsConnected: true,
         error: undefined
       };
 
-    case WS_CONNECTION_ERROR:
+    case wsAllOrdersActions.error || wsMyOrdersActions.error:
       return {
         wsConnected: false,
         error: action.payload
       };
 
-    case WS_CONNECTION_CLOSED:
+    case wsAllOrdersActions.closed || wsMyOrdersActions.closed:
       return {
         wsConnected: false,
         error: undefined

@@ -1,21 +1,41 @@
 import {
-  WS_GET_MESSAGE
+  wsAllOrdersActions, wsMyOrdersActions
 } from '../../utils/constants';
 
 const ordersState = {
-  total: undefined,
-  totalToday: undefined,
-  list: []
+  all: {
+    total: undefined,
+    totalToday: undefined,
+    list: []
+  },
+  my: {
+    total: undefined,
+    totalToday: undefined,
+    list: []
+  }
 };
 
 const orders = (state = ordersState, action) => {
   switch (action.type) {
-    case WS_GET_MESSAGE:
-      const message = JSON.parse(action.payload);
+    case wsAllOrdersActions.getMessage:
+      const messageAll = JSON.parse(action.payload);
       return {
-        total: message.total,
-        totalToday: message.totalToday,
-        list: message.orders
+        ...state,
+        all: {
+          total: messageAll.total,
+          totalToday: messageAll.totalToday,
+          list: messageAll.orders
+        }
+      };
+    case wsMyOrdersActions.getMessage:
+      const messageMy = JSON.parse(action.payload);
+      return {
+        ...state,
+        my: {
+          total: messageMy.total,
+          totalToday: messageMy.totalToday,
+          list: messageMy.orders
+        }
       };
     default:
       return state;

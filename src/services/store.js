@@ -2,13 +2,13 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { rootReducer } from './reducers/reducers';
 import thunk from 'redux-thunk';
 import { socketMiddleware } from './middleware/socketMiddleware';
-import { baseUrl } from '../utils/constants';
+import { baseUrl, wsAllOrdersActions, wsMyOrdersActions } from '../utils/constants';
 
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
-const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware(`wss${baseUrl}/orders/all`)));
+const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware(`wss${baseUrl}/orders/all`, wsAllOrdersActions, false), socketMiddleware(`wss${baseUrl}/orders`, wsMyOrdersActions, true)));
 
 export const store = createStore(rootReducer, enhancer);
 
