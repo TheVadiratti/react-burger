@@ -32,30 +32,30 @@ function getTimeString(ISO) {
     period = String(dateToday.getUTCFullYear() - date.getUTCFullYear());
     const lastDigit = getLastDigit(period);
     if (lastDigit === 1) {
-      period = period + 'год';
+      period = period + ' год';
     }
     else if (lastDigit > 1 && lastDigit < 5) {
-      period = period + 'года';
+      period = period + ' года';
     }
     else if (lastDigit > 4 && lastDigit < 10) {
-      period = period + 'лет';
+      period = period + ' лет';
     }
-    period = period + 'назад,';
+    period = period + ' назад,';
   }
 
   else if (dateToday.getUTCMonth() > date.getUTCMonth()) {
     period = String(dateToday.getUTCMonth() - date.getUTCMonth());
     const lastDigit = getLastDigit(period);
     if (lastDigit === 1) {
-      period = period + 'месяц';
+      period = period + ' месяц';
     }
     else if (lastDigit > 1 && lastDigit < 5) {
-      period = period + 'месяца';
+      period = period + ' месяца';
     }
     else if (lastDigit > 4 && lastDigit < 10) {
-      period = period + 'месяцев';
+      period = period + ' месяцев';
     }
-    period = period + 'назад';
+    period = period + ' назад';
   }
 
   else if (dateToday.getUTCDate() >= date.getUTCDate()) {
@@ -72,10 +72,10 @@ function getTimeString(ISO) {
     }
     else {
       if (lastDigit > 1 && lastDigit < 5) {
-        period = period + 'дня';
+        period = period + ' дня';
       }
       else {
-        period = period + 'дней';
+        period = period + ' дней';
       }
       period = period + ' назад';
     }

@@ -1,6 +1,6 @@
 .orders {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   gap: 24px;
   height: calc(100vh - 220px);
   padding: 0;
@@ -12,6 +12,7 @@
   position: relative;
   top: -76px;
   left: 0;
+  cursor: pointer;
 }
 
 /* для Chrome/Edge/Safari */
