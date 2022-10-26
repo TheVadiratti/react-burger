@@ -17,20 +17,7 @@ function OrderInfo() {
   const sumCost = useSumCost();
   const findIngredient = useFindIngredient();
 
-  useEffect(() => {
-    if (!wsConnected) {
-      dispatch({
-        type: wsAllOrdersActions.start
-      });
-    }
-    return () => {
-      if (wsConnected) {
-        dispatch({
-          type: wsAllOrdersActions.closed
-        })
-      }
-    }
-  }, []);
+  
 
   const currentOrder = orders.find(order => {
     return order._id === params.id;

@@ -76,6 +76,13 @@ function Main() {
           </Modal>
         }
       </Route>
+      <Route path='/profile/orders/:id' exact>
+        {modalEnable &&
+          <Modal prePage={'/profile/orders'}>
+            <OrderInfo />
+          </Modal>
+        }
+      </Route>
     </>
   )
 }

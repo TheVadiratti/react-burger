@@ -2,17 +2,18 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import profileHistoryStyles from './Orders.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useHistory } from 'react-router-dom';
 import useSumCost from '../../hooks/useSumCost';
 import { wsMyOrdersActions } from '../../utils/constants';
 import { getTimeString } from '../../utils/utils';
 import OrderIngredients from '../../components/OrderIngredients/OrderIngredients';
+import { openOrderInfoAction } from '../../services/actions/modal';
 
 function Orders() {
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders.my.list);
+  const orders = useSelector((state) => state.orders.list);
+  const history = useHistory();
   const sumCost = useSumCost();
-
-  console.log(orders);
 
   useEffect(() => {
     dispatch({
@@ -25,10 +26,16 @@ function Orders() {
     }
   }, []);
 
+  function openOrder(e) {
+    const id = e.currentTarget.getAttribute('id');
+    dispatch(openOrderInfoAction(true));
+    history.replace({ pathname: `/profile/orders/${id}` });
+  }
+
   function renderOrders() {
     return orders.map((order, i) => {
       return (
-        <li className={`p-6 ${profileHistoryStyles.order}`} key={i}>
+        <li onClick={openOrder} className={`p-6 ${profileHistoryStyles.order}`} key={i} id={order._id}>
           <div className={profileHistoryStyles.idCnt}>
             <span className="text text_type_digits-default">{'#' + order.number}</span>
             <span className="text text_type_main-default text_color_inactive">{getTimeString(order.createdAt)}</span>
