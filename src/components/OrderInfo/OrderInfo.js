@@ -10,7 +10,7 @@ import { wsAllOrdersActions, wsMyOrdersActions } from '../../utils/constants';
 
 
 function OrderInfo({ type }) {
-  const orders = useSelector((state) => state.orders.list);
+  const orders = useSelector((state) => state.orders);
   const wsConnected = useSelector((state) => state.ws.wsConnected);
   const params = useParams();
   const dispatch = useDispatch();
@@ -47,7 +47,10 @@ function OrderInfo({ type }) {
     }
   }, []);
 
-  const currentOrder = orders.find(order => {
+  const currentOrders = type === 'all' ? orders.all.list : orders.my.list;
+  console.log(currentOrders);
+
+  const currentOrder = currentOrders.find(order => {
     return order._id === params.id;
   });
 
