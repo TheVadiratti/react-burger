@@ -7,7 +7,10 @@ import PropTypes from 'prop-types';
 function ModalOverlay({ children, prePage }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const byClick = useSelector((state) => state.modal.byClick);
+  const pageView = useSelector((state) => state.modal.pageView);
+  const modalType = useSelector((state) => state.modal.type);
+
+  const isPageType = pageView.ingredient && pageView.order && pageView.myOrder && modalType !== 'OrderDetails';
 
   function closePopupOverlay(e) {
     if (e.target.getAttribute('id') === 'overlay') {
@@ -17,7 +20,7 @@ function ModalOverlay({ children, prePage }) {
   }
 
   return (
-    <div id='overlay' className={`${modalOverlayStyle.overlay} ${!byClick && modalOverlayStyle.overlayTypeGeneral}`} onClick={byClick ? closePopupOverlay : undefined}>
+    <div id='overlay' className={`${modalOverlayStyle.overlay} ${isPageType && modalOverlayStyle.overlayTypeGeneral}`} onClick={!isPageType ? closePopupOverlay : undefined}>
       {children}
     </div>
   )

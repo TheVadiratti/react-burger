@@ -3,7 +3,10 @@ import {
   OPEN_INGREDIENT_DETAILS,
   OPEN_ORDER_DETAILS,
   OPEN_ORDER_INFO,
-  OPEN_MY_ORDER_INFO
+  OPEN_MY_ORDER_INFO,
+  MAKE_MODAL_INGREDIENT,
+  MAKE_MODAL_ORDER,
+  MAKE_MODAL_MY_ORDER
 } from '../../utils/constants';
 
 const modalState = {
@@ -20,12 +23,9 @@ const modal = (state = modalState, action) => {
   switch (action.type) {
     case OPEN_INGREDIENT_DETAILS:
       return {
+        ...state,
         open: true,
         type: 'IngredientDetails',
-        pageView: {
-          ...state.pageView,
-          ingredient: false
-        }
       }
 
     case OPEN_ORDER_DETAILS:
@@ -37,18 +37,39 @@ const modal = (state = modalState, action) => {
 
     case OPEN_ORDER_INFO:
       return {
+        ...state,
         open: true,
         type: 'OrderInfo',
+      }
+
+    case OPEN_MY_ORDER_INFO:
+      return {
+        ...state,
+        open: true,
+        type: 'MyOrderInfo',
+      }
+
+    case MAKE_MODAL_INGREDIENT:
+      return {
+        ...state,
+        pageView: {
+          ...state.pageView,
+          ingredient: false
+        }
+      }
+
+    case MAKE_MODAL_ORDER:
+      return {
+        ...state,
         pageView: {
           ...state.pageView,
           order: false
         }
       }
 
-    case OPEN_MY_ORDER_INFO:
+    case MAKE_MODAL_MY_ORDER:
       return {
-        open: true,
-        type: 'MyOrderInfo',
+        ...state,
         pageView: {
           ...state.pageView,
           myOrder: false

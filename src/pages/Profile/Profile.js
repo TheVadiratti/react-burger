@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import commonStyles from '../CommonStyles.module.css';
@@ -12,6 +12,7 @@ import { getUserDataFetchAction } from '../../services/actions/user';
 function Profile() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const pageView = useSelector((state) => state.modal.pageView);
 
   useEffect(() => {
     dispatch(getUserDataFetchAction());
@@ -41,7 +42,7 @@ function Profile() {
           <Route path="/profile" exact>
             <ProfileForm />
           </Route>
-          <Route path="/profile/orders" exact>
+          <Route path="/profile/orders" exact={pageView.myOrder}>
             <Orders />
           </Route>
         </Switch>

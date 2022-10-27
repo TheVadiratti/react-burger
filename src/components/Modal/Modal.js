@@ -13,7 +13,8 @@ const modalRoot = document.querySelector('#react-modals');
 function Modal({ children, prePage }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const byClick = useSelector((state) => state.modal.byClick);
+  const pageView = useSelector((state) => state.modal.pageView);
+  const modalType = useSelector((state) => state.modal.type);
 
   useEffect(() => {
     function closePopupEsc(e) {
@@ -27,6 +28,9 @@ function Modal({ children, prePage }) {
     }
   }, []);
 
+  const isPageType = pageView.ingredient && pageView.order && pageView.myOrder && modalType !== 'OrderDetails';
+  console.log(isPageType);
+
   function closeModal() {
     dispatch(closeModalAction());
     history.replace({ pathname: `${prePage}` });
@@ -35,8 +39,8 @@ function Modal({ children, prePage }) {
   return ReactDOM.createPortal(
     (
       <ModalOverlay prePage={prePage}>
-        <div className={`${modalStyles.window} ${!byClick && modalStyles.windowTypeGeneral}`}>
-          {byClick && <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>}
+        <div className={`${modalStyles.window} ${isPageType && modalStyles.windowTypeGeneral}`}>
+          {!isPageType && <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>}
           {children}
         </div>
       </ModalOverlay>

@@ -18,24 +18,29 @@ import { openIngredientDetailsAction, openOrderInfoAction } from '../../services
 function Main() {
   const modalEnable = useSelector((state) => state.modal.open);
   const modalType = useSelector((state) => state.modal.type);
+  const pageView = useSelector((state) => state.modal.pageView);
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const byClick = useSelector((state) => state.modal.byClick);
-
   useEffect(() => {
     if (location.pathname.includes('ingredients/')) {
-      dispatch(openIngredientDetailsAction(false));
+      dispatch(openIngredientDetailsAction());
     }
     if (location.pathname.includes('feed/')) {
-      dispatch(openOrderInfoAction(false));
+      dispatch(openOrderInfoAction());
+    }
+    if (location.pathname.includes('profile/orders/')) {
+      dispatch(openOrderInfoAction());
     }
   }, []);
+
+  const isOpenOrder = location.pathname.startsWith('/profile/orders/');
+  console.log(isOpenOrder);
 
   return (
     <>
       <Switch>
-        <Route path='/feed' exact={!byClick}>
+        <Route path='/feed' exact={pageView.order}>
           <Feed />
         </Route>
         <Route path="/login" exact={true}>
@@ -50,10 +55,10 @@ function Main() {
         <Route path="/reset-password" exact={true}>
           <ResetPassword />
         </Route>
-        <ProtectedRoute path="/profile">
+        <ProtectedRoute path="/profile" exact={pageView.myOrder && isOpenOrder}>
           <Profile />
         </ProtectedRoute>
-        <Route path="/" exact={!byClick}>
+        <Route path="/" exact={pageView.ingredient}>
           <MainPage />
           {(modalEnable && modalType === 'OrderDetails') &&
             <Modal heading={''} prePage={'/'}>

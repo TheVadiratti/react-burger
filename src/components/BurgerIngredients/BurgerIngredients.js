@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { openIngredientDetailsAction } from '../../services/actions/modal';
 import Ingredient from '../Ingredient/Ingredient';
 import { useHistory } from 'react-router-dom';
+import { MAKE_MODAL_INGREDIENT } from '../../utils/constants';
 
 function BurgerIngredients() {
   const [current, setCurrent] = React.useState('one');
@@ -68,7 +69,10 @@ function BurgerIngredients() {
 
   function openIngredientDetailsPopup(e) {
     const id = e.currentTarget.getAttribute('id');
-    dispatch(openIngredientDetailsAction(true));
+    dispatch(openIngredientDetailsAction());
+    dispatch({
+      type: MAKE_MODAL_INGREDIENT
+    });
     history.replace({pathname: `/ingredients/${id}`});
   }
 

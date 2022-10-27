@@ -8,6 +8,7 @@ import { wsMyOrdersActions } from '../../utils/constants';
 import { getTimeString } from '../../utils/utils';
 import OrderIngredients from '../../components/OrderIngredients/OrderIngredients';
 import { openOrderInfoAction } from '../../services/actions/modal';
+import { MAKE_MODAL_MY_ORDER } from '../../utils/constants';
 
 function Orders() {
   const dispatch = useDispatch();
@@ -28,7 +29,10 @@ function Orders() {
 
   function openOrder(e) {
     const id = e.currentTarget.getAttribute('id');
-    dispatch(openOrderInfoAction(true));
+    dispatch(openOrderInfoAction());
+    dispatch({
+      type: MAKE_MODAL_MY_ORDER
+    });
     history.replace({ pathname: `/profile/orders/${id}` });
   }
 

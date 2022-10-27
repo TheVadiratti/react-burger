@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 function IngredientDetails() {
   const ingredientsData = useSelector((state) => state.ingredients.data);
-  const byClick = useSelector((state) => state.modal.byClick);
+  const isPageView = useSelector((state) => state.modal.pageView.ingredient);
   const params = useParams();
 
   const currentIngredient = ingredientsData.find(item => {
@@ -14,7 +14,7 @@ function IngredientDetails() {
   return (currentIngredient &&
     <>
       <div className={ingredientDetails.headingCnt}>
-        <h2 className={`text text_type_main-large ${!byClick && ingredientDetails.headingTypeGeneral}`}>Детали ингредиента:</h2>
+        <h2 className={`text text_type_main-large ${isPageView && ingredientDetails.headingTypeGeneral}`}>Детали ингредиента:</h2>
       </div>
       <img className={ingredientDetails.image} src={currentIngredient.image} alt={currentIngredient.name}></img>
       <span className="mt-4 text text_type_main-medium">{currentIngredient.name}</span>

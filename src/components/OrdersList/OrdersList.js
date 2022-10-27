@@ -7,6 +7,7 @@ import { getTimeString } from '../../utils/utils';
 import useSumCost from '../../hooks/useSumCost';
 import { openOrderInfoAction } from '../../services/actions/modal';
 import OrderIngredients from '../OrderIngredients/OrderIngredients';
+import { MAKE_MODAL_ORDER } from '../../utils/constants';
 
 function OrdersList() {
   const orders = useSelector((state) => state.orders.all);
@@ -17,7 +18,10 @@ function OrdersList() {
 
   function openOrder(e) {
     const id = e.currentTarget.getAttribute('id');
-    dispatch(openOrderInfoAction(true));
+    dispatch(openOrderInfoAction());
+    dispatch({
+      type: MAKE_MODAL_ORDER
+    });
     history.replace({ pathname: `/feed/${id}` });
   }
 
