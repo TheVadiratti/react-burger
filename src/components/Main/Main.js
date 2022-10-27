@@ -40,7 +40,7 @@ function Main() {
   return (
     <>
       <Switch>
-        <Route path='/feed' exact={pageView.order}>
+        <Route path="/feed" exact={pageView.order}>
           <Feed />
         </Route>
         <Route path="/login" exact={true}>
@@ -67,21 +67,21 @@ function Main() {
           }
         </Route>
       </Switch>
-      <Route path='/ingredients/:id' exact>
+      <Route path="/ingredients/:id" exact>
         {modalEnable &&
           <Modal heading={'Детали ингредиента'} prePage={'/'}>
             <IngredientDetails />
           </Modal>
         }
       </Route>
-      <Route path='/feed/:id' exact>
+      <Route path="/feed/:id" exact>
         {modalEnable &&
           <Modal prePage={'/feed'}>
             <OrderInfo type="all" />
           </Modal>
         }
       </Route>
-      <ProtectedRoute path='/profile/orders/:id' exact>
+      <ProtectedRoute path="/profile/orders/:id" exact>
         {modalEnable &&
           <Modal prePage={'/profile/orders'}>
             <OrderInfo type="my" />

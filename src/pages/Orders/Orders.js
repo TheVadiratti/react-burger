@@ -9,6 +9,7 @@ import { getTimeString } from '../../utils/utils';
 import OrderIngredients from '../../components/OrderIngredients/OrderIngredients';
 import { openOrderInfoAction } from '../../services/actions/modal';
 import { MAKE_MODAL_MY_ORDER } from '../../utils/constants';
+import OrderStatus from '../../components/OrderStatus/OrderStatus';
 
 function Orders() {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ function Orders() {
             <span className="text text_type_main-default text_color_inactive">{getTimeString(order.createdAt)}</span>
           </div>
           <h3 className="text text_type_main-medium mt-6 mb-2">{order.name}</h3>
-          <span className="text text_type_main-default">Создан</span>
+          <OrderStatus order={order} />
           <div className={`mt-6 ${profileHistoryStyles.cnt}`}>
             <div className={profileHistoryStyles.components}>
               <OrderIngredients ingredientsArr={order.ingredients} />

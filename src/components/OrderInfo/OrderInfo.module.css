@@ -10,11 +10,6 @@
   text-align: center;
 }
 
-.status {
-  height: 34px;
-  color: #00CCCC;
-}
-
 .components {
   display: flex;
   flex-direction: column;
