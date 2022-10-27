@@ -1,4 +1,4 @@
-export const socketMiddleware = (URL, Actions, hasToken) => {
+export const socketMiddleware = (URL, Actions, needToken) => {
   const {start, success, error, closed, getMessage, sendMessage } = Actions;
 
   return store => {
@@ -10,7 +10,7 @@ export const socketMiddleware = (URL, Actions, hasToken) => {
 
       if (type === start) {
         // объект класса WebSocket
-        if (hasToken) {
+        if (needToken) {
           const accessToken = localStorage.getItem('accessToken');
           socket = new WebSocket(`${URL}?token=${accessToken}`);
         }

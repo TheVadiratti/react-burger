@@ -11,7 +11,7 @@ import { openOrderInfoAction } from '../../services/actions/modal';
 
 function Orders() {
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders.list);
+  const orders = useSelector((state) => state.orders.my.list);
   const history = useHistory();
   const sumCost = useSumCost();
 

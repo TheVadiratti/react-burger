@@ -72,14 +72,14 @@ function Main() {
       <Route path='/feed/:id' exact>
         {modalEnable &&
           <Modal prePage={'/feed'}>
-            <OrderInfo />
+            <OrderInfo type="all" />
           </Modal>
         }
       </Route>
       <Route path='/profile/orders/:id' exact>
         {modalEnable &&
           <Modal prePage={'/profile/orders'}>
-            <OrderInfo />
+            <OrderInfo type="my" />
           </Modal>
         }
       </Route>

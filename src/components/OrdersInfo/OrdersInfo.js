@@ -2,7 +2,7 @@ import orderInfoStyles from './OrdersInfo.module.css';
 import { useSelector } from 'react-redux';
 
 function OrdersInfo() {
-  const orders = useSelector((state) => state.orders);
+  const orders = useSelector((state) => state.orders.all);
 
   function renderNumbers(type) {
     return orders.list.map((order, i) => {

@@ -6,10 +6,10 @@ import { useParams } from 'react-router-dom';
 import { getTimeString, getQuantity } from '../../utils/utils';
 import useSumCost from '../../hooks/useSumCost';
 import useFindIngredient from '../../hooks/useFindIngredient';
-import { wsAllOrdersActions } from '../../utils/constants';
+import { wsAllOrdersActions, wsMyOrdersActions } from '../../utils/constants';
 
 
-function OrderInfo() {
+function OrderInfo({ type }) {
   const orders = useSelector((state) => state.orders.list);
   const wsConnected = useSelector((state) => state.ws.wsConnected);
   const params = useParams();
@@ -17,7 +17,35 @@ function OrderInfo() {
   const sumCost = useSumCost();
   const findIngredient = useFindIngredient();
 
-  
+  useEffect(() => {
+    if (!wsConnected) {
+      if (type === 'all') {
+        dispatch({
+          type: wsAllOrdersActions.start
+        });
+      }
+      else if (type === 'my') {
+        dispatch({
+          type: wsMyOrdersActions.start
+        });
+      }
+    }
+
+    return () => {
+      if (wsConnected) {
+        if (type === 'all') {
+          dispatch({
+            type: wsAllOrdersActions.closed
+          });
+        }
+        else if (type === 'my') {
+          dispatch({
+            type: wsMyOrdersActions.closed
+          });
+        }
+      }
+    }
+  }, []);
 
   const currentOrder = orders.find(order => {
     return order._id === params.id;

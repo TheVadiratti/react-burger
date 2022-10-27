@@ -3,9 +3,16 @@ import {
 } from '../../utils/constants';
 
 const ordersState = {
-  total: undefined,
-  totalToday: undefined,
-  list: []
+  all: {
+    total: undefined,
+    totalToday: undefined,
+    list: []
+  },
+  my: {
+    total: undefined,
+    totalToday: undefined,
+    list: []
+  }
 };
 
 const orders = (state = ordersState, action) => {
@@ -13,16 +20,23 @@ const orders = (state = ordersState, action) => {
     case wsAllOrdersActions.getMessage:
       const messageAll = JSON.parse(action.payload);
       return {
-        total: messageAll.total,
-        totalToday: messageAll.totalToday,
-        list: messageAll.orders
+        ...state,
+        all: {
+          total: messageAll.total,
+          totalToday: messageAll.totalToday,
+          list: messageAll.orders
+        }
       };
     case wsMyOrdersActions.getMessage:
       const messageMy = JSON.parse(action.payload);
       return {
-        total: messageMy.total,
-        totalToday: messageMy.totalToday,
-        list: messageMy.orders
+        ...state,
+        my: {
+          total: messageMy.total,
+          totalToday: messageMy.totalToday,
+          list: messageMy.orders
+        }
+
       };
     default:
       return state;
