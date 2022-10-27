@@ -81,13 +81,13 @@ function Main() {
           </Modal>
         }
       </Route>
-      <Route path='/profile/orders/:id' exact>
+      <ProtectedRoute path='/profile/orders/:id' exact>
         {modalEnable &&
           <Modal prePage={'/profile/orders'}>
             <OrderInfo type="my" />
           </Modal>
         }
-      </Route>
+      </ProtectedRoute>
     </>
   )
 }
