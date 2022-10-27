@@ -1,0 +1,49 @@
+@keyframes rotation {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+.main {
+  width: 144px;
+  height: calc(100vh - 200px);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.background {
+  position: absolute;
+  bottom: calc(15vh + 92px);
+  left: 0;
+  width: 144px;
+  height: 144px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right, #801AB2, #4C4CFF);
+  border-radius: 50%;
+  animation-name: rotation;
+  animation-duration: 0.3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.img {
+  position: absolute;
+  bottom: calc(15vh + 98px);
+  left: 6px;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  background-color: #131316;
+  background-size: 100%;
+  background-position: center;
+}
