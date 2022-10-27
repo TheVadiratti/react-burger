@@ -2,13 +2,18 @@ import {
   CLOSE_MODAL,
   OPEN_INGREDIENT_DETAILS,
   OPEN_ORDER_DETAILS,
-  OPEN_ORDER_INFO
+  OPEN_ORDER_INFO,
+  OPEN_MY_ORDER_INFO
 } from '../../utils/constants';
 
 const modalState = {
   open: false,
   type: '',
-  byClick: false
+  pageView: {
+    ingredient: true,
+    order: true,
+    myOrder: true
+  }
 }
 
 const modal = (state = modalState, action) => {
@@ -17,21 +22,37 @@ const modal = (state = modalState, action) => {
       return {
         open: true,
         type: 'IngredientDetails',
-        byClick: action.byClick
+        pageView: {
+          ...state.pageView,
+          ingredient: false
+        }
       }
 
     case OPEN_ORDER_DETAILS:
       return {
+        ...state,
         open: true,
         type: 'OrderDetails',
-        byClick: action.byClick
       }
-    
+
     case OPEN_ORDER_INFO:
       return {
         open: true,
         type: 'OrderInfo',
-        byClick: action.byClick
+        pageView: {
+          ...state.pageView,
+          order: false
+        }
+      }
+
+    case OPEN_MY_ORDER_INFO:
+      return {
+        open: true,
+        type: 'MyOrderInfo',
+        pageView: {
+          ...state.pageView,
+          myOrder: false
+        }
       }
 
     case CLOSE_MODAL:
