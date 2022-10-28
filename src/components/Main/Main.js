@@ -35,7 +35,6 @@ function Main() {
   }, []);
 
   const isOpenOrder = location.pathname.startsWith('/profile/orders/');
-  console.log(isOpenOrder);
 
   return (
     <>

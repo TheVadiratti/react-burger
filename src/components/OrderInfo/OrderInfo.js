@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import orderInfoStyles from './OrderInfo.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,6 +8,7 @@ import { getTimeString, getQuantity } from '../../utils/utils';
 import useSumCost from '../../hooks/useSumCost';
 import useFindIngredient from '../../hooks/useFindIngredient';
 import { wsAllOrdersActions, wsMyOrdersActions } from '../../utils/constants';
+import PropTypes from 'prop-types';
 
 
 function OrderInfo({ type }) {
@@ -49,7 +50,6 @@ function OrderInfo({ type }) {
   }, []);
 
   const currentOrders = type === 'all' ? orders.all.list : orders.my.list;
-  console.log(currentOrders);
 
   const currentOrder = currentOrders.find(order => {
     return order._id === params.id;
@@ -103,3 +103,7 @@ function OrderInfo({ type }) {
 }
 
 export default OrderInfo;
+
+OrderInfo.propTypes = {
+  type: PropTypes.string.isRequired
+}; 

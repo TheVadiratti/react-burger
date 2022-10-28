@@ -1,4 +1,5 @@
 import orderStatusStyles from './OrderStatus.module.css';
+import PropTypes from 'prop-types';
 
 function OrderStatus({ order }) {
   function getStatus () {
@@ -18,3 +19,15 @@ function OrderStatus({ order }) {
 }
 
 export default OrderStatus;
+
+OrderStatus.propTypes = {
+  order: PropTypes.shape({
+    _id: PropTypes.string,
+    ingredients: PropTypes.array,
+    status: PropTypes.string,
+    name: PropTypes.string,
+    createdAt: PropTypes.string,
+    number: PropTypes.number,
+    updatedAt: PropTypes.string
+  })
+}; 

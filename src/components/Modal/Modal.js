@@ -31,7 +31,6 @@ function Modal({ children, prePage }) {
   }, [sendOrderRequest]);
 
   const isPageType = pageView.ingredient && pageView.order && pageView.myOrder && modalType !== 'OrderDetails';
-  console.log(isPageType);
 
   function closeModal() {
     dispatch(closeModalAction());
