@@ -3,17 +3,21 @@ import { useSelector } from 'react-redux';
 
 function OrdersInfo() {
   const orders = useSelector((state) => state.orders.all);
+  const maxRenderNumber = 20;
+  console.log(orders);
 
   function renderNumbers(type) {
     return orders.list.map((order, i) => {
-      if (i < 20) {
-        if (type === 'done') {
+      if (i < maxRenderNumber) {
+        if (type === 'done' && type === order.status) {
           return (
             <li className={`text text_type_digits-default ${orderInfoStyles.numberComplited}`} key={i}>{order.number}</li>
           )
         }
-        else {
-          <li className={`text text_type_digits-default ${orderInfoStyles.numberInProgress}`}>{order.number}</li>
+        else if (type === 'pending' && type === order.status) {
+          return (
+            <li className={`text text_type_digits-default ${orderInfoStyles.numberInProgress}`} key={i}>{order.number}</li>
+          )
         }
       }
     })
@@ -31,7 +35,7 @@ function OrdersInfo() {
         <div>
           <h3 className='text text_type_main-medium'>В работе:</h3>
           <ul className={`mt-6 ${orderInfoStyles.list}`}>
-            {renderNumbers('work')}
+            {renderNumbers('pending')}
           </ul>
         </div>
       </div>

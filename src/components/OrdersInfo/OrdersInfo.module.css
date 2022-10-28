@@ -25,6 +25,7 @@
 .numberInProgress {
   height: 24px;
   list-style-type: none;
+  color: white;
 }
 
 .digit {
