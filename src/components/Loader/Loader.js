@@ -1,15 +1,15 @@
 import loaderStyles from './Loader.module.css';
-import bun02 from '../../images/Loader/bun-02.svg';
-import cheese from '../../images/Loader/cheese.svg';
-import meat01 from '../../images/Loader/meat-01.svg';
-import core from '../../images/Loader/core.svg';
-import meat03 from '../../images/Loader/meat-03.svg';
-import meat04 from '../../images/Loader/meat-04.svg';
-import mineralRings from '../../images/Loader/mineral-rings.svg';
-import sauce01 from '../../images/Loader/sauce-01.svg';
-import sauce04 from '../../images/Loader/sauce-04.svg';
-import salad from '../../images/Loader/salad.svg';
-import sp1 from '../../images/Loader/sp-1.svg';
+import bun02 from '../../images/Loader/bun-02.png';
+import cheese from '../../images/Loader/cheese.png';
+import meat01 from '../../images/Loader/meat-01.png';
+import core from '../../images/Loader/core.png';
+import meat03 from '../../images/Loader/meat-03.png';
+import meat04 from '../../images/Loader/meat-04.png';
+import mineralRings from '../../images/Loader/mineral-rings.png';
+import sauce01 from '../../images/Loader/sauce-01.png';
+import sauce04 from '../../images/Loader/sauce-04.png';
+import salad from '../../images/Loader/salad.png';
+import sp1 from '../../images/Loader/sp-1.png';
 
 function Loader() {
   const images = [

@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import profileHistoryStyles from './Orders.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useHistory } from 'react-router-dom';
 import useSumCost from '../../hooks/useSumCost';
-import { wsMyOrdersActions } from '../../utils/constants';
 import { getTimeString } from '../../utils/utils';
 import OrderIngredients from '../../components/OrderIngredients/OrderIngredients';
 import { openOrderInfoAction } from '../../services/actions/modal';
@@ -16,17 +14,6 @@ function Orders() {
   const orders = useSelector((state) => state.orders.my.list);
   const history = useHistory();
   const sumCost = useSumCost();
-
-  useEffect(() => {
-    dispatch({
-      type: wsMyOrdersActions.start
-    });
-    return () => {
-      dispatch({
-        type: wsMyOrdersActions.closed
-      })
-    }
-  }, []);
 
   function openOrder(e) {
     const id = e.currentTarget.getAttribute('id');

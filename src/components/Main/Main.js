@@ -41,9 +41,6 @@ function Main() {
   return (
     <>
       <Switch>
-      <Route path="/loader" exact={pageView.order}>
-          <Loader />
-        </Route>
         <Route path="/feed" exact={pageView.order}>
           <Feed />
         </Route>
