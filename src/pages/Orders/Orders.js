@@ -25,7 +25,11 @@ function Orders() {
   }
 
   function renderOrders() {
-    return orders.map((order, i) => {
+    let reverseOrders = [];
+    orders.forEach(item => {
+      reverseOrders.unshift(item);
+    });
+    return reverseOrders.map((order, i) => {
       return (
         <li onClick={openOrder} className={`p-6 ${profileHistoryStyles.order}`} key={i} id={order._id}>
           <div className={profileHistoryStyles.idCnt}>
