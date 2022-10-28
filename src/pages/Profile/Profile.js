@@ -17,6 +17,7 @@ function Profile() {
   const pageView = useSelector((state) => state.modal.pageView);
   const isDataLoaded = useSelector((state) => state.getUserData.isLoaded);
   const data = useSelector((state) => state.orders.my);
+  const hasToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
     dispatch(getUserDataFetchAction());
@@ -28,7 +29,7 @@ function Profile() {
         type: wsMyOrdersActions.closed
       });
     }
-  }, []);
+  }, [hasToken]);
 
   const description = location.pathname === '/profile' ? 'В этом разделе вы можете изменить свои персональные данные' :
     'В этом разделе вы можете просмотреть свою историю заказов';
@@ -37,7 +38,7 @@ function Profile() {
     dispatch(logoutFetchAction());
   }
 
-  if (isDataLoaded || !data.list) {
+  if (isDataLoaded || !data.list || !hasToken) {
     return (
       <Loader />
     )
