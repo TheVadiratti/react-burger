@@ -1,5 +1,5 @@
 import {
-  baseUrl,
+  BASE_URL,
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_ERROR,
@@ -57,7 +57,7 @@ function changePasswordFetchAction(email) {
     dispatch({
       type: CHANGE_PASSWORD_REQUEST
     })
-    fetch(`http${baseUrl}/api/password-reset/`, {
+    fetch(`${BASE_URL}/api/password-reset/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ function resetPasswordFetchAction(password, token) {
     dispatch({
       type: RESET_PASSWORD_REQUEST
     })
-    fetch(`http${baseUrl}/api/password-reset/reset/`, {
+    fetch(`${BASE_URL}/api/password-reset/reset/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -128,7 +128,7 @@ function registationFetchAction(email, password, name) {
     dispatch({
       type: REGISTRATION_REQUEST
     })
-    fetch(`http${baseUrl}/api/auth/register/`, {
+    fetch(`${BASE_URL}/api/auth/register/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -159,7 +159,7 @@ function authorizationFetchAction(email, password) {
     dispatch({
       type: AUTHORIZATION_REQUEST
     })
-    fetch(`http${baseUrl}/api/auth/login`, {
+    fetch(`${BASE_URL}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -191,7 +191,7 @@ function updateTokenFetchAction() {
     dispatch({
       type: UPDATE_TOKEN_REQUEST
     })
-    fetch(`http${baseUrl}/api/auth/token`, {
+    fetch(`${BASE_URL}/api/auth/token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -232,7 +232,7 @@ function logoutFetchAction() {
     dispatch({
       type: LOGOUT_REQUEST
     })
-    fetch(`http${baseUrl}/api/auth/logout`, {
+    fetch(`${BASE_URL}/api/auth/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

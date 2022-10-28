@@ -9,7 +9,7 @@ import {
   DELETE_INGREDIENT,
   UPDATE_COUNTER,
   SORT_INGREDIENTS,
-  baseUrl
+  BASE_URL
 } from '../../utils/constants';
 import { checkResponse } from '../../utils/utils';
 
@@ -25,7 +25,7 @@ function setIngredientsListAction() {
     dispatch({
       type: GET_INGREDIENTS_REQUEST
     })
-    fetch(`http${baseUrl}/api/ingredients/`)
+    fetch(`${BASE_URL}/api/ingredients/`)
       .then(checkResponse)
       .then(res => {
         dispatch(getDataAction(res.data))
@@ -44,7 +44,7 @@ function sendOrderAction(list) {
     dispatch({
       type: SEND_ORDER_REQUEST
     })
-    fetch(`http${baseUrl}/api/orders/`, {
+    fetch(`${BASE_URL}/api/orders/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

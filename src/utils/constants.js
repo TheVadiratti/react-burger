@@ -63,4 +63,6 @@ export const wsMyOrdersActions = {
 }
 
 // other
-export const baseUrl = '://norma.nomoreparties.space';
+export const BASE_URL = 'http://norma.nomoreparties.space';
+export const ALL_ORDERS_URL = 'wss://norma.nomoreparties.space/orders/all';
+export const MY_ORDERS_URL = 'wss://norma.nomoreparties.space/orders';
