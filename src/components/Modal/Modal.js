@@ -7,6 +7,7 @@ import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { closeModalAction } from '../../services/actions/modal';
+import Loader from '../Loader/Loader';
 
 const modalRoot = document.querySelector('#react-modals');
 
@@ -15,6 +16,7 @@ function Modal({ children, prePage }) {
   const history = useHistory();
   const pageView = useSelector((state) => state.modal.pageView);
   const modalType = useSelector((state) => state.modal.type);
+  const sendOrderRequest = useSelector((state) => state.order.isLoaded);
 
   useEffect(() => {
     function closePopupEsc(e) {
@@ -26,7 +28,7 @@ function Modal({ children, prePage }) {
     return () => {
       document.removeEventListener('keydown', closePopupEsc);
     }
-  }, []);
+  }, [sendOrderRequest]);
 
   const isPageType = pageView.ingredient && pageView.order && pageView.myOrder && modalType !== 'OrderDetails';
   console.log(isPageType);
@@ -36,13 +38,17 @@ function Modal({ children, prePage }) {
     history.replace({ pathname: `${prePage}` });
   }
 
+
   return ReactDOM.createPortal(
     (
       <ModalOverlay prePage={prePage}>
+        {!sendOrderRequest ?
         <div className={`${modalStyles.window} ${isPageType && modalStyles.windowTypeGeneral}`}>
           {!isPageType && <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>}
           {children}
         </div>
+        :
+        <Loader />}
       </ModalOverlay>
     ),
     modalRoot
