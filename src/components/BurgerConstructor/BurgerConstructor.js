@@ -7,6 +7,7 @@ import BurgerItem from '../BurgerItem/BurgerItem';
 import { sendOrderAction, addIngredientAction, updateCounterAction } from '../../services/actions/ingredients';
 import { openOrderDetailsAction } from '../../services/actions/modal';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
+import { SET_INITIAL_BUNS } from '../../utils/constants';
 
 function BurgerConstructor() {
   const ingredientsData = useSelector((state) => state.ingredients.data);
@@ -14,6 +15,7 @@ function BurgerConstructor() {
   const dispatch = useDispatch();
   const history = useHistory();
   const hasToken = localStorage.getItem('refreshToken');
+  const isDataSuccess = useSelector((state) => state.ingredients.isSuccess);
 
   const windowCntRef = React.useRef(null);
 
@@ -24,6 +26,12 @@ function BurgerConstructor() {
       left: 0,
       behavior: "smooth"
     });
+    if (isDataSuccess) {
+      dispatch({
+        type: SET_INITIAL_BUNS,
+        buns: getInitBuns()
+      });
+    }
   }, [constructorStructure.main.length])
 
   const [, dropTarget] = useDrop({
@@ -39,6 +47,12 @@ function BurgerConstructor() {
       }
     }
   });
+
+  function getInitBuns() {
+    return ingredientsData.find(ingredient => {
+      return ingredient.type === 'bun';
+    })
+  }
 
   function sum() {
     const bunSum = constructorStructure.buns.price * 2 || 0;
@@ -68,10 +82,7 @@ function BurgerConstructor() {
     <section className={burgerConstructorStyles.section}>
       <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
 
-        {constructorStructure.buns.name ?
-          <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} keyValue={0} />
-          :
-          <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте булки</p>}
+        <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} keyValue={0} />
 
         <div ref={windowCntRef} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
@@ -80,7 +91,7 @@ function BurgerConstructor() {
               return (<BurgerItem ingredient={item} type={null} isLocked={false} isMain={true} text={''} id={i} key={i} />)
             })
             :
-            <p className={`${burgerConstructorStyles.instruction} text text_type_digits-default`}>Добавьте ингредиенты</p>
+            <p className={`${burgerConstructorStyles.instruction} text text_type_main-medium`}>Добавьте ингредиенты</p>
           }
 
         </div>

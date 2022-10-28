@@ -15,7 +15,7 @@ function Profile() {
   const dispatch = useDispatch();
   const location = useLocation();
   const pageView = useSelector((state) => state.modal.pageView);
-  const userData = useSelector((state) => state.user);
+  const isDataLoaded = useSelector((state) => state.getUserData.isLoaded);
   const data = useSelector((state) => state.orders.my);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function Profile() {
     dispatch(logoutFetchAction());
   }
 
-  if (!userData.email || !userData.name || !data.list) {
+  if (isDataLoaded || !data.list) {
     return (
       <Loader />
     )

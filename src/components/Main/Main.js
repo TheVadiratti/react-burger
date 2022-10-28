@@ -14,7 +14,6 @@ import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import { openIngredientDetailsAction, openOrderInfoAction } from '../../services/actions/modal';
-import Loader from '../Loader/Loader';
 
 function Main() {
   const modalEnable = useSelector((state) => state.modal.open);
