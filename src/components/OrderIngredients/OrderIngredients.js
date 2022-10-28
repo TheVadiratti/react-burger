@@ -1,5 +1,6 @@
 import orderIngredientsStyles from './OrderIngredients.module.css';
 import useFindIngredient from '../../hooks/useFindIngredient';
+import PropTypes from 'prop-types';
 
 function OrderIngredients({ ingredientsArr }) {
   const findIngredient = useFindIngredient();
@@ -29,3 +30,7 @@ function OrderIngredients({ ingredientsArr }) {
 }
 
 export default OrderIngredients;
+
+OrderIngredients.propTypes = {
+  ingredientsArr: PropTypes.array.isRequired
+}; 
