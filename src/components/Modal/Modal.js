@@ -42,7 +42,6 @@ function Modal({ children, isPageType }) {
         return item;
       }
     });
-    console.log(urlArr);
     let prePageUrl = '/';
     urlArr.forEach((item, i) => {
       prePageUrl = prePageUrl + item;
@@ -53,8 +52,6 @@ function Modal({ children, isPageType }) {
     })
     return prePageUrl;
   };
-
-  console.log(getPrePageURL());
 
   function closeModal() {
     dispatch(closeModalAction());
@@ -81,5 +78,6 @@ function Modal({ children, isPageType }) {
 export default Modal;
 
 Modal.propTypes = {
-  heading: PropTypes.string
+  heading: PropTypes.string,
+  isPageType: PropTypes.bool.isRequired
 }; 
