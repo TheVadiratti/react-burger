@@ -11,12 +11,10 @@ import Loader from '../Loader/Loader';
 
 const modalRoot = document.querySelector('#react-modals');
 
-function Modal({ children }) {
+function Modal({ children, isPageType }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const pageView = useSelector((state) => state.modal.pageView);
-  const modalType = useSelector((state) => state.modal.type);
   const sendOrderRequest = useSelector((state) => state.order.isLoaded);
 
   useEffect(() => {
@@ -31,7 +29,6 @@ function Modal({ children }) {
     }
   }, [sendOrderRequest]);
 
-  const isPageType = pageView.ingredient && pageView.order && pageView.myOrder && modalType !== 'OrderDetails';
   let nStepsBack = 1;
 
   if (location.pathname.startsWith('/ingredients')) {
@@ -67,7 +64,7 @@ function Modal({ children }) {
 
   return ReactDOM.createPortal(
     (
-      <ModalOverlay prePage={getPrePageURL()}>
+      <ModalOverlay prePage={getPrePageURL()} isPageType={isPageType}>
         {!sendOrderRequest ?
         <div className={`${modalStyles.window} ${isPageType && modalStyles.windowTypeGeneral}`}>
           {!isPageType && <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>}
