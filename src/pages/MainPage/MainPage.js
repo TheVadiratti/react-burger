@@ -8,9 +8,9 @@ import commonStyles from '../CommonStyles.module.css';
 import mainPageStyles from './MainPage.module.css';
 
 function MainPage() {
-  const isLoaded = useSelector((state) => state.ingredients.isLoaded);
+  const isLoading = useSelector((state) => state.ingredients.isLoaded);
   const isSuccess = useSelector((state) => state.ingredients.isSuccess);
-  if (isLoaded) {
+  if (isLoading) {
     return (
       <Loader />
     )
