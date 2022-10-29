@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
@@ -12,6 +12,7 @@ import Loader from "../../components/Loader/Loader";
 import { wsMyOrdersActions } from "../../utils/constants";
 
 function Profile() {
+  const [description, setDescription] = useState('');
   const dispatch = useDispatch();
   const location = useLocation();
   const pageView = useSelector((state) => state.modal.pageView);
@@ -26,15 +27,20 @@ function Profile() {
         type: wsMyOrdersActions.start
       });
     }
+    switch (location.pathname) {
+      case '/profile':
+        setDescription('В этом разделе вы можете изменить свои персональные данные');
+        break;
+      case '/profile/orders':
+        setDescription('В этом разделе вы можете просмотреть свою историю заказов');
+        break;
+    }
     return () => {
       dispatch({
         type: wsMyOrdersActions.closed
       });
     }
-  }, [hasToken]);
-
-  const description = location.pathname === '/profile' ? 'В этом разделе вы можете изменить свои персональные данные' :
-    'В этом разделе вы можете просмотреть свою историю заказов';
+  }, [hasToken, location]);
 
   function logout() {
     dispatch(logoutFetchAction());
