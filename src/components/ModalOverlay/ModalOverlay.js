@@ -2,7 +2,6 @@ import modalOverlayStyle from './ModalOverlay.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeModalAction } from '../../services/actions/modal';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 function ModalOverlay({ children, prePage }) {
   const dispatch = useDispatch();
@@ -30,7 +29,3 @@ function ModalOverlay({ children, prePage }) {
 }
 
 export default ModalOverlay;
-
-ModalOverlay.propTypes = {
-  prePage: PropTypes.string.isRequired
-}; 
