@@ -21,9 +21,11 @@ function Profile() {
 
   useEffect(() => {
     dispatch(getUserDataFetchAction());
-    dispatch({
-      type: wsMyOrdersActions.start
-    });
+    if (hasToken) {
+      dispatch({
+        type: wsMyOrdersActions.start
+      });
+    }
     return () => {
       dispatch({
         type: wsMyOrdersActions.closed

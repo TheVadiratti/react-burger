@@ -18,11 +18,6 @@ function Modal({ children }) {
   const pageView = useSelector((state) => state.modal.pageView);
   const modalType = useSelector((state) => state.modal.type);
   const sendOrderRequest = useSelector((state) => state.order.isLoaded);
-  let nStepsBack = 1;
-
-  if (location.pathname.startsWith('/ingredients')) {
-    nStepsBack = 2;
-  }
 
   useEffect(() => {
     function closePopupEsc(e) {
@@ -37,7 +32,11 @@ function Modal({ children }) {
   }, [sendOrderRequest]);
 
   const isPageType = pageView.ingredient && pageView.order && pageView.myOrder && modalType !== 'OrderDetails';
-  console.log(history);
+  let nStepsBack = 1;
+
+  if (location.pathname.startsWith('/ingredients')) {
+    nStepsBack = 2;
+  }
   
   function getPrePageURL () {
     let urlArr = location.pathname.split('/');
