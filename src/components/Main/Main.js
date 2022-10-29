@@ -60,7 +60,7 @@ function Main() {
         <Route path="/" exact={pageView.ingredient}>
           <MainPage />
           {(modalEnable && modalType === 'OrderDetails') &&
-            <Modal heading={''} prePage={'/'}>
+            <Modal heading={''}>
               <OrderDetails />
             </Modal>
           }
@@ -68,21 +68,21 @@ function Main() {
       </Switch>
       <Route path="/ingredients/:id" exact>
         {modalEnable &&
-          <Modal heading={'Детали ингредиента'} prePage={'/'}>
+          <Modal heading={'Детали ингредиента'}>
             <IngredientDetails />
           </Modal>
         }
       </Route>
       <Route path="/feed/:id" exact>
         {modalEnable &&
-          <Modal prePage={'/feed'}>
+          <Modal>
             <OrderInfo type="all" />
           </Modal>
         }
       </Route>
       <ProtectedRoute path="/profile/orders/:id" exact>
         {modalEnable &&
-          <Modal prePage={'/profile/orders'}>
+          <Modal>
             <OrderInfo type="my" />
           </Modal>
         }
