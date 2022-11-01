@@ -1,0 +1,14 @@
+.main {
+  width: 1240px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 608px 580px;
+  grid-row: auto auto;
+  column-gap: 52px;
+  justify-content: center;
+}
+
+.heading {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}

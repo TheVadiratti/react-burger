@@ -1,8 +1,8 @@
 .main {
   margin-top: 120px;
   display: grid;
-  grid-template-columns: 320px auto;
-  column-gap: 60px;
+  grid-template-columns: 320px 873px;
+  column-gap: 48px;
 }
 
 .links {

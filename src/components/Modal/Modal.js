@@ -1,27 +1,23 @@
-import React from 'react';
+import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import modalStyles from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { closeModalAction } from '../../services/actions/modal';
+import Loader from '../Loader/Loader';
 
 const modalRoot = document.querySelector('#react-modals');
 
-function Modal(props) {
+function Modal({ children, isPageType }) {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+  const sendOrderRequest = useSelector((state) => state.order.isLoaded);
 
-  const byClick = useSelector((state) => state.modal.byClick);
-
-  function closeModal() {
-    dispatch(closeModalAction());
-    history.replace({pathname: '/'});
-  }
-
-  React.useEffect(() => {
+  useEffect(() => {
     function closePopupEsc(e) {
       if (e.code === 'Escape') {
         closeModal();
@@ -31,18 +27,48 @@ function Modal(props) {
     return () => {
       document.removeEventListener('keydown', closePopupEsc);
     }
-  }, []);
+  }, [sendOrderRequest]);
+
+  let nStepsBack = 1;
+
+  if (location.pathname.startsWith('/ingredients')) {
+    nStepsBack = 2;
+  }
+  
+  function getPrePageURL () {
+    let urlArr = location.pathname.split('/');
+    urlArr = urlArr.filter((item, i) => {
+      if ((i !== 0) && (i < urlArr.length - nStepsBack)) {
+        return item;
+      }
+    });
+    let prePageUrl = '/';
+    urlArr.forEach((item, i) => {
+      prePageUrl = prePageUrl + item;
+      if (i < urlArr.length - 1) {
+        prePageUrl = prePageUrl + '/';
+        
+      }
+    })
+    return prePageUrl;
+  };
+
+  function closeModal() {
+    dispatch(closeModalAction());
+    history.replace({ pathname: `${getPrePageURL()}` });
+  }
+
 
   return ReactDOM.createPortal(
     (
-      <ModalOverlay >
-        <div className={`${modalStyles.window} ${!byClick && modalStyles.windowTypeGeneral}`}>
-          <div className={`mt-10 ${modalStyles.cnt}`}>
-            <h2 className={`text text_type_main-large ${!byClick && modalStyles.textTypeGeneral}`}>{props.heading}</h2>
-            {byClick && <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>}
-          </div>
-          {props.children}
+      <ModalOverlay prePage={getPrePageURL()} isPageType={isPageType}>
+        {!sendOrderRequest ?
+        <div className={`${modalStyles.window} ${isPageType && modalStyles.windowTypeGeneral}`}>
+          {!isPageType && <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>}
+          {children}
         </div>
+        :
+        <Loader />}
       </ModalOverlay>
     ),
     modalRoot
@@ -52,5 +78,6 @@ function Modal(props) {
 export default Modal;
 
 Modal.propTypes = {
-  heading: PropTypes.string
+  heading: PropTypes.string,
+  isPageType: PropTypes.bool.isRequired
 }; 

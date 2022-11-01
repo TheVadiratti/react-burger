@@ -1,4 +1,5 @@
 .main {
   width: 1280px;
-  margin: auto;
+  display: flex;
+  justify-content: center;
 }

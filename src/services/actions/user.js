@@ -1,5 +1,5 @@
 import {
-  baseUrl,
+  BASE_URL,
   GET_USER_DATA_REQUEST,
   GET_USER_DATA_SUCCESS,
   GET_USER_DATA_ERROR,
@@ -24,7 +24,7 @@ function getUserDataFetchAction() {
     dispatch({
       type: GET_USER_DATA_REQUEST
     })
-    fetch(`${baseUrl}/api/auth/user`, {
+    fetch(`${BASE_URL}/api/auth/user`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ function updateUserDataFetchAction(changedData) {
     dispatch({
       type: UPDATE_USER_DATA_REQUEST
     })
-    fetch(`${baseUrl}/api/auth/user`, {
+    fetch(`${BASE_URL}/api/auth/user`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

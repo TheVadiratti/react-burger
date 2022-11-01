@@ -9,7 +9,8 @@ import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   UPDATE_COUNTER,
-  SORT_INGREDIENTS
+  SORT_INGREDIENTS,
+  SET_INITIAL_BUNS
 } from "../../utils/constants";
 
 const ingredientsState = {
@@ -134,6 +135,12 @@ const burgerConstructor = (state = constructorState, action) => {
       return {
         ...state,
         main: burgerItems
+      }
+
+    case SET_INITIAL_BUNS:
+      return {
+        ...state,
+        buns: action.buns
       }
 
     default:

@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Switch, Route, useLocation } from 'react-router-dom';
+import { Switch, Route, useLocation, Redirect } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import MainPage from '../../pages/MainPage/MainPage';
+import Feed from '../../pages/Feed/Feed';
+import OrderInfo from '../OrderInfo/OrderInfo';
 import Login from '../../pages/Login/Login';
 import Register from '../../pages/Register/Register';
 import ResetPassword from '../../pages/ResetPassword/ResetPassword';
@@ -11,25 +13,35 @@ import Profile from '../../pages/Profile/Profile';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import { openIngredientDetailsAction } from '../../services/actions/modal';
+import { openIngredientDetailsAction, openOrderInfoAction } from '../../services/actions/modal';
 
 function Main() {
+  const modalEnable = useSelector((state) => state.modal.open);
   const modalType = useSelector((state) => state.modal.type);
+  const pageView = useSelector((state) => state.modal.pageView);
   const dispatch = useDispatch();
   const location = useLocation();
-  
-  const byClick = useSelector((state) => state.modal.byClick);
-  
+
   useEffect(() => {
-    if(location.pathname.includes('ingredients/')) {
-      dispatch(openIngredientDetailsAction(false));
+    if (location.pathname.includes('ingredients/')) {
+      dispatch(openIngredientDetailsAction());
+    }
+    if (location.pathname.includes('feed/')) {
+      dispatch(openOrderInfoAction());
+    }
+    if (location.pathname.includes('profile/orders/')) {
+      dispatch(openOrderInfoAction());
     }
   }, []);
+
+  const isOpenOrder = location.pathname.startsWith('/profile/orders/');
 
   return (
     <>
       <Switch>
-        <Route path='/orders' exact={true}></Route>
+        <Route path="/feed" exact={pageView.order}>
+          <Feed />
+        </Route>
         <Route path="/login" exact={true}>
           <Login />
         </Route>
@@ -42,23 +54,39 @@ function Main() {
         <Route path="/reset-password" exact={true}>
           <ResetPassword />
         </Route>
-        <ProtectedRoute path="/profile">
+        <ProtectedRoute path="/profile" exact={pageView.myOrder && isOpenOrder}>
           <Profile />
         </ProtectedRoute>
-        <Route path="/" exact={!byClick}>
+        <Route path="/" exact={pageView.ingredient}>
           <MainPage />
+          {(modalEnable && modalType === 'OrderDetails') &&
+            <Modal heading={''} isPageType={false}>
+              <OrderDetails />
+            </Modal>
+          }
         </Route>
       </Switch>
-      <Route path='/ingredients/:id' exact>
-        <Modal heading={modalType === 'IngredientDetails' ? 'Детали ингредиента' : ''}>
-          {modalType === 'IngredientDetails' && (
+      <Route path="/ingredients/:id" exact>
+        {modalEnable &&
+          <Modal heading={'Детали ингредиента'} isPageType={pageView.ingredient}>
             <IngredientDetails />
-          )}
-          {modalType === 'OrderDetails' && (
-            <OrderDetails />
-          )}
-        </Modal>
+          </Modal>
+        }
       </Route>
+      <Route path="/feed/:id" exact>
+        {modalEnable &&
+          <Modal isPageType={pageView.order}>
+            <OrderInfo type="all" />
+          </Modal>
+        }
+      </Route>
+      <ProtectedRoute path="/profile/orders/:id" exact>
+        {modalEnable &&
+          <Modal isPageType={pageView.myOrder}>
+            <OrderInfo type="my" />
+          </Modal>
+        }
+      </ProtectedRoute>
     </>
   )
 }
