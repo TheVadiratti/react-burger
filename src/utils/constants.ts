@@ -45,7 +45,7 @@ export const UPDATE_USER_DATA_SUCCESS: 'UPDATE_USER_DATA_SUCCESS' = 'UPDATE_USER
 export const UPDATE_USER_DATA_ERROR: 'UPDATE_USER_DATA_ERROR' = 'UPDATE_USER_DATA_ERROR';
 export const SET_INITIAL_BUNS: 'SET_INITIAL_BUNS' = 'SET_INITIAL_BUNS';
 
-interface wsAllOrders {
+interface IwsAllOrders {
   start: 'WS_ALL_ORDERS_START';
   success: 'WS_ALL_ORDERS_SUCCESS';
   error: 'WS_ALL_ORDERS_ERROR';
@@ -54,7 +54,7 @@ interface wsAllOrders {
   sendMessage: 'WS_ALL_ORDERS_SEND_MESSAGE';
 }
 
-interface wsMyOrders {
+interface IwsMyOrders {
   start: 'WS_MY_ORDERS_START';
   success: 'WS_MY_ORDERS_SUCCESS';
   error: 'WS_MY_ORDERS_ERROR';
