@@ -63,7 +63,7 @@ interface IwsMyOrders {
   sendMessage: 'WS_MY_ORDERS_SEND_MESSAGE';
 }
 
-export const wsAllOrdersActions: wsAllOrders = {
+export const wsAllOrdersActions: IwsAllOrders = {
   start: 'WS_ALL_ORDERS_START',
   success: 'WS_ALL_ORDERS_SUCCESS',
   error: 'WS_ALL_ORDERS_ERROR',
@@ -71,7 +71,7 @@ export const wsAllOrdersActions: wsAllOrders = {
   getMessage: 'WS_ALL_ORDERS_GET_MESSAGE',
   sendMessage: 'WS_ALL_ORDERS_SEND_MESSAGE'
 }
-export const wsMyOrdersActions: wsMyOrders = {
+export const wsMyOrdersActions: IwsMyOrders = {
   start: 'WS_MY_ORDERS_START',
   success: 'WS_MY_ORDERS_SUCCESS',
   error: 'WS_MY_ORDERS_ERROR',
