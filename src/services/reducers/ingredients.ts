@@ -12,6 +12,7 @@ import {
   SORT_INGREDIENTS,
   SET_INITIAL_BUNS
 } from "../../utils/constants";
+import { Iingredient, TingredientsActions } from "../types/ingredients";
 
 const ingredientsState = {
   data: [],
@@ -33,7 +34,7 @@ const constructorState = {
   counter: {}
 }
 
-const ingredients = (state = ingredientsState, action) => {
+const ingredients = (state = ingredientsState, action: TingredientsActions) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
       return {
@@ -64,7 +65,7 @@ const ingredients = (state = ingredientsState, action) => {
   }
 }
 
-const order = (state = orderState, action) => {
+const order = (state = orderState, action: TingredientsActions) => {
   switch (action.type) {
     case SEND_ORDER_REQUEST:
       return {
@@ -101,7 +102,7 @@ const order = (state = orderState, action) => {
   }
 }
 
-const burgerConstructor = (state = constructorState, action) => {
+const burgerConstructor = (state = constructorState, action: TingredientsActions) => {
   switch (action.type) {
     case ADD_INGREDIENT:
       return {
@@ -115,7 +116,7 @@ const burgerConstructor = (state = constructorState, action) => {
         ...state,
         counter: {
           ...state.counter,
-          [action.id]: state.main.filter(item => {
+          [action.id]: state.main.filter((item: Iingredient) => {
             return item._id === action.id
           }).length
         }
@@ -124,7 +125,7 @@ const burgerConstructor = (state = constructorState, action) => {
     case DELETE_INGREDIENT:
       return {
         ...state,
-        main: state.main.filter((item, i) => {
+        main: state.main.filter((item: Iingredient, i) => {
           return item._id !== action.id || i !== action.index;
         })
       }

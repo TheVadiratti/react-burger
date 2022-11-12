@@ -10,25 +10,59 @@ import {
   UPDATE_COUNTER,
   SORT_INGREDIENTS,
   BASE_URL
-} from '../../utils/constants';
-import { checkResponse } from '../../utils/utils';
+} from "../../utils/constants";
+import { checkResponse } from "../../utils/utils";
+import { AppDispatch } from "../types/index";
+import { TingredientsActions } from "../types/ingredients";
+import { Iingredient } from "../types/ingredients";
 
-function getDataAction(data) {
+function getDataAction(data: object[]): TingredientsActions {
   return {
     type: GET_INGREDIENTS_SUCCESS,
     data: data
   }
 }
 
+function addIngredientAction(ingredient: Iingredient): TingredientsActions {
+  return {
+    type: ADD_INGREDIENT,
+    ingredient: ingredient
+  }
+}
+
+function deleteIngredientAction(id: string, index: number): TingredientsActions {
+  return {
+    type: DELETE_INGREDIENT,
+    id: id,
+    index: index
+  }
+}
+
+function updateCounterAction(id: string): TingredientsActions {
+  return {
+    type: UPDATE_COUNTER,
+    id: id
+  }
+}
+
+function sortIngredientsAction(fromIndex: number, toIndex: number): TingredientsActions {
+  return {
+    type: SORT_INGREDIENTS,
+    from: fromIndex,
+    to: toIndex
+  }
+}
+
 function setIngredientsListAction() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_INGREDIENTS_REQUEST
     })
     fetch(`${BASE_URL}/api/ingredients/`)
       .then(checkResponse)
       .then(res => {
-        dispatch(getDataAction(res.data))
+        dispatch(getDataAction(res.data));
+        console.log(res.data);
       })
       .catch(error => {
         dispatch({
@@ -39,8 +73,8 @@ function setIngredientsListAction() {
   }
 }
 
-function sendOrderAction(list) {
-  return function (dispatch) {
+function sendOrderAction(list: string[]) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: SEND_ORDER_REQUEST
     })
@@ -69,38 +103,6 @@ function sendOrderAction(list) {
       })
   }
 }
-
-function addIngredientAction(ingredient) {
-  return {
-    type: ADD_INGREDIENT,
-    ingredient: ingredient
-  }
-}
-
-function deleteIngredientAction(id, index) {
-  return {
-    type: DELETE_INGREDIENT,
-    id: id,
-    index: index
-  }
-}
-
-function updateCounterAction(id) {
-  return {
-    type: UPDATE_COUNTER,
-    id: id
-  }
-}
-
-function sortIngredientsAction(fromIndex, toIndex) {
-  return {
-    type: SORT_INGREDIENTS,
-    from: fromIndex,
-    to: toIndex
-  }
-}
-
-
 
 export {
   setIngredientsListAction,
