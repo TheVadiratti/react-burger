@@ -13,6 +13,7 @@ import {
   SET_INITIAL_BUNS
 } from "../../utils/constants";
 import { Iingredient, TingredientsActions } from "../types/ingredients";
+import { IcloseModalAction } from "../types/modal";
 
 const ingredientsState = {
   data: [],
@@ -65,7 +66,7 @@ const ingredients = (state = ingredientsState, action: TingredientsActions) => {
   }
 }
 
-const order = (state = orderState, action: TingredientsActions) => {
+const order = (state = orderState, action: TingredientsActions | IcloseModalAction) => {
   switch (action.type) {
     case SEND_ORDER_REQUEST:
       return {

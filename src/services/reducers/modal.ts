@@ -8,6 +8,7 @@ import {
   MAKE_MODAL_ORDER,
   MAKE_MODAL_MY_ORDER
 } from '../../utils/constants';
+import { TmodalActions } from '../types/modal';
 
 const modalState = {
   open: false,
@@ -19,7 +20,7 @@ const modalState = {
   }
 }
 
-const modal = (state = modalState, action) => {
+const modal = (state = modalState, action: TmodalActions) => {
   switch (action.type) {
     case OPEN_INGREDIENT_DETAILS:
       return {
