@@ -19,31 +19,35 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_ERROR
 } from '../../utils/constants';
+import { TaccountActions } from '../types/account';
+import { AppDispatch } from '../types/index';
 import { setUserDataAction, getUserDataFetchAction } from './user';
 import { checkResponse } from '../../utils/utils';
 
-function changePasswordAction(message) {
+// action func
+
+function changePasswordAction(message: string): TaccountActions {
   return {
     type: CHANGE_PASSWORD_SUCCESS,
     message: message
   }
 }
 
-function resetPasswordAction(message) {
+function resetPasswordAction(message: string): TaccountActions {
   return {
     type: RESET_PASSWORD_SUCCESS,
     message: message
   }
 }
 
-function registrationAction(result) {
+function registrationAction(result: string): TaccountActions {
   return {
     type: REGISTRATION_SUCCESS,
     result: result
   }
 }
 
-function authorizationAction(result) {
+function authorizationAction(result: string): TaccountActions {
   return {
     type: AUTHORIZATION_SUCCESS,
     result: result
@@ -52,8 +56,8 @@ function authorizationAction(result) {
 
 // API
 
-function changePasswordFetchAction(email) {
-  return function (dispatch) {
+function changePasswordFetchAction(email: string) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: CHANGE_PASSWORD_REQUEST
     })
@@ -68,7 +72,7 @@ function changePasswordFetchAction(email) {
     })
       .then(checkResponse)
       .then(res => {
-        if(res.success) {
+        if (res.success) {
           dispatch(changePasswordAction(res.message))
         }
         else {
@@ -87,8 +91,8 @@ function changePasswordFetchAction(email) {
   }
 }
 
-function resetPasswordFetchAction(password, token) {
-  return function (dispatch) {
+function resetPasswordFetchAction(password: string, token: string) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: RESET_PASSWORD_REQUEST
     })
@@ -104,7 +108,7 @@ function resetPasswordFetchAction(password, token) {
     })
       .then(checkResponse)
       .then(res => {
-        if(res.success) {
+        if (res.success) {
           dispatch(resetPasswordAction(res.message));
         }
         else {
@@ -123,8 +127,8 @@ function resetPasswordFetchAction(password, token) {
   }
 }
 
-function registationFetchAction(email, password, name) {
-  return function (dispatch) {
+function registationFetchAction(email: string, password: string, name: string) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: REGISTRATION_REQUEST
     })
@@ -154,8 +158,8 @@ function registationFetchAction(email, password, name) {
   }
 }
 
-function authorizationFetchAction(email, password) {
-  return function (dispatch) {
+function authorizationFetchAction(email: string, password: string) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: AUTHORIZATION_REQUEST
     })
@@ -187,7 +191,7 @@ function authorizationFetchAction(email, password) {
 }
 
 function updateTokenFetchAction() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: UPDATE_TOKEN_REQUEST
     })
@@ -228,7 +232,7 @@ function updateTokenFetchAction() {
 }
 
 function logoutFetchAction() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: LOGOUT_REQUEST
     })
