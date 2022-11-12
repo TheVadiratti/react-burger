@@ -7,11 +7,13 @@ import {
   UPDATE_USER_DATA_REQUEST,
   UPDATE_USER_DATA_SUCCESS,
   UPDATE_USER_DATA_ERROR
-} from '../../utils/constants';
-import { checkResponse } from '../../utils/utils';
-import { updateTokenFetchAction } from './account';
+} from "../../utils/constants";
+import { checkResponse } from "../../utils/utils";
+import { updateTokenFetchAction } from "./account";
+import { AppDispatch } from "../types/index";
+import { IchangedUserData } from "../types/user";
 
-function setUserDataAction(email, name) {
+function setUserDataAction(email: string, name: string) {
   return {
     type: SET_USER_DATA,
     email: email,
@@ -20,7 +22,7 @@ function setUserDataAction(email, name) {
 }
 
 function getUserDataFetchAction() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_USER_DATA_REQUEST
     })
@@ -47,7 +49,7 @@ function getUserDataFetchAction() {
 
       })
       .catch(error => {
-        if(error === 'Ошибка: 403') {
+        if (error === 'Ошибка: 403') {
           console.log('Token updating');
           dispatch(updateTokenFetchAction());
         }
@@ -61,8 +63,8 @@ function getUserDataFetchAction() {
   }
 }
 
-function updateUserDataFetchAction(changedData) {
-  return function (dispatch) {
+function updateUserDataFetchAction(changedData: IchangedUserData) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: UPDATE_USER_DATA_REQUEST
     })
@@ -91,7 +93,7 @@ function updateUserDataFetchAction(changedData) {
 
       })
       .catch(error => {
-        if(error === 'Ошибка: 403') {
+        if (error === 'Ошибка: 403') {
           console.log('Token updating');
           dispatch(updateTokenFetchAction());
         }

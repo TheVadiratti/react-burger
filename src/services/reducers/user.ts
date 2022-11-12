@@ -6,6 +6,7 @@ import { SET_USER_DATA,
   UPDATE_USER_DATA_SUCCESS,
   UPDATE_USER_DATA_ERROR
 } from "../../utils/constants";
+import { TuserActions } from "../types/user";
 
 const userState = {
   email: '',
@@ -24,7 +25,7 @@ const updateUserDataState = {
   isError: false
 }
 
-const user = (state = userState, action) => {
+const user = (state = userState, action: TuserActions) => {
   switch (action.type) {
     case SET_USER_DATA:
       return {
@@ -37,7 +38,7 @@ const user = (state = userState, action) => {
   }
 }
 
-const getUserData = (state = getUserDataState, action) => {
+const getUserData = (state = getUserDataState, action: TuserActions) => {
   switch (action.type) {
     case GET_USER_DATA_REQUEST:
       return {
@@ -67,7 +68,7 @@ const getUserData = (state = getUserDataState, action) => {
   }
 }
 
-const updateUserData = (state = updateUserDataState, action) => {
+const updateUserData = (state = updateUserDataState, action: TuserActions) => {
   switch (action.type) {
     case UPDATE_USER_DATA_REQUEST:
       return {
