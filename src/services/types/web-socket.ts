@@ -47,5 +47,5 @@ type TwsOrders =
 
 export interface IwsOrdersAction {
   type: TwsOrders;
-  payload: unknown;
+  payload: string;
 }

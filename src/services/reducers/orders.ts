@@ -1,6 +1,7 @@
 import {
   wsAllOrdersActions, wsMyOrdersActions
 } from '../../utils/constants';
+import { IwsOrdersAction } from '../types/web-socket';
 
 const ordersState = {
   all: {
@@ -15,7 +16,7 @@ const ordersState = {
   }
 };
 
-const orders = (state = ordersState, action) => {
+const orders = (state = ordersState, action: IwsOrdersAction) => {
   switch (action.type) {
     case wsAllOrdersActions.getMessage:
       const messageAll = JSON.parse(action.payload);
