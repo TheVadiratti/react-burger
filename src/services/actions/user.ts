@@ -22,7 +22,7 @@ function setUserDataAction(email: string, name: string) {
 }
 
 function getUserDataFetchAction() {
-  return function (dispatch: AppDispatch) {
+  return function (dispatch: any) {
     dispatch({
       type: GET_USER_DATA_REQUEST
     })
@@ -64,7 +64,7 @@ function getUserDataFetchAction() {
 }
 
 function updateUserDataFetchAction(changedData: IchangedUserData) {
-  return function (dispatch: AppDispatch) {
+  return function (dispatch: any) {
     dispatch({
       type: UPDATE_USER_DATA_REQUEST
     })

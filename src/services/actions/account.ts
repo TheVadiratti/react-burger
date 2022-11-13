@@ -191,7 +191,7 @@ function authorizationFetchAction(email: string, password: string) {
 }
 
 function updateTokenFetchAction() {
-  return function (dispatch: AppDispatch) {
+  return function (dispatch: any) {
     dispatch({
       type: UPDATE_TOKEN_REQUEST
     })

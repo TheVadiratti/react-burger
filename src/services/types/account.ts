@@ -31,7 +31,6 @@ interface IchangePasswordSuccessAction {
 
 interface IchangePasswordErrorAction {
   readonly type: typeof CHANGE_PASSWORD_ERROR;
-  readonly message: string;
 }
 
 interface IchangePasswordResetStateAction {
@@ -49,7 +48,6 @@ interface IresetPasswordSuccessAction {
 
 interface IresetPasswordErrorAction {
   readonly type: typeof RESET_PASSWORD_ERROR;
-  readonly message: string;
 }
 
 interface IregistrationRequestAction {

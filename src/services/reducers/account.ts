@@ -91,8 +91,7 @@ const changePassword = (state = changePasswordState, action: TaccountActions) =>
       return {
         isLoaded: false,
         isSuccess: false,
-        isError: true,
-        message: action.message
+        isError: true
       }
 
     case CHANGE_PASSWORD_RESET_STATE:
@@ -126,8 +125,7 @@ const resetPassword = (state = resetPasswordState, action: TaccountActions) => {
         ...state,
         isLoaded: false,
         isSuccess: false,
-        isError: true,
-        message: action.message
+        isError: true
       }
 
     default:
