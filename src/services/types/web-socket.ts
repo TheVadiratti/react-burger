@@ -13,23 +13,23 @@ import {
   WS_MY_ORDERS_SEND_MESSAGE
 } from '../../utils/constants';
 
-export interface IwsAllOrders {
+export type TwsAllOrders = {
   start: typeof WS_ALL_ORDERS_START;
   success: typeof WS_ALL_ORDERS_SUCCESS;
   error: typeof WS_ALL_ORDERS_ERROR;
   closed: typeof WS_ALL_ORDERS_CLOSED;
   getMessage: typeof WS_ALL_ORDERS_GET_MESSAGE;
   sendMessage: typeof WS_ALL_ORDERS_SEND_MESSAGE;
-}
+};
 
-export interface IwsMyOrders {
+export type TwsMyOrders = {
   start: typeof WS_MY_ORDERS_START;
   success: typeof WS_MY_ORDERS_SUCCESS;
   error: typeof WS_MY_ORDERS_ERROR;
   closed: typeof WS_MY_ORDERS_CLOSED;
   getMessage: typeof WS_MY_ORDERS_GET_MESSAGE;
   sendMessage: typeof WS_MY_ORDERS_SEND_MESSAGE;
-}
+};
 
 type TwsOrders =
   & typeof WS_MY_ORDERS_START

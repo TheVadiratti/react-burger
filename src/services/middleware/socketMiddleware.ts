@@ -1,4 +1,6 @@
-export const socketMiddleware = (URL, Actions, needToken) => {
+import { TwsAllOrders, TwsMyOrders } from "../types/web-socket";
+
+export const socketMiddleware = (URL: string, Actions: TwsAllOrders | TwsMyOrders, needToken: boolean) => {
   const {start, success, error, closed, getMessage, sendMessage } = Actions;
 
   return store => {

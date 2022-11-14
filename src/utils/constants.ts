@@ -1,4 +1,4 @@
-import { IwsAllOrders, IwsMyOrders } from "../services/types/web-socket";
+import { TwsAllOrders, TwsMyOrders } from "../services/types/web-socket";
 
 // action types
 export const GET_INGREDIENTS_REQUEST: 'GET_INGREDIENTS_REQUEST' = 'GET_INGREDIENTS_REQUEST';
@@ -59,7 +59,7 @@ export const WS_MY_ORDERS_CLOSED: 'WS_MY_ORDERS_CLOSED' = 'WS_MY_ORDERS_CLOSED';
 export const WS_MY_ORDERS_GET_MESSAGE: 'WS_MY_ORDERS_GET_MESSAGE' = 'WS_MY_ORDERS_GET_MESSAGE';
 export const WS_MY_ORDERS_SEND_MESSAGE: 'WS_MY_ORDERS_SEND_MESSAGE' = 'WS_MY_ORDERS_SEND_MESSAGE';
 
-export const wsAllOrdersActions: IwsAllOrders = {
+export const wsAllOrdersActions: TwsAllOrders = {
   start: WS_ALL_ORDERS_START,
   success: WS_ALL_ORDERS_SUCCESS,
   error: WS_ALL_ORDERS_ERROR,
@@ -67,7 +67,7 @@ export const wsAllOrdersActions: IwsAllOrders = {
   getMessage: WS_ALL_ORDERS_GET_MESSAGE,
   sendMessage: WS_ALL_ORDERS_SEND_MESSAGE
 }
-export const wsMyOrdersActions: IwsMyOrders = {
+export const wsMyOrdersActions: TwsMyOrders = {
   start: WS_MY_ORDERS_START,
   success: WS_MY_ORDERS_SUCCESS,
   error: WS_MY_ORDERS_ERROR,
