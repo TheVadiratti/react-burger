@@ -8,6 +8,11 @@ import {
   UPDATE_USER_DATA_ERROR
 } from "../../utils/constants";
 
+export type TuserState = {
+  email: string;
+  name: string;
+};
+
 export interface IchangedUserData {
   readonly name?: string;
   readonly login?: string;

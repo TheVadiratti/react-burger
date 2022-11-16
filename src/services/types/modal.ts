@@ -9,6 +9,18 @@ import {
   MAKE_MODAL_MY_ORDER
 } from '../../utils/constants';
 
+type modalType = 'IngredientDetails' | 'OrderDetails' | 'OrderInfo' | 'MyOrderInfo' | '';
+
+export type TmodalState = {
+  open: boolean;
+  type: modalType;
+  pageView: {
+    ingredient: boolean;
+    order: boolean;
+    myOrder: boolean;
+  };
+};
+
 interface IopenIngredientDetailsAction {
   readonly type: typeof OPEN_INGREDIENT_DETAILS;
 }

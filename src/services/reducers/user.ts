@@ -6,20 +6,21 @@ import { SET_USER_DATA,
   UPDATE_USER_DATA_SUCCESS,
   UPDATE_USER_DATA_ERROR
 } from "../../utils/constants";
-import { TuserActions } from "../types/user";
+import { TuserState, TuserActions } from "../types/user";
+import { IapiStatusState } from "../types";
 
-const userState = {
+const userState: TuserState = {
   email: '',
   name: ''
 }
 
-const getUserDataState = {
+const getUserDataState: IapiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const updateUserDataState = {
+const updateUserDataState: IapiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false

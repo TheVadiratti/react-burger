@@ -12,24 +12,33 @@ import {
   SORT_INGREDIENTS,
   SET_INITIAL_BUNS
 } from "../../utils/constants";
-import { Iingredient, TingredientsActions } from "../types/ingredients";
+import { IapiStatusState } from "../types";
+import { TconstructorState, TingredientsActions } from "../types/ingredients";
 import { IcloseModalAction } from "../types/modal";
 
-const ingredientsState = {
+interface IapiStatusWithIngredients extends IapiStatusState {
+  data: object[];
+}
+
+interface IapiStatusWithOrderNum extends IapiStatusState {
+  number: number | null;
+}
+
+const ingredientsState: IapiStatusWithIngredients = {
   data: [],
   isLoaded: false,
   isSuccess: false,
   isError: false
 };
 
-const orderState = {
+const orderState: IapiStatusWithOrderNum = {
   number: null,
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const constructorState = {
+const constructorState: TconstructorState = {
   buns: {},
   main: [],
   counter: {}
@@ -117,7 +126,7 @@ const burgerConstructor = (state = constructorState, action: TingredientsActions
         ...state,
         counter: {
           ...state.counter,
-          [action.id]: state.main.filter((item: Iingredient) => {
+          [action.id]: state.main.filter(item => {
             return item._id === action.id
           }).length
         }
@@ -126,7 +135,7 @@ const burgerConstructor = (state = constructorState, action: TingredientsActions
     case DELETE_INGREDIENT:
       return {
         ...state,
-        main: state.main.filter((item: Iingredient, i) => {
+        main: state.main.filter((item, i) => {
           return item._id !== action.id || i !== action.index;
         })
       }

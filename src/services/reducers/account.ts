@@ -19,51 +19,42 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_ERROR
 } from "../../utils/constants";
+import { IapiStatusState, IapiStatusWithMessage } from "../types";
 import { TaccountActions } from "../types/account";
 
-interface IstatusState {
-  isLoaded: boolean;
-  isSuccess: boolean;
-  isError: boolean;
-}
-
-interface IstatusWithMessage extends IstatusState {
-  message: string | null;
-}
-
-const changePasswordState: IstatusWithMessage = {
+const changePasswordState: IapiStatusWithMessage = {
   isLoaded: false,
   isSuccess: false,
   isError: false,
   message: null
 }
 
-const resetPasswordState: IstatusWithMessage = {
+const resetPasswordState: IapiStatusWithMessage = {
   isLoaded: false,
   isSuccess: false,
   isError: false,
   message: null
 }
 
-const registrationState: IstatusState = {
+const registrationState: IapiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const authorizationState: IstatusState = {
+const authorizationState: IapiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const updateTokenState: IstatusState = {
+const updateTokenState: IapiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const logoutState: IstatusState = {
+const logoutState: IapiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false

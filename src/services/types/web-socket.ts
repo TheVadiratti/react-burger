@@ -13,6 +13,11 @@ import {
   WS_MY_ORDERS_SEND_MESSAGE
 } from '../../utils/constants';
 
+export type TwsState = {
+  wsConnected: boolean;
+  error: undefined | string;
+};
+
 export type TwsAllOrders = {
   start: typeof WS_ALL_ORDERS_START;
   success: typeof WS_ALL_ORDERS_SUCCESS;

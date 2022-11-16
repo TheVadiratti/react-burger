@@ -1,7 +1,7 @@
 import { wsAllOrdersActions, wsMyOrdersActions } from '../../utils/constants';
-import { IwsOrdersAction } from '../types/web-socket';
+import { TwsState, IwsOrdersAction } from '../types/web-socket';
 
-const socketState = {
+const socketState: TwsState = {
   wsConnected: false,
   error: undefined
 };

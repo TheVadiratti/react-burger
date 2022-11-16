@@ -8,9 +8,9 @@ import {
   MAKE_MODAL_ORDER,
   MAKE_MODAL_MY_ORDER
 } from '../../utils/constants';
-import { TmodalActions } from '../types/modal';
+import { TmodalState, TmodalActions } from '../types/modal';
 
-const modalState = {
+const modalState: TmodalState = {
   open: false,
   type: '',
   pageView: {

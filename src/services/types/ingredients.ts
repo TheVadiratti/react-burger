@@ -92,3 +92,9 @@ export type TingredientsActions =
   | IsendOrderSuccessAction
   | IsendOrderErrorAction
   | IsetInitialBunsAction;
+
+export type TconstructorState = {
+  buns: object;
+  main: object[];
+  counter: {};
+};
