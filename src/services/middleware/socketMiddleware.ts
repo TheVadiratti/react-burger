@@ -1,12 +1,13 @@
 import { TwsAllOrders, TwsMyOrders } from "../types/web-socket";
+import { AnyAction, MiddlewareAPI } from 'redux';
 
 export const socketMiddleware = (URL: string, Actions: TwsAllOrders | TwsMyOrders, needToken: boolean) => {
   const {start, success, error, closed, getMessage, sendMessage } = Actions;
 
-  return store => {
-    let socket = null;
+  return (store: MiddlewareAPI) => {
+    let socket: WebSocket;
 
-    return next => action => {
+    return (next: (i: AnyAction) => void) => (action: AnyAction) => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
 

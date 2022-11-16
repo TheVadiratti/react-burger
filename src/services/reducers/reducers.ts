@@ -7,19 +7,19 @@ import { ws } from "./web-socket";
 import { orders } from "./orders";
 
 export const rootReducer = combineReducers({
-  ingredients,
-  modal,
-  order,
-  burgerConstructor,
-  changePassword,
-  resetPassword,
-  registration,
-  authorization,
-  user,
-  updateToken,
-  logout,
-  getUserData,
-  updateUserData,
-  ws,
-  orders
+  ingredients: ingredients,
+  modal: modal,
+  order: order,
+  burgerConstructor: burgerConstructor,
+  changePassword: changePassword,
+  resetPassword: resetPassword,
+  registration: registration,
+  authorization: authorization,
+  user: user,
+  updateToken: updateToken,
+  logout: logout,
+  getUserData: getUserData,
+  updateUserData: updateUserData,
+  ws: ws,
+  orders: orders
 })
