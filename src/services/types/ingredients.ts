@@ -12,20 +12,20 @@ import {
   SET_INITIAL_BUNS
 } from "../../utils/constants";
 
-export interface Iingredient {
-  readonly type: string;
-  readonly calories: number;
-  readonly carbohydrates: number;
-  readonly fat: number;
-  readonly proteins: number;
-  readonly image: string;
-  readonly image_large: string;
-  readonly image_mobile: string;
-  readonly name: string;
-  readonly price: number;
-  readonly __v: 0;
-  readonly _id: string;
-}
+export type Tingredient = {
+  type?: string;
+  calories?: number;
+  carbohydrates?: number;
+  fat?: number;
+  proteins?: number;
+  image?: string;
+  image_large?: string;
+  image_mobile?: string;
+  name?: string;
+  price?: number;
+  __v?: number;
+  _id?: string;
+};
 
 interface IgetDataRequestAction {
   readonly type: typeof GET_INGREDIENTS_REQUEST;
@@ -42,7 +42,7 @@ interface IgetDataErrorAction {
 
 interface IaddIngredientAction {
   readonly type: typeof ADD_INGREDIENT;
-  readonly ingredient: Iingredient;
+  readonly ingredient: Tingredient;
 }
 
 interface IdeleteIngredientAction {
@@ -96,5 +96,5 @@ export type TingredientsActions =
 export type TconstructorState = {
   buns: object;
   main: object[];
-  counter: {};
+  counter: object;
 };

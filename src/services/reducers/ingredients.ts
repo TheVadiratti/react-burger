@@ -13,7 +13,7 @@ import {
   SET_INITIAL_BUNS
 } from "../../utils/constants";
 import { IapiStatusState } from "../types";
-import { TconstructorState, TingredientsActions } from "../types/ingredients";
+import { TconstructorState, TingredientsActions, Tingredient } from "../types/ingredients";
 import { IcloseModalAction } from "../types/modal";
 
 interface IapiStatusWithIngredients extends IapiStatusState {
@@ -126,8 +126,8 @@ const burgerConstructor = (state = constructorState, action: TingredientsActions
         ...state,
         counter: {
           ...state.counter,
-          [action.id]: state.main.filter(item => {
-            return item._id === action.id
+          [action.id]: state.main.filter((item: Tingredient) => {
+            return item._id === action.id;
           }).length
         }
       }
@@ -135,7 +135,7 @@ const burgerConstructor = (state = constructorState, action: TingredientsActions
     case DELETE_INGREDIENT:
       return {
         ...state,
-        main: state.main.filter((item, i) => {
+        main: state.main.filter((item: Tingredient, i) => {
           return item._id !== action.id || i !== action.index;
         })
       }

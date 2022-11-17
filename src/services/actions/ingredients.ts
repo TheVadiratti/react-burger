@@ -14,7 +14,7 @@ import {
 import { checkResponse } from "../../utils/utils";
 import { AppDispatch } from "../types/index";
 import { TingredientsActions } from "../types/ingredients";
-import { Iingredient } from "../types/ingredients";
+import { Tingredient } from "../types/ingredients";
 
 function getDataAction(data: object[]): TingredientsActions {
   return {
@@ -23,7 +23,7 @@ function getDataAction(data: object[]): TingredientsActions {
   }
 }
 
-function addIngredientAction(ingredient: Iingredient): TingredientsActions {
+function addIngredientAction(ingredient: Tingredient): TingredientsActions {
   return {
     type: ADD_INGREDIENT,
     ingredient: ingredient
