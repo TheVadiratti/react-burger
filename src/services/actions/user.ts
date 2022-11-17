@@ -12,6 +12,7 @@ import { checkResponse } from "../../utils/utils";
 import { updateTokenFetchAction } from "./account";
 import { AppDispatch } from "../types/index";
 import { IchangedUserData } from "../types/user";
+import { AppThunk } from "../types/index";
 
 function setUserDataAction(email: string, name: string) {
   return {
@@ -21,8 +22,8 @@ function setUserDataAction(email: string, name: string) {
   }
 }
 
-function getUserDataFetchAction() {
-  return function (dispatch: any) {
+const getUserDataFetchAction: AppThunk = () => {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_USER_DATA_REQUEST
     })
@@ -63,8 +64,8 @@ function getUserDataFetchAction() {
   }
 }
 
-function updateUserDataFetchAction(changedData: IchangedUserData) {
-  return function (dispatch: any) {
+const updateUserDataFetchAction: AppThunk = (changedData: IchangedUserData) => {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: UPDATE_USER_DATA_REQUEST
     })

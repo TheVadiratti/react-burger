@@ -15,6 +15,7 @@ import { checkResponse } from "../../utils/utils";
 import { AppDispatch } from "../types/index";
 import { TingredientsActions } from "../types/ingredients";
 import { Tingredient } from "../types/ingredients";
+import { AppThunk } from "../types/index";
 
 function getDataAction(data: object[]): TingredientsActions {
   return {
@@ -53,7 +54,7 @@ function sortIngredientsAction(fromIndex: number, toIndex: number): Tingredients
   }
 }
 
-function setIngredientsListAction() {
+const setIngredientsListAction: AppThunk = () => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_INGREDIENTS_REQUEST
@@ -73,7 +74,7 @@ function setIngredientsListAction() {
   }
 }
 
-function sendOrderAction(list: string[]) {
+const sendOrderAction: AppThunk = (list: string[]) => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: SEND_ORDER_REQUEST

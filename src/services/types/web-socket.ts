@@ -37,20 +37,20 @@ export type TwsMyOrders = {
 };
 
 type TwsOrders =
-  & typeof WS_MY_ORDERS_START
-  & typeof WS_MY_ORDERS_SUCCESS
-  & typeof WS_MY_ORDERS_ERROR
-  & typeof WS_MY_ORDERS_CLOSED
-  & typeof WS_MY_ORDERS_GET_MESSAGE
-  & typeof WS_MY_ORDERS_SEND_MESSAGE
-  & typeof WS_MY_ORDERS_START
-  & typeof WS_MY_ORDERS_SUCCESS
-  & typeof WS_MY_ORDERS_ERROR
-  & typeof WS_MY_ORDERS_CLOSED
-  & typeof WS_MY_ORDERS_GET_MESSAGE
-  & typeof WS_MY_ORDERS_SEND_MESSAGE;
+  | typeof WS_MY_ORDERS_START
+  | typeof WS_MY_ORDERS_SUCCESS
+  | typeof WS_MY_ORDERS_ERROR
+  | typeof WS_MY_ORDERS_CLOSED
+  | typeof WS_MY_ORDERS_GET_MESSAGE
+  | typeof WS_MY_ORDERS_SEND_MESSAGE
+  | typeof WS_MY_ORDERS_START
+  | typeof WS_MY_ORDERS_SUCCESS
+  | typeof WS_MY_ORDERS_ERROR
+  | typeof WS_MY_ORDERS_CLOSED
+  | typeof WS_MY_ORDERS_GET_MESSAGE
+  | typeof WS_MY_ORDERS_SEND_MESSAGE;
 
-export interface IwsOrdersAction {
+export type TwsOrdersAction = {
   type: TwsOrders;
   payload: string;
-}
+};

@@ -23,6 +23,7 @@ import { TaccountActions } from '../types/account';
 import { AppDispatch } from '../types/index';
 import { setUserDataAction, getUserDataFetchAction } from './user';
 import { checkResponse } from '../../utils/utils';
+import { AppThunk } from '../types/index';
 
 // action func
 
@@ -56,7 +57,7 @@ function authorizationAction(result: string): TaccountActions {
 
 // API
 
-function changePasswordFetchAction(email: string) {
+const changePasswordFetchAction: AppThunk = (email: string) => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: CHANGE_PASSWORD_REQUEST
@@ -91,7 +92,7 @@ function changePasswordFetchAction(email: string) {
   }
 }
 
-function resetPasswordFetchAction(password: string, token: string) {
+const resetPasswordFetchAction: AppThunk = (password: string, token: string) => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: RESET_PASSWORD_REQUEST
@@ -127,7 +128,7 @@ function resetPasswordFetchAction(password: string, token: string) {
   }
 }
 
-function registationFetchAction(email: string, password: string, name: string) {
+const registationFetchAction: AppThunk = (email: string, password: string, name: string) => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: REGISTRATION_REQUEST
@@ -158,7 +159,7 @@ function registationFetchAction(email: string, password: string, name: string) {
   }
 }
 
-function authorizationFetchAction(email: string, password: string) {
+const authorizationFetchAction: AppThunk = (email: string, password: string) => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: AUTHORIZATION_REQUEST
@@ -190,7 +191,7 @@ function authorizationFetchAction(email: string, password: string) {
   }
 }
 
-function updateTokenFetchAction() {
+const updateTokenFetchAction: AppThunk = () => {
   return function (dispatch: any) {
     dispatch({
       type: UPDATE_TOKEN_REQUEST
@@ -231,7 +232,7 @@ function updateTokenFetchAction() {
   }
 }
 
-function logoutFetchAction() {
+const logoutFetchAction: AppThunk = () => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: LOGOUT_REQUEST
