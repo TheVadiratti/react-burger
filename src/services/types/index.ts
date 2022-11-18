@@ -9,6 +9,14 @@ import { TwsOrdersAction } from "./web-socket";
 
 export type AppDispatch = typeof store.dispatch;
 
+export type RootState = ReturnType<typeof store.getState>;
+
+type TapplicationActions = TaccountActions | TingredientsActions | TmodalActions | TuserActions | TwsOrdersAction;
+export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, RootState, TapplicationActions>
+>;
+
+// common types
+
 export interface IapiStatusState {
   isLoaded: boolean;
   isSuccess: boolean;
@@ -18,8 +26,3 @@ export interface IapiStatusState {
 export interface IapiStatusWithMessage extends IapiStatusState {
   message: string | null;
 }
-
-export type RootState = ReturnType<typeof store.getState>;
-
-type TapplicationActions = TaccountActions | TingredientsActions | TmodalActions | TuserActions | TwsOrdersAction;
-export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, RootState, TapplicationActions>>;

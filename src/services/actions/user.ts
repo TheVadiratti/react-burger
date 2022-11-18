@@ -23,7 +23,7 @@ function setUserDataAction(email: string, name: string) {
 }
 
 const getUserDataFetchAction: AppThunk = () => {
-  return function (dispatch: AppDispatch) {
+  return function (dispatch: AppDispatch & AppThunk) {
     dispatch({
       type: GET_USER_DATA_REQUEST
     })
@@ -65,7 +65,7 @@ const getUserDataFetchAction: AppThunk = () => {
 }
 
 const updateUserDataFetchAction: AppThunk = (changedData: IchangedUserData) => {
-  return function (dispatch: AppDispatch) {
+  return function (dispatch: AppDispatch & AppThunk) {
     dispatch({
       type: UPDATE_USER_DATA_REQUEST
     })

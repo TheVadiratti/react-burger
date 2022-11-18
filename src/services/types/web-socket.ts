@@ -37,12 +37,12 @@ export type TwsMyOrders = {
 };
 
 type TwsOrders =
-  | typeof WS_MY_ORDERS_START
-  | typeof WS_MY_ORDERS_SUCCESS
-  | typeof WS_MY_ORDERS_ERROR
-  | typeof WS_MY_ORDERS_CLOSED
-  | typeof WS_MY_ORDERS_GET_MESSAGE
-  | typeof WS_MY_ORDERS_SEND_MESSAGE
+  | typeof WS_ALL_ORDERS_START
+  | typeof WS_ALL_ORDERS_SUCCESS
+  | typeof WS_ALL_ORDERS_ERROR
+  | typeof WS_ALL_ORDERS_CLOSED
+  | typeof WS_ALL_ORDERS_GET_MESSAGE
+  | typeof WS_ALL_ORDERS_SEND_MESSAGE
   | typeof WS_MY_ORDERS_START
   | typeof WS_MY_ORDERS_SUCCESS
   | typeof WS_MY_ORDERS_ERROR

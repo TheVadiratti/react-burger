@@ -1,12 +1,12 @@
 import { wsAllOrdersActions, wsMyOrdersActions } from '../../utils/constants';
-import { TwsState, IwsOrdersAction } from '../types/web-socket';
+import { TwsState, TwsOrdersAction } from '../types/web-socket';
 
 const socketState: TwsState = {
   wsConnected: false,
   error: undefined
 };
 
-export const ws = (state = socketState, action: IwsOrdersAction) => {
+export const ws = (state = socketState, action: TwsOrdersAction) => {
   switch (action.type) {
     case wsAllOrdersActions.success || wsMyOrdersActions.success:
       return {

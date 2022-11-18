@@ -192,7 +192,7 @@ const authorizationFetchAction: AppThunk = (email: string, password: string) => 
 }
 
 const updateTokenFetchAction: AppThunk = () => {
-  return function (dispatch: any) {
+  return function (dispatch: AppDispatch  & AppThunk) {
     dispatch({
       type: UPDATE_TOKEN_REQUEST
     })
