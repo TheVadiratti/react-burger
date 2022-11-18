@@ -6,27 +6,27 @@ import { SET_USER_DATA,
   UPDATE_USER_DATA_SUCCESS,
   UPDATE_USER_DATA_ERROR
 } from "../../utils/constants";
-import { TuserState, TuserActions } from "../types/user";
-import { IapiStatusState } from "../types";
+import { TUserState, TUserActions } from "../types/user";
+import { IApiStatusState } from "../types";
 
-const userState: TuserState = {
+const userState: TUserState = {
   email: '',
   name: ''
 }
 
-const getUserDataState: IapiStatusState = {
+const getUserDataState: IApiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const updateUserDataState: IapiStatusState = {
+const updateUserDataState: IApiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const user = (state = userState, action: TuserActions) => {
+const user = (state = userState, action: TUserActions) => {
   switch (action.type) {
     case SET_USER_DATA:
       return {
@@ -39,7 +39,7 @@ const user = (state = userState, action: TuserActions) => {
   }
 }
 
-const getUserData = (state = getUserDataState, action: TuserActions) => {
+const getUserData = (state = getUserDataState, action: TUserActions) => {
   switch (action.type) {
     case GET_USER_DATA_REQUEST:
       return {
@@ -69,7 +69,7 @@ const getUserData = (state = getUserDataState, action: TuserActions) => {
   }
 }
 
-const updateUserData = (state = updateUserDataState, action: TuserActions) => {
+const updateUserData = (state = updateUserDataState, action: TUserActions) => {
   switch (action.type) {
     case UPDATE_USER_DATA_REQUEST:
       return {

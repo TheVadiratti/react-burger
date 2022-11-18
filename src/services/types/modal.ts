@@ -9,11 +9,11 @@ import {
   MAKE_MODAL_MY_ORDER
 } from '../../utils/constants';
 
-type modalType = 'IngredientDetails' | 'OrderDetails' | 'OrderInfo' | 'MyOrderInfo' | '';
+type TModalType = 'IngredientDetails' | 'OrderDetails' | 'OrderInfo' | 'MyOrderInfo' | '';
 
-export type TmodalState = {
+export type TModalState = {
   open: boolean;
-  type: modalType;
+  type: TModalType;
   pageView: {
     ingredient: boolean;
     order: boolean;
@@ -21,44 +21,44 @@ export type TmodalState = {
   };
 };
 
-interface IopenIngredientDetailsAction {
+interface IOpenIngredientDetailsAction {
   readonly type: typeof OPEN_INGREDIENT_DETAILS;
 }
 
-interface IopenOrderDetailsAction {
+interface IOpenOrderDetailsAction {
   readonly type: typeof OPEN_ORDER_DETAILS;
 }
 
-interface IopenOrderInfoAction {
+interface IOpenOrderInfoAction {
   readonly type: typeof OPEN_ORDER_INFO;
 }
 
-interface IopenMyOrderInfoAction {
+interface IOpenMyOrderInfoAction {
   readonly type: typeof OPEN_MY_ORDER_INFO;
 }
 
-export interface IcloseModalAction {
+export interface ICloseModalAction {
   readonly type: typeof CLOSE_MODAL;
 }
 
-interface ImakeModalIngredientAction {
+interface IMakeModalIngredientAction {
   readonly type: typeof MAKE_MODAL_INGREDIENT;
 }
 
-interface ImakeModalOrderAction {
+interface IMakeModalOrderAction {
   readonly type: typeof MAKE_MODAL_ORDER;
 }
 
-interface ImakeModalMyOrderAction {
+interface IMakeModalMyOrderAction {
   readonly type: typeof MAKE_MODAL_MY_ORDER;
 }
 
-export type TmodalActions =
-  | IopenIngredientDetailsAction
-  | IopenOrderDetailsAction
-  | IopenOrderInfoAction
-  | IopenMyOrderInfoAction
-  | IcloseModalAction
-  | ImakeModalIngredientAction
-  | ImakeModalOrderAction
-  | ImakeModalMyOrderAction;
+export type TModalActions =
+  | IOpenIngredientDetailsAction
+  | IOpenOrderDetailsAction
+  | IOpenOrderInfoAction
+  | IOpenMyOrderInfoAction
+  | ICloseModalAction
+  | IMakeModalIngredientAction
+  | IMakeModalOrderAction
+  | IMakeModalMyOrderAction;

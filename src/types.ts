@@ -1,4 +1,4 @@
-export type Tingredient = {
+export type TIngredient = {
   type: string;
   calories: number;
   carbohydrates: number;
@@ -13,7 +13,7 @@ export type Tingredient = {
   _id: string;
 };
 
-export type Torder = {
+export type TOrder = {
   createdAt: string;
   ingredients: string[];
   name: string;

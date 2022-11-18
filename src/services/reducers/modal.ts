@@ -8,9 +8,9 @@ import {
   MAKE_MODAL_ORDER,
   MAKE_MODAL_MY_ORDER
 } from '../../utils/constants';
-import { TmodalState, TmodalActions } from '../types/modal';
+import { TModalState, TModalActions } from '../types/modal';
 
-const modalState: TmodalState = {
+const modalState: TModalState = {
   open: false,
   type: '',
   pageView: {
@@ -20,7 +20,7 @@ const modalState: TmodalState = {
   }
 }
 
-const modal = (state = modalState, action: TmodalActions) => {
+const modal = (state = modalState, action: TModalActions) => {
   switch (action.type) {
     case OPEN_INGREDIENT_DETAILS:
       return {

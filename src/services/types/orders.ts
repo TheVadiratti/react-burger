@@ -1,12 +1,12 @@
-import { Torder } from '../../types';
+import { TOrder } from '../../types';
 
-type TordersOfType = {
+type TOrdersOfType = {
   total: undefined | number;
   totalToday: undefined | number;
-  list: Torder[];
+  list: TOrder[];
 }
 
-export type TordersState = {
-  all: TordersOfType;
-  my: TordersOfType;
+export type TOrdersState = {
+  all: TOrdersOfType;
+  my: TOrdersOfType;
 };

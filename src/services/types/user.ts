@@ -8,50 +8,50 @@ import {
   UPDATE_USER_DATA_ERROR
 } from "../../utils/constants";
 
-export type TuserState = {
+export type TUserState = {
   email: string;
   name: string;
 };
 
-export interface IchangedUserData {
+export interface IChangedUserData {
   readonly name?: string;
   readonly login?: string;
   readonly password?: string;
 }
 
-interface IgetUserDataRequestAction {
+interface IGetUserDataRequestAction {
   readonly type: typeof GET_USER_DATA_REQUEST;
 }
 
-interface IgetUserDataSuccessAction {
+interface IGetUserDataSuccessAction {
   readonly type: typeof GET_USER_DATA_SUCCESS;
 }
 
-interface IgetUserDataErrorAction {
+interface IGetUserDataErrorAction {
   readonly type: typeof GET_USER_DATA_ERROR;
 }
 
-interface IsetUserDataAction {
+interface ISetUserDataAction {
   readonly type: typeof SET_USER_DATA;
   readonly email: string;
   readonly name: string;
 }
 
-interface IupdateUserDataRequestAction {
+interface IUpdateUserDataRequestAction {
   readonly type: typeof UPDATE_USER_DATA_REQUEST;
 }
-interface IupdateUserDataSuccessAction {
+interface IUpdateUserDataSuccessAction {
   readonly type: typeof UPDATE_USER_DATA_SUCCESS;
 }
-interface IupdateUserDataErrorAction {
+interface IUpdateUserDataErrorAction {
   readonly type: typeof UPDATE_USER_DATA_ERROR;
 }
 
-export type TuserActions =
-  | IgetUserDataRequestAction
-  | IgetUserDataSuccessAction
-  | IgetUserDataErrorAction
-  | IsetUserDataAction
-  | IupdateUserDataRequestAction
-  | IupdateUserDataSuccessAction
-  | IupdateUserDataErrorAction;
+export type TUserActions =
+  | IGetUserDataRequestAction
+  | IGetUserDataSuccessAction
+  | IGetUserDataErrorAction
+  | ISetUserDataAction
+  | IUpdateUserDataRequestAction
+  | IUpdateUserDataSuccessAction
+  | IUpdateUserDataErrorAction;

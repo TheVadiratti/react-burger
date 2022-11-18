@@ -1,7 +1,7 @@
-import { TwsAllOrders, TwsMyOrders } from "../types/web-socket";
+import { TWsAllOrders, TWsMyOrders } from "../types/web-socket";
 import { AnyAction, MiddlewareAPI } from 'redux';
 
-export const socketMiddleware = (URL: string, Actions: TwsAllOrders | TwsMyOrders, needToken: boolean) => {
+export const socketMiddleware = (URL: string, Actions: TWsAllOrders | TWsMyOrders, needToken: boolean) => {
   const {start, success, error, closed, getMessage, sendMessage } = Actions;
 
   return (store: MiddlewareAPI) => {

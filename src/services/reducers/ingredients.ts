@@ -12,40 +12,40 @@ import {
   SORT_INGREDIENTS,
   SET_INITIAL_BUNS
 } from '../../utils/constants';
-import { IapiStatusState } from '../types';
-import { TconstructorState, TingredientsActions } from '../types/ingredients';
-import { Tingredient } from '../../types';
-import { IcloseModalAction } from '../types/modal';
+import { IApiStatusState } from '../types';
+import { TConstructorState, TIngredientsActions } from '../types/ingredients';
+import { TIngredient } from '../../types';
+import { ICloseModalAction } from '../types/modal';
 
-interface IapiStatusWithIngredients extends IapiStatusState {
-  data: Tingredient[];
+interface IApiStatusWithIngredients extends IApiStatusState {
+  data: TIngredient[];
 }
 
-interface IapiStatusWithOrderNum extends IapiStatusState {
+interface IApiStatusWithOrderNum extends IApiStatusState {
   number: number | null;
 }
 
-const ingredientsState: IapiStatusWithIngredients = {
+const ingredientsState: IApiStatusWithIngredients = {
   data: [],
   isLoaded: false,
   isSuccess: false,
   isError: false
 };
 
-const orderState: IapiStatusWithOrderNum = {
+const orderState: IApiStatusWithOrderNum = {
   number: null,
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const constructorState: TconstructorState = {
+const constructorState: TConstructorState = {
   buns: {},
   main: [],
   counter: {}
 }
 
-const ingredients = (state = ingredientsState, action: TingredientsActions) => {
+const ingredients = (state = ingredientsState, action: TIngredientsActions) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
       return {
@@ -76,7 +76,7 @@ const ingredients = (state = ingredientsState, action: TingredientsActions) => {
   }
 }
 
-const order = (state = orderState, action: TingredientsActions | IcloseModalAction) => {
+const order = (state = orderState, action: TIngredientsActions | ICloseModalAction) => {
   switch (action.type) {
     case SEND_ORDER_REQUEST:
       return {
@@ -113,7 +113,7 @@ const order = (state = orderState, action: TingredientsActions | IcloseModalActi
   }
 }
 
-const burgerConstructor = (state = constructorState, action: TingredientsActions) => {
+const burgerConstructor = (state = constructorState, action: TIngredientsActions) => {
   switch (action.type) {
     case ADD_INGREDIENT:
       return {

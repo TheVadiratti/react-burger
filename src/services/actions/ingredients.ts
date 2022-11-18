@@ -13,25 +13,25 @@ import {
 } from "../../utils/constants";
 import { checkResponse } from '../../utils/utils';
 import { AppDispatch } from '../types/index';
-import { TingredientsActions } from '../types/ingredients';
-import { Tingredient } from '../../types';
+import { TIngredientsActions } from '../types/ingredients';
+import { TIngredient } from '../../types';
 import { AppThunk } from '../types/index';
 
-function getDataAction(data: Tingredient[]): TingredientsActions {
+function getDataAction(data: TIngredient[]): TIngredientsActions {
   return {
     type: GET_INGREDIENTS_SUCCESS,
     data: data
   }
 }
 
-function addIngredientAction(ingredient: Tingredient): TingredientsActions {
+function addIngredientAction(ingredient: TIngredient): TIngredientsActions {
   return {
     type: ADD_INGREDIENT,
     ingredient: ingredient
   }
 }
 
-function deleteIngredientAction(id: string, index: number): TingredientsActions {
+function deleteIngredientAction(id: string, index: number): TIngredientsActions {
   return {
     type: DELETE_INGREDIENT,
     id: id,
@@ -39,14 +39,14 @@ function deleteIngredientAction(id: string, index: number): TingredientsActions 
   }
 }
 
-function updateCounterAction(id: string): TingredientsActions {
+function updateCounterAction(id: string): TIngredientsActions {
   return {
     type: UPDATE_COUNTER,
     id: id
   }
 }
 
-function sortIngredientsAction(fromIndex: number, toIndex: number): TingredientsActions {
+function sortIngredientsAction(fromIndex: number, toIndex: number): TIngredientsActions {
   return {
     type: SORT_INGREDIENTS,
     from: fromIndex,

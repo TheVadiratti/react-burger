@@ -20,103 +20,103 @@ import {
   LOGOUT_ERROR
 } from '../../utils/constants';
 
-interface IchangePasswordRequestAction {
+interface IChangePasswordRequestAction {
   readonly type: typeof CHANGE_PASSWORD_REQUEST;
 }
 
-interface IchangePasswordSuccessAction {
+interface IChangePasswordSuccessAction {
   readonly type: typeof CHANGE_PASSWORD_SUCCESS;
   readonly message: string;
 }
 
-interface IchangePasswordErrorAction {
+interface IChangePasswordErrorAction {
   readonly type: typeof CHANGE_PASSWORD_ERROR;
 }
 
-interface IchangePasswordResetStateAction {
+interface IChangePasswordResetStateAction {
   readonly type: typeof CHANGE_PASSWORD_RESET_STATE;
 }
 
-interface IresetPasswordRequestAction {
+interface IResetPasswordRequestAction {
   readonly type: typeof RESET_PASSWORD_REQUEST;
 }
 
-interface IresetPasswordSuccessAction {
+interface IResetPasswordSuccessAction {
   readonly type: typeof RESET_PASSWORD_SUCCESS;
   readonly message: string;
 }
 
-interface IresetPasswordErrorAction {
+interface IResetPasswordErrorAction {
   readonly type: typeof RESET_PASSWORD_ERROR;
 }
 
-interface IregistrationRequestAction {
+interface IRegistrationRequestAction {
   readonly type: typeof REGISTRATION_REQUEST;
 }
 
-interface IregistrationSuccessAction {
+interface IRegistrationSuccessAction {
   readonly type: typeof REGISTRATION_SUCCESS;
   readonly result: string;
 }
 
-interface IregistrationErrorAction {
+interface IRegistrationErrorAction {
   readonly type: typeof REGISTRATION_ERROR;
 }
 
-interface IauthorizationRequestAction {
+interface IAuthorizationRequestAction {
   readonly type: typeof AUTHORIZATION_REQUEST;
 }
 
-interface IauthorizationSuccessAction {
+interface IAuthorizationSuccessAction {
   readonly type: typeof AUTHORIZATION_SUCCESS;
   readonly result: string;
 }
 
-interface IauthorizationErrorAction {
+interface IAuthorizationErrorAction {
   readonly type: typeof AUTHORIZATION_ERROR;
 }
 
-interface IupdateTokenRequestAction {
+interface IUpdateTokenRequestAction {
   readonly type: typeof UPDATE_TOKEN_REQUEST;
 }
 
-interface IupdateTokenSuccessAction {
+interface IUpdateTokenSuccessAction {
   readonly type: typeof UPDATE_TOKEN_SUCCESS;
 }
 
-interface IupdateTokenErrorAction {
+interface IUpdateTokenErrorAction {
   readonly type: typeof UPDATE_TOKEN_ERROR;
 }
 
-interface IlogoutRequestAction {
+interface ILogoutRequestAction {
   readonly type: typeof LOGOUT_REQUEST;
 }
 
-interface IlogoutSuccessAction {
+interface ILogoutSuccessAction {
   readonly type: typeof LOGOUT_SUCCESS;
 }
 
-interface IlogoutErrortAction {
+interface ILogoutErrortAction {
   readonly type: typeof LOGOUT_ERROR;
 }
 
-export type TaccountActions = 
-  | IchangePasswordRequestAction
-  | IchangePasswordSuccessAction
-  | IchangePasswordErrorAction
-  | IchangePasswordResetStateAction
-  | IresetPasswordRequestAction
-  | IresetPasswordSuccessAction
-  | IresetPasswordErrorAction
-  | IregistrationRequestAction
-  | IregistrationSuccessAction
-  | IregistrationErrorAction
-  | IauthorizationRequestAction
-  | IauthorizationSuccessAction
-  | IauthorizationErrorAction
-  | IupdateTokenRequestAction
-  | IupdateTokenSuccessAction
-  | IupdateTokenErrorAction
-  | IlogoutRequestAction
-  | IlogoutSuccessAction
-  | IlogoutErrortAction;
+export type TAccountActions = 
+  | IChangePasswordRequestAction
+  | IChangePasswordSuccessAction
+  | IChangePasswordErrorAction
+  | IChangePasswordResetStateAction
+  | IResetPasswordRequestAction
+  | IResetPasswordSuccessAction
+  | IResetPasswordErrorAction
+  | IRegistrationRequestAction
+  | IRegistrationSuccessAction
+  | IRegistrationErrorAction
+  | IAuthorizationRequestAction
+  | IAuthorizationSuccessAction
+  | IAuthorizationErrorAction
+  | IUpdateTokenRequestAction
+  | IUpdateTokenSuccessAction
+  | IUpdateTokenErrorAction
+  | ILogoutRequestAction
+  | ILogoutSuccessAction
+  | ILogoutErrortAction;

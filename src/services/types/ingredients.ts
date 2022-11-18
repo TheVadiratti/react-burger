@@ -11,76 +11,76 @@ import {
   SORT_INGREDIENTS,
   SET_INITIAL_BUNS
 } from '../../utils/constants';
-import { Tingredient } from '../../types';
+import { TIngredient } from '../../types';
 
-interface IgetDataRequestAction {
+interface IGetDataRequestAction {
   readonly type: typeof GET_INGREDIENTS_REQUEST;
 }
 
-interface IgetDataSuccessAction {
+interface IGetDataSuccessAction {
   readonly type: typeof GET_INGREDIENTS_SUCCESS;
-  readonly data: Tingredient[];
+  readonly data: TIngredient[];
 }
 
-interface IgetDataErrorAction {
+interface IGetDataErrorAction {
   readonly type: typeof GET_INGREDIENTS_ERROR;
 }
 
-interface IaddIngredientAction {
+interface IAddIngredientAction {
   readonly type: typeof ADD_INGREDIENT;
-  readonly ingredient: Tingredient;
+  readonly ingredient: TIngredient;
 }
 
-interface IdeleteIngredientAction {
+interface IDeleteIngredientAction {
   readonly type: typeof DELETE_INGREDIENT;
   readonly id: string;
   readonly index: number;
 }
 
-interface IupdateCounterAction {
+interface IUpdateCounterAction {
   readonly type: typeof UPDATE_COUNTER;
   readonly id: string;
 }
 
-interface IsortIngredientsAction {
+interface ISortIngredientsAction {
   readonly type: typeof SORT_INGREDIENTS;
   readonly from: number;
   readonly to: number;
 }
 
-interface IsendOrderRequestAction {
+interface ISendOrderRequestAction {
   readonly type: typeof SEND_ORDER_REQUEST;
 }
 
-interface IsendOrderSuccessAction {
+interface ISendOrderSuccessAction {
   readonly type: typeof SEND_ORDER_SUCCESS;
   readonly data: string[];
 }
 
-interface IsendOrderErrorAction {
+interface ISendOrderErrorAction {
   readonly type: typeof SEND_ORDER_ERROR;
 }
 
-interface IsetInitialBunsAction {
+interface ISetInitialBunsAction {
   readonly type: typeof SET_INITIAL_BUNS;
-  readonly buns: Tingredient;
+  readonly buns: TIngredient;
 }
 
-export type TingredientsActions =
-  | IgetDataRequestAction
-  | IgetDataSuccessAction
-  | IgetDataErrorAction
-  | IaddIngredientAction
-  | IdeleteIngredientAction
-  | IupdateCounterAction
-  | IsortIngredientsAction
-  | IsendOrderRequestAction
-  | IsendOrderSuccessAction
-  | IsendOrderErrorAction
-  | IsetInitialBunsAction;
+export type TIngredientsActions =
+  | IGetDataRequestAction
+  | IGetDataSuccessAction
+  | IGetDataErrorAction
+  | IAddIngredientAction
+  | IDeleteIngredientAction
+  | IUpdateCounterAction
+  | ISortIngredientsAction
+  | ISendOrderRequestAction
+  | ISendOrderSuccessAction
+  | ISendOrderErrorAction
+  | ISetInitialBunsAction;
 
-export type TconstructorState = {
-  buns: Tingredient | object;
-  main: Tingredient[];
+export type TConstructorState = {
+  buns: TIngredient | object;
+  main: TIngredient[];
   counter: object;
 };

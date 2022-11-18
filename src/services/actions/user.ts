@@ -11,7 +11,7 @@ import {
 import { checkResponse } from "../../utils/utils";
 import { updateTokenFetchAction } from "./account";
 import { AppDispatch } from "../types/index";
-import { IchangedUserData } from "../types/user";
+import { IChangedUserData } from "../types/user";
 import { AppThunk } from "../types/index";
 
 function setUserDataAction(email: string, name: string) {
@@ -64,7 +64,7 @@ const getUserDataFetchAction: AppThunk = () => {
   }
 }
 
-const updateUserDataFetchAction: AppThunk = (changedData: IchangedUserData) => {
+const updateUserDataFetchAction: AppThunk = (changedData: IChangedUserData) => {
   return function (dispatch: AppDispatch & AppThunk) {
     dispatch({
       type: UPDATE_USER_DATA_REQUEST

@@ -19,7 +19,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_ERROR
 } from '../../utils/constants';
-import { TaccountActions } from '../types/account';
+import { TAccountActions } from '../types/account';
 import { AppDispatch } from '../types/index';
 import { setUserDataAction, getUserDataFetchAction } from './user';
 import { checkResponse } from '../../utils/utils';
@@ -27,28 +27,28 @@ import { AppThunk } from '../types/index';
 
 // action func
 
-function changePasswordAction(message: string): TaccountActions {
+function changePasswordAction(message: string): TAccountActions {
   return {
     type: CHANGE_PASSWORD_SUCCESS,
     message: message
   }
 }
 
-function resetPasswordAction(message: string): TaccountActions {
+function resetPasswordAction(message: string): TAccountActions {
   return {
     type: RESET_PASSWORD_SUCCESS,
     message: message
   }
 }
 
-function registrationAction(result: string): TaccountActions {
+function registrationAction(result: string): TAccountActions {
   return {
     type: REGISTRATION_SUCCESS,
     result: result
   }
 }
 
-function authorizationAction(result: string): TaccountActions {
+function authorizationAction(result: string): TAccountActions {
   return {
     type: AUTHORIZATION_SUCCESS,
     result: result

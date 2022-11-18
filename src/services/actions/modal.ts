@@ -5,33 +5,33 @@ import {
   OPEN_MY_ORDER_INFO,
   CLOSE_MODAL
 } from '../../utils/constants';
-import { TmodalActions } from '../types/modal';
+import { TModalActions } from '../types/modal';
 
-function openIngredientDetailsAction(): TmodalActions {
+function openIngredientDetailsAction(): TModalActions {
   return {
     type: OPEN_INGREDIENT_DETAILS
   }
 }
 
-function openOrderDetailsAction(): TmodalActions {
+function openOrderDetailsAction(): TModalActions {
   return {
     type: OPEN_ORDER_DETAILS
   }
 }
 
-function openOrderInfoAction(): TmodalActions {
+function openOrderInfoAction(): TModalActions {
   return {
     type: OPEN_ORDER_INFO
   }
 }
 
-function openMyOrderInfoAction(): TmodalActions {
+function openMyOrderInfoAction(): TModalActions {
   return {
     type: OPEN_MY_ORDER_INFO
   }
 }
 
-function closeModalAction(): TmodalActions {
+function closeModalAction(): TModalActions {
   return {
     type: CLOSE_MODAL
   }

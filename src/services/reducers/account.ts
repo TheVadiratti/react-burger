@@ -19,48 +19,48 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_ERROR
 } from "../../utils/constants";
-import { IapiStatusState, IapiStatusWithMessage } from "../types";
-import { TaccountActions } from "../types/account";
+import { IApiStatusState, IApiStatusWithMessage } from "../types";
+import { TAccountActions } from "../types/account";
 
-const changePasswordState: IapiStatusWithMessage = {
+const changePasswordState: IApiStatusWithMessage = {
   isLoaded: false,
   isSuccess: false,
   isError: false,
   message: null
 }
 
-const resetPasswordState: IapiStatusWithMessage = {
+const resetPasswordState: IApiStatusWithMessage = {
   isLoaded: false,
   isSuccess: false,
   isError: false,
   message: null
 }
 
-const registrationState: IapiStatusState = {
+const registrationState: IApiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const authorizationState: IapiStatusState = {
+const authorizationState: IApiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const updateTokenState: IapiStatusState = {
+const updateTokenState: IApiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const logoutState: IapiStatusState = {
+const logoutState: IApiStatusState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const changePassword = (state = changePasswordState, action: TaccountActions) => {
+const changePassword = (state = changePasswordState, action: TAccountActions) => {
   switch (action.type) {
     case CHANGE_PASSWORD_REQUEST:
       return {
@@ -93,7 +93,7 @@ const changePassword = (state = changePasswordState, action: TaccountActions) =>
   }
 }
 
-const resetPassword = (state = resetPasswordState, action: TaccountActions) => {
+const resetPassword = (state = resetPasswordState, action: TAccountActions) => {
   switch (action.type) {
     case RESET_PASSWORD_REQUEST:
       return {
@@ -124,7 +124,7 @@ const resetPassword = (state = resetPasswordState, action: TaccountActions) => {
   }
 }
 
-const registration = (state = registrationState, action: TaccountActions) => {
+const registration = (state = registrationState, action: TAccountActions) => {
   switch (action.type) {
     case REGISTRATION_REQUEST:
       return {
@@ -163,7 +163,7 @@ const registration = (state = registrationState, action: TaccountActions) => {
   }
 }
 
-const authorization = (state = authorizationState, action: TaccountActions) => {
+const authorization = (state = authorizationState, action: TAccountActions) => {
   switch (action.type) {
     case AUTHORIZATION_REQUEST:
       return {
@@ -202,7 +202,7 @@ const authorization = (state = authorizationState, action: TaccountActions) => {
   }
 }
 
-const updateToken = (state = updateTokenState, action: TaccountActions) => {
+const updateToken = (state = updateTokenState, action: TAccountActions) => {
   switch (action.type) {
     case UPDATE_TOKEN_REQUEST:
       return {
@@ -232,7 +232,7 @@ const updateToken = (state = updateTokenState, action: TaccountActions) => {
   }
 }
 
-const logout = (state = logoutState, action: TaccountActions) => {
+const logout = (state = logoutState, action: TAccountActions) => {
   switch (action.type) {
     case LOGOUT_REQUEST:
       return {

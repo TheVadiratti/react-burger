@@ -13,12 +13,12 @@ import {
   WS_MY_ORDERS_SEND_MESSAGE
 } from '../../utils/constants';
 
-export type TwsState = {
+export type TWsState = {
   wsConnected: boolean;
   error: undefined | string;
 };
 
-export type TwsAllOrders = {
+export type TWsAllOrders = {
   start: typeof WS_ALL_ORDERS_START;
   success: typeof WS_ALL_ORDERS_SUCCESS;
   error: typeof WS_ALL_ORDERS_ERROR;
@@ -27,7 +27,7 @@ export type TwsAllOrders = {
   sendMessage: typeof WS_ALL_ORDERS_SEND_MESSAGE;
 };
 
-export type TwsMyOrders = {
+export type TWsMyOrders = {
   start: typeof WS_MY_ORDERS_START;
   success: typeof WS_MY_ORDERS_SUCCESS;
   error: typeof WS_MY_ORDERS_ERROR;
@@ -36,7 +36,7 @@ export type TwsMyOrders = {
   sendMessage: typeof WS_MY_ORDERS_SEND_MESSAGE;
 };
 
-type TwsOrders =
+type TWsOrders =
   | typeof WS_ALL_ORDERS_START
   | typeof WS_ALL_ORDERS_SUCCESS
   | typeof WS_ALL_ORDERS_ERROR
@@ -50,7 +50,7 @@ type TwsOrders =
   | typeof WS_MY_ORDERS_GET_MESSAGE
   | typeof WS_MY_ORDERS_SEND_MESSAGE;
 
-export type TwsOrdersAction = {
-  type: TwsOrders;
+export type TWsOrdersAction = {
+  type: TWsOrders;
   payload: string;
 };
