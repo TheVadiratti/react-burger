@@ -18,7 +18,7 @@ import { Tingredient } from '../../types';
 import { IcloseModalAction } from '../types/modal';
 
 interface IapiStatusWithIngredients extends IapiStatusState {
-  data: object[];
+  data: Tingredient[];
 }
 
 interface IapiStatusWithOrderNum extends IapiStatusState {
@@ -127,7 +127,7 @@ const burgerConstructor = (state = constructorState, action: TingredientsActions
         ...state,
         counter: {
           ...state.counter,
-          [action.id]: state.main.filter((item: Tingredient) => {
+          [action.id]: state.main.filter((item) => {
             return item._id === action.id;
           }).length
         }
@@ -136,7 +136,7 @@ const burgerConstructor = (state = constructorState, action: TingredientsActions
     case DELETE_INGREDIENT:
       return {
         ...state,
-        main: state.main.filter((item: Tingredient, i) => {
+        main: state.main.filter((item, i) => {
           return item._id !== action.id || i !== action.index;
         })
       }

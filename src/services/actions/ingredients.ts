@@ -17,7 +17,7 @@ import { TingredientsActions } from '../types/ingredients';
 import { Tingredient } from '../../types';
 import { AppThunk } from '../types/index';
 
-function getDataAction(data: object[]): TingredientsActions {
+function getDataAction(data: Tingredient[]): TingredientsActions {
   return {
     type: GET_INGREDIENTS_SUCCESS,
     data: data

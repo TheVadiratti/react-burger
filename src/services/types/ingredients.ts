@@ -19,7 +19,7 @@ interface IgetDataRequestAction {
 
 interface IgetDataSuccessAction {
   readonly type: typeof GET_INGREDIENTS_SUCCESS;
-  readonly data: object[];
+  readonly data: Tingredient[];
 }
 
 interface IgetDataErrorAction {
@@ -63,7 +63,7 @@ interface IsendOrderErrorAction {
 
 interface IsetInitialBunsAction {
   readonly type: typeof SET_INITIAL_BUNS;
-  readonly buns: object;
+  readonly buns: Tingredient;
 }
 
 export type TingredientsActions =
@@ -80,7 +80,7 @@ export type TingredientsActions =
   | IsetInitialBunsAction;
 
 export type TconstructorState = {
-  buns: object;
-  main: object[];
+  buns: Tingredient | object;
+  main: Tingredient[];
   counter: object;
 };
