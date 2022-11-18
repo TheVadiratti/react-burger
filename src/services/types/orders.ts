@@ -1,12 +1,4 @@
-type Torder = {
-  createdAt: string;
-  ingredients: string[];
-  name: string;
-  number: number;
-  status: string;
-  updatedAt: string;
-  _id: string;
-}
+import { Torder } from '../../types';
 
 type TordersOfType = {
   total: undefined | number;

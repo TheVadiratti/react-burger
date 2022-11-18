@@ -11,10 +11,11 @@ import {
   UPDATE_COUNTER,
   SORT_INGREDIENTS,
   SET_INITIAL_BUNS
-} from "../../utils/constants";
-import { IapiStatusState } from "../types";
-import { TconstructorState, TingredientsActions, Tingredient } from "../types/ingredients";
-import { IcloseModalAction } from "../types/modal";
+} from '../../utils/constants';
+import { IapiStatusState } from '../types';
+import { TconstructorState, TingredientsActions } from '../types/ingredients';
+import { Tingredient } from '../../types';
+import { IcloseModalAction } from '../types/modal';
 
 interface IapiStatusWithIngredients extends IapiStatusState {
   data: object[];

@@ -10,22 +10,8 @@ import {
   UPDATE_COUNTER,
   SORT_INGREDIENTS,
   SET_INITIAL_BUNS
-} from "../../utils/constants";
-
-export type Tingredient = {
-  type?: string;
-  calories?: number;
-  carbohydrates?: number;
-  fat?: number;
-  proteins?: number;
-  image?: string;
-  image_large?: string;
-  image_mobile?: string;
-  name?: string;
-  price?: number;
-  __v?: number;
-  _id?: string;
-};
+} from '../../utils/constants';
+import { Tingredient } from '../../types';
 
 interface IgetDataRequestAction {
   readonly type: typeof GET_INGREDIENTS_REQUEST;

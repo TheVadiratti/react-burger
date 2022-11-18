@@ -11,11 +11,11 @@ import {
   SORT_INGREDIENTS,
   BASE_URL
 } from "../../utils/constants";
-import { checkResponse } from "../../utils/utils";
-import { AppDispatch } from "../types/index";
-import { TingredientsActions } from "../types/ingredients";
-import { Tingredient } from "../types/ingredients";
-import { AppThunk } from "../types/index";
+import { checkResponse } from '../../utils/utils';
+import { AppDispatch } from '../types/index';
+import { TingredientsActions } from '../types/ingredients';
+import { Tingredient } from '../../types';
+import { AppThunk } from '../types/index';
 
 function getDataAction(data: object[]): TingredientsActions {
   return {
