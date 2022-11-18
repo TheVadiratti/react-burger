@@ -3,7 +3,7 @@ import appStyles from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import { setIngredientsListAction } from '../../services/actions/ingredients';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "../../hooks/hooks";
 
 function App() {
   const dispatch = useDispatch();
