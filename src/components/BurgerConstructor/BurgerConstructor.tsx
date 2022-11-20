@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { useHistory } from 'react-router-dom';
 import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,6 +9,10 @@ import { openOrderDetailsAction } from '../../services/actions/modal';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 import { SET_INITIAL_BUNS } from '../../utils/constants';
 
+type TDroppedItem = {
+  id: string;
+}
+
 function BurgerConstructor() {
   const ingredientsData = useSelector((state) => state.ingredients.data);
   const constructorStructure = useSelector((state) => state.burgerConstructor);
@@ -17,11 +21,11 @@ function BurgerConstructor() {
   const hasToken = localStorage.getItem('refreshToken');
   const isDataSuccess = useSelector((state) => state.ingredients.isSuccess);
 
-  const windowCntRef = React.useRef(null);
+  const windowCntRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     // плавная прокрутка к последнему добавленному ингредиенту
-    windowCntRef.current.scrollBy({
+    windowCntRef.current?.scrollBy({
       top: windowCntRef.current.scrollHeight,
       left: 0,
       behavior: "smooth"
@@ -36,14 +40,16 @@ function BurgerConstructor() {
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop(item: TDroppedItem) {
       // поиск ингредиента в сторе
       const currentIngredient = ingredientsData.find(ingredient => {
         return ingredient._id === item.id
       });
-      dispatch(addIngredientAction(currentIngredient));
-      if (currentIngredient.type !== 'bun') {
-        dispatch(updateCounterAction(item.id));
+      if (currentIngredient) {
+        dispatch(addIngredientAction(currentIngredient));
+        if (currentIngredient.type !== 'bun') {
+          dispatch(updateCounterAction(item.id));
+        }
       }
     }
   });
@@ -71,7 +77,7 @@ function BurgerConstructor() {
       orderList.unshift(constructorStructure.buns);
       orderList.push(constructorStructure.buns);
       dispatch(sendOrderAction(orderList));
-      dispatch(openOrderDetailsAction(true));
+      dispatch(openOrderDetailsAction());
     }
     else {
       history.replace({ pathname: '/login' });
@@ -82,7 +88,7 @@ function BurgerConstructor() {
     <section className={burgerConstructorStyles.section}>
       <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
 
-        <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} keyValue={0} />
+        <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} key={0} />
 
         <div ref={windowCntRef} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
@@ -97,7 +103,7 @@ function BurgerConstructor() {
         </div>
 
         {constructorStructure.buns.name &&
-          <BurgerItem ingredient={constructorStructure.buns} type={'bottom'} isLocked={true} isMain={false} text={'(низ)'} keyValue={1} />
+          <BurgerItem ingredient={constructorStructure.buns} type={'bottom'} isLocked={true} isMain={false} text={'(низ)'} key={1} />
         }
 
       </div>

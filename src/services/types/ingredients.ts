@@ -80,7 +80,7 @@ export type TIngredientsActions =
   | ISetInitialBunsAction;
 
 export type TConstructorState = {
-  buns: TIngredient | object;
+  buns?: TIngredient | null;
   main: TIngredient[];
   counter: object;
 };
