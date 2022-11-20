@@ -8,6 +8,7 @@ import { sendOrderAction, addIngredientAction, updateCounterAction } from '../..
 import { openOrderDetailsAction } from '../../services/actions/modal';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 import { SET_INITIAL_BUNS } from '../../utils/constants';
+import { TIngredient, TIngredientNotRequired } from '../../types';
 
 type TDroppedItem = {
   id: string;
@@ -61,7 +62,7 @@ function BurgerConstructor() {
   }
 
   function sum() {
-    const bunSum = constructorStructure.buns.price * 2 || 0;
+    const bunSum = constructorStructure.buns!.price! * 2 || 0;
     const mainPriceArray = constructorStructure.main.map(item => {
       return item.price;
     });
@@ -73,7 +74,7 @@ function BurgerConstructor() {
 
   function sendOrder() {
     if (hasToken) {
-      const orderList = Object.assign([], constructorStructure.main);
+      const orderList: TIngredientNotRequired[] = Object.assign([], constructorStructure.main);
       orderList.unshift(constructorStructure.buns);
       orderList.push(constructorStructure.buns);
       dispatch(sendOrderAction(orderList));
@@ -102,7 +103,7 @@ function BurgerConstructor() {
 
         </div>
 
-        {constructorStructure.buns.name &&
+        {constructorStructure.buns!.name &&
           <BurgerItem ingredient={constructorStructure.buns} type={'bottom'} isLocked={true} isMain={false} text={'(низ)'} key={1} />
         }
 

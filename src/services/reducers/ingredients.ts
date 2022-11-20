@@ -40,7 +40,7 @@ const orderState: IApiStatusWithOrderNum = {
 }
 
 const constructorState: TConstructorState = {
-  buns: null,
+  buns: {},
   main: [],
   counter: {}
 }

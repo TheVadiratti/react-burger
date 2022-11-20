@@ -13,6 +13,8 @@ export type TIngredient = {
   _id: string;
 };
 
+export type TIngredientNotRequired = Partial<TIngredient>;
+
 export type TOrder = {
   createdAt: string;
   ingredients: string[];

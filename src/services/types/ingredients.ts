@@ -11,7 +11,7 @@ import {
   SORT_INGREDIENTS,
   SET_INITIAL_BUNS
 } from '../../utils/constants';
-import { TIngredient } from '../../types';
+import { TIngredient, TIngredientNotRequired } from '../../types';
 
 interface IGetDataRequestAction {
   readonly type: typeof GET_INGREDIENTS_REQUEST;
@@ -80,7 +80,7 @@ export type TIngredientsActions =
   | ISetInitialBunsAction;
 
 export type TConstructorState = {
-  buns?: TIngredient | null;
+  buns: TIngredientNotRequired;
   main: TIngredient[];
   counter: object;
 };
