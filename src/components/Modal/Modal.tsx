@@ -1,24 +1,28 @@
-import { useEffect } from 'react';
+import { useEffect, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { useHistory, useLocation } from 'react-router-dom';
 import modalStyles from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import { closeModalAction } from '../../services/actions/modal';
 import Loader from '../Loader/Loader';
 
 const modalRoot = document.querySelector('#react-modals');
 
-function Modal({ children, isPageType }) {
+type TProps = {
+  children: ReactNode;
+  isPageType: boolean;
+};
+
+function Modal({ children, isPageType }: TProps) {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const sendOrderRequest = useSelector((state) => state.order.isLoaded);
 
   useEffect(() => {
-    function closePopupEsc(e) {
+    function closePopupEsc(e: any) {
       if (e.code === 'Escape') {
         closeModal();
       }
@@ -71,13 +75,8 @@ function Modal({ children, isPageType }) {
         <Loader />}
       </ModalOverlay>
     ),
-    modalRoot
+    modalRoot!
   );
 }
 
 export default Modal;
-
-Modal.propTypes = {
-  heading: PropTypes.string,
-  isPageType: PropTypes.bool.isRequired
-}; 
