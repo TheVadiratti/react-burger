@@ -10,7 +10,7 @@ function Ingredient({ image, name, price, _id }) {
   const [counter, setCounter] = React.useState(null);
   const [, dragRef] = useDrag({
     type: "ingredient",
-    item: {id: _id}
+    item: { id: _id }
   });
 
   React.useEffect(() => {
@@ -18,14 +18,16 @@ function Ingredient({ image, name, price, _id }) {
   }, [constructorStructure])
 
   function counterRender() {
-    if(constructorStructure.buns._id === _id) {
-      return (<Counter count={2} size="default" />)
-    }
-    else if(constructorStructure.counter[_id]) {
-      return (<Counter count={constructorStructure.counter[_id]} size="default" />)
-    }
-    else {
-      return;
+    if (constructorStructure.buns) {
+      if (constructorStructure.buns._id === _id) {
+        return (<Counter count={2} size="default" />)
+      }
+      else if (constructorStructure.counter[_id]) {
+        return (<Counter count={constructorStructure.counter[_id]} size="default" />)
+      }
+      else {
+        return;
+      }
     }
   }
 

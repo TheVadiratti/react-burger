@@ -8,11 +8,8 @@ import { sendOrderAction, addIngredientAction, updateCounterAction } from '../..
 import { openOrderDetailsAction } from '../../services/actions/modal';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 import { SET_INITIAL_BUNS } from '../../utils/constants';
-import { TIngredient, TIngredientNotRequired } from '../../types';
-
-type TDroppedItem = {
-  id: string;
-}
+import { TIngredient } from '../../types';
+import { TDnDConstructorCntTarget } from '../../types';
 
 function BurgerConstructor() {
   const ingredientsData = useSelector((state) => state.ingredients.data);
@@ -32,16 +29,18 @@ function BurgerConstructor() {
       behavior: "smooth"
     });
     if (isDataSuccess) {
-      dispatch({
-        type: SET_INITIAL_BUNS,
-        buns: getInitBuns()
-      });
+      if (!constructorStructure.buns) {
+        dispatch({
+          type: SET_INITIAL_BUNS,
+          buns: getInitBuns()
+        });
+      }
     }
   }, [constructorStructure.main.length])
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(item: TDroppedItem) {
+    drop(item: TDnDConstructorCntTarget) {
       // поиск ингредиента в сторе
       const currentIngredient = ingredientsData.find(ingredient => {
         return ingredient._id === item.id
@@ -74,9 +73,9 @@ function BurgerConstructor() {
 
   function sendOrder() {
     if (hasToken) {
-      const orderList: TIngredientNotRequired[] = Object.assign([], constructorStructure.main);
-      orderList.unshift(constructorStructure.buns);
-      orderList.push(constructorStructure.buns);
+      const orderList: TIngredient[] = Object.assign([], constructorStructure.main);
+      orderList.unshift(constructorStructure.buns!);
+      orderList.push(constructorStructure.buns!);
       dispatch(sendOrderAction(orderList));
       dispatch(openOrderDetailsAction());
     }
@@ -85,40 +84,42 @@ function BurgerConstructor() {
     }
   }
 
-  return (
-    <section className={burgerConstructorStyles.section}>
-      <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
+  if (constructorStructure.buns) {
+    return (
+      <section className={burgerConstructorStyles.section}>
+        <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
 
-        <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} key={0} />
+          <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} key={0} />
 
-        <div ref={windowCntRef} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
+          <div ref={windowCntRef} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
-          {constructorStructure.main.length !== 0 ?
-            constructorStructure.main.map((item, i) => {
-              return (<BurgerItem ingredient={item} type={null} isLocked={false} isMain={true} text={''} id={i} key={i} />)
-            })
-            :
-            <p className={`${burgerConstructorStyles.instruction} text text_type_main-medium`}>Добавьте ингредиенты</p>
+            {constructorStructure.main.length !== 0 ?
+              constructorStructure.main.map((item, i) => {
+                return (<BurgerItem ingredient={item} isLocked={false} isMain={true} text={''} id={i} key={i} />)
+              })
+              :
+              <p className={`${burgerConstructorStyles.instruction} text text_type_main-medium`}>Добавьте ингредиенты</p>
+            }
+
+          </div>
+
+          {constructorStructure.buns!.name &&
+            <BurgerItem ingredient={constructorStructure.buns} type={'bottom'} isLocked={true} isMain={false} text={'(низ)'} key={1} />
           }
 
         </div>
-
-        {constructorStructure.buns!.name &&
-          <BurgerItem ingredient={constructorStructure.buns} type={'bottom'} isLocked={true} isMain={false} text={'(низ)'} key={1} />
-        }
-
-      </div>
-      <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>
-        <Button type="primary" size="large" onClick={sendOrder} htmlType='submit'>
-          Оформить заказ
-        </Button>
-        <div className={`${burgerConstructorStyles.sum} mr-10`}>
-          <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>{`${sum()}`}</p>
-          <CurrencyIcon type="primary" />
+        <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>
+          <Button type="primary" size="large" onClick={sendOrder} htmlType='submit'>
+            Оформить заказ
+          </Button>
+          <div className={`${burgerConstructorStyles.sum} mr-10`}>
+            <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>{`${sum()}`}</p>
+            <CurrencyIcon type="primary" />
+          </div>
         </div>
-      </div>
-    </section>
-  )
+      </section>
+    )
+  }
 }
 
 export default BurgerConstructor;

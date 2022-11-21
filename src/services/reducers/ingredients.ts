@@ -40,7 +40,7 @@ const orderState: IApiStatusWithOrderNum = {
 }
 
 const constructorState: TConstructorState = {
-  buns: {},
+  buns: undefined,
   main: [],
   counter: {}
 }
@@ -116,10 +116,17 @@ const order = (state = orderState, action: TIngredientsActions | ICloseModalActi
 const burgerConstructor = (state = constructorState, action: TIngredientsActions) => {
   switch (action.type) {
     case ADD_INGREDIENT:
-      return {
-        ...state,
-        buns: action.ingredient.type === 'bun' ? action.ingredient : state.buns,
-        main: action.ingredient.type !== 'bun' ? [...state.main, action.ingredient] : state.main
+      if (action.ingredient.type === 'bun') {
+        return {
+          ...state,
+          buns: action.ingredient
+        }
+      }
+      else {
+        return {
+          ...state,
+          main: [...state.main, action.ingredient]
+        }
       }
 
     case UPDATE_COUNTER:

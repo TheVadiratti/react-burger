@@ -24,3 +24,12 @@ export type TOrder = {
   updatedAt: string;
   _id: string;
 }
+
+// DnD
+
+export type TDnDConstructorCntTarget = {
+  id: string;
+}
+export type TDnDBurgerItemTarget = {
+  id: string;
+}
