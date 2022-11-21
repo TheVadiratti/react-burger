@@ -1,5 +1,5 @@
 import orderDetailsStyles from './OrderDetails.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../hooks/hooks';
 
 function OrderDetails() {
   const {number, isSuccess} = useSelector((state) => state.order);
