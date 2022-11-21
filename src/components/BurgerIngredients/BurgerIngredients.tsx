@@ -1,33 +1,33 @@
-import React from 'react';
+import { useState, useRef } from 'react';
 import burgerIngredientsStyles from './BurgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks/hooks';
 import { openIngredientDetailsAction } from '../../services/actions/modal';
 import Ingredient from '../Ingredient/Ingredient';
 import { useHistory } from 'react-router-dom';
 import { MAKE_MODAL_INGREDIENT } from '../../utils/constants';
 
 function BurgerIngredients() {
-  const [current, setCurrent] = React.useState('one');
-  const {data, isSuccess} = useSelector((state) => state.ingredients);
+  const [current, setCurrent] = useState('one');
+  const { data, isSuccess } = useSelector((state) => state.ingredients);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const windowCntRef = React.useRef(null);
-  const bunSectionRef = React.useRef(null);
-  const sauceSectionRef = React.useRef(null);
-  const mainSectionRef = React.useRef(null);
+  const windowCntRef = useRef<HTMLDivElement>(null);
+  const bunSectionRef = useRef<HTMLDivElement>(null);
+  const sauceSectionRef = useRef<HTMLDivElement>(null);
+  const mainSectionRef = useRef<HTMLDivElement>(null);
 
   function autoToggleByScroll() {
-    const bunSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - bunSectionRef.current.getBoundingClientRect().top);
-    const sauceSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - sauceSectionRef.current.getBoundingClientRect().top);
-    const mainSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - mainSectionRef.current.getBoundingClientRect().top);
+    const bunSectionDist = Math.abs(windowCntRef.current!.getBoundingClientRect().top - bunSectionRef.current!.getBoundingClientRect().top);
+    const sauceSectionDist = Math.abs(windowCntRef.current!.getBoundingClientRect().top - sauceSectionRef.current!.getBoundingClientRect().top);
+    const mainSectionDist = Math.abs(windowCntRef.current!.getBoundingClientRect().top - mainSectionRef.current!.getBoundingClientRect().top);
 
-    const bottomWindow = windowCntRef.current.getBoundingClientRect().bottom;
-    const bottomLastEl = mainSectionRef.current.getBoundingClientRect().bottom;
+    const bottomWindow = windowCntRef.current!.getBoundingClientRect().bottom;
+    const bottomLastEl = mainSectionRef.current!.getBoundingClientRect().bottom;
 
     const minDist = Math.min(bunSectionDist, sauceSectionDist, mainSectionDist);
-    
+
 
     switch (minDist) {
       case bunSectionDist:
@@ -48,11 +48,11 @@ function BurgerIngredients() {
     }
   }
 
-  function scrollOnTarget(section) {
-    section.current.scrollIntoView({ behavior: "smooth" });
+  function scrollOnTarget(section: React.RefObject<HTMLDivElement>) {
+    section.current!.scrollIntoView({ behavior: "smooth" });
   }
 
-  function setCurrentTab(e) {
+  function setCurrentTab(e: any) {
     setCurrent(e)
     switch (e) {
       case 'one':
@@ -67,16 +67,16 @@ function BurgerIngredients() {
     }
   }
 
-  function openIngredientDetailsPopup(e) {
+  function openIngredientDetailsPopup(e: any) {
     const id = e.currentTarget.getAttribute('id');
     dispatch(openIngredientDetailsAction());
     dispatch({
       type: MAKE_MODAL_INGREDIENT
     });
-    history.replace({pathname: `/ingredients/${id}`});
+    history.replace({ pathname: `/ingredients/${id}` });
   }
 
-  function renderInredientsListOfType(type) {
+  function renderInredientsListOfType(type: string) {
     return data.map(item => {
       if (item.type === `${type}`) {
         return (
@@ -97,28 +97,28 @@ function BurgerIngredients() {
       </div>
 
       {isSuccess &&
-      <div ref={windowCntRef} onScroll={autoToggleByScroll} className={`${burgerIngredientsStyles.window} mt-10`}>
-        <div id='one' ref={bunSectionRef}>
-          <h2 className='text text_type_main-medium mb-6'>Булки</h2>
-          <div className={burgerIngredientsStyles.options}>
-            {renderInredientsListOfType('bun')}
+        <div ref={windowCntRef} onScroll={autoToggleByScroll} className={`${burgerIngredientsStyles.window} mt-10`}>
+          <div id='one' ref={bunSectionRef}>
+            <h2 className='text text_type_main-medium mb-6'>Булки</h2>
+            <div className={burgerIngredientsStyles.options}>
+              {renderInredientsListOfType('bun')}
+            </div>
+          </div>
+          <div id='two' ref={sauceSectionRef}>
+            <h2 className='text text_type_main-medium mt-10 mb-6'>Cоусы</h2>
+            <div className={burgerIngredientsStyles.options}>
+              {renderInredientsListOfType('sauce')}
+            </div>
+          </div>
+          <div id='three' ref={mainSectionRef}>
+            <h2 className='text text_type_main-medium mt-10 mb-6'>Начинки</h2>
+            <div className={burgerIngredientsStyles.options}>
+              {renderInredientsListOfType('main')}
+            </div>
           </div>
         </div>
-        <div id='two' ref={sauceSectionRef}>
-          <h2 className='text text_type_main-medium mt-10 mb-6'>Cоусы</h2>
-          <div className={burgerIngredientsStyles.options}>
-            {renderInredientsListOfType('sauce')}
-          </div>
-        </div>
-        <div id='three' ref={mainSectionRef}>
-          <h2 className='text text_type_main-medium mt-10 mb-6'>Начинки</h2>
-          <div className={burgerIngredientsStyles.options}>
-            {renderInredientsListOfType('main')}
-          </div>
-        </div>
-      </div>
       }
-      
+
     </section>
   )
 }
