@@ -24,5 +24,5 @@ export interface IApiStatusState {
 }
 
 export interface IApiStatusWithMessage extends IApiStatusState {
-  message: string | null;
+  message?: string;
 }

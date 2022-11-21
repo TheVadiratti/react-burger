@@ -1,3 +1,4 @@
+import { Reducer } from "redux";
 import {
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
@@ -22,45 +23,45 @@ import {
 import { IApiStatusState, IApiStatusWithMessage } from "../types";
 import { TAccountActions } from "../types/account";
 
-const changePasswordState: IApiStatusWithMessage = {
+const changePasswordState = {
   isLoaded: false,
   isSuccess: false,
   isError: false,
-  message: null
+  message: undefined
 }
 
-const resetPasswordState: IApiStatusWithMessage = {
+const resetPasswordState = {
   isLoaded: false,
   isSuccess: false,
   isError: false,
-  message: null
+  message: undefined
 }
 
-const registrationState: IApiStatusState = {
+const registrationState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const authorizationState: IApiStatusState = {
+const authorizationState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const updateTokenState: IApiStatusState = {
+const updateTokenState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const logoutState: IApiStatusState = {
+const logoutState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const changePassword = (state = changePasswordState, action: TAccountActions) => {
+const changePassword: Reducer<IApiStatusWithMessage, TAccountActions> = (state = changePasswordState, action) => {
   switch (action.type) {
     case CHANGE_PASSWORD_REQUEST:
       return {
@@ -82,7 +83,8 @@ const changePassword = (state = changePasswordState, action: TAccountActions) =>
       return {
         isLoaded: false,
         isSuccess: false,
-        isError: true
+        isError: true,
+        message: action.message
       }
 
     case CHANGE_PASSWORD_RESET_STATE:
@@ -93,7 +95,7 @@ const changePassword = (state = changePasswordState, action: TAccountActions) =>
   }
 }
 
-const resetPassword = (state = resetPasswordState, action: TAccountActions) => {
+const resetPassword: Reducer<IApiStatusWithMessage, TAccountActions> = (state = resetPasswordState, action) => {
   switch (action.type) {
     case RESET_PASSWORD_REQUEST:
       return {
@@ -124,7 +126,7 @@ const resetPassword = (state = resetPasswordState, action: TAccountActions) => {
   }
 }
 
-const registration = (state = registrationState, action: TAccountActions) => {
+const registration: Reducer<IApiStatusState, TAccountActions> = (state = registrationState, action) => {
   switch (action.type) {
     case REGISTRATION_REQUEST:
       return {
@@ -163,7 +165,7 @@ const registration = (state = registrationState, action: TAccountActions) => {
   }
 }
 
-const authorization = (state = authorizationState, action: TAccountActions) => {
+const authorization: Reducer<IApiStatusState, TAccountActions> = (state = authorizationState, action) => {
   switch (action.type) {
     case AUTHORIZATION_REQUEST:
       return {
@@ -202,7 +204,7 @@ const authorization = (state = authorizationState, action: TAccountActions) => {
   }
 }
 
-const updateToken = (state = updateTokenState, action: TAccountActions) => {
+const updateToken: Reducer<IApiStatusState, TAccountActions> = (state = updateTokenState, action) => {
   switch (action.type) {
     case UPDATE_TOKEN_REQUEST:
       return {
@@ -232,7 +234,7 @@ const updateToken = (state = updateTokenState, action: TAccountActions) => {
   }
 }
 
-const logout = (state = logoutState, action: TAccountActions) => {
+const logout: Reducer<IApiStatusState, TAccountActions> = (state = logoutState, action) => {
   switch (action.type) {
     case LOGOUT_REQUEST:
       return {

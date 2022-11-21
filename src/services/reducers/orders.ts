@@ -1,10 +1,11 @@
+import { Reducer } from 'redux';
 import {
   wsAllOrdersActions, wsMyOrdersActions
 } from '../../utils/constants';
 import { TOrdersState } from '../types/orders';
 import { TWsOrdersAction } from '../types/web-socket';
 
-const ordersState: TOrdersState = {
+const ordersState = {
   all: {
     total: undefined,
     totalToday: undefined,
@@ -17,7 +18,7 @@ const ordersState: TOrdersState = {
   }
 };
 
-const orders = (state = ordersState, action: TWsOrdersAction) => {
+const orders: Reducer<TOrdersState, TWsOrdersAction> = (state = ordersState, action) => {
   switch (action.type) {
     case wsAllOrdersActions.getMessage:
       const messageAll = JSON.parse(action.payload);

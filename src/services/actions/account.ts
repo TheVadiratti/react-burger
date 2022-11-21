@@ -85,7 +85,8 @@ const changePasswordFetchAction: AppThunk = (email: string) => {
       })
       .catch(error => {
         dispatch({
-          type: CHANGE_PASSWORD_ERROR
+          type: CHANGE_PASSWORD_ERROR,
+          message: error.message
         })
         console.log(error);
       })

@@ -8,25 +8,26 @@ import { SET_USER_DATA,
 } from "../../utils/constants";
 import { TUserState, TUserActions } from "../types/user";
 import { IApiStatusState } from "../types";
+import { Reducer } from "redux";
 
-const userState: TUserState = {
+const userState = {
   email: '',
   name: ''
 }
 
-const getUserDataState: IApiStatusState = {
+const getUserDataState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const updateUserDataState: IApiStatusState = {
+const updateUserDataState = {
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const user = (state = userState, action: TUserActions) => {
+const user: Reducer<TUserState, TUserActions> = (state = userState, action) => {
   switch (action.type) {
     case SET_USER_DATA:
       return {
@@ -39,7 +40,7 @@ const user = (state = userState, action: TUserActions) => {
   }
 }
 
-const getUserData = (state = getUserDataState, action: TUserActions) => {
+const getUserData: Reducer<IApiStatusState, TUserActions> = (state = getUserDataState, action) => {
   switch (action.type) {
     case GET_USER_DATA_REQUEST:
       return {
@@ -69,7 +70,7 @@ const getUserData = (state = getUserDataState, action: TUserActions) => {
   }
 }
 
-const updateUserData = (state = updateUserDataState, action: TUserActions) => {
+const updateUserData: Reducer<IApiStatusState, TUserActions> = (state = updateUserDataState, action) => {
   switch (action.type) {
     case UPDATE_USER_DATA_REQUEST:
       return {

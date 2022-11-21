@@ -26,27 +26,27 @@ interface IApiStatusWithOrderNum extends IApiStatusState {
   number?: number;
 }
 
-const ingredientsState: IApiStatusWithIngredients = {
+const ingredientsState = {
   data: [],
   isLoaded: false,
   isSuccess: false,
   isError: false
 };
 
-const orderState: IApiStatusWithOrderNum = {
+const orderState = {
   number: undefined,
   isLoaded: false,
   isSuccess: false,
   isError: false
 }
 
-const constructorState: TConstructorState = {
+const constructorState = {
   buns: undefined,
   main: [],
   counter: undefined
 }
 
-const ingredients = (state = ingredientsState, action: TIngredientsActions) => {
+const ingredients: Reducer<IApiStatusWithIngredients, TIngredientsActions> = (state = ingredientsState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
       return {
@@ -77,7 +77,7 @@ const ingredients = (state = ingredientsState, action: TIngredientsActions) => {
   }
 }
 
-const order = (state = orderState, action: TIngredientsActions | ICloseModalAction) => {
+const order: Reducer<IApiStatusWithOrderNum, TIngredientsActions | ICloseModalAction> = (state = orderState, action) => {
   switch (action.type) {
     case SEND_ORDER_REQUEST:
       return {
@@ -114,7 +114,7 @@ const order = (state = orderState, action: TIngredientsActions | ICloseModalActi
   }
 }
 
-const burgerConstructor = (state = constructorState, action: TIngredientsActions) => {
+const burgerConstructor: Reducer<TConstructorState, TIngredientsActions> = (state = constructorState, action) => {
   switch (action.type) {
     case ADD_INGREDIENT:
       if (action.ingredient.type === 'bun') {

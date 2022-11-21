@@ -1,12 +1,13 @@
+import { Reducer } from 'redux';
 import { wsAllOrdersActions, wsMyOrdersActions } from '../../utils/constants';
 import { TWsState, TWsOrdersAction } from '../types/web-socket';
 
-const socketState: TWsState = {
+const socketState = {
   wsConnected: false,
   error: undefined
 };
 
-export const ws = (state = socketState, action: TWsOrdersAction) => {
+export const ws: Reducer<TWsState, TWsOrdersAction> = (state = socketState, action) => {
   switch (action.type) {
     case wsAllOrdersActions.success || wsMyOrdersActions.success:
       return {
