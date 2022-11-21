@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from '../../hooks/hooks';
 import { useHistory } from 'react-router-dom';
 import burgerConstructorStyles from './BurgerConstructor.module.css';
@@ -7,6 +7,7 @@ import BurgerItem from '../BurgerItem/BurgerItem';
 import { sendOrderAction, addIngredientAction, updateCounterAction } from '../../services/actions/ingredients';
 import { openOrderDetailsAction } from '../../services/actions/modal';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
+import useFindIngredient from '../../hooks/useFindIngredient';
 import { SET_INITIAL_BUNS } from '../../utils/constants';
 import { TIngredient } from '../../types';
 import { TDnDConstructorCntTarget } from '../../types';
@@ -18,10 +19,11 @@ function BurgerConstructor() {
   const history = useHistory();
   const hasToken = localStorage.getItem('refreshToken');
   const isDataSuccess = useSelector((state) => state.ingredients.isSuccess);
+  const findIngredient = useFindIngredient();
 
-  const windowCntRef = React.useRef<HTMLDivElement>(null);
+  const windowCntRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // плавная прокрутка к последнему добавленному ингредиенту
     windowCntRef.current?.scrollBy({
       top: windowCntRef.current.scrollHeight,
@@ -42,9 +44,7 @@ function BurgerConstructor() {
     accept: "ingredient",
     drop(item: TDnDConstructorCntTarget) {
       // поиск ингредиента в сторе
-      const currentIngredient = ingredientsData.find(ingredient => {
-        return ingredient._id === item.id
-      });
+      const currentIngredient = findIngredient(item.id);
       if (currentIngredient) {
         dispatch(addIngredientAction(currentIngredient));
         if (currentIngredient.type !== 'bun') {
