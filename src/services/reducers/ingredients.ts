@@ -42,7 +42,7 @@ const orderState: IApiStatusWithOrderNum = {
 const constructorState: TConstructorState = {
   buns: undefined,
   main: [],
-  counter: {}
+  counter: undefined
 }
 
 const ingredients = (state = ingredientsState, action: TIngredientsActions) => {

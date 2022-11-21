@@ -79,8 +79,12 @@ export type TIngredientsActions =
   | ISendOrderErrorAction
   | ISetInitialBunsAction;
 
+type TCounter = {
+  [key: string]: number;
+};
+
 export type TConstructorState = {
   buns?: TIngredient;
   main: TIngredient[];
-  counter: object;
+  counter?: TCounter;
 };

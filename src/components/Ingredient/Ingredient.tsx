@@ -1,29 +1,35 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import ingredientStyles from './Ingredient.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../hooks/hooks';
 import { useDrag } from "react-dnd";
-import PropTypes from 'prop-types';
 
-function Ingredient({ image, name, price, _id }) {
+type TProps = {
+  image: string;
+  name: string;
+  price: number;
+  _id: string;
+};
+
+function Ingredient({ image, name, price, _id }: TProps) {
   const constructorStructure = useSelector((state) => state.burgerConstructor);
-  const [counter, setCounter] = React.useState(null);
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: { id: _id }
   });
 
-  React.useEffect(() => {
-    setCounter(counterRender);
-  }, [constructorStructure])
+  useEffect(() => {
+  }, [constructorStructure]);
 
   function counterRender() {
     if (constructorStructure.buns) {
       if (constructorStructure.buns._id === _id) {
         return (<Counter count={2} size="default" />)
       }
-      else if (constructorStructure.counter[_id]) {
-        return (<Counter count={constructorStructure.counter[_id]} size="default" />)
+      else if (constructorStructure.counter) {
+        if (constructorStructure.counter[_id]) {
+          return (<Counter count={constructorStructure.counter[_id]} size="default" />)
+        }
       }
       else {
         return;
@@ -39,19 +45,9 @@ function Ingredient({ image, name, price, _id }) {
         <CurrencyIcon type="primary" />
       </div>
       <h3 className="text text_type_main-default" ref={dragRef}>{name}</h3>
-      {counter}
+      {counterRender()}
     </div>
   )
 }
 
 export default Ingredient;
-
-Ingredient.propTypes = {
-  image: PropTypes.string,
-
-  name: PropTypes.string,
-
-  price: PropTypes.number,
-
-  _id: PropTypes.string
-}; 
