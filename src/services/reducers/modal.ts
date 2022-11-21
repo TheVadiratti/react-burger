@@ -1,3 +1,4 @@
+import { Reducer } from 'redux';
 import {
   CLOSE_MODAL,
   OPEN_INGREDIENT_DETAILS,
@@ -10,9 +11,9 @@ import {
 } from '../../utils/constants';
 import { TModalState, TModalActions } from '../types/modal';
 
-const modalState: TModalState = {
+const modalState = {
   open: false,
-  type: '',
+  type: undefined,
   pageView: {
     ingredient: true,
     order: true,
@@ -20,7 +21,7 @@ const modalState: TModalState = {
   }
 }
 
-const modal = (state = modalState, action: TModalActions) => {
+const modal: Reducer<TModalState, TModalActions> = (state = modalState, action) => {
   switch (action.type) {
     case OPEN_INGREDIENT_DETAILS:
       return {

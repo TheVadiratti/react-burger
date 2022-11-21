@@ -9,11 +9,11 @@ import {
   MAKE_MODAL_MY_ORDER
 } from '../../utils/constants';
 
-type TModalType = 'IngredientDetails' | 'OrderDetails' | 'OrderInfo' | 'MyOrderInfo' | '';
+type TModalType = 'IngredientDetails' | 'OrderDetails' | 'OrderInfo' | 'MyOrderInfo';
 
 export type TModalState = {
   open: boolean;
-  type: TModalType;
+  type?: TModalType;
   pageView: {
     ingredient: boolean;
     order: boolean;

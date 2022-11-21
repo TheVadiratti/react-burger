@@ -16,13 +16,14 @@ import { IApiStatusState } from '../types';
 import { TConstructorState, TIngredientsActions } from '../types/ingredients';
 import { TIngredient } from '../../types';
 import { ICloseModalAction } from '../types/modal';
+import { Reducer } from 'redux';
 
 interface IApiStatusWithIngredients extends IApiStatusState {
   data: TIngredient[];
 }
 
 interface IApiStatusWithOrderNum extends IApiStatusState {
-  number: number | null;
+  number?: number;
 }
 
 const ingredientsState: IApiStatusWithIngredients = {
@@ -33,7 +34,7 @@ const ingredientsState: IApiStatusWithIngredients = {
 };
 
 const orderState: IApiStatusWithOrderNum = {
-  number: null,
+  number: undefined,
   isLoaded: false,
   isSuccess: false,
   isError: false
@@ -105,7 +106,7 @@ const order = (state = orderState, action: TIngredientsActions | ICloseModalActi
     case CLOSE_MODAL:
       return {
         ...state,
-        number: null
+        number: undefined
       }
 
     default:

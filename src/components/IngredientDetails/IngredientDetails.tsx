@@ -1,11 +1,15 @@
 import ingredientDetails from './IngredientDetails.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../hooks/hooks';
 import { useParams } from 'react-router-dom';
+
+type TParams = {
+  id: string;
+}
 
 function IngredientDetails() {
   const ingredientsData = useSelector((state) => state.ingredients.data);
   const isPageView = useSelector((state) => state.modal.pageView.ingredient);
-  const params = useParams();
+  const params = useParams<TParams>();
 
   const currentIngredient = ingredientsData.find(item => {
     return item._id === params.id;

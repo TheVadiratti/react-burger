@@ -54,7 +54,7 @@ interface ISendOrderRequestAction {
 
 interface ISendOrderSuccessAction {
   readonly type: typeof SEND_ORDER_SUCCESS;
-  readonly data: string[];
+  readonly data: number;
 }
 
 interface ISendOrderErrorAction {
