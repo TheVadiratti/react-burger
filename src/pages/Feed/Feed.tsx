@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import ordersStyles from './Feed.module.css';
 import OrdersList from '../../components/OrdersList/OrdersList';
 import OrdersInfo from '../../components/OrdersInfo/OrdersInfo';
