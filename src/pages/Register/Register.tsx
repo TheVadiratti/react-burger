@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { Redirect } from 'react-router-dom';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -21,11 +21,11 @@ function Register() {
     }
   ]
 
-  function onChange(e) {
+  function onChange(e: any) {
     setValuePassword(e.target.value)
   }
 
-  function submitForm(e) {
+  function submitForm(e: any) {
     e.preventDefault();
     dispatch(registationFetchAction(valueEmail, valuePassword, valueName));
   }
