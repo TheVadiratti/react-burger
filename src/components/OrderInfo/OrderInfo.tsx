@@ -8,7 +8,6 @@ import { getTimeString, getQuantity } from '../../utils/utils';
 import useSumCost from '../../hooks/useSumCost';
 import useFindIngredient from '../../hooks/useFindIngredient';
 import { wsAllOrdersActions, wsMyOrdersActions } from '../../utils/constants';
-import { TIngredient } from '../../types';
 
 type TProps = {
   type: string;
