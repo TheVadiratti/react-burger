@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { Redirect } from "react-router-dom";
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -26,11 +26,11 @@ function Login() {
     }
   ]
 
-  const onChange = e => {
+  const onChange = (e: any) => {
     setValuePassword(e.target.value)
   }
 
-  function onSubmit(e) {
+  function onSubmit(e: any) {
     e.preventDefault();
     dispatch(authorizationFetchAction(valueEmail, valuePassword));
   }
