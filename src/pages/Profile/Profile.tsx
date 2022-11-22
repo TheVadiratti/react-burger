@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../hooks/hooks";
 import { NavLink, useLocation } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import commonStyles from '../CommonStyles.module.css';
