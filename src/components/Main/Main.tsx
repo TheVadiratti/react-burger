@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Switch, Route, useLocation, Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from '../../hooks/hooks';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import MainPage from '../../pages/MainPage/MainPage';
 import Feed from '../../pages/Feed/Feed';
@@ -60,7 +60,7 @@ function Main() {
         <Route path="/" exact={pageView.ingredient}>
           <MainPage />
           {(modalEnable && modalType === 'OrderDetails') &&
-            <Modal heading={''} isPageType={false}>
+            <Modal isPageType={false}>
               <OrderDetails />
             </Modal>
           }
@@ -68,7 +68,7 @@ function Main() {
       </Switch>
       <Route path="/ingredients/:id" exact>
         {modalEnable &&
-          <Modal heading={'Детали ингредиента'} isPageType={pageView.ingredient}>
+          <Modal isPageType={pageView.ingredient}>
             <IngredientDetails />
           </Modal>
         }
