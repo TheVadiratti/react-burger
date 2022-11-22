@@ -1,7 +1,13 @@
-import { useSelector } from 'react-redux';
+import { ReactNode } from 'react';
+import { useSelector } from '../../hooks/hooks';
 import { Route, Redirect } from 'react-router-dom';
 
-function ProtectedRoute({ children, ...props }) {
+type TProps = {
+  children: ReactNode;
+  [key: string]: any;
+};
+
+function ProtectedRoute({ children, ...props }: TProps) {
   const userName = useSelector((state) => state.user.name);
   const hasToken = localStorage.getItem('refreshToken');
 
