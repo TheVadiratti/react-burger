@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import profileHistoryStyles from './Orders.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useHistory } from 'react-router-dom';
@@ -8,6 +8,7 @@ import OrderIngredients from '../../components/OrderIngredients/OrderIngredients
 import { openOrderInfoAction } from '../../services/actions/modal';
 import { MAKE_MODAL_MY_ORDER } from '../../utils/constants';
 import OrderStatus from '../../components/OrderStatus/OrderStatus';
+import { TOrder } from '../../types';
 
 function Orders() {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function Orders() {
   const history = useHistory();
   const sumCost = useSumCost();
 
-  function openOrder(e) {
+  function openOrder(e: any) {
     const id = e.currentTarget.getAttribute('id');
     dispatch(openOrderInfoAction());
     dispatch({
@@ -25,7 +26,7 @@ function Orders() {
   }
 
   function renderOrders() {
-    let reverseOrders = [];
+    let reverseOrders: TOrder[] = [];
     orders.forEach(item => {
       reverseOrders.unshift(item);
     });
