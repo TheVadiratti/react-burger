@@ -1,8 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import profileFormStyles from './ProfileForm.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { updateUserDataFetchAction } from '../../services/actions/user';
+
+type TSubmitFormData = {
+  name?: string;
+  login?: string;
+  password?: string;
+};
 
 function ProfileForm() {
   const initialUserState = {
@@ -44,7 +50,7 @@ function ProfileForm() {
   }
 
   function submitForm() {
-    let data = {};
+    let data: TSubmitFormData = {};
     if (userState.name !== userName) {
       data.name = userState.name;
     }
@@ -80,7 +86,6 @@ function ProfileForm() {
         disabled={inputState.name}
         onIconClick={() => { setInputState({ ...inputState, name: !inputState.name }) }}
         ref={nameRef}
-        onFocus={true}
       />
       <Input
         type={'email'}
