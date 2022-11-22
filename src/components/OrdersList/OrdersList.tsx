@@ -16,7 +16,7 @@ function OrdersList() {
   const dispatch = useDispatch();
   const sumCost = useSumCost();
 
-  function openOrder(e) {
+  function openOrder(e: any) {
     const id = e.currentTarget.getAttribute('id');
     dispatch(openOrderInfoAction());
     dispatch({
