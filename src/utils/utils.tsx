@@ -1,4 +1,6 @@
-function checkResponse(res) {
+import { RefObject } from 'react';
+
+function checkResponse(res: Response) {
   if (res.ok) {
     return res.json();
   }
@@ -7,22 +9,22 @@ function checkResponse(res) {
   }
 }
 
-function showPassword(ref) {
-  ref.current.setAttribute('type', 'password');
+function showPassword(ref: RefObject<HTMLInputElement>) {
+  ref.current?.setAttribute('type', 'password');
 }
 
-function hidePassword(ref) {
-  ref.current.setAttribute('type', 'text');
+function hidePassword(ref: RefObject<HTMLInputElement>) {
+  ref.current?.setAttribute('type', 'text');
 }
 
-function getTimeString(ISO) {
+function getTimeString(ISO: string) {
   const date = new Date(ISO);
   const dateToday = new Date();
 
   const hours = date.getUTCHours() > 9 ? String(date.getUTCHours()) : '0' + String(date.getUTCHours());
   const minutes = date.getUTCMinutes() > 9 ? String(date.getUTCMinutes()) : '0' + String(date.getUTCMinutes());
 
-  function getLastDigit(timeframe) {
+  function getLastDigit(timeframe: string) {
     const array = Array.from(timeframe);
     return array[array.length - 1];
   }
@@ -30,7 +32,7 @@ function getTimeString(ISO) {
   let period;
   if (dateToday.getUTCFullYear() > date.getUTCFullYear()) {
     period = String(dateToday.getUTCFullYear() - date.getUTCFullYear());
-    const lastDigit = getLastDigit(period);
+    const lastDigit = Number(getLastDigit(period));
     if (lastDigit === 1) {
       period = period + ' год';
     }
@@ -45,7 +47,7 @@ function getTimeString(ISO) {
 
   else if (dateToday.getUTCMonth() > date.getUTCMonth()) {
     period = String(dateToday.getUTCMonth() - date.getUTCMonth());
-    const lastDigit = getLastDigit(period);
+    const lastDigit = Number(getLastDigit(period));
     if (lastDigit === 1) {
       period = period + ' месяц';
     }
@@ -61,7 +63,6 @@ function getTimeString(ISO) {
   else if (dateToday.getUTCDate() >= date.getUTCDate()) {
     period = String(dateToday.getUTCDate() - date.getUTCDate());
     const lastDigit = Number(getLastDigit(period));
-    // me here
     if (Number(period) < 2) {
       if (Number(period) === 0) {
         period = 'Сегодня,';
@@ -90,11 +91,11 @@ function getTimeString(ISO) {
   return period + ' ' + hours + ':' + minutes + ' i-GMT' + gmt;
 }
 
-function getQuantity (array, target) {
+function getQuantity(array: any[], target: any) {
   let quantity = 0;
   array.forEach(item => {
-    if(item === target) {
-      quantity += 1; 
+    if (item === target) {
+      quantity += 1;
     }
   })
   return quantity;

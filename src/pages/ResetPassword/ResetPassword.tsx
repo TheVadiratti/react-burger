@@ -13,7 +13,7 @@ function ResetPassword() {
   const [showPasswordState, setShowPassword] = useState<{enable: boolean; icon: 'ShowIcon' | 'HideIcon'}>({ enable: false, icon: 'ShowIcon' });
   const requestSuccess = useSelector((state) => state.resetPassword.isSuccess);
   const preRequestSuccess = useSelector((state) => state.changePassword.isSuccess);
-  const inputPasswordRef = useRef(null);
+  const inputPasswordRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const hasToken = localStorage.getItem('refreshToken');
   const forgotPasswordHints = [
