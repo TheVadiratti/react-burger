@@ -1,20 +1,27 @@
 import { useEffect } from 'react';
 import orderInfoStyles from './OrderInfo.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks/hooks';
 import { useParams } from 'react-router-dom';
 import OrderStatus from '../OrderStatus/OrderStatus';
 import { getTimeString, getQuantity } from '../../utils/utils';
 import useSumCost from '../../hooks/useSumCost';
 import useFindIngredient from '../../hooks/useFindIngredient';
 import { wsAllOrdersActions, wsMyOrdersActions } from '../../utils/constants';
-import PropTypes from 'prop-types';
+import { TIngredient } from '../../types';
 
+type TProps = {
+  type: string;
+};
 
-function OrderInfo({ type }) {
+type TParams = {
+  id: string;
+};
+
+function OrderInfo({ type }: TProps) {
   const orders = useSelector((state) => state.orders);
   const wsConnected = useSelector((state) => state.ws.wsConnected);
-  const params = useParams();
+  const params = useParams<TParams>();
   const dispatch = useDispatch();
   const sumCost = useSumCost();
   const findIngredient = useFindIngredient();
@@ -56,28 +63,30 @@ function OrderInfo({ type }) {
   });
 
   function renderComponents() {
-    let rendered = [];
-    return currentOrder.ingredients.map((ingredient, i) => {
-      const currentIngredient = findIngredient(ingredient);
-      const hasAlready = rendered.some(item => {
-        return item === ingredient;
+    if (currentOrder) {
+      let renderedIngredients: string[] = [];
+      return currentOrder.ingredients.map((ingredient, i) => {
+        const currentIngredient = findIngredient(ingredient);
+        const hasAlready = renderedIngredients.some(item => {
+          return item === ingredient;
+        })
+        if (!hasAlready && currentIngredient) {
+          renderedIngredients.push(ingredient);
+          return (
+            <li className={orderInfoStyles.component} key={i}>
+              <div className={orderInfoStyles.fakeBorder}>
+                <div className={orderInfoStyles.img} style={{ backgroundImage: `url(${currentIngredient.image})` }}></div>
+              </div>
+              <h5 className={`text text_type_main-default ${orderInfoStyles.componentName}`}>{currentIngredient.name}</h5>
+              <div className={orderInfoStyles.priceCnt}>
+                <span className="text text_type_digits-default">{`${getQuantity(currentOrder.ingredients, ingredient)} x ${currentIngredient.price}`}</span>
+                <CurrencyIcon type="primary" />
+              </div>
+            </li>
+          )
+        }
       })
-      if (!hasAlready) {
-        rendered.push(ingredient);
-        return (
-          <li className={orderInfoStyles.component} key={i}>
-            <div className={orderInfoStyles.fakeBorder}>
-              <div className={orderInfoStyles.img} style={{ backgroundImage: `url(${currentIngredient.image})` }}></div>
-            </div>
-            <h5 className={`text text_type_main-default ${orderInfoStyles.componentName}`}>{currentIngredient.name}</h5>
-            <div className={orderInfoStyles.priceCnt}>
-              <span className="text text_type_digits-default">{`${getQuantity(currentOrder.ingredients, ingredient)} x ${currentIngredient.price}`}</span>
-              <CurrencyIcon type="primary" />
-            </div>
-          </li>
-        )
-      }
-    })
+    }
   }
 
   return (currentOrder &&
@@ -103,7 +112,3 @@ function OrderInfo({ type }) {
 }
 
 export default OrderInfo;
-
-OrderInfo.propTypes = {
-  type: PropTypes.string.isRequired
-}; 
