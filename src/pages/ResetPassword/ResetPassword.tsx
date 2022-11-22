@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { Redirect } from 'react-router-dom';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -10,7 +10,7 @@ import { CHANGE_PASSWORD_RESET_STATE } from '../../utils/constants';
 function ResetPassword() {
   const [valuePassword, setValuePassword] = useState('');
   const [valueCode, setValueCode] = useState('');
-  const [showPasswordState, setShowPassword] = useState({ enable: false, icon: 'ShowIcon' });
+  const [showPasswordState, setShowPassword] = useState<{enable: boolean; icon: 'ShowIcon' | 'HideIcon'}>({ enable: false, icon: 'ShowIcon' });
   const requestSuccess = useSelector((state) => state.resetPassword.isSuccess);
   const preRequestSuccess = useSelector((state) => state.changePassword.isSuccess);
   const inputPasswordRef = useRef(null);
@@ -35,7 +35,7 @@ function ResetPassword() {
     }
   }
 
-  function submitForm(e) {
+  function submitForm(e: any) {
     e.preventDefault();
     dispatch(resetPasswordFetchAction(valuePassword, valueCode));
     dispatch({
