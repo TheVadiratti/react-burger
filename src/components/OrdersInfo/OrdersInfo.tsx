@@ -1,12 +1,12 @@
 import orderInfoStyles from './OrdersInfo.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../hooks/hooks';
 
 function OrdersInfo() {
   const orders = useSelector((state) => state.orders.all);
   const maxRenderNumber = 20;
   console.log(orders);
 
-  function renderNumbers(type) {
+  function renderNumbers(type: string) {
     return orders.list.map((order, i) => {
       if (i < maxRenderNumber) {
         if (type === 'done' && type === order.status) {
