@@ -1,9 +1,23 @@
+import { ReactNode } from 'react';
 import styles from './PageWithForm.module.css';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function PageWithForm({ heading, buttonText, hints, children, submitFunc }) {
+type THint = {
+  text: string;
+  link: string;
+  route: string;
+};
+
+type TProps = {
+  heading: string;
+  buttonText: string;
+  hints: THint[];
+  children: ReactNode;
+  submitFunc: (e: any) => void;
+};
+
+function PageWithForm({ heading, buttonText, hints, children, submitFunc }: TProps) {
   function renderHints() {
     return hints.map((hint, i) => {
       if (hints.length - 1 === i) {
@@ -34,10 +48,3 @@ function PageWithForm({ heading, buttonText, hints, children, submitFunc }) {
 }
 
 export default PageWithForm;
-
-PageWithForm.propTypes = {
-  heading: PropTypes.string,
-  buttonText: PropTypes.string,
-  hints: PropTypes.arrayOf(PropTypes.object),
-  submitFunc: PropTypes.func.isRequired
-}; 
