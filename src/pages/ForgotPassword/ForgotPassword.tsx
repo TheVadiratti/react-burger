@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { Redirect } from "react-router-dom";
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -20,7 +20,7 @@ function ForgotPassword() {
     }
   ];
 
-  function submitForm(e) {
+  function submitForm(e: any) {
     e.preventDefault();
     dispatch(changePasswordFetchAction(value));
   }
