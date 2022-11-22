@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import ordersListStyles from './OrdersList.module.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks/hooks';
 import { useHistory } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getTimeString } from '../../utils/utils';
