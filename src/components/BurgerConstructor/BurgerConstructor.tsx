@@ -84,8 +84,7 @@ function BurgerConstructor() {
     }
   }
 
-  if (constructorStructure.buns) {
-    return (
+  return (constructorStructure.buns ? (
       <section className={burgerConstructorStyles.section}>
         <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
 
@@ -118,8 +117,8 @@ function BurgerConstructor() {
           </div>
         </div>
       </section>
-    )
-  }
+    ) : null
+  )
 }
 
 export default BurgerConstructor;
