@@ -80,3 +80,8 @@
   display: flex;
   gap: 9px;
 }
+
+.errorName {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
