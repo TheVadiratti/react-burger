@@ -38,7 +38,8 @@ const orderState = {
   number: undefined,
   isLoading: false,
   isSuccess: false,
-  isError: false
+  isError: false,
+  message: undefined
 }
 
 const constructorState = {
@@ -102,13 +103,15 @@ const order: Reducer<IApiStatusWithOrderNum, TIngredientsActions | ICloseModalAc
         ...state,
         isLoading: false,
         isSuccess: false,
-        isError: true
+        isError: true,
+        message: action.message
       }
 
     case CLOSE_MODAL:
       return {
         ...state,
-        number: undefined
+        number: undefined,
+        message: undefined
       }
 
     default:

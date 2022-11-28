@@ -60,6 +60,7 @@ interface ISendOrderSuccessAction {
 
 interface ISendOrderErrorAction {
   readonly type: typeof SEND_ORDER_ERROR;
+  readonly message: string;
 }
 
 interface ISetInitialBunsAction {

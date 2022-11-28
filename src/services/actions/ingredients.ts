@@ -101,7 +101,7 @@ const sendOrderAction: AppThunk = (list: string[]) => {
         console.log(error);
         dispatch({
           type: SEND_ORDER_ERROR,
-          message: error.message
+          message: error
         })
       })
   }
