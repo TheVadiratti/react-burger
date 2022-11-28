@@ -67,7 +67,8 @@ const setIngredientsListAction: AppThunk = () => {
       })
       .catch(error => {
         dispatch({
-          type: GET_INGREDIENTS_ERROR
+          type: GET_INGREDIENTS_ERROR,
+          message: error.message
         })
         console.log(error);
       })
@@ -99,7 +100,8 @@ const sendOrderAction: AppThunk = (list: string[]) => {
       .catch(error => {
         console.log(error);
         dispatch({
-          type: SEND_ORDER_ERROR
+          type: SEND_ORDER_ERROR,
+          message: error.message
         })
       })
   }

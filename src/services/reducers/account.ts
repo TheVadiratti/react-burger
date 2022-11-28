@@ -20,60 +20,60 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_ERROR
 } from "../../utils/constants";
-import { IApiStatusState, IApiStatusWithMessage } from "../types";
+import { IApiStatusState } from "../types";
 import { TAccountActions } from "../types/account";
 
 const changePasswordState = {
-  isLoaded: false,
+  isLoading: false,
   isSuccess: false,
   isError: false,
   message: undefined
 }
 
 const resetPasswordState = {
-  isLoaded: false,
+  isLoading: false,
   isSuccess: false,
   isError: false,
   message: undefined
 }
 
 const registrationState = {
-  isLoaded: false,
+  isLoading: false,
   isSuccess: false,
   isError: false
 }
 
 const authorizationState = {
-  isLoaded: false,
+  isLoading: false,
   isSuccess: false,
   isError: false
 }
 
 const updateTokenState = {
-  isLoaded: false,
+  isLoading: false,
   isSuccess: false,
   isError: false
 }
 
 const logoutState = {
-  isLoaded: false,
+  isLoading: false,
   isSuccess: false,
   isError: false
 }
 
-const changePassword: Reducer<IApiStatusWithMessage, TAccountActions> = (state = changePasswordState, action) => {
+const changePassword: Reducer<IApiStatusState, TAccountActions> = (state = changePasswordState, action) => {
   switch (action.type) {
     case CHANGE_PASSWORD_REQUEST:
       return {
         ...state,
-        isLoaded: true,
+        isLoading: true,
         isSuccess: false,
         isError: false
       }
 
     case CHANGE_PASSWORD_SUCCESS:
       return {
-        isLoaded: false,
+        isLoading: false,
         isSuccess: true,
         isError: false,
         message: action.message
@@ -81,7 +81,7 @@ const changePassword: Reducer<IApiStatusWithMessage, TAccountActions> = (state =
 
     case CHANGE_PASSWORD_ERROR:
       return {
-        isLoaded: false,
+        isLoading: false,
         isSuccess: false,
         isError: true,
         message: action.message
@@ -95,19 +95,19 @@ const changePassword: Reducer<IApiStatusWithMessage, TAccountActions> = (state =
   }
 }
 
-const resetPassword: Reducer<IApiStatusWithMessage, TAccountActions> = (state = resetPasswordState, action) => {
+const resetPassword: Reducer<IApiStatusState, TAccountActions> = (state = resetPasswordState, action) => {
   switch (action.type) {
     case RESET_PASSWORD_REQUEST:
       return {
         ...state,
-        isLoaded: true,
+        isLoading: true,
         isSuccess: false,
         isError: false
       }
 
     case RESET_PASSWORD_SUCCESS:
       return {
-        isLoaded: false,
+        isLoading: false,
         isSuccess: true,
         isError: false,
         message: action.message
@@ -116,7 +116,7 @@ const resetPassword: Reducer<IApiStatusWithMessage, TAccountActions> = (state = 
     case RESET_PASSWORD_ERROR:
       return {
         ...state,
-        isLoaded: false,
+        isLoading: false,
         isSuccess: false,
         isError: true
       }
@@ -131,7 +131,7 @@ const registration: Reducer<IApiStatusState, TAccountActions> = (state = registr
     case REGISTRATION_REQUEST:
       return {
         ...state,
-        isLoaded: true,
+        isLoading: true,
         isSuccess: false,
         isError: false
       }
@@ -139,14 +139,14 @@ const registration: Reducer<IApiStatusState, TAccountActions> = (state = registr
     case REGISTRATION_SUCCESS:
       if (action.result) {
         return {
-          isLoaded: false,
+          isLoading: false,
           isSuccess: true,
           isError: false
         }
       }
       else {
         return {
-          isLoaded: false,
+          isLoading: false,
           isSuccess: false,
           isError: true
         }
@@ -155,7 +155,7 @@ const registration: Reducer<IApiStatusState, TAccountActions> = (state = registr
     case REGISTRATION_ERROR:
       return {
         ...state,
-        isLoaded: false,
+        isLoading: false,
         isSuccess: false,
         isError: true
       }
@@ -170,7 +170,7 @@ const authorization: Reducer<IApiStatusState, TAccountActions> = (state = author
     case AUTHORIZATION_REQUEST:
       return {
         ...state,
-        isLoaded: true,
+        isLoading: true,
         isSuccess: false,
         isError: false
       }
@@ -178,14 +178,14 @@ const authorization: Reducer<IApiStatusState, TAccountActions> = (state = author
     case AUTHORIZATION_SUCCESS:
       if (action.result) {
         return {
-          isLoaded: false,
+          isLoading: false,
           isSuccess: true,
           isError: false
         }
       }
       else {
         return {
-          isLoaded: false,
+          isLoading: false,
           isSuccess: false,
           isError: true
         }
@@ -194,7 +194,7 @@ const authorization: Reducer<IApiStatusState, TAccountActions> = (state = author
     case AUTHORIZATION_ERROR:
       return {
         ...state,
-        isLoaded: false,
+        isLoading: false,
         isSuccess: false,
         isError: true
       }
@@ -209,14 +209,14 @@ const updateToken: Reducer<IApiStatusState, TAccountActions> = (state = updateTo
     case UPDATE_TOKEN_REQUEST:
       return {
         ...state,
-        isLoaded: true,
+        isLoading: true,
         isSuccess: false,
         isError: false
       }
 
     case UPDATE_TOKEN_SUCCESS:
       return {
-        isLoaded: false,
+        isLoading: false,
         isSuccess: true,
         isError: false
       }
@@ -224,7 +224,7 @@ const updateToken: Reducer<IApiStatusState, TAccountActions> = (state = updateTo
     case UPDATE_TOKEN_ERROR:
       return {
         ...state,
-        isLoaded: false,
+        isLoading: false,
         isSuccess: false,
         isError: true
       }
@@ -239,14 +239,14 @@ const logout: Reducer<IApiStatusState, TAccountActions> = (state = logoutState, 
     case LOGOUT_REQUEST:
       return {
         ...state,
-        isLoaded: true,
+        isLoading: true,
         isSuccess: false,
         isError: false
       }
 
     case LOGOUT_SUCCESS:
       return {
-        isLoaded: false,
+        isLoading: false,
         isSuccess: true,
         isError: false
       }
@@ -254,7 +254,7 @@ const logout: Reducer<IApiStatusState, TAccountActions> = (state = logoutState, 
     case LOGOUT_ERROR:
       return {
         ...state,
-        isLoaded: false,
+        isLoading: false,
         isSuccess: false,
         isError: true
       }

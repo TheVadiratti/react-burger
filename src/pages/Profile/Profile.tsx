@@ -15,7 +15,7 @@ function Profile() {
   const dispatch = useDispatch();
   const location = useLocation();
   const pageView = useSelector((state) => state.modal.pageView);
-  const isDataLoaded = useSelector((state) => state.getUserData.isLoaded);
+  const isDataLoaded = useSelector((state) => state.getUserData.isLoading);
   const data = useSelector((state) => state.orders.my);
   const hasToken = localStorage.getItem('accessToken');
 

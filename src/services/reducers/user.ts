@@ -16,13 +16,13 @@ const userState = {
 }
 
 const getUserDataState = {
-  isLoaded: false,
+  isLoading: false,
   isSuccess: false,
   isError: false
 }
 
 const updateUserDataState = {
-  isLoaded: false,
+  isLoading: false,
   isSuccess: false,
   isError: false
 }
@@ -45,14 +45,14 @@ const getUserData: Reducer<IApiStatusState, TUserActions> = (state = getUserData
     case GET_USER_DATA_REQUEST:
       return {
         ...state,
-        isLoaded: true,
+        isLoading: true,
         isSuccess: false,
         isError: false
       }
 
     case GET_USER_DATA_SUCCESS:
       return {
-        isLoaded: false,
+        isLoading: false,
         isSuccess: true,
         isError: false
       }
@@ -60,7 +60,7 @@ const getUserData: Reducer<IApiStatusState, TUserActions> = (state = getUserData
     case GET_USER_DATA_ERROR:
       return {
         ...state,
-        isLoaded: false,
+        isLoading: false,
         isSuccess: false,
         isError: true
       }
@@ -75,14 +75,14 @@ const updateUserData: Reducer<IApiStatusState, TUserActions> = (state = updateUs
     case UPDATE_USER_DATA_REQUEST:
       return {
         ...state,
-        isLoaded: true,
+        isLoading: true,
         isSuccess: false,
         isError: false
       }
 
     case UPDATE_USER_DATA_SUCCESS:
       return {
-        isLoaded: false,
+        isLoading: false,
         isSuccess: true,
         isError: false
       }
@@ -90,7 +90,7 @@ const updateUserData: Reducer<IApiStatusState, TUserActions> = (state = updateUs
     case UPDATE_USER_DATA_ERROR:
       return {
         ...state,
-        isLoaded: false,
+        isLoading: false,
         isSuccess: false,
         isError: true
       }

@@ -122,7 +122,8 @@ const resetPasswordFetchAction: AppThunk = (password: string, token: string) => 
       })
       .catch(error => {
         dispatch({
-          type: RESET_PASSWORD_ERROR
+          type: RESET_PASSWORD_ERROR,
+          message: error.message
         })
         console.log(error);
       })
@@ -153,7 +154,8 @@ const registationFetchAction: AppThunk = (email: string, password: string, name:
       })
       .catch(error => {
         dispatch({
-          type: REGISTRATION_ERROR
+          type: REGISTRATION_ERROR,
+          message: error.message
         })
         console.log(error);
       })
@@ -185,7 +187,8 @@ const authorizationFetchAction: AppThunk = (email: string, password: string) => 
       })
       .catch(error => {
         dispatch({
-          type: AUTHORIZATION_ERROR
+          type: AUTHORIZATION_ERROR,
+          message: error.message
         })
         console.log(error);
       })
@@ -226,7 +229,8 @@ const updateTokenFetchAction: AppThunk = () => {
       })
       .catch(error => {
         dispatch({
-          type: UPDATE_TOKEN_ERROR
+          type: UPDATE_TOKEN_ERROR,
+          message: error.message
         })
         console.log(error);
       })
@@ -266,7 +270,8 @@ const logoutFetchAction: AppThunk = () => {
       })
       .catch(error => {
         dispatch({
-          type: LOGOUT_ERROR
+          type: LOGOUT_ERROR,
+          message: error.message
         })
         console.log(error);
       })

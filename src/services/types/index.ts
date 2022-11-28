@@ -18,11 +18,8 @@ export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action
 // common types
 
 export interface IApiStatusState {
-  isLoaded: boolean;
+  isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
-}
-
-export interface IApiStatusWithMessage extends IApiStatusState {
   message?: string;
 }

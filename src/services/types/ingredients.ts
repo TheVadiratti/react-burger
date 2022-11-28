@@ -24,6 +24,7 @@ interface IGetDataSuccessAction {
 
 interface IGetDataErrorAction {
   readonly type: typeof GET_INGREDIENTS_ERROR;
+  readonly message: string;
 }
 
 interface IAddIngredientAction {

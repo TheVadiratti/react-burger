@@ -14,7 +14,7 @@ type TProps = {
 function ModalOverlay({ children, prePage, isPageType }: TProps) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const sendOrderRequest = useSelector((state) => state.order.isLoaded);
+  const sendOrderRequest = useSelector((state) => state.order.isLoading);
 
   function closePopupOverlay(e: any) {
     if (!sendOrderRequest) {

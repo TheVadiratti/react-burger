@@ -19,7 +19,7 @@ function Modal({ children, isPageType }: TProps) {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const sendOrderRequest = useSelector((state) => state.order.isLoaded);
+  const sendOrderRequest = useSelector((state) => state.order.isLoading);
 
   useEffect(() => {
     function closePopupEsc(e: any) {

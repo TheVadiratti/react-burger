@@ -28,14 +28,15 @@ interface IApiStatusWithOrderNum extends IApiStatusState {
 
 const ingredientsState = {
   data: [],
-  isLoaded: false,
+  isLoading: false,
   isSuccess: false,
-  isError: false
+  isError: false,
+  message: undefined
 };
 
 const orderState = {
   number: undefined,
-  isLoaded: false,
+  isLoading: false,
   isSuccess: false,
   isError: false
 }
@@ -51,14 +52,14 @@ const ingredients: Reducer<IApiStatusWithIngredients, TIngredientsActions> = (st
     case GET_INGREDIENTS_REQUEST:
       return {
         ...state,
-        isLoaded: true,
+        isLoading: true,
         isSuccess: false,
         isError: false
       }
     case GET_INGREDIENTS_SUCCESS:
       return {
         ...state,
-        isLoaded: false,
+        isLoading: false,
         isSuccess: true,
         isError: false,
         data: action.data
@@ -67,9 +68,10 @@ const ingredients: Reducer<IApiStatusWithIngredients, TIngredientsActions> = (st
     case GET_INGREDIENTS_ERROR:
       return {
         ...state,
-        isLoaded: false,
+        isLoading: false,
         isSuccess: false,
-        isError: true
+        isError: true,
+        message: action.message
       }
 
     default:
@@ -82,14 +84,14 @@ const order: Reducer<IApiStatusWithOrderNum, TIngredientsActions | ICloseModalAc
     case SEND_ORDER_REQUEST:
       return {
         ...state,
-        isLoaded: true,
+        isLoading: true,
         isSuccess: false,
         isError: false
       }
     case SEND_ORDER_SUCCESS:
       return {
         ...state,
-        isLoaded: false,
+        isLoading: false,
         isSuccess: true,
         isError: false,
         number: action.data
@@ -98,7 +100,7 @@ const order: Reducer<IApiStatusWithOrderNum, TIngredientsActions | ICloseModalAc
     case SEND_ORDER_ERROR:
       return {
         ...state,
-        isLoaded: false,
+        isLoading: false,
         isSuccess: false,
         isError: true
       }
