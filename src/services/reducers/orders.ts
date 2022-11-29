@@ -22,7 +22,6 @@ const orders: Reducer<TOrdersState, TWsOrdersAction> = (state = ordersState, act
   switch (action.type) {
     case wsAllOrdersActions.getMessage:
       const messageAll = JSON.parse(action.payload);
-      console.log(messageAll);
       return {
         ...state,
         all: {

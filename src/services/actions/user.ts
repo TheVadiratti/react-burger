@@ -79,7 +79,6 @@ const updateUserDataFetchAction: AppThunk = (changedData: IChangedUserData) => {
     })
       .then(checkResponse)
       .then(res => {
-        console.log(res);
         if (res.success) {
           dispatch({
             type: UPDATE_USER_DATA_SUCCESS
@@ -101,7 +100,7 @@ const updateUserDataFetchAction: AppThunk = (changedData: IChangedUserData) => {
         else {
           dispatch({
             type: UPDATE_USER_DATA_ERROR
-          })
+          });
           console.log(error);
         }
       })

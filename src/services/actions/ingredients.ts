@@ -63,12 +63,11 @@ const setIngredientsListAction: AppThunk = () => {
       .then(checkResponse)
       .then(res => {
         dispatch(getDataAction(res.data));
-        console.log(res.data);
       })
       .catch(error => {
         dispatch({
           type: GET_INGREDIENTS_ERROR,
-          message: error.message
+          message: error
         })
         console.log(error);
       })

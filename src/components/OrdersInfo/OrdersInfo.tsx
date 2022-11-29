@@ -4,7 +4,6 @@ import { useSelector } from '../../hooks/hooks';
 function OrdersInfo() {
   const orders = useSelector((state) => state.orders.all);
   const maxRenderNumber = 20;
-  console.log(orders);
 
   function renderNumbers(type: string) {
     return orders.list.map((order, i) => {
