@@ -1,11 +1,8 @@
 import { ReactNode } from 'react';
 import { useSelector } from '../../hooks/hooks';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, RouteProps } from 'react-router-dom';
 
-type TProps = {
-  children: ReactNode;
-  [key: string]: any;
-};
+type TProps = RouteProps & {children: ReactNode};
 
 function ProtectedRoute({ children, ...props }: TProps) {
   const userName = useSelector((state) => state.user.name);

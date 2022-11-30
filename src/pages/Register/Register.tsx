@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, ChangeEvent, FormEvent } from 'react';
 import { useDispatch, useSelector } from '../../hooks/hooks';
 import { Redirect } from 'react-router-dom';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
@@ -21,11 +21,11 @@ function Register() {
     }
   ]
 
-  function onChange(e: any) {
+  function onChange(e: ChangeEvent<HTMLInputElement>) {
     setValuePassword(e.target.value)
   }
 
-  function submitForm(e: any) {
+  function submitForm(e: FormEvent) {
     e.preventDefault();
     dispatch(registationFetchAction(valueEmail, valuePassword, valueName));
   }

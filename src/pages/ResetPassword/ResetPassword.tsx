@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import { useDispatch, useSelector } from '../../hooks/hooks';
 import { Redirect } from 'react-router-dom';
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
@@ -35,7 +35,7 @@ function ResetPassword() {
     }
   }
 
-  function submitForm(e: any) {
+  function submitForm(e: FormEvent) {
     e.preventDefault();
     dispatch(resetPasswordFetchAction(valuePassword, valueCode));
     dispatch({

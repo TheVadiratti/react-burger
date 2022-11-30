@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, SyntheticEvent } from 'react';
 import ordersListStyles from './OrdersList.module.css';
 import { useSelector, useDispatch } from '../../hooks/hooks';
 import { useHistory } from 'react-router-dom';
@@ -16,7 +16,7 @@ function OrdersList() {
   const dispatch = useDispatch();
   const sumCost = useSumCost();
 
-  function openOrder(e: any) {
+  function openOrder(e: SyntheticEvent) {
     const id = e.currentTarget.getAttribute('id');
     dispatch(openOrderInfoAction());
     dispatch({

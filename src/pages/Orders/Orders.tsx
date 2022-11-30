@@ -1,3 +1,4 @@
+import { SyntheticEvent, MouseEventHandler } from 'react';
 import { useDispatch, useSelector } from '../../hooks/hooks';
 import profileHistoryStyles from './Orders.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -16,7 +17,7 @@ function Orders() {
   const history = useHistory();
   const sumCost = useSumCost();
 
-  function openOrder(e: any) {
+  function openOrder (e: SyntheticEvent) {
     const id = e.currentTarget.getAttribute('id');
     dispatch(openOrderInfoAction());
     dispatch({

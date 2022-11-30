@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, FormEvent } from 'react';
 import styles from './PageWithForm.module.css';
 import { Link } from 'react-router-dom';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -14,7 +14,7 @@ type TProps = {
   buttonText: string;
   hints: THint[];
   children: ReactNode;
-  submitFunc: (e: any) => void;
+  submitFunc: (e: FormEvent) => void;
 };
 
 function PageWithForm({ heading, buttonText, hints, children, submitFunc }: TProps) {
