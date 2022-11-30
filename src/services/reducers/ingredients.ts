@@ -129,9 +129,14 @@ const burgerConstructor: Reducer<TConstructorState, TIngredientsActions> = (stat
         }
       }
       else {
+        const newIngredient = {
+          ...action.ingredient,
+          uuid: action.uuid
+        }
+
         return {
           ...state,
-          main: [...state.main, action.ingredient]
+          main: [...state.main, newIngredient]
         }
       }
 

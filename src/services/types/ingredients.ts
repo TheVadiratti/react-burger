@@ -30,6 +30,7 @@ interface IGetDataErrorAction {
 interface IAddIngredientAction {
   readonly type: typeof ADD_INGREDIENT;
   readonly ingredient: TIngredient;
+  readonly uuid: string;
 }
 
 interface IDeleteIngredientAction {

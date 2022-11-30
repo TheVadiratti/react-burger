@@ -94,7 +94,7 @@ function BurgerConstructor() {
 
             {constructorStructure.main.length !== 0 ?
               constructorStructure.main.map((item, i) => {
-                return (<BurgerItem ingredient={item} isLocked={false} isMain={true} text={''} id={i} key={i} />)
+                return (<BurgerItem ingredient={item} isLocked={false} isMain={true} text={''} id={i} key={item.uuid} />)
               })
               :
               <p className={`${burgerConstructorStyles.instruction} text text_type_main-medium`}>Добавьте ингредиенты</p>

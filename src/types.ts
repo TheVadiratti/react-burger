@@ -11,6 +11,7 @@ export type TIngredient = {
   price: number;
   __v: number;
   _id: string;
+  uuid?: string;
 };
 
 export type TIngredientNotRequired = Partial<TIngredient>;

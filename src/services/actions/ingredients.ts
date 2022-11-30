@@ -16,6 +16,7 @@ import { AppDispatch } from '../types/index';
 import { TIngredientsActions } from '../types/ingredients';
 import { TIngredient } from '../../types';
 import { AppThunk } from '../types/index';
+import { v4 as createUUID } from 'uuid';
 
 function getDataAction(data: TIngredient[]): TIngredientsActions {
   return {
@@ -25,9 +26,11 @@ function getDataAction(data: TIngredient[]): TIngredientsActions {
 }
 
 function addIngredientAction(ingredient: TIngredient): TIngredientsActions {
+  const uuid = createUUID();
   return {
     type: ADD_INGREDIENT,
-    ingredient: ingredient
+    ingredient: ingredient,
+    uuid: uuid
   }
 }
 
