@@ -17,6 +17,7 @@ function Profile() {
   const pageView = useSelector((state) => state.modal.pageView);
   const isDataLoaded = useSelector((state) => state.getUserData.isLoading);
   const data = useSelector((state) => state.orders.my);
+  const userName = useSelector((state) => state.user.name);
   const hasToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
@@ -46,7 +47,7 @@ function Profile() {
     }
   }
 
-  if (isDataLoaded || !data.list || !hasToken) {
+  if (isDataLoaded || !data.list || !hasToken || !userName) {
     return (
       <Loader />
     )
