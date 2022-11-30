@@ -30,13 +30,13 @@ function BurgerItem({ ingredient, type, isLocked, isMain, text, id }: TProps) {
 
   const [, dropTarget] = useDrop({
     accept: "burgerItem",
-    hover: (item: TDnDBurgerItemTarget, monitor) => {
+    hover: (item: {id: number}, monitor) => {
       if (!commonRef.current) {
         return;
       }
       // атрибут id есть только у компонентов бургера, которые можно перетащить
-      if (id) {
-        const dragIndex = Number(item.id);
+      if (id || id === 0) {
+        const dragIndex = item.id;
         const hoverIndex = id;
         const hoverBoundingRect = commonRef.current?.getBoundingClientRect();
         const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
@@ -49,7 +49,7 @@ function BurgerItem({ ingredient, type, isLocked, isMain, text, id }: TProps) {
           return;
         }
         dispatch(sortIngredientsAction(dragIndex, hoverIndex));
-        item.id = String(hoverIndex);
+        item.id = hoverIndex;
       }
     }
   })
