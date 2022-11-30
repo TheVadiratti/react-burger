@@ -22,18 +22,19 @@ function Modal({ children, isPageType }: TProps) {
   const sendOrderRequest = useSelector((state) => state.order.isLoading);
 
   useEffect(() => {
-    function closePopupEsc(e: any) {
-      if (e.code === 'Escape') {
-        closeModal();
-      }
-    }
     document.addEventListener('keydown', closePopupEsc);
     return () => {
       document.removeEventListener('keydown', closePopupEsc);
     }
   }, [sendOrderRequest]);
 
-  let nStepsBack = 1;
+  let nStepsBack: number = 1;
+
+  function closePopupEsc(e: KeyboardEvent) {
+    if (e.code === 'Escape') {
+      closeModal();
+    }
+  }
 
   if (location.pathname.startsWith('/ingredients')) {
     nStepsBack = 2;
@@ -65,7 +66,7 @@ function Modal({ children, isPageType }: TProps) {
 
   return ReactDOM.createPortal(
     (
-      <ModalOverlay prePage={getPrePageURL()} isPageType={isPageType}>
+      <ModalOverlay isPageType={isPageType} closeModal={closeModal}>
         {!sendOrderRequest ?
         <div className={`${modalStyles.window} ${isPageType && modalStyles.windowTypeGeneral}`}>
           {!isPageType && <div onClick={closeModal} className={modalStyles.closeIcon}><CloseIcon type='primary' /></div>}

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, SyntheticEvent } from 'react';
 import burgerIngredientsStyles from './BurgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from '../../hooks/hooks';
@@ -52,8 +52,8 @@ function BurgerIngredients() {
     section.current!.scrollIntoView({ behavior: "smooth" });
   }
 
-  function setCurrentTab(e: any) {
-    setCurrent(e)
+  function setCurrentTab(e: string) {
+    setCurrent(e);
     switch (e) {
       case 'one':
         scrollOnTarget(bunSectionRef);
@@ -67,7 +67,7 @@ function BurgerIngredients() {
     }
   }
 
-  function openIngredientDetailsPopup(e: any) {
+  function openIngredientDetailsPopup(e: SyntheticEvent) {
     const id = e.currentTarget.getAttribute('id');
     dispatch(openIngredientDetailsAction());
     dispatch({
