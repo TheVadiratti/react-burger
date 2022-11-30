@@ -1,6 +1,6 @@
 import { useState, useRef, ChangeEvent, FormEvent } from 'react';
 import { useDispatch, useSelector } from '../../hooks/hooks';
-import { Redirect } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
 import PageWithForm from '../../components/PageWithForm/PageWithForm';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { authorizationFetchAction } from '../../services/actions/account';
@@ -12,6 +12,9 @@ function Login() {
   const dispatch = useDispatch();
   const hasUserName = useSelector((state) => state.user.name);
   const hasToken = localStorage.getItem('refreshToken');
+  const location = useLocation<{from: {pathname: string}}>();
+
+  console.log(location.state);
 
   const loginHints = [
     {
@@ -39,7 +42,7 @@ function Login() {
     return (
       <Redirect
         to={{
-          pathname: '/'
+          pathname: location.state.from.pathname || '/'
         }}
       />
     )
