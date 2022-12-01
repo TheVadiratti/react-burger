@@ -14,8 +14,6 @@ function Login() {
   const hasToken = localStorage.getItem('refreshToken');
   const location = useLocation<{from: {pathname: string}}>();
 
-  console.log(location.state);
-
   const loginHints = [
     {
       text: 'Вы — новый пользователь? ',

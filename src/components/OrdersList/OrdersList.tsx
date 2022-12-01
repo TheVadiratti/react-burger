@@ -22,7 +22,7 @@ function OrdersList() {
     dispatch({
       type: MAKE_MODAL_ORDER
     });
-    history.replace({ pathname: `/feed/${id}` });
+    history.push({ pathname: `/feed/${id}` });
   }
 
   function renderOrderCard() {

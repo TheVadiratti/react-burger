@@ -16,8 +16,6 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import { openIngredientDetailsAction, openOrderInfoAction } from '../../services/actions/modal';
 
 function Main() {
-  const modalEnable = useSelector((state) => state.modal.open);
-  const modalType = useSelector((state) => state.modal.type);
   const pageView = useSelector((state) => state.modal.pageView);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -57,35 +55,29 @@ function Main() {
         <ProtectedRoute path="/profile" exact={pageView.myOrder && isOpenOrder}>
           <Profile />
         </ProtectedRoute>
-        <Route path="/" exact={pageView.ingredient}>
+        <Route path="/">
           <MainPage />
-          {(modalEnable && modalType === 'OrderDetails') &&
+          <Route path="/order" exact={true}>
             <Modal isPageType={false}>
               <OrderDetails />
             </Modal>
-          }
+          </Route>
         </Route>
       </Switch>
       <Route path="/ingredients/:id" exact>
-        {modalEnable &&
-          <Modal isPageType={pageView.ingredient}>
-            <IngredientDetails />
-          </Modal>
-        }
+        <Modal isPageType={pageView.ingredient}>
+          <IngredientDetails />
+        </Modal>
       </Route>
       <Route path="/feed/:id" exact>
-        {modalEnable &&
-          <Modal isPageType={pageView.order}>
-            <OrderInfo type="all" />
-          </Modal>
-        }
+        <Modal isPageType={pageView.order}>
+          <OrderInfo type="all" />
+        </Modal>
       </Route>
       <ProtectedRoute path="/profile/orders/:id" exact>
-        {modalEnable &&
-          <Modal isPageType={pageView.myOrder}>
-            <OrderInfo type="my" />
-          </Modal>
-        }
+        <Modal isPageType={pageView.myOrder}>
+          <OrderInfo type="my" />
+        </Modal>
       </ProtectedRoute>
     </>
   )

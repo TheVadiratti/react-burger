@@ -23,7 +23,7 @@ function Orders() {
     dispatch({
       type: MAKE_MODAL_MY_ORDER
     });
-    history.replace({ pathname: `/profile/orders/${id}` });
+    history.push({ pathname: `/profile/orders/${id}` });
   }
 
   function renderOrders() {

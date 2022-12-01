@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from '../../hooks/hooks';
 import { deleteIngredientAction, updateCounterAction, sortIngredientsAction } from '../../services/actions/ingredients';
 import { useDrag, useDrop } from "react-dnd";
 import { TIngredient } from '../../types';
-import { TDnDBurgerItemTarget } from '../../types';
 
 type TProps = {
   ingredient: TIngredient;

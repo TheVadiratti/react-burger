@@ -73,7 +73,7 @@ function BurgerIngredients() {
     dispatch({
       type: MAKE_MODAL_INGREDIENT
     });
-    history.replace({ pathname: `/ingredients/${id}` });
+    history.push({ pathname: `/ingredients/${id}` });
   }
 
   function renderInredientsListOfType(type: string) {
