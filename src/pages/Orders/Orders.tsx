@@ -1,4 +1,4 @@
-import { SyntheticEvent, MouseEventHandler } from 'react';
+import { SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from '../../hooks/hooks';
 import profileHistoryStyles from './Orders.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 import useSumCost from '../../hooks/useSumCost';
 import { getTimeString } from '../../utils/utils';
 import OrderIngredients from '../../components/OrderIngredients/OrderIngredients';
-import { openOrderInfoAction } from '../../services/actions/modal';
 import { MAKE_MODAL_MY_ORDER } from '../../utils/constants';
 import OrderStatus from '../../components/OrderStatus/OrderStatus';
 import { TOrder } from '../../types';
@@ -19,7 +18,6 @@ function Orders() {
 
   function openOrder (e: SyntheticEvent) {
     const id = e.currentTarget.getAttribute('id');
-    dispatch(openOrderInfoAction());
     dispatch({
       type: MAKE_MODAL_MY_ORDER
     });

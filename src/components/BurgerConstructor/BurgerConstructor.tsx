@@ -5,7 +5,6 @@ import burgerConstructorStyles from './BurgerConstructor.module.css';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerItem from '../BurgerItem/BurgerItem';
 import { sendOrderAction, addIngredientAction, updateCounterAction } from '../../services/actions/ingredients';
-import { openOrderDetailsAction } from '../../services/actions/modal';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 import useFindIngredient from '../../hooks/useFindIngredient';
 import { SET_INITIAL_BUNS } from '../../utils/constants';

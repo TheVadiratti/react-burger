@@ -1,8 +1,7 @@
-import { useState, useRef, SyntheticEvent } from 'react';
+import { useState, useRef, MouseEvent } from 'react';
 import burgerIngredientsStyles from './BurgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from '../../hooks/hooks';
-import { openIngredientDetailsAction } from '../../services/actions/modal';
 import Ingredient from '../Ingredient/Ingredient';
 import { useHistory } from 'react-router-dom';
 import { MAKE_MODAL_INGREDIENT } from '../../utils/constants';
@@ -67,9 +66,8 @@ function BurgerIngredients() {
     }
   }
 
-  function openIngredientDetailsPopup(e: SyntheticEvent) {
+  function openIngredientDetailsPopup(e: MouseEvent) {
     const id = e.currentTarget.getAttribute('id');
-    dispatch(openIngredientDetailsAction());
     dispatch({
       type: MAKE_MODAL_INGREDIENT
     });

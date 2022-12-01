@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getTimeString } from '../../utils/utils';
 import useSumCost from '../../hooks/useSumCost';
-import { openOrderInfoAction } from '../../services/actions/modal';
 import OrderIngredients from '../OrderIngredients/OrderIngredients';
 import { MAKE_MODAL_ORDER } from '../../utils/constants';
 
@@ -18,7 +17,6 @@ function OrdersList() {
 
   function openOrder(e: SyntheticEvent) {
     const id = e.currentTarget.getAttribute('id');
-    dispatch(openOrderInfoAction());
     dispatch({
       type: MAKE_MODAL_ORDER
     });

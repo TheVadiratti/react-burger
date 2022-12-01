@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, MouseEvent } from 'react';
 import modalOverlayStyle from './ModalOverlay.module.css';
 
 type TProps = {
@@ -8,9 +8,14 @@ type TProps = {
 };
 
 function ModalOverlay({ children, isPageType, closeModal }: TProps) {
+  function closeOnOverlay(e: MouseEvent) {
+    if ((e.target as HTMLDivElement).id === 'overlay') {
+      closeModal();
+    }
+  }
 
   return (
-    <div id='overlay' className={`${modalOverlayStyle.overlay} ${isPageType && modalOverlayStyle.overlayTypeGeneral}`} onClick={closeModal}>
+    <div id='overlay' className={`${modalOverlayStyle.overlay} ${isPageType && modalOverlayStyle.overlayTypeGeneral}`} onClick={closeOnOverlay}>
       {children}
     </div>
   )

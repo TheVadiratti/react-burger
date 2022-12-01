@@ -13,25 +13,10 @@ import Profile from '../../pages/Profile/Profile';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import { openIngredientDetailsAction, openOrderInfoAction } from '../../services/actions/modal';
 
 function Main() {
   const pageView = useSelector((state) => state.modal.pageView);
-  const dispatch = useDispatch();
   const location = useLocation();
-
-  useEffect(() => {
-    if (location.pathname.includes('ingredients/')) {
-      dispatch(openIngredientDetailsAction());
-    }
-    if (location.pathname.includes('feed/')) {
-      dispatch(openOrderInfoAction());
-    }
-    if (location.pathname.includes('profile/orders/')) {
-      dispatch(openOrderInfoAction());
-    }
-  }, []);
-
   const isOpenOrder = location.pathname.startsWith('/profile/orders/');
 
   return (
@@ -55,7 +40,7 @@ function Main() {
         <ProtectedRoute path="/profile" exact={pageView.myOrder && isOpenOrder}>
           <Profile />
         </ProtectedRoute>
-        <Route path="/">
+        <Route path="/" exact={pageView.ingredient}>
           <MainPage />
           <Route path="/order" exact={true}>
             <Modal isPageType={false}>
