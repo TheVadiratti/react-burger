@@ -23,7 +23,9 @@ function AppHeader() {
           </li>
         </menu>
 
-        <Logo />
+        <NavLink to='/'>
+          <Logo />
+        </NavLink>
 
         <NavLink to='/profile' className={headerStyles.link} activeClassName={headerStyles.link_active}>
           <div className={`${headerStyles.profile} p-5`}>
