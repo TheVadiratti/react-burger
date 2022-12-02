@@ -5,3 +5,12 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.errorName {
+  margin-top: 5vh;
+}
+
+.errorCode {
+  margin-top: 20px;
+  color: red;
+}

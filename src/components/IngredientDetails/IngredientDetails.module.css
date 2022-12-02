@@ -27,3 +27,8 @@
   flex-direction: column;
   align-items: center;
 }
+
+.errorName {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
