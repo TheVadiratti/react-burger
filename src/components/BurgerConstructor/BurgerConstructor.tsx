@@ -14,13 +14,12 @@ import { TDnDConstructorCntTarget } from '../../types';
 function BurgerConstructor() {
   const ingredientsData = useSelector((state) => state.ingredients.data);
   const constructorStructure = useSelector((state) => state.burgerConstructor);
+  const isDataSuccess = useSelector((state) => state.ingredients.isSuccess);
   const dispatch = useDispatch();
   const history = useHistory();
-  const hasToken = localStorage.getItem('refreshToken');
-  const isDataSuccess = useSelector((state) => state.ingredients.isSuccess);
   const findIngredient = useFindIngredient();
-
   const windowCntRef = useRef<HTMLDivElement>(null);
+  const hasToken = localStorage.getItem('refreshToken');
 
   useEffect(() => {
     // плавная прокрутка к последнему добавленному ингредиенту
@@ -60,23 +59,27 @@ function BurgerConstructor() {
   }
 
   function sum() {
-    const bunSum = constructorStructure.buns!.price! * 2 || 0;
-    const mainPriceArray = constructorStructure.main.map(item => {
-      return item.price;
-    });
-    const mainSum = mainPriceArray.reduce((prev, current) => {
-      return prev + current;
-    }, 0) || 0;
-    return mainSum + bunSum;
+    if (constructorStructure.buns) {
+      const bunSum = constructorStructure.buns.price * 2 || 0;
+      const mainPriceArray = constructorStructure.main.map(item => {
+        return item.price;
+      });
+      const mainSum = mainPriceArray.reduce((prev, current) => {
+        return prev + current;
+      }, 0) || 0;
+      return mainSum + bunSum;
+    }
   }
 
   function sendOrder() {
     if (hasToken) {
-      const orderList: TIngredient[] = Object.assign([], constructorStructure.main);
-      orderList.unshift(constructorStructure.buns!);
-      orderList.push(constructorStructure.buns!);
-      dispatch(sendOrderAction(orderList));
-      history.push({ pathname: '/order' });
+      if (constructorStructure.buns) {
+        const orderList: TIngredient[] = Object.assign([], constructorStructure.main);
+        orderList.unshift(constructorStructure.buns);
+        orderList.push(constructorStructure.buns);
+        dispatch(sendOrderAction(orderList));
+        history.push({ pathname: '/order' });
+      }
     }
     else {
       history.push({ pathname: '/login' });
@@ -84,39 +87,39 @@ function BurgerConstructor() {
   }
 
   return (constructorStructure.buns ? (
-      <section className={burgerConstructorStyles.section}>
-        <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
+    <section className={burgerConstructorStyles.section}>
+      <div ref={dropTarget} className={burgerConstructorStyles.ingredients}>
 
-          <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} key={0} />
+        <BurgerItem ingredient={constructorStructure.buns} type={'top'} isLocked={true} isMain={false} text={'(верх)'} key={0} />
 
-          <div ref={windowCntRef} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
+        <div ref={windowCntRef} className={`mt-4 mb-4 ${burgerConstructorStyles.window}`}>
 
-            {constructorStructure.main.length !== 0 ?
-              constructorStructure.main.map((item, i) => {
-                return (<BurgerItem ingredient={item} isLocked={false} isMain={true} text={''} id={i} key={item.uuid} />)
-              })
-              :
-              <p className={`${burgerConstructorStyles.instruction} text text_type_main-medium`}>Добавьте ингредиенты</p>
-            }
-
-          </div>
-
-          {constructorStructure.buns!.name &&
-            <BurgerItem ingredient={constructorStructure.buns} type={'bottom'} isLocked={true} isMain={false} text={'(низ)'} key={1} />
+          {constructorStructure.main.length !== 0 ?
+            constructorStructure.main.map((item, i) => {
+              return (<BurgerItem ingredient={item} isLocked={false} isMain={true} text={''} id={i} key={item.uuid} />)
+            })
+            :
+            <p className={`${burgerConstructorStyles.instruction} text text_type_main-medium`}>Добавьте ингредиенты</p>
           }
 
         </div>
-        <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>
-          <Button type="primary" size="large" onClick={sendOrder} htmlType='submit'>
-            Оформить заказ
-          </Button>
-          <div className={`${burgerConstructorStyles.sum} mr-10`}>
-            <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>{`${sum()}`}</p>
-            <CurrencyIcon type="primary" />
-          </div>
+
+        {constructorStructure.buns.name &&
+          <BurgerItem ingredient={constructorStructure.buns} type={'bottom'} isLocked={true} isMain={false} text={'(низ)'} key={1} />
+        }
+
+      </div>
+      <div className={`${burgerConstructorStyles.total} mt-10 pr-4`}>
+        <Button type="primary" size="large" onClick={sendOrder} htmlType='submit'>
+          Оформить заказ
+        </Button>
+        <div className={`${burgerConstructorStyles.sum} mr-10`}>
+          <p className={`${burgerConstructorStyles.digit} text text_type_digits-medium mr-2`}>{`${sum()}`}</p>
+          <CurrencyIcon type="primary" />
         </div>
-      </section>
-    ) : null
+      </div>
+    </section>
+  ) : null
   )
 }
 
