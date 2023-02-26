@@ -7,7 +7,7 @@ import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import Loader from '../Loader/Loader';
 
-const modalRoot = document.querySelector('#react-modals');
+const modalRoot = document.getElementById('react-modals') as HTMLElement;
 
 type TProps = {
   children: ReactNode;
@@ -31,11 +31,9 @@ function Modal({ children, isPageType }: TProps) {
     }
   }
   
-
   function closeModal() {
     history.goBack();
   }
-
 
   return ReactDOM.createPortal(
     (
@@ -49,7 +47,7 @@ function Modal({ children, isPageType }: TProps) {
         <Loader />}
       </ModalOverlay>
     ),
-    modalRoot!
+    modalRoot
   );
 }
 
