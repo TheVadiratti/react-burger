@@ -18,37 +18,41 @@ function BurgerIngredients() {
   const mainSectionRef = useRef<HTMLDivElement>(null);
 
   function autoToggleByScroll() {
-    const bunSectionDist = Math.abs(windowCntRef.current!.getBoundingClientRect().top - bunSectionRef.current!.getBoundingClientRect().top);
-    const sauceSectionDist = Math.abs(windowCntRef.current!.getBoundingClientRect().top - sauceSectionRef.current!.getBoundingClientRect().top);
-    const mainSectionDist = Math.abs(windowCntRef.current!.getBoundingClientRect().top - mainSectionRef.current!.getBoundingClientRect().top);
+    if (windowCntRef.current && bunSectionRef.current && sauceSectionRef.current && mainSectionRef.current) {
+      const bunSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - bunSectionRef.current.getBoundingClientRect().top);
+      const sauceSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - sauceSectionRef.current.getBoundingClientRect().top);
+      const mainSectionDist = Math.abs(windowCntRef.current.getBoundingClientRect().top - mainSectionRef.current.getBoundingClientRect().top);
 
-    const bottomWindow = windowCntRef.current!.getBoundingClientRect().bottom;
-    const bottomLastEl = mainSectionRef.current!.getBoundingClientRect().bottom;
+      const bottomWindow = windowCntRef.current.getBoundingClientRect().bottom;
+      const bottomLastEl = mainSectionRef.current.getBoundingClientRect().bottom;
 
-    const minDist = Math.min(bunSectionDist, sauceSectionDist, mainSectionDist);
+      const minDist = Math.min(bunSectionDist, sauceSectionDist, mainSectionDist);
 
 
-    switch (minDist) {
-      case bunSectionDist:
-        setCurrent('one');
-        break;
-      case sauceSectionDist:
-        setCurrent('two');
-        break;
-      case mainSectionDist:
+      switch (minDist) {
+        case bunSectionDist:
+          setCurrent('one');
+          break;
+        case sauceSectionDist:
+          setCurrent('two');
+          break;
+        case mainSectionDist:
+          setCurrent('three');
+          break;
+      }
+
+      // для корректного отображения навигации при малом кол-ве ингредиентов
+      // переключится на последний таб, если прокрутят до дна
+      if (bottomWindow === bottomLastEl) {
         setCurrent('three');
-        break;
-    }
-
-    // для корректного отображения навигации при малом кол-ве ингредиентов
-    // переключится на последний таб, если прокрутят до дна
-    if (bottomWindow === bottomLastEl) {
-      setCurrent('three');
+      }
     }
   }
 
   function scrollOnTarget(section: React.RefObject<HTMLDivElement>) {
-    section.current!.scrollIntoView({ behavior: "smooth" });
+    if(section.current) {
+      section.current.scrollIntoView({ behavior: "smooth" });
+    }
   }
 
   function setCurrentTab(e: string) {

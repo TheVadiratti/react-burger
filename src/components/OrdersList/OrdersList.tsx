@@ -23,32 +23,28 @@ function OrdersList() {
     history.push({ pathname: `/feed/${id}` });
   }
 
-  function renderOrderCard() {
-    return orders.list.map((order, i) => {
-      return (
-        <div onClick={openOrder} className={`p-6 ${ordersListStyles.item}`} key={i} id={order._id}>
-          <div className={ordersListStyles.info}>
-            <span className="text text_type_digits-default">{'#' + order.number}</span>
-            <span className="text text_type_main-default text_color_inactive">{getTimeString(order.createdAt)}</span>
-          </div>
-          <h4 className={`text text_type_main-medium ${ordersListStyles.heading}`}>{order.name}</h4>
-          <div className={ordersListStyles.componentsCnt}>
-            <div className={ordersListStyles.components}>
-              <OrderIngredients ingredientsArr={order.ingredients} />
-            </div>
-            <div className={ordersListStyles.sum}>
-              <span className="text text_type_digits-default">{sumCost(order)}</span>
-              <CurrencyIcon type="primary" />
-            </div>
-          </div>
-        </div>
-      )
-    })
-  }
-
   return (
     <section ref={windowCntRef} className={`${ordersListStyles.window}`}>
-      {renderOrderCard()}
+      {orders.list.map((order, i) => {
+        return (
+          <div onClick={openOrder} className={`p-6 ${ordersListStyles.item}`} key={i} id={order._id}>
+            <div className={ordersListStyles.info}>
+              <span className="text text_type_digits-default">{'#' + order.number}</span>
+              <span className="text text_type_main-default text_color_inactive">{getTimeString(order.createdAt)}</span>
+            </div>
+            <h4 className={`text text_type_main-medium ${ordersListStyles.heading}`}>{order.name}</h4>
+            <div className={ordersListStyles.componentsCnt}>
+              <div className={ordersListStyles.components}>
+                <OrderIngredients ingredientsArr={order.ingredients} />
+              </div>
+              <div className={ordersListStyles.sum}>
+                <span className="text text_type_digits-default">{sumCost(order)}</span>
+                <CurrencyIcon type="primary" />
+              </div>
+            </div>
+          </div>
+        )
+      })}
     </section>
   )
 }
